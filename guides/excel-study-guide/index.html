@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Excel Study Guide: Lookups, Pivot Tables &amp; Core Functions | SkillPrep</title>
+<meta name="description" content="Core Excel skills for work, interviews and skills tests: lookup formulas, text and logical functions, pivot tables, and 3 practice questions with full…">
+<link rel="canonical" href="https://skillsprep.github.io/guides/excel-study-guide/">
+<meta name="robots" content="index,follow">
+<meta name="theme-color" content="#0D1B2A">
+<meta property="og:site_name" content="SkillPrep">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Excel Study Guide: Lookups, Pivot Tables &amp; Core Functions | SkillPrep">
+<meta property="og:description" content="Core Excel skills for work, interviews and skills tests: lookup formulas, text and logical functions, pivot tables, and 3 practice questions with full…">
+<meta property="og:url" content="https://skillsprep.github.io/guides/excel-study-guide/">
+<meta property="og:image" content="https://skillsprep.github.io/assets/og-image.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Excel Study Guide: Lookups, Pivot Tables &amp; Core Functions | SkillPrep">
+<meta name="twitter:description" content="Core Excel skills for work, interviews and skills tests: lookup formulas, text and logical functions, pivot tables, and 3 practice questions with full…">
+<meta name="twitter:image" content="https://skillsprep.github.io/assets/og-image.png">
+<link rel="icon" href="../../assets/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="../../css/style.css">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"Excel Study Guide: Lookups, Pivot Tables & Core Functions","description":"Core Excel skills for work, interviews and skills tests: lookup formulas, text and logical functions, pivot tables, and 3 practice questions with full explanations.","datePublished":"2026-09-05","dateModified":"2026-10-18","author":{"@type":"Organization","name":"SkillPrep editorial team"},"publisher":{"@type":"Organization","name":"SkillPrep","logo":{"@type":"ImageObject","url":"https://skillsprep.github.io/assets/favicon.svg"}},"mainEntityOfPage":"https://skillsprep.github.io/guides/excel-study-guide/","image":"https://skillsprep.github.io/assets/og-image.png","articleSection":"Excel","inLanguage":"en"}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://skillsprep.github.io/"},{"@type":"ListItem","position":2,"name":"Excel","item":"https://skillsprep.github.io/#guides"},{"@type":"ListItem","position":3,"name":"Excel Study Guide: Lookups, Pivot Tables & Core Functions","item":"https://skillsprep.github.io/guides/excel-study-guide/"}]}</script>
+</head>
+<body>
+<a class="skip-link" href="#main">Skip to content</a>
+<header class="site-header">
+  <div class="container header-inner">
+    <a href="../../" class="logo"><span class="mark" aria-hidden="true">S</span> SkillPrep</a>
+    <button class="burger" id="burger" type="button" aria-label="Menu" aria-expanded="false" aria-controls="mainNav">☰</button>
+    <nav class="main-nav" id="mainNav" aria-label="Main">
+      <a href="../../">Home</a>
+      <a href="../../about/">About</a>
+      <a href="../../contact/">Contact</a>
+    </nav>
+  </div>
+</header>
+<main id="main">
+
+<div id="progress" aria-hidden="true"></div>
+<section class="article-hero">
+  <div class="container">
+    <nav class="crumbs" aria-label="Breadcrumb"><a href="../../">Home</a> <span aria-hidden="true">›</span> <a href="../../#guides">Guides</a> <span aria-hidden="true">›</span> <span aria-current="page">Excel</span></nav>
+    <div class="cat">Excel</div>
+    <h1>Excel Study Guide: Lookups, Pivot Tables &amp; Core Functions</h1>
+    <div class="meta">
+      <span>Published <time datetime="2026-09-05">Sep 5, 2026</time></span>
+      <span>Last reviewed <time datetime="2026-10-18">Oct 18, 2026</time></span>
+      <span>3 min read</span>
+      <span>By the SkillPrep editorial team</span>
+    </div>
+  </div>
+</section>
+<div class="container article-wrap">
+  <article class="article-body">
+    <p class="note"><b>Unofficial study resource.</b> Written independently of any exam provider, employer or software vendor.</p>
+    <p class="lead">Excel is one of the most requested skills in office, finance and analyst roles. This guide covers the everyday core — lookups, logical and text functions, and pivot tables — and finishes with practice questions so you can test yourself before an interview or skills test.</p>
+    <h2 id="core-topics-to-know">Core topics to know</h2>
+        <p>Practical, everyday spreadsheet work rests on these areas:</p>
+        <ul>
+          <li><b>Lookup functions</b> — <code>VLOOKUP</code>, <code>XLOOKUP</code>, <code>INDEX</code> + <code>MATCH</code></li>
+          <li><b>Logical functions</b> — <code>IF</code>, <code>IFS</code>, <code>AND</code>, <code>OR</code>, <code>SWITCH</code></li>
+          <li><b>Text functions</b> — <code>LEFT</code>, <code>RIGHT</code>, <code>MID</code>, <code>CONCAT</code>, <code>TRIM</code>, <code>TEXTSPLIT</code> (Microsoft 365)</li>
+          <li><b>Pivot tables</b> — grouping, calculated fields, slicers, and value field settings</li>
+          <li><b>Conditional formatting</b> — highlight cells rules, color scales, and icon sets</li>
+          <li><b>Data tools</b> — remove duplicates, text to columns, data validation</li>
+        </ul>
+    <h2 id="vlookup-vs-xlookup">VLOOKUP vs XLOOKUP</h2>
+        <p>A classic interview and test question. <code>VLOOKUP</code> only searches the <b>first column</b> of a range and can only return columns to the <b>right</b>. <code>XLOOKUP</code> (Excel 365/2021) searches anywhere and returns from any column:</p>
+        <pre><code>=XLOOKUP(A2, Sheet2!B:B, Sheet2!C:C, "Not found")</code></pre>
+        <div class="callout"><b>Quick rule</b> If the lookup value may not exist and you want a friendly message instead of #N/A, reach for a function with a built-in <i>if not found</i> argument — that's <code>XLOOKUP</code> (or <code>IFERROR</code> wrapped around <code>VLOOKUP</code>).</div>
+    <h2 id="pivot-table-essentials">Pivot table essentials</h2>
+        <p>A typical scenario: "You have 10,000 rows of sales data and need the total per region per quarter." The right tool is a <b>pivot table</b>, with Region in Rows, Quarter in Columns, and Sum of Amount in Values.</p>
+        <p>Know the difference between:</p>
+        <ul>
+          <li><b>Sum</b> — default for numeric data</li>
+          <li><b>Count</b> — counts non-empty cells</li>
+          <li><b>Distinct Count</b> — requires adding the data to the <i>Data Model</i></li>
+        </ul>
+    <h2 id="practice-questions">Practice questions</h2>
+        <p>Test yourself. Select an answer, then check the explanation.</p>
+        <div class="quiz" data-quiz>
+          <div class="q-head"><span>Question 1 of 3</span><span>Functions</span></div>
+          <div class="q-body" role="radiogroup" aria-labelledby="excel-study-guide-iq1-t">
+            <p class="q-text" id="excel-study-guide-iq1-t">Cell A2 contains "New York, NY". Which formula extracts just "NY"?</p>
+            <label class="opt" data-correct><input type="radio" name="excel-study-guide-q1"> =RIGHT(A2, 2)</label>
+            <label class="opt"><input type="radio" name="excel-study-guide-q1"> =LEFT(A2, 2)</label>
+            <label class="opt"><input type="radio" name="excel-study-guide-q1"> =MID(A2, 2)</label>
+            <label class="opt"><input type="radio" name="excel-study-guide-q1"> =TRIM(A2, 2)</label>
+            <button type="button" class="check-btn">Check answer</button><span class="q-result" role="status" aria-live="polite"></span>
+          </div>
+          <div class="q-explain"><b>Why:</b> <code>RIGHT(text, 2)</code> returns the last 2 characters. The state code "NY" sits at the end of the string. <code>MID</code> requires a start position and length; <code>TRIM</code> only removes extra spaces.</div>
+        </div>
+        <div class="quiz" data-quiz>
+          <div class="q-head"><span>Question 2 of 3</span><span>Lookups</span></div>
+          <div class="q-body" role="radiogroup" aria-labelledby="excel-study-guide-iq2-t">
+            <p class="q-text" id="excel-study-guide-iq2-t">Your lookup table has the ID in column D and the name in column C (to its LEFT). Which is the best formula to return the name for ID in A2?</p>
+            <label class="opt"><input type="radio" name="excel-study-guide-q2"> =VLOOKUP(A2, C:D, 2, FALSE)</label>
+            <label class="opt" data-correct><input type="radio" name="excel-study-guide-q2"> =XLOOKUP(A2, D:D, C:C, "Not found")</label>
+            <label class="opt"><input type="radio" name="excel-study-guide-q2"> =HLOOKUP(A2, D:D, 1, FALSE)</label>
+            <label class="opt"><input type="radio" name="excel-study-guide-q2"> =LOOKUP(A2, C:C)</label>
+            <button type="button" class="check-btn">Check answer</button><span class="q-result" role="status" aria-live="polite"></span>
+          </div>
+          <div class="q-explain"><b>Why:</b> <code>XLOOKUP</code> returns values from a column <i>to the left</i> of the lookup column — VLOOKUP cannot. The <code>"Not found"</code> argument also handles missing IDs gracefully.</div>
+        </div>
+        <div class="quiz" data-quiz>
+          <div class="q-head"><span>Question 3 of 3</span><span>Pivot Tables</span></div>
+          <div class="q-body" role="radiogroup" aria-labelledby="excel-study-guide-iq3-t">
+            <p class="q-text" id="excel-study-guide-iq3-t">In a pivot table, you want the number of unique customers per product, not the number of orders. What do you need?</p>
+            <label class="opt"><input type="radio" name="excel-study-guide-q3"> Change the value field to Count of Customer</label>
+            <label class="opt"><input type="radio" name="excel-study-guide-q3"> Use Sum of Customer instead</label>
+            <label class="opt" data-correct><input type="radio" name="excel-study-guide-q3"> Add the data to the Data Model and use Distinct Count</label>
+            <label class="opt"><input type="radio" name="excel-study-guide-q3"> Group the Customer field</label>
+            <button type="button" class="check-btn">Check answer</button><span class="q-result" role="status" aria-live="polite"></span>
+          </div>
+          <div class="q-explain"><b>Why:</b> Plain "Count" counts rows, so repeat customers are counted multiple times. <b>Distinct Count</b> is only available when the pivot table is based on the Data Model (check "Add this data to the Data Model" when inserting).</div>
+        </div>
+    <h2 id="final-preparation-checklist">Final preparation checklist</h2>
+        <ul>
+          <li>Practice the functions above hands-on — real tasks are scenario-based, not definition-based</li>
+          <li>Rebuild one real spreadsheet from scratch (a budget or a sales report) using a lookup and a pivot table</li>
+          <li>Time yourself: try each practice question in under a minute before reading the options</li>
+          <li>Revisit Microsoft's official Excel help (linked under Sources) for any topic that still feels rusty</li>
+        </ul>
+    <h2 id="sources">Sources &amp; further reading</h2>
+    <ul class="sources"><li><a href="https://support.microsoft.com/en-us/office/xlookup-function-b7fd680e-6d10-43e6-84f9-88eae8bf5929" rel="noopener noreferrer" target="_blank">XLOOKUP function — Microsoft Support</a></li><li><a href="https://support.microsoft.com/office/18fb0032-b01a-4c99-9a5f-7ab09edde05a" rel="noopener noreferrer" target="_blank">Create a PivotTable to analyze worksheet data — Microsoft Support</a></li></ul>
+    <hr class="sep">
+    <nav class="prevnext" aria-label="More guides">
+      <span></span>
+      <a class="next" href="../../guides/python-study-guide/"><small>Next →</small>Python Fundamentals: Study Guide + Practice Quiz</a>
+    </nav>
+    <a href="../../#guides" class="btn btn-link">← Back to all guides</a>
+  </article>
+  <aside class="sidebar">
+    <div class="box">
+      <h2 class="box-h">On this page</h2>
+      <div class="toc">
+        <a href="#core-topics-to-know" data-toc="core-topics-to-know">Core topics to know</a>
+        <a href="#vlookup-vs-xlookup" data-toc="vlookup-vs-xlookup">VLOOKUP vs XLOOKUP</a>
+        <a href="#pivot-table-essentials" data-toc="pivot-table-essentials">Pivot table essentials</a>
+        <a href="#practice-questions" data-toc="practice-questions">Practice questions</a>
+        <a href="#final-preparation-checklist" data-toc="final-preparation-checklist">Final preparation checklist</a>
+        <a href="#sources" data-toc="sources">Sources &amp; further reading</a>
+      </div>
+    </div>
+    <div class="box rel">
+      <h2 class="box-h">Related guides</h2>
+      <a href="../../guides/python-study-guide/">Python Fundamentals: Study Guide + Practice Quiz</a>
+      <a href="../../guides/javascript-study-guide/">JavaScript Fundamentals: Key Concepts Explained</a>
+      <a href="../../guides/project-management-study-guide/">Project Management Study Guide: Concepts That Matter</a>
+    </div>
+    <div class="box">
+      <h2 class="box-h">Spotted a mistake?</h2>
+      <p class="box-p">We correct errors quickly. Tell us what's wrong and we'll fix it.</p>
+      <a class="btn btn-link" href="mailto:hello@skillprep.blog?subject=Correction%3A%20Excel%20Study%20Guide%3A%20Lookups%2C%20Pivot%20Tables%20%26%20Core%20Functions&amp;body=Page%3A%20https%3A%2F%2Fskillsprep.github.io%2Fguides%2Fexcel-study-guide%2F%0A%0AWhat's%20wrong%3A%0A">Report a correction</a>
+    </div>
+  </aside>
+</div>
+</main>
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div>
+        <h2 class="foot-h">SkillPrep</h2>
+        <p class="foot-about">Concept-first study guides and practice tests for everyday work skills. Learn the "why" behind every answer.</p>
+      </div>
+      <div>
+        <h2 class="foot-h">Explore</h2>
+        <a href="../../">All guides</a>
+        <a href="../../about/">About</a>
+        <a href="../../contact/">Contact</a>
+        <a href="../../privacy/">Privacy</a>
+        <a href="../../terms/">Terms</a>
+      </div>
+      <div>
+        <h2 class="foot-h">Popular guides</h2>
+        <a href="../../guides/excel-study-guide/">Excel Study Guide</a>
+        <a href="../../guides/python-study-guide/">Python Fundamentals</a>
+        <a href="../../guides/javascript-study-guide/">JavaScript Fundamentals</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2026 SkillPrep. All rights reserved.</span>
+      <span>Independent educational site. Not affiliated with LinkedIn, Microsoft or any other vendor; product names are trademarks of their owners.</span>
+    </div>
+  </div>
+</footer>
+<button class="back-top" id="backTop" type="button" aria-label="Back to top">↑</button>
+<script src="../../js/site.js" defer></script>
+</body>
+</html>

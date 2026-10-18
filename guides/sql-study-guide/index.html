@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>SQL Study Guide: Queries You Should Master | SkillPrep</title>
+<meta name="description" content="JOINs, GROUP BY, window functions, and subqueries — the SQL patterns behind most interview and skills-test questions, explained with examples.">
+<link rel="canonical" href="https://skillsprep.github.io/guides/sql-study-guide/">
+<meta name="robots" content="index,follow">
+<meta name="theme-color" content="#0D1B2A">
+<meta property="og:site_name" content="SkillPrep">
+<meta property="og:type" content="article">
+<meta property="og:title" content="SQL Study Guide: Queries You Should Master | SkillPrep">
+<meta property="og:description" content="JOINs, GROUP BY, window functions, and subqueries — the SQL patterns behind most interview and skills-test questions, explained with examples.">
+<meta property="og:url" content="https://skillsprep.github.io/guides/sql-study-guide/">
+<meta property="og:image" content="https://skillsprep.github.io/assets/og-image.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="SQL Study Guide: Queries You Should Master | SkillPrep">
+<meta name="twitter:description" content="JOINs, GROUP BY, window functions, and subqueries — the SQL patterns behind most interview and skills-test questions, explained with examples.">
+<meta name="twitter:image" content="https://skillsprep.github.io/assets/og-image.png">
+<link rel="icon" href="../../assets/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="../../css/style.css">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"SQL Study Guide: Queries You Should Master","description":"JOINs, GROUP BY, window functions, and subqueries — the SQL patterns behind most interview and skills-test questions, explained with examples.","datePublished":"2026-08-15","dateModified":"2026-10-18","author":{"@type":"Organization","name":"SkillPrep editorial team"},"publisher":{"@type":"Organization","name":"SkillPrep","logo":{"@type":"ImageObject","url":"https://skillsprep.github.io/assets/favicon.svg"}},"mainEntityOfPage":"https://skillsprep.github.io/guides/sql-study-guide/","image":"https://skillsprep.github.io/assets/og-image.png","articleSection":"SQL","inLanguage":"en"}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://skillsprep.github.io/"},{"@type":"ListItem","position":2,"name":"SQL","item":"https://skillsprep.github.io/#guides"},{"@type":"ListItem","position":3,"name":"SQL Study Guide: Queries You Should Master","item":"https://skillsprep.github.io/guides/sql-study-guide/"}]}</script>
+</head>
+<body>
+<a class="skip-link" href="#main">Skip to content</a>
+<header class="site-header">
+  <div class="container header-inner">
+    <a href="../../" class="logo"><span class="mark" aria-hidden="true">S</span> SkillPrep</a>
+    <button class="burger" id="burger" type="button" aria-label="Menu" aria-expanded="false" aria-controls="mainNav">☰</button>
+    <nav class="main-nav" id="mainNav" aria-label="Main">
+      <a href="../../">Home</a>
+      <a href="../../about/">About</a>
+      <a href="../../contact/">Contact</a>
+    </nav>
+  </div>
+</header>
+<main id="main">
+
+<div id="progress" aria-hidden="true"></div>
+<section class="article-hero">
+  <div class="container">
+    <nav class="crumbs" aria-label="Breadcrumb"><a href="../../">Home</a> <span aria-hidden="true">›</span> <a href="../../#guides">Guides</a> <span aria-hidden="true">›</span> <span aria-current="page">SQL</span></nav>
+    <div class="cat">SQL</div>
+    <h1>SQL Study Guide: Queries You Should Master</h1>
+    <div class="meta">
+      <span>Published <time datetime="2026-08-15">Aug 15, 2026</time></span>
+      <span>Last reviewed <time datetime="2026-10-18">Oct 18, 2026</time></span>
+      <span>2 min read</span>
+      <span>By the SkillPrep editorial team</span>
+    </div>
+  </div>
+</section>
+<div class="container article-wrap">
+  <article class="article-body">
+    <p class="note"><b>Unofficial study resource.</b> Written independently of any exam provider, employer or software vendor.</p>
+    <p class="lead">SQL interviews and skills tests often ask you to read and reason about queries more than to write them from scratch. JOIN types, aggregation, and the difference between WHERE and HAVING come up constantly.</p>
+    <h2 id="must-know-query-patterns">Must-know query patterns</h2>
+        <ul>
+          <li><b>JOIN types</b> — INNER, LEFT, RIGHT, FULL OUTER, and CROSS — and which rows survive each</li>
+          <li><b>Aggregation</b> — <code>GROUP BY</code> with <code>COUNT</code>, <code>SUM</code>, <code>AVG</code>, <code>MAX</code>, <code>MIN</code></li>
+          <li><b>WHERE vs HAVING</b> — filter rows before grouping vs filter groups after</li>
+          <li><b>Subqueries</b> — in <code>WHERE</code>, <code>FROM</code>, and <code>SELECT</code></li>
+          <li><b>Window functions</b> — <code>ROW_NUMBER()</code>, <code>RANK()</code>, <code>OVER (PARTITION BY ...)</code></li>
+          <li><b>Indexes</b> — what they speed up and their cost on writes</li>
+        </ul>
+    <h2 id="where-vs-having-the-classic-trap">WHERE vs HAVING — the classic trap</h2>
+        <pre><code>SELECT department, AVG(salary)
+FROM employees
+WHERE status = 'active'      -- filters ROWS first
+GROUP BY department
+HAVING AVG(salary) > 50000;  -- filters GROUPS after</code></pre>
+        <p>You cannot use an aggregate in <code>WHERE</code> — the aggregate doesn't exist yet when WHERE runs. Interviewers love testing this.</p>
+        <div class="callout"><b>Memory trick</b> WHERE = filter rows → then GROUP → then HAVING = filter groups.</div>
+    <h2 id="join-types-at-a-glance">JOIN types at a glance</h2>
+        <p>Given tables <code>customers</code> and <code>orders</code>:</p>
+        <ul>
+          <li><b>INNER JOIN</b> — only customers who have orders</li>
+          <li><b>LEFT JOIN</b> — all customers, with NULLs where no order exists (find customers who never ordered: <code>WHERE o.id IS NULL</code>)</li>
+          <li><b>FULL OUTER</b> — everyone from both sides, NULLs filling gaps (not supported in MySQL)</li>
+        </ul>
+        <p>A common question asks "return all rows from one table whether or not there's a match" — the answer is LEFT (or RIGHT) JOIN.</p>
+    <h2 id="practice-questions">Practice questions</h2>
+        <div class="quiz" data-quiz>
+          <div class="q-head"><span>Question 1 of 3</span><span>Aggregation</span></div>
+          <div class="q-body" role="radiogroup" aria-labelledby="sql-study-guide-iq1-t">
+            <p class="q-text" id="sql-study-guide-iq1-t">You want to list only departments whose average salary exceeds 60,000. Which clause filters this correctly?</p>
+            <label class="opt"><input type="radio" name="sql-study-guide-q1"> WHERE AVG(salary) &gt; 60000</label>
+            <label class="opt" data-correct><input type="radio" name="sql-study-guide-q1"> HAVING AVG(salary) &gt; 60000</label>
+            <label class="opt"><input type="radio" name="sql-study-guide-q1"> FILTER AVG(salary) &gt; 60000</label>
+            <label class="opt"><input type="radio" name="sql-study-guide-q1"> GROUP BY avg_salary &gt; 60000</label>
+            <button type="button" class="check-btn">Check answer</button><span class="q-result" role="status" aria-live="polite"></span>
+          </div>
+          <div class="q-explain"><b>Why:</b> Aggregates are computed during grouping, so they can only be filtered with HAVING after GROUP BY. WHERE runs before grouping and can't reference aggregates.</div>
+        </div>
+        <div class="quiz" data-quiz>
+          <div class="q-head"><span>Question 2 of 3</span><span>JOINs</span></div>
+          <div class="q-body" role="radiogroup" aria-labelledby="sql-study-guide-iq2-t">
+            <p class="q-text" id="sql-study-guide-iq2-t">Which join returns ALL rows from the left table, with NULLs where there is no match on the right?</p>
+            <label class="opt"><input type="radio" name="sql-study-guide-q2"> INNER JOIN</label>
+            <label class="opt" data-correct><input type="radio" name="sql-study-guide-q2"> LEFT JOIN</label>
+            <label class="opt"><input type="radio" name="sql-study-guide-q2"> CROSS JOIN</label>
+            <label class="opt"><input type="radio" name="sql-study-guide-q2"> SELF JOIN</label>
+            <button type="button" class="check-btn">Check answer</button><span class="q-result" role="status" aria-live="polite"></span>
+          </div>
+          <div class="q-explain"><b>Why:</b> LEFT JOIN preserves every row from the left side regardless of matches. INNER drops non-matching rows from both sides; CROSS returns the Cartesian product.</div>
+        </div>
+        <div class="quiz" data-quiz>
+          <div class="q-head"><span>Question 3 of 3</span><span>Window Functions</span></div>
+          <div class="q-body" role="radiogroup" aria-labelledby="sql-study-guide-iq3-t">
+            <p class="q-text" id="sql-study-guide-iq3-t">To number rows within each department by salary (highest first), you would use:</p>
+            <label class="opt"><input type="radio" name="sql-study-guide-q3"> GROUP BY department ORDER BY salary DESC</label>
+            <label class="opt" data-correct><input type="radio" name="sql-study-guide-q3"> ROW_NUMBER() OVER (PARTITION BY department ORDER BY salary DESC)</label>
+            <label class="opt"><input type="radio" name="sql-study-guide-q3"> RANK() OVER (ORDER BY salary DESC)</label>
+            <label class="opt"><input type="radio" name="sql-study-guide-q3"> COUNT(*) OVER (PARTITION BY department)</label>
+            <button type="button" class="check-btn">Check answer</button><span class="q-result" role="status" aria-live="polite"></span>
+          </div>
+          <div class="q-explain"><b>Why:</b> <code>PARTITION BY department</code> restarts numbering per department, and <code>ORDER BY salary DESC</code> puts the highest first. Plain GROUP BY would collapse rows and couldn't produce per-row numbers.</div>
+        </div>
+    <h2 id="preparation-checklist">Preparation checklist</h2>
+        <ul>
+          <li>Practice the 5 JOIN types and the anti-join pattern (LEFT JOIN + IS NULL)</li>
+          <li>Memorize the WHERE → GROUP BY → HAVING → ORDER BY execution order</li>
+          <li>Know basic index trade-offs: faster reads, slower writes, extra storage</li>
+          <li>For window functions, understand what <code>PARTITION BY</code> changes compared with a plain <code>ORDER BY</code></li>
+        </ul>
+    <h2 id="sources">Sources &amp; further reading</h2>
+    <ul class="sources"><li><a href="https://www.postgresql.org/docs/current/tutorial-window.html" rel="noopener noreferrer" target="_blank">Window functions — PostgreSQL documentation</a></li><li><a href="https://www.postgresql.org/docs/current/queries-table-expressions.html" rel="noopener noreferrer" target="_blank">Joins and table expressions — PostgreSQL documentation</a></li></ul>
+    <hr class="sep">
+    <nav class="prevnext" aria-label="More guides">
+      <a class="prev" href="../../guides/project-management-study-guide/"><small>← Previous</small>Project Management Study Guide: Concepts That Matter</a>
+      <a class="next" href="../../guides/digital-marketing-study-guide/"><small>Next →</small>Digital Marketing Study Guide: SEO, Funnels &amp; Metrics</a>
+    </nav>
+    <a href="../../#guides" class="btn btn-link">← Back to all guides</a>
+  </article>
+  <aside class="sidebar">
+    <div class="box">
+      <h2 class="box-h">On this page</h2>
+      <div class="toc">
+        <a href="#must-know-query-patterns" data-toc="must-know-query-patterns">Must-know query patterns</a>
+        <a href="#where-vs-having-the-classic-trap" data-toc="where-vs-having-the-classic-trap">WHERE vs HAVING — the classic trap</a>
+        <a href="#join-types-at-a-glance" data-toc="join-types-at-a-glance">JOIN types at a glance</a>
+        <a href="#practice-questions" data-toc="practice-questions">Practice questions</a>
+        <a href="#preparation-checklist" data-toc="preparation-checklist">Preparation checklist</a>
+        <a href="#sources" data-toc="sources">Sources &amp; further reading</a>
+      </div>
+    </div>
+    <div class="box rel">
+      <h2 class="box-h">Related guides</h2>
+      <a href="../../guides/excel-study-guide/">Excel Study Guide: Lookups, Pivot Tables &amp; Core Functions</a>
+      <a href="../../guides/python-study-guide/">Python Fundamentals: Study Guide + Practice Quiz</a>
+      <a href="../../guides/javascript-study-guide/">JavaScript Fundamentals: Key Concepts Explained</a>
+    </div>
+    <div class="box">
+      <h2 class="box-h">Spotted a mistake?</h2>
+      <p class="box-p">We correct errors quickly. Tell us what's wrong and we'll fix it.</p>
+      <a class="btn btn-link" href="mailto:hello@skillprep.blog?subject=Correction%3A%20SQL%20Study%20Guide%3A%20Queries%20You%20Should%20Master&amp;body=Page%3A%20https%3A%2F%2Fskillsprep.github.io%2Fguides%2Fsql-study-guide%2F%0A%0AWhat's%20wrong%3A%0A">Report a correction</a>
+    </div>
+  </aside>
+</div>
+</main>
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div>
+        <h2 class="foot-h">SkillPrep</h2>
+        <p class="foot-about">Concept-first study guides and practice tests for everyday work skills. Learn the "why" behind every answer.</p>
+      </div>
+      <div>
+        <h2 class="foot-h">Explore</h2>
+        <a href="../../">All guides</a>
+        <a href="../../about/">About</a>
+        <a href="../../contact/">Contact</a>
+        <a href="../../privacy/">Privacy</a>
+        <a href="../../terms/">Terms</a>
+      </div>
+      <div>
+        <h2 class="foot-h">Popular guides</h2>
+        <a href="../../guides/excel-study-guide/">Excel Study Guide</a>
+        <a href="../../guides/python-study-guide/">Python Fundamentals</a>
+        <a href="../../guides/javascript-study-guide/">JavaScript Fundamentals</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2026 SkillPrep. All rights reserved.</span>
+      <span>Independent educational site. Not affiliated with LinkedIn, Microsoft or any other vendor; product names are trademarks of their owners.</span>
+    </div>
+  </div>
+</footer>
+<button class="back-top" id="backTop" type="button" aria-label="Back to top">↑</button>
+<script src="../../js/site.js" defer></script>
+</body>
+</html>

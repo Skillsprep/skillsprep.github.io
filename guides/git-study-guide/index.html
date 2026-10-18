@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Git Study Guide: Commands and Concepts | SkillPrep</title>
+<meta name="description" content="Branching, merging vs rebasing, staging, and undoing mistakes — the Git knowledge every developer needs, with quizzes.">
+<link rel="canonical" href="https://skillsprep.github.io/guides/git-study-guide/">
+<meta name="robots" content="index,follow">
+<meta name="theme-color" content="#0D1B2A">
+<meta property="og:site_name" content="SkillPrep">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Git Study Guide: Commands and Concepts | SkillPrep">
+<meta property="og:description" content="Branching, merging vs rebasing, staging, and undoing mistakes — the Git knowledge every developer needs, with quizzes.">
+<meta property="og:url" content="https://skillsprep.github.io/guides/git-study-guide/">
+<meta property="og:image" content="https://skillsprep.github.io/assets/og-image.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Git Study Guide: Commands and Concepts | SkillPrep">
+<meta name="twitter:description" content="Branching, merging vs rebasing, staging, and undoing mistakes — the Git knowledge every developer needs, with quizzes.">
+<meta name="twitter:image" content="https://skillsprep.github.io/assets/og-image.png">
+<link rel="icon" href="../../assets/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="../../css/style.css">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"Git Study Guide: Commands and Concepts","description":"Branching, merging vs rebasing, staging, and undoing mistakes — the Git knowledge every developer needs, with quizzes.","datePublished":"2026-07-30","dateModified":"2026-10-18","author":{"@type":"Organization","name":"SkillPrep editorial team"},"publisher":{"@type":"Organization","name":"SkillPrep","logo":{"@type":"ImageObject","url":"https://skillsprep.github.io/assets/favicon.svg"}},"mainEntityOfPage":"https://skillsprep.github.io/guides/git-study-guide/","image":"https://skillsprep.github.io/assets/og-image.png","articleSection":"Git","inLanguage":"en"}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://skillsprep.github.io/"},{"@type":"ListItem","position":2,"name":"Git","item":"https://skillsprep.github.io/#guides"},{"@type":"ListItem","position":3,"name":"Git Study Guide: Commands and Concepts","item":"https://skillsprep.github.io/guides/git-study-guide/"}]}</script>
+</head>
+<body>
+<a class="skip-link" href="#main">Skip to content</a>
+<header class="site-header">
+  <div class="container header-inner">
+    <a href="../../" class="logo"><span class="mark" aria-hidden="true">S</span> SkillPrep</a>
+    <button class="burger" id="burger" type="button" aria-label="Menu" aria-expanded="false" aria-controls="mainNav">☰</button>
+    <nav class="main-nav" id="mainNav" aria-label="Main">
+      <a href="../../">Home</a>
+      <a href="../../about/">About</a>
+      <a href="../../contact/">Contact</a>
+    </nav>
+  </div>
+</header>
+<main id="main">
+
+<div id="progress" aria-hidden="true"></div>
+<section class="article-hero">
+  <div class="container">
+    <nav class="crumbs" aria-label="Breadcrumb"><a href="../../">Home</a> <span aria-hidden="true">›</span> <a href="../../#guides">Guides</a> <span aria-hidden="true">›</span> <span aria-current="page">Git</span></nav>
+    <div class="cat">Git</div>
+    <h1>Git Study Guide: Commands and Concepts</h1>
+    <div class="meta">
+      <span>Published <time datetime="2026-07-30">Jul 30, 2026</time></span>
+      <span>Last reviewed <time datetime="2026-10-18">Oct 18, 2026</time></span>
+      <span>2 min read</span>
+      <span>By the SkillPrep editorial team</span>
+    </div>
+  </div>
+</section>
+<div class="container article-wrap">
+  <article class="article-body">
+    <p class="note"><b>Unofficial study resource.</b> Written independently of any exam provider, employer or software vendor.</p>
+    <p class="lead">Interviews and skills tests focus on everyday version-control workflows. Questions often present a situation ("you committed to the wrong branch") and ask for the correct command sequence.</p>
+    <h2 id="core-workflow-commands">Core workflow commands</h2>
+        <pre><code>git status              # what's changed / staged
+git add file.txt        # stage a file
+git commit -m "msg"     # commit staged changes
+git log --oneline       # compact history
+git diff                # unstaged changes
+git diff --staged       # staged vs last commit</code></pre>
+        <p>Know the three areas cold: <b>working directory</b> → <code>git add</code> → <b>staging area</b> → <code>git commit</code> → <b>repository</b>.</p>
+    <h2 id="undoing-things-a-favorite-topic">Undoing things — a favorite topic</h2>
+        <table>
+          <tr><th>Situation</th><th>Command</th></tr>
+          <tr><td>Discard unstaged changes to a file</td><td><code>git restore file.txt</code> (or <code>git checkout -- file.txt</code>)</td></tr>
+          <tr><td>Unstage a file (keep changes)</td><td><code>git restore --staged file.txt</code></td></tr>
+          <tr><td>Amend the last commit</td><td><code>git commit --amend</code></td></tr>
+          <tr><td>Move branch pointer back one commit (keep changes staged)</td><td><code>git reset --soft HEAD~1</code></td></tr>
+          <tr><td>Revert a pushed commit safely</td><td><code>git revert &lt;sha&gt;</code></td></tr>
+        </table>
+        <div class="callout"><b>Key distinction</b> <code>reset</code> rewrites history (dangerous after push); <code>revert</code> creates a new commit that undoes changes (safe for shared history).</div>
+    <h2 id="merge-vs-rebase">Merge vs rebase</h2>
+        <p>Both combine branches, but differently:</p>
+        <ul>
+          <li><b>Merge</b> — creates a merge commit, preserves true history. Safe for shared branches.</li>
+          <li><b>Rebase</b> — replays your commits on top of another branch, producing linear history. Never rebase commits others have pulled.</li>
+        </ul>
+        <p>The golden rule: <b>rebase local, merge shared</b>.</p>
+    <h2 id="practice-questions">Practice questions</h2>
+        <div class="quiz" data-quiz>
+          <div class="q-head"><span>Question 1 of 3</span><span>Basics</span></div>
+          <div class="q-body" role="radiogroup" aria-labelledby="git-study-guide-iq1-t">
+            <p class="q-text" id="git-study-guide-iq1-t">Which command shows the difference between your working directory and the staging area?</p>
+            <label class="opt"><input type="radio" name="git-study-guide-q1"> git diff --staged</label>
+            <label class="opt" data-correct><input type="radio" name="git-study-guide-q1"> git diff</label>
+            <label class="opt"><input type="radio" name="git-study-guide-q1"> git log -p</label>
+            <label class="opt"><input type="radio" name="git-study-guide-q1"> git status -v</label>
+            <button type="button" class="check-btn">Check answer</button><span class="q-result" role="status" aria-live="polite"></span>
+          </div>
+          <div class="q-explain"><b>Why:</b> Plain <code>git diff</code> compares working tree to the index (staging area). <code>--staged</code> compares the index to the last commit instead.</div>
+        </div>
+        <div class="quiz" data-quiz>
+          <div class="q-head"><span>Question 2 of 3</span><span>Undoing</span></div>
+          <div class="q-body" role="radiogroup" aria-labelledby="git-study-guide-iq2-t">
+            <p class="q-text" id="git-study-guide-iq2-t">A commit has already been pushed to a shared branch, and you need to undo it without rewriting history. What do you use?</p>
+            <label class="opt"><input type="radio" name="git-study-guide-q2"> git reset --hard HEAD~1</label>
+            <label class="opt"><input type="radio" name="git-study-guide-q2"> git rebase -i</label>
+            <label class="opt" data-correct><input type="radio" name="git-study-guide-q2"> git revert &lt;sha&gt;</label>
+            <label class="opt"><input type="radio" name="git-study-guide-q2"> git stash</label>
+            <button type="button" class="check-btn">Check answer</button><span class="q-result" role="status" aria-live="polite"></span>
+          </div>
+          <div class="q-explain"><b>Why:</b> <code>revert</code> adds a new commit that undoes the target commit — safe for shared history. <code>reset</code> rewrites history and would break teammates' repos on their next pull.</div>
+        </div>
+        <div class="quiz" data-quiz>
+          <div class="q-head"><span>Question 3 of 3</span><span>Branching</span></div>
+          <div class="q-body" role="radiogroup" aria-labelledby="git-study-guide-iq3-t">
+            <p class="q-text" id="git-study-guide-iq3-t">What does <code>git checkout -b feature</code> do?</p>
+            <label class="opt"><input type="radio" name="git-study-guide-q3"> Creates a branch named "feature" only</label>
+            <label class="opt" data-correct><input type="radio" name="git-study-guide-q3"> Creates and switches to a new branch named "feature"</label>
+            <label class="opt"><input type="radio" name="git-study-guide-q3"> Switches to an existing branch named "feature"</label>
+            <label class="opt"><input type="radio" name="git-study-guide-q3"> Merges "feature" into the current branch</label>
+            <button type="button" class="check-btn">Check answer</button><span class="q-result" role="status" aria-live="polite"></span>
+          </div>
+          <div class="q-explain"><b>Why:</b> The <code>-b</code> flag creates the branch and immediately checks it out — equivalent to <code>git branch feature</code> followed by <code>git checkout feature</code>. Modern Git also offers <code>git switch -c feature</code> for the same job.</div>
+        </div>
+    <h2 id="final-tips">Final tips</h2>
+        <ul>
+          <li>Practice the "wrong branch" scenario: you committed on the wrong branch → <code>git branch newbranch</code>, then <code>git reset --hard HEAD~1</code>, then <code>git switch newbranch</code></li>
+          <li>Know <code>git stash</code> / <code>stash pop</code> for parking unfinished work</li>
+          <li>Understand <code>.gitignore</code> purpose — ignoring build artifacts and secrets</li>
+        </ul>
+    <h2 id="sources">Sources &amp; further reading</h2>
+    <ul class="sources"><li><a href="https://git-scm.com/docs/git-revert" rel="noopener noreferrer" target="_blank">git-revert — Git documentation</a></li><li><a href="https://git-scm.com/docs/git-restore" rel="noopener noreferrer" target="_blank">git-restore — Git documentation</a></li><li><a href="https://git-scm.com/book/en/v2/Git-Branching-Rebasing" rel="noopener noreferrer" target="_blank">Rebasing — Pro Git book</a></li></ul>
+    <hr class="sep">
+    <nav class="prevnext" aria-label="More guides">
+      <a class="prev" href="../../guides/digital-marketing-study-guide/"><small>← Previous</small>Digital Marketing Study Guide: SEO, Funnels &amp; Metrics</a>
+      <a class="next" href="../../guides/powerpoint-study-guide/"><small>Next →</small>PowerPoint Study Guide: Efficient Slide Skills</a>
+    </nav>
+    <a href="../../#guides" class="btn btn-link">← Back to all guides</a>
+  </article>
+  <aside class="sidebar">
+    <div class="box">
+      <h2 class="box-h">On this page</h2>
+      <div class="toc">
+        <a href="#core-workflow-commands" data-toc="core-workflow-commands">Core workflow commands</a>
+        <a href="#undoing-things-a-favorite-topic" data-toc="undoing-things-a-favorite-topic">Undoing things — a favorite topic</a>
+        <a href="#merge-vs-rebase" data-toc="merge-vs-rebase">Merge vs rebase</a>
+        <a href="#practice-questions" data-toc="practice-questions">Practice questions</a>
+        <a href="#final-tips" data-toc="final-tips">Final tips</a>
+        <a href="#sources" data-toc="sources">Sources &amp; further reading</a>
+      </div>
+    </div>
+    <div class="box rel">
+      <h2 class="box-h">Related guides</h2>
+      <a href="../../guides/excel-study-guide/">Excel Study Guide: Lookups, Pivot Tables &amp; Core Functions</a>
+      <a href="../../guides/python-study-guide/">Python Fundamentals: Study Guide + Practice Quiz</a>
+      <a href="../../guides/javascript-study-guide/">JavaScript Fundamentals: Key Concepts Explained</a>
+    </div>
+    <div class="box">
+      <h2 class="box-h">Spotted a mistake?</h2>
+      <p class="box-p">We correct errors quickly. Tell us what's wrong and we'll fix it.</p>
+      <a class="btn btn-link" href="mailto:hello@skillprep.blog?subject=Correction%3A%20Git%20Study%20Guide%3A%20Commands%20and%20Concepts&amp;body=Page%3A%20https%3A%2F%2Fskillsprep.github.io%2Fguides%2Fgit-study-guide%2F%0A%0AWhat's%20wrong%3A%0A">Report a correction</a>
+    </div>
+  </aside>
+</div>
+</main>
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div>
+        <h2 class="foot-h">SkillPrep</h2>
+        <p class="foot-about">Concept-first study guides and practice tests for everyday work skills. Learn the "why" behind every answer.</p>
+      </div>
+      <div>
+        <h2 class="foot-h">Explore</h2>
+        <a href="../../">All guides</a>
+        <a href="../../about/">About</a>
+        <a href="../../contact/">Contact</a>
+        <a href="../../privacy/">Privacy</a>
+        <a href="../../terms/">Terms</a>
+      </div>
+      <div>
+        <h2 class="foot-h">Popular guides</h2>
+        <a href="../../guides/excel-study-guide/">Excel Study Guide</a>
+        <a href="../../guides/python-study-guide/">Python Fundamentals</a>
+        <a href="../../guides/javascript-study-guide/">JavaScript Fundamentals</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2026 SkillPrep. All rights reserved.</span>
+      <span>Independent educational site. Not affiliated with LinkedIn, Microsoft or any other vendor; product names are trademarks of their owners.</span>
+    </div>
+  </div>
+</footer>
+<button class="back-top" id="backTop" type="button" aria-label="Back to top">↑</button>
+<script src="../../js/site.js" defer></script>
+</body>
+</html>

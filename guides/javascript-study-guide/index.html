@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>JavaScript Fundamentals: Key Concepts Explained | SkillPrep</title>
+<meta name="description" content="Hoisting, closures, == vs ===, arrow functions, and promises — the JavaScript fundamentals behind most interview and skills-test questions.">
+<link rel="canonical" href="https://skillsprep.github.io/guides/javascript-study-guide/">
+<meta name="robots" content="index,follow">
+<meta name="theme-color" content="#0D1B2A">
+<meta property="og:site_name" content="SkillPrep">
+<meta property="og:type" content="article">
+<meta property="og:title" content="JavaScript Fundamentals: Key Concepts Explained | SkillPrep">
+<meta property="og:description" content="Hoisting, closures, == vs ===, arrow functions, and promises — the JavaScript fundamentals behind most interview and skills-test questions.">
+<meta property="og:url" content="https://skillsprep.github.io/guides/javascript-study-guide/">
+<meta property="og:image" content="https://skillsprep.github.io/assets/og-image.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="JavaScript Fundamentals: Key Concepts Explained | SkillPrep">
+<meta name="twitter:description" content="Hoisting, closures, == vs ===, arrow functions, and promises — the JavaScript fundamentals behind most interview and skills-test questions.">
+<meta name="twitter:image" content="https://skillsprep.github.io/assets/og-image.png">
+<link rel="icon" href="../../assets/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="../../css/style.css">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"JavaScript Fundamentals: Key Concepts Explained","description":"Hoisting, closures, == vs ===, arrow functions, and promises — the JavaScript fundamentals behind most interview and skills-test questions.","datePublished":"2026-08-28","dateModified":"2026-10-18","author":{"@type":"Organization","name":"SkillPrep editorial team"},"publisher":{"@type":"Organization","name":"SkillPrep","logo":{"@type":"ImageObject","url":"https://skillsprep.github.io/assets/favicon.svg"}},"mainEntityOfPage":"https://skillsprep.github.io/guides/javascript-study-guide/","image":"https://skillsprep.github.io/assets/og-image.png","articleSection":"JavaScript","inLanguage":"en"}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://skillsprep.github.io/"},{"@type":"ListItem","position":2,"name":"JavaScript","item":"https://skillsprep.github.io/#guides"},{"@type":"ListItem","position":3,"name":"JavaScript Fundamentals: Key Concepts Explained","item":"https://skillsprep.github.io/guides/javascript-study-guide/"}]}</script>
+</head>
+<body>
+<a class="skip-link" href="#main">Skip to content</a>
+<header class="site-header">
+  <div class="container header-inner">
+    <a href="../../" class="logo"><span class="mark" aria-hidden="true">S</span> SkillPrep</a>
+    <button class="burger" id="burger" type="button" aria-label="Menu" aria-expanded="false" aria-controls="mainNav">☰</button>
+    <nav class="main-nav" id="mainNav" aria-label="Main">
+      <a href="../../">Home</a>
+      <a href="../../about/">About</a>
+      <a href="../../contact/">Contact</a>
+    </nav>
+  </div>
+</header>
+<main id="main">
+
+<div id="progress" aria-hidden="true"></div>
+<section class="article-hero">
+  <div class="container">
+    <nav class="crumbs" aria-label="Breadcrumb"><a href="../../">Home</a> <span aria-hidden="true">›</span> <a href="../../#guides">Guides</a> <span aria-hidden="true">›</span> <span aria-current="page">JavaScript</span></nav>
+    <div class="cat">JavaScript</div>
+    <h1>JavaScript Fundamentals: Key Concepts Explained</h1>
+    <div class="meta">
+      <span>Published <time datetime="2026-08-28">Aug 28, 2026</time></span>
+      <span>Last reviewed <time datetime="2026-10-18">Oct 18, 2026</time></span>
+      <span>2 min read</span>
+      <span>By the SkillPrep editorial team</span>
+    </div>
+  </div>
+</section>
+<div class="container article-wrap">
+  <article class="article-body">
+    <p class="note"><b>Unofficial study resource.</b> Written independently of any exam provider, employer or software vendor.</p>
+    <p class="lead">JavaScript interviews and skills tests lean heavily on language fundamentals. Questions about output, scope, and type coercion are common — framework knowledge matters far less.</p>
+    <h2 id="core-topics-to-know">Core topics to know</h2>
+        <ul>
+          <li><b>var vs let vs const</b> — scoping, hoisting, and the temporal dead zone</li>
+          <li><b>Type coercion</b> — <code>==</code> vs <code>===</code>, truthy/falsy values</li>
+          <li><b>Closures</b> — what they are and how they capture variables</li>
+          <li><b>Arrow functions</b> — lexical <code>this</code> (no own <code>this</code> binding)</li>
+          <li><b>Promises &amp; async/await</b> — order of execution, <code>.then()</code> chaining</li>
+          <li><b>Array methods</b> — <code>map</code>, <code>filter</code>, <code>reduce</code>, <code>find</code>, and what each returns</li>
+          <li><b>Objects</b> — destructuring, spread, <code>this</code> in methods</li>
+        </ul>
+    <h2 id="truthy-and-falsy-values">Truthy and falsy values</h2>
+        <p>Memorize the falsy values — everything else is truthy:</p>
+        <pre><code>false, 0, -0, 0n, "", null, undefined, NaN</code></pre>
+        <p>Tricky truthy values: <code>"0"</code>, <code>"false"</code> (non-empty strings), <code>[]</code> and <code>{}</code> (empty objects are truthy!).</p>
+        <div class="callout"><b>Classic trap</b> <code>[] == false</code> is <b>true</b> (array coerces to empty string, which coerces to 0), but <code>[] ? "yes" : "no"</code> is <b>"yes"</b> because <code>[]</code> is truthy in a boolean context.</div>
+    <h2 id="async-execution-order">Async execution order</h2>
+        <p>Expect questions like "what order do these logs appear?" Remember: synchronous code first, then microtasks (promises), then macrotasks (<code>setTimeout</code>):</p>
+        <pre><code>console.log("1");
+setTimeout(() => console.log("2"));
+Promise.resolve().then(() => console.log("3"));
+console.log("4");
+// Output: 1, 4, 3, 2</code></pre>
+    <h2 id="practice-questions">Practice questions</h2>
+        <div class="quiz" data-quiz>
+          <div class="q-head"><span>Question 1 of 3</span><span>Types</span></div>
+          <div class="q-body" role="radiogroup" aria-labelledby="javascript-study-guide-iq1-t">
+            <p class="q-text" id="javascript-study-guide-iq1-t">What is the result of <code>typeof null</code>?</p>
+            <label class="opt"><input type="radio" name="javascript-study-guide-q1"> "null"</label>
+            <label class="opt" data-correct><input type="radio" name="javascript-study-guide-q1"> "object"</label>
+            <label class="opt"><input type="radio" name="javascript-study-guide-q1"> "undefined"</label>
+            <label class="opt"><input type="radio" name="javascript-study-guide-q1"> Throws a TypeError</label>
+            <button type="button" class="check-btn">Check answer</button><span class="q-result" role="status" aria-live="polite"></span>
+          </div>
+          <div class="q-explain"><b>Why:</b> A bug preserved since JavaScript's first version — <code>typeof null</code> returns <code>"object"</code>. To check for null, use <code>value === null</code>.</div>
+        </div>
+        <div class="quiz" data-quiz>
+          <div class="q-head"><span>Question 2 of 3</span><span>Array Methods</span></div>
+          <div class="q-body" role="radiogroup" aria-labelledby="javascript-study-guide-iq2-t">
+            <p class="q-text" id="javascript-study-guide-iq2-t">Which method returns a new array containing only elements for which a callback returns true?</p>
+            <label class="opt"><input type="radio" name="javascript-study-guide-q2"> map</label>
+            <label class="opt"><input type="radio" name="javascript-study-guide-q2"> forEach</label>
+            <label class="opt"><input type="radio" name="javascript-study-guide-q2"> find</label>
+            <label class="opt" data-correct><input type="radio" name="javascript-study-guide-q2"> filter</label>
+            <button type="button" class="check-btn">Check answer</button><span class="q-result" role="status" aria-live="polite"></span>
+          </div>
+          <div class="q-explain"><b>Why:</b> <code>filter</code> returns a new array of all matching elements. <code>find</code> returns only the first match (a single value), <code>map</code> transforms every element, and <code>forEach</code> returns undefined.</div>
+        </div>
+        <div class="quiz" data-quiz>
+          <div class="q-head"><span>Question 3 of 3</span><span>Functions</span></div>
+          <div class="q-body" role="radiogroup" aria-labelledby="javascript-study-guide-iq3-t">
+            <p class="q-text" id="javascript-study-guide-iq3-t">What makes arrow functions different from regular functions regarding <code>this</code>?</p>
+            <label class="opt"><input type="radio" name="javascript-study-guide-q3"> They bind this to the window object</label>
+            <label class="opt" data-correct><input type="radio" name="javascript-study-guide-q3"> They inherit this from the surrounding (lexical) scope</label>
+            <label class="opt"><input type="radio" name="javascript-study-guide-q3"> They create a new this like regular functions</label>
+            <label class="opt"><input type="radio" name="javascript-study-guide-q3"> They cannot use this at all</label>
+            <button type="button" class="check-btn">Check answer</button><span class="q-result" role="status" aria-live="polite"></span>
+          </div>
+          <div class="q-explain"><b>Why:</b> Arrow functions have no own <code>this</code> — they capture it lexically from the enclosing context, which is exactly why they're preferred for callbacks and event handlers inside classes and methods.</div>
+        </div>
+    <h2 id="last-minute-tips">Last-minute tips</h2>
+        <ul>
+          <li>Practice reading short code snippets and predicting output — that is most of the exam</li>
+          <li>Review <code>map</code> vs <code>forEach</code> vs <code>reduce</code> until you can say what each returns without looking</li>
+          <li>Understand closure examples like a counter function</li>
+          <li>Run every snippet in your browser console to check your prediction</li>
+        </ul>
+    <h2 id="sources">Sources &amp; further reading</h2>
+    <ul class="sources"><li><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Closures" rel="noopener noreferrer" target="_blank">Closures — MDN Web Docs</a></li><li><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Event_loop" rel="noopener noreferrer" target="_blank">JavaScript execution model (event loop) — MDN Web Docs</a></li><li><a href="https://developer.mozilla.org/en-US/docs/Glossary/Falsy" rel="noopener noreferrer" target="_blank">Falsy — MDN Web Docs</a></li></ul>
+    <hr class="sep">
+    <nav class="prevnext" aria-label="More guides">
+      <a class="prev" href="../../guides/python-study-guide/"><small>← Previous</small>Python Fundamentals: Study Guide + Practice Quiz</a>
+      <a class="next" href="../../guides/project-management-study-guide/"><small>Next →</small>Project Management Study Guide: Concepts That Matter</a>
+    </nav>
+    <a href="../../#guides" class="btn btn-link">← Back to all guides</a>
+  </article>
+  <aside class="sidebar">
+    <div class="box">
+      <h2 class="box-h">On this page</h2>
+      <div class="toc">
+        <a href="#core-topics-to-know" data-toc="core-topics-to-know">Core topics to know</a>
+        <a href="#truthy-and-falsy-values" data-toc="truthy-and-falsy-values">Truthy and falsy values</a>
+        <a href="#async-execution-order" data-toc="async-execution-order">Async execution order</a>
+        <a href="#practice-questions" data-toc="practice-questions">Practice questions</a>
+        <a href="#last-minute-tips" data-toc="last-minute-tips">Last-minute tips</a>
+        <a href="#sources" data-toc="sources">Sources &amp; further reading</a>
+      </div>
+    </div>
+    <div class="box rel">
+      <h2 class="box-h">Related guides</h2>
+      <a href="../../guides/excel-study-guide/">Excel Study Guide: Lookups, Pivot Tables &amp; Core Functions</a>
+      <a href="../../guides/python-study-guide/">Python Fundamentals: Study Guide + Practice Quiz</a>
+      <a href="../../guides/project-management-study-guide/">Project Management Study Guide: Concepts That Matter</a>
+    </div>
+    <div class="box">
+      <h2 class="box-h">Spotted a mistake?</h2>
+      <p class="box-p">We correct errors quickly. Tell us what's wrong and we'll fix it.</p>
+      <a class="btn btn-link" href="mailto:hello@skillprep.blog?subject=Correction%3A%20JavaScript%20Fundamentals%3A%20Key%20Concepts%20Explained&amp;body=Page%3A%20https%3A%2F%2Fskillsprep.github.io%2Fguides%2Fjavascript-study-guide%2F%0A%0AWhat's%20wrong%3A%0A">Report a correction</a>
+    </div>
+  </aside>
+</div>
+</main>
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div>
+        <h2 class="foot-h">SkillPrep</h2>
+        <p class="foot-about">Concept-first study guides and practice tests for everyday work skills. Learn the "why" behind every answer.</p>
+      </div>
+      <div>
+        <h2 class="foot-h">Explore</h2>
+        <a href="../../">All guides</a>
+        <a href="../../about/">About</a>
+        <a href="../../contact/">Contact</a>
+        <a href="../../privacy/">Privacy</a>
+        <a href="../../terms/">Terms</a>
+      </div>
+      <div>
+        <h2 class="foot-h">Popular guides</h2>
+        <a href="../../guides/excel-study-guide/">Excel Study Guide</a>
+        <a href="../../guides/python-study-guide/">Python Fundamentals</a>
+        <a href="../../guides/javascript-study-guide/">JavaScript Fundamentals</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2026 SkillPrep. All rights reserved.</span>
+      <span>Independent educational site. Not affiliated with LinkedIn, Microsoft or any other vendor; product names are trademarks of their owners.</span>
+    </div>
+  </div>
+</footer>
+<button class="back-top" id="backTop" type="button" aria-label="Back to top">↑</button>
+<script src="../../js/site.js" defer></script>
+</body>
+</html>

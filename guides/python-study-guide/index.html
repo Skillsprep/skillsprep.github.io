@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Python Fundamentals: Study Guide + Practice Quiz | SkillPrep</title>
+<meta name="description" content="Data structures, comprehensions, exceptions, and functions — the Python fundamentals that interviews and skills tests keep returning to, with explained…">
+<link rel="canonical" href="https://skillsprep.github.io/guides/python-study-guide/">
+<meta name="robots" content="index,follow">
+<meta name="theme-color" content="#0D1B2A">
+<meta property="og:site_name" content="SkillPrep">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Python Fundamentals: Study Guide + Practice Quiz | SkillPrep">
+<meta property="og:description" content="Data structures, comprehensions, exceptions, and functions — the Python fundamentals that interviews and skills tests keep returning to, with explained…">
+<meta property="og:url" content="https://skillsprep.github.io/guides/python-study-guide/">
+<meta property="og:image" content="https://skillsprep.github.io/assets/og-image.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Python Fundamentals: Study Guide + Practice Quiz | SkillPrep">
+<meta name="twitter:description" content="Data structures, comprehensions, exceptions, and functions — the Python fundamentals that interviews and skills tests keep returning to, with explained…">
+<meta name="twitter:image" content="https://skillsprep.github.io/assets/og-image.png">
+<link rel="icon" href="../../assets/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="../../css/style.css">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"Python Fundamentals: Study Guide + Practice Quiz","description":"Data structures, comprehensions, exceptions, and functions — the Python fundamentals that interviews and skills tests keep returning to, with explained practice questions.","datePublished":"2026-09-03","dateModified":"2026-10-18","author":{"@type":"Organization","name":"SkillPrep editorial team"},"publisher":{"@type":"Organization","name":"SkillPrep","logo":{"@type":"ImageObject","url":"https://skillsprep.github.io/assets/favicon.svg"}},"mainEntityOfPage":"https://skillsprep.github.io/guides/python-study-guide/","image":"https://skillsprep.github.io/assets/og-image.png","articleSection":"Python","inLanguage":"en"}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://skillsprep.github.io/"},{"@type":"ListItem","position":2,"name":"Python","item":"https://skillsprep.github.io/#guides"},{"@type":"ListItem","position":3,"name":"Python Fundamentals: Study Guide + Practice Quiz","item":"https://skillsprep.github.io/guides/python-study-guide/"}]}</script>
+</head>
+<body>
+<a class="skip-link" href="#main">Skip to content</a>
+<header class="site-header">
+  <div class="container header-inner">
+    <a href="../../" class="logo"><span class="mark" aria-hidden="true">S</span> SkillPrep</a>
+    <button class="burger" id="burger" type="button" aria-label="Menu" aria-expanded="false" aria-controls="mainNav">☰</button>
+    <nav class="main-nav" id="mainNav" aria-label="Main">
+      <a href="../../">Home</a>
+      <a href="../../about/">About</a>
+      <a href="../../contact/">Contact</a>
+    </nav>
+  </div>
+</header>
+<main id="main">
+
+<div id="progress" aria-hidden="true"></div>
+<section class="article-hero">
+  <div class="container">
+    <nav class="crumbs" aria-label="Breadcrumb"><a href="../../">Home</a> <span aria-hidden="true">›</span> <a href="../../#guides">Guides</a> <span aria-hidden="true">›</span> <span aria-current="page">Python</span></nav>
+    <div class="cat">Python</div>
+    <h1>Python Fundamentals: Study Guide + Practice Quiz</h1>
+    <div class="meta">
+      <span>Published <time datetime="2026-09-03">Sep 3, 2026</time></span>
+      <span>Last reviewed <time datetime="2026-10-18">Oct 18, 2026</time></span>
+      <span>2 min read</span>
+      <span>By the SkillPrep editorial team</span>
+    </div>
+  </div>
+</section>
+<div class="container article-wrap">
+  <article class="article-body">
+    <p class="note"><b>Unofficial study resource.</b> Written independently of any exam provider, employer or software vendor.</p>
+    <p class="lead">Python interviews and skills tests usually probe core language knowledge rather than frameworks. A solid grip on built-in data types, iteration, error handling, and a few intermediate features like comprehensions and decorators covers most of it.</p>
+    <h2 id="topics-to-know-cold">Topics to know cold</h2>
+        <p>These are the areas worth being able to explain from memory:</p>
+        <ul>
+          <li><b>Lists, dicts, tuples, sets</b> — mutability, methods (<code>append</code>, <code>get</code>, <code>set</code> operations)</li>
+          <li><b>List &amp; dict comprehensions</b> — reading and writing them</li>
+          <li><b>String methods</b> — <code>split</code>, <code>join</code>, <code>strip</code>, <code>replace</code>, slicing</li>
+          <li><b>Exceptions</b> — <code>try/except/else/finally</code> flow</li>
+          <li><b>Functions</b> — <code>*args</code>/<code>**kwargs</code>, default arguments, lambda, scope (<code>global</code>)</li>
+          <li><b>Decorators</b> — basic understanding of <code>@wrapper</code> syntax</li>
+          <li><b>OOP basics</b> — <code>__init__</code>, <code>self</code>, inheritance, <code>super()</code></li>
+        </ul>
+    <h2 id="the-classic-mutable-default-argument-trap">The classic mutable default argument trap</h2>
+        <p>This pattern is a favourite in interviews and tests. What does this print?</p>
+        <pre><code>def add(item, basket=[]):
+    basket.append(item)
+    return basket
+
+print(add("apple"))
+print(add("banana"))</code></pre>
+        <p>Answer: <code>['apple']</code> then <code>['apple', 'banana']</code>. The default list is created <b>once</b> when the function is defined and shared across calls. The safe pattern is <code>def add(item, basket=None):</code> with a fresh list inside.</p>
+        <div class="callout tip"><b>Remember</b> Default argument values are evaluated once at function definition time — not on each call. This applies to any mutable default.</div>
+    <h2 id="comprehension-patterns">Comprehension patterns</h2>
+        <p>Learn to read comprehensions left-to-right: <code>[expression for item in iterable if condition]</code></p>
+        <pre><code># squares of even numbers 0-9
+[x**2 for x in range(10) if x % 2 == 0]
+# swap keys/values
+{v: k for k, v in prices.items()}</code></pre>
+    <h2 id="practice-questions">Practice questions</h2>
+        <div class="quiz" data-quiz>
+          <div class="q-head"><span>Question 1 of 3</span><span>Data Types</span></div>
+          <div class="q-body" role="radiogroup" aria-labelledby="python-study-guide-iq1-t">
+            <p class="q-text" id="python-study-guide-iq1-t">Which of these is immutable?</p>
+            <label class="opt"><input type="radio" name="python-study-guide-q1"> list</label>
+            <label class="opt"><input type="radio" name="python-study-guide-q1"> dict</label>
+            <label class="opt" data-correct><input type="radio" name="python-study-guide-q1"> tuple</label>
+            <label class="opt"><input type="radio" name="python-study-guide-q1"> set</label>
+            <button type="button" class="check-btn">Check answer</button><span class="q-result" role="status" aria-live="polite"></span>
+          </div>
+          <div class="q-explain"><b>Why:</b> Tuples cannot be modified after creation, so they can be dictionary keys and set members. Lists, dicts, and sets are all mutable.</div>
+        </div>
+        <div class="quiz" data-quiz>
+          <div class="q-head"><span>Question 2 of 3</span><span>Exceptions</span></div>
+          <div class="q-body" role="radiogroup" aria-labelledby="python-study-guide-iq2-t">
+            <p class="q-text" id="python-study-guide-iq2-t">In a try/except/else/finally block, which part runs only when no exception is raised?</p>
+            <label class="opt"><input type="radio" name="python-study-guide-q2"> finally</label>
+            <label class="opt" data-correct><input type="radio" name="python-study-guide-q2"> else</label>
+            <label class="opt"><input type="radio" name="python-study-guide-q2"> except</label>
+            <label class="opt"><input type="radio" name="python-study-guide-q2"> try</label>
+            <button type="button" class="check-btn">Check answer</button><span class="q-result" role="status" aria-live="polite"></span>
+          </div>
+          <div class="q-explain"><b>Why:</b> <code>else</code> executes only if the try block completes without raising. <code>finally</code> always runs (exception or not), and <code>except</code> runs only when an exception occurs.</div>
+        </div>
+        <div class="quiz" data-quiz>
+          <div class="q-head"><span>Question 3 of 3</span><span>Functions</span></div>
+          <div class="q-body" role="radiogroup" aria-labelledby="python-study-guide-iq3-t">
+            <p class="q-text" id="python-study-guide-iq3-t">What does <code>*args</code> allow in a function definition?</p>
+            <label class="opt" data-correct><input type="radio" name="python-study-guide-q3"> Accept any number of positional arguments as a tuple</label>
+            <label class="opt"><input type="radio" name="python-study-guide-q3"> Accept any number of keyword arguments as a dict</label>
+            <label class="opt"><input type="radio" name="python-study-guide-q3"> Unpack a list into separate arguments</label>
+            <label class="opt"><input type="radio" name="python-study-guide-q3"> Make the argument optional</label>
+            <button type="button" class="check-btn">Check answer</button><span class="q-result" role="status" aria-live="polite"></span>
+          </div>
+          <div class="q-explain"><b>Why:</b> <code>*args</code> collects extra positional arguments into a tuple. Collecting keyword arguments into a dict is <code>**kwargs</code> — the two are frequently confused in questions.</div>
+        </div>
+    <h2 id="preparation-tips">Preparation tips</h2>
+        <ul>
+          <li>Run code snippets mentally — "what is the output?" is the classic question format</li>
+          <li>Review the official Python tutorial's sections on data structures and exceptions</li>
+          <li>Know the difference between <code>==</code> and <code>is</code> (<code>is</code> compares identity)</li>
+          <li>Learn decorators well enough to read the <code>@wrapper</code> syntax and explain what it does</li>
+        </ul>
+    <h2 id="sources">Sources &amp; further reading</h2>
+    <ul class="sources"><li><a href="https://docs.python.org/3/tutorial/controlflow.html#default-argument-values" rel="noopener noreferrer" target="_blank">Default argument values — The Python Tutorial</a></li><li><a href="https://docs.python.org/3/tutorial/errors.html" rel="noopener noreferrer" target="_blank">Errors and exceptions — The Python Tutorial</a></li><li><a href="https://docs.python.org/3/tutorial/datastructures.html" rel="noopener noreferrer" target="_blank">Data structures — The Python Tutorial</a></li></ul>
+    <hr class="sep">
+    <nav class="prevnext" aria-label="More guides">
+      <a class="prev" href="../../guides/excel-study-guide/"><small>← Previous</small>Excel Study Guide: Lookups, Pivot Tables &amp; Core Functions</a>
+      <a class="next" href="../../guides/javascript-study-guide/"><small>Next →</small>JavaScript Fundamentals: Key Concepts Explained</a>
+    </nav>
+    <a href="../../#guides" class="btn btn-link">← Back to all guides</a>
+  </article>
+  <aside class="sidebar">
+    <div class="box">
+      <h2 class="box-h">On this page</h2>
+      <div class="toc">
+        <a href="#topics-to-know-cold" data-toc="topics-to-know-cold">Topics to know cold</a>
+        <a href="#the-classic-mutable-default-argument-trap" data-toc="the-classic-mutable-default-argument-trap">The classic mutable default argument trap</a>
+        <a href="#comprehension-patterns" data-toc="comprehension-patterns">Comprehension patterns</a>
+        <a href="#practice-questions" data-toc="practice-questions">Practice questions</a>
+        <a href="#preparation-tips" data-toc="preparation-tips">Preparation tips</a>
+        <a href="#sources" data-toc="sources">Sources &amp; further reading</a>
+      </div>
+    </div>
+    <div class="box rel">
+      <h2 class="box-h">Related guides</h2>
+      <a href="../../guides/excel-study-guide/">Excel Study Guide: Lookups, Pivot Tables &amp; Core Functions</a>
+      <a href="../../guides/javascript-study-guide/">JavaScript Fundamentals: Key Concepts Explained</a>
+      <a href="../../guides/project-management-study-guide/">Project Management Study Guide: Concepts That Matter</a>
+    </div>
+    <div class="box">
+      <h2 class="box-h">Spotted a mistake?</h2>
+      <p class="box-p">We correct errors quickly. Tell us what's wrong and we'll fix it.</p>
+      <a class="btn btn-link" href="mailto:hello@skillprep.blog?subject=Correction%3A%20Python%20Fundamentals%3A%20Study%20Guide%20%2B%20Practice%20Quiz&amp;body=Page%3A%20https%3A%2F%2Fskillsprep.github.io%2Fguides%2Fpython-study-guide%2F%0A%0AWhat's%20wrong%3A%0A">Report a correction</a>
+    </div>
+  </aside>
+</div>
+</main>
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div>
+        <h2 class="foot-h">SkillPrep</h2>
+        <p class="foot-about">Concept-first study guides and practice tests for everyday work skills. Learn the "why" behind every answer.</p>
+      </div>
+      <div>
+        <h2 class="foot-h">Explore</h2>
+        <a href="../../">All guides</a>
+        <a href="../../about/">About</a>
+        <a href="../../contact/">Contact</a>
+        <a href="../../privacy/">Privacy</a>
+        <a href="../../terms/">Terms</a>
+      </div>
+      <div>
+        <h2 class="foot-h">Popular guides</h2>
+        <a href="../../guides/excel-study-guide/">Excel Study Guide</a>
+        <a href="../../guides/python-study-guide/">Python Fundamentals</a>
+        <a href="../../guides/javascript-study-guide/">JavaScript Fundamentals</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2026 SkillPrep. All rights reserved.</span>
+      <span>Independent educational site. Not affiliated with LinkedIn, Microsoft or any other vendor; product names are trademarks of their owners.</span>
+    </div>
+  </div>
+</footer>
+<button class="back-top" id="backTop" type="button" aria-label="Back to top">↑</button>
+<script src="../../js/site.js" defer></script>
+</body>
+</html>

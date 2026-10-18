@@ -1,64 +1,232 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>SkillPrep — LinkedIn Learning Assessment Study Guides</title>
-  <meta name="description" content="Free study guides and practice questions for LinkedIn Skill Assessments: Excel, Python, SQL, JavaScript, Project Management, Marketing and more.">
-  <link rel="canonical" href="https://cdeepak4u.github.io/">
-  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='20' fill='%230A66C2'/><text x='50' y='68' font-size='52' text-anchor='middle' fill='white' font-family='Arial' font-weight='bold'>S</text></svg>">
-  <link rel="stylesheet" href="css/style.css">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>SkillPrep — Free Study Guides &amp; Practice Tests for Work Skills</title>
+<meta name="description" content="Free, concept-first study guides and practice quizzes for Excel, Python, SQL, JavaScript, Git, project management, generative AI and more — every answer explained.">
+<link rel="canonical" href="https://skillsprep.github.io/">
+<meta name="robots" content="index,follow">
+<meta name="theme-color" content="#0D1B2A">
+<meta property="og:site_name" content="SkillPrep">
+<meta property="og:type" content="website">
+<meta property="og:title" content="SkillPrep — Free Study Guides &amp; Practice Tests for Work Skills">
+<meta property="og:description" content="Free, concept-first study guides and practice quizzes for Excel, Python, SQL, JavaScript, Git, project management, generative AI and more — every answer explained.">
+<meta property="og:url" content="https://skillsprep.github.io/">
+<meta property="og:image" content="https://skillsprep.github.io/assets/og-image.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="SkillPrep — Free Study Guides &amp; Practice Tests for Work Skills">
+<meta name="twitter:description" content="Free, concept-first study guides and practice quizzes for Excel, Python, SQL, JavaScript, Git, project management, generative AI and more — every answer explained.">
+<meta name="twitter:image" content="https://skillsprep.github.io/assets/og-image.png">
+<link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="css/style.css">
+<script>(function(){var h=location.hash;if(h.indexOf("#/")!==0)return;var m={"excel-assessment-guide":"excel-study-guide","python-assessment-guide":"python-study-guide","javascript-assessment-guide":"javascript-study-guide","project-management-assessment-guide":"project-management-study-guide","sql-assessment-guide":"sql-study-guide","digital-marketing-assessment-guide":"digital-marketing-study-guide","git-github-assessment-guide":"git-study-guide","powerpoint-assessment-guide":"powerpoint-study-guide","assessment-basics-faq":"linkedin-skill-assessments-retired","generative-ai-microsoft-linkedin-guide":"generative-ai-career-essentials-practice-test","lean-six-sigma-sustainability-mock-test":"lean-six-sigma-practice-test"},p=h.slice(2).split("/");var t=null;if(p[0]==="post"&&m[p[1]])t="guides/"+m[p[1]]+"/";else if(p[0]==="about")t="about/";else if(p[0]==="contact")t="contact/";if(t)location.replace(t);})();</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"WebSite","name":"SkillPrep","url":"https://skillsprep.github.io/","description":"Free study guides and practice tests for everyday work skills."}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"Organization","name":"SkillPrep","url":"https://skillsprep.github.io/","logo":"https://skillsprep.github.io/assets/favicon.svg"}</script>
 </head>
 <body>
+<a class="skip-link" href="#main">Skip to content</a>
+<header class="site-header">
+  <div class="container header-inner">
+    <a href="./" class="logo"><span class="mark" aria-hidden="true">S</span> SkillPrep</a>
+    <button class="burger" id="burger" type="button" aria-label="Menu" aria-expanded="false" aria-controls="mainNav">☰</button>
+    <nav class="main-nav" id="mainNav" aria-label="Main">
+      <a href="./" aria-current="page" class="active">Home</a>
+      <a href="about/">About</a>
+      <a href="contact/">Contact</a>
+    </nav>
+  </div>
+</header>
+<main id="main">
 
-  <header class="site-header">
-    <div class="container header-inner">
-      <a href="#/" class="logo">
-        <span class="mark">S</span> SkillPrep
+<section class="hero">
+  <div class="container">
+    <h1>Free study guides and practice tests for the <span>skills employers ask about</span></h1>
+    <p>Concept-first guides for Excel, Python, SQL, JavaScript, Git, project management and more — with practice questions that explain every answer.</p>
+    <form class="search-bar" id="searchForm" role="search" action="./" method="get">
+      <label for="searchInput" class="visually-hidden">Search guides</label>
+      <input type="search" id="searchInput" name="q" placeholder="Search guides… e.g. pivot tables, JOINs, closures" autocomplete="off">
+      <button type="submit">Search</button>
+    </form>
+    <div class="stats">
+      <div class="stat"><b>11</b><small>Study guides &amp; tests</small></div>
+      <div class="stat"><b>11</b><small>Skill categories</small></div>
+      <div class="stat"><b>164</b><small>Practice questions</small></div>
+      <div class="stat"><b>Free</b><small>No sign-up needed</small></div>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="guides">
+  <div class="container">
+    <h2 class="section-title" id="gridTitle">All guides</h2>
+    <p class="section-sub" id="gridSub">Hand-written study notes with interactive practice quizzes.</p>
+    <div class="chip-row" id="chips" role="group" aria-label="Filter by category">
+      <button type="button" class="chip active" data-cat="All" aria-pressed="true">All</button>
+      <button type="button" class="chip" data-cat="Excel" aria-pressed="false">Excel</button>
+      <button type="button" class="chip" data-cat="Python" aria-pressed="false">Python</button>
+      <button type="button" class="chip" data-cat="JavaScript" aria-pressed="false">JavaScript</button>
+      <button type="button" class="chip" data-cat="Project Management" aria-pressed="false">Project Management</button>
+      <button type="button" class="chip" data-cat="SQL" aria-pressed="false">SQL</button>
+      <button type="button" class="chip" data-cat="Marketing" aria-pressed="false">Marketing</button>
+      <button type="button" class="chip" data-cat="Git" aria-pressed="false">Git</button>
+      <button type="button" class="chip" data-cat="PowerPoint" aria-pressed="false">PowerPoint</button>
+      <button type="button" class="chip" data-cat="Getting Started" aria-pressed="false">Getting Started</button>
+      <button type="button" class="chip" data-cat="Generative AI" aria-pressed="false">Generative AI</button>
+      <button type="button" class="chip" data-cat="Lean Six Sigma" aria-pressed="false">Lean Six Sigma</button>
+    </div>
+    <div class="post-grid" id="grid">
+      <a class="post-card" href="guides/excel-study-guide/" data-cat="Excel" data-search="excel study guide: lookups, pivot tables &amp; core functions core excel skills for work, interviews and skills tests: lookup formulas, text and logical functions, pivot tables, and 3 practice questions with full explanations. excel">
+        <div class="thumb" style="background:linear-gradient(135deg,#1D6F42,#31a05f)" aria-hidden="true">XL</div>
+        <div class="body">
+          <div class="cat">Excel</div>
+          <h3>Excel Study Guide: Lookups, Pivot Tables &amp; Core Functions</h3>
+          <p class="excerpt">Core Excel skills for work, interviews and skills tests: lookup formulas, text and logical functions, pivot tables, and 3 practice questions with full explanations.</p>
+          <div class="meta"><span>Sep 5, 2026 · 3 min read</span><span class="read">Read →</span></div>
+        </div>
       </a>
-      <button class="burger" id="burger" aria-label="Menu">☰</button>
-      <nav class="main-nav" id="mainNav">
-        <a href="#/" data-nav="home">Home</a>
-        <a href="#/about" data-nav="about">About</a>
-        <a href="#/contact" data-nav="contact">Contact</a>
-      </nav>
+      <a class="post-card" href="guides/python-study-guide/" data-cat="Python" data-search="python fundamentals: study guide + practice quiz data structures, comprehensions, exceptions, and functions — the python fundamentals that interviews and skills tests keep returning to, with explained practice questions. python">
+        <div class="thumb" style="background:linear-gradient(135deg,#2b6cb0,#3182ce)" aria-hidden="true">PY</div>
+        <div class="body">
+          <div class="cat">Python</div>
+          <h3>Python Fundamentals: Study Guide + Practice Quiz</h3>
+          <p class="excerpt">Data structures, comprehensions, exceptions, and functions — the Python fundamentals that interviews and skills tests keep returning to, with explained practice questions.</p>
+          <div class="meta"><span>Sep 3, 2026 · 2 min read</span><span class="read">Read →</span></div>
+        </div>
+      </a>
+      <a class="post-card" href="guides/javascript-study-guide/" data-cat="JavaScript" data-search="javascript fundamentals: key concepts explained hoisting, closures, == vs ===, arrow functions, and promises — the javascript fundamentals behind most interview and skills-test questions. javascript">
+        <div class="thumb" style="background:linear-gradient(135deg,#8a5a0b,#c98a12)" aria-hidden="true">JS</div>
+        <div class="body">
+          <div class="cat">JavaScript</div>
+          <h3>JavaScript Fundamentals: Key Concepts Explained</h3>
+          <p class="excerpt">Hoisting, closures, == vs ===, arrow functions, and promises — the JavaScript fundamentals behind most interview and skills-test questions.</p>
+          <div class="meta"><span>Aug 28, 2026 · 2 min read</span><span class="read">Read →</span></div>
+        </div>
+      </a>
+      <a class="post-card" href="guides/project-management-study-guide/" data-cat="Project Management" data-search="project management study guide: concepts that matter agile vs waterfall, the iron triangle, raci matrices, and risk management — the core project management concepts, with practice questions. project management">
+        <div class="thumb" style="background:linear-gradient(135deg,#6b46c1,#9f7aea)" aria-hidden="true">PM</div>
+        <div class="body">
+          <div class="cat">Project Management</div>
+          <h3>Project Management Study Guide: Concepts That Matter</h3>
+          <p class="excerpt">Agile vs Waterfall, the Iron Triangle, RACI matrices, and risk management — the core project management concepts, with practice questions.</p>
+          <div class="meta"><span>Aug 22, 2026 · 2 min read</span><span class="read">Read →</span></div>
+        </div>
+      </a>
+      <a class="post-card" href="guides/sql-study-guide/" data-cat="SQL" data-search="sql study guide: queries you should master joins, group by, window functions, and subqueries — the sql patterns behind most interview and skills-test questions, explained with examples. sql">
+        <div class="thumb" style="background:linear-gradient(135deg,#2c5282,#4299e1)" aria-hidden="true">SQ</div>
+        <div class="body">
+          <div class="cat">SQL</div>
+          <h3>SQL Study Guide: Queries You Should Master</h3>
+          <p class="excerpt">JOINs, GROUP BY, window functions, and subqueries — the SQL patterns behind most interview and skills-test questions, explained with examples.</p>
+          <div class="meta"><span>Aug 15, 2026 · 2 min read</span><span class="read">Read →</span></div>
+        </div>
+      </a>
+      <a class="post-card" href="guides/digital-marketing-study-guide/" data-cat="Marketing" data-search="digital marketing study guide: seo, funnels &amp; metrics seo fundamentals, funnel metrics, a/b testing, and campaign attribution — condensed study notes with practice questions. marketing">
+        <div class="thumb" style="background:linear-gradient(135deg,#b02525,#dc4a4a)" aria-hidden="true">DM</div>
+        <div class="body">
+          <div class="cat">Marketing</div>
+          <h3>Digital Marketing Study Guide: SEO, Funnels &amp; Metrics</h3>
+          <p class="excerpt">SEO fundamentals, funnel metrics, A/B testing, and campaign attribution — condensed study notes with practice questions.</p>
+          <div class="meta"><span>Aug 8, 2026 · 2 min read</span><span class="read">Read →</span></div>
+        </div>
+      </a>
+      <a class="post-card" href="guides/git-study-guide/" data-cat="Git" data-search="git study guide: commands and concepts branching, merging vs rebasing, staging, and undoing mistakes — the git knowledge every developer needs, with quizzes. git">
+        <div class="thumb" style="background:linear-gradient(135deg,#c05621,#ed8936)" aria-hidden="true">GT</div>
+        <div class="body">
+          <div class="cat">Git</div>
+          <h3>Git Study Guide: Commands and Concepts</h3>
+          <p class="excerpt">Branching, merging vs rebasing, staging, and undoing mistakes — the Git knowledge every developer needs, with quizzes.</p>
+          <div class="meta"><span>Jul 30, 2026 · 2 min read</span><span class="read">Read →</span></div>
+        </div>
+      </a>
+      <a class="post-card" href="guides/powerpoint-study-guide/" data-cat="PowerPoint" data-search="powerpoint study guide: efficient slide skills slide masters, presenter view, smartart, and the productivity features that separate casual users from efficient ones. powerpoint">
+        <div class="thumb" style="background:linear-gradient(135deg,#b03a2e,#e07b39)" aria-hidden="true">PP</div>
+        <div class="body">
+          <div class="cat">PowerPoint</div>
+          <h3>PowerPoint Study Guide: Efficient Slide Skills</h3>
+          <p class="excerpt">Slide masters, presenter view, SmartArt, and the productivity features that separate casual users from efficient ones.</p>
+          <div class="meta"><span>Jul 22, 2026 · 2 min read</span><span class="read">Read →</span></div>
+        </div>
+      </a>
+      <a class="post-card" href="guides/linkedin-skill-assessments-retired/" data-cat="Getting Started" data-search="linkedin skill assessments are retired: what to do instead linkedin skill assessments are no longer available. here is what that means for your profile and the best ways to prove and practise your skills today. getting started">
+        <div class="thumb" style="background:linear-gradient(135deg,#0A66C2,#4a90d9)" aria-hidden="true">LI</div>
+        <div class="body">
+          <div class="cat">Getting Started</div>
+          <h3>LinkedIn Skill Assessments Are Retired: What to Do Instead</h3>
+          <p class="excerpt">LinkedIn Skill Assessments are no longer available. Here is what that means for your profile and the best ways to prove and practise your skills today.</p>
+          <div class="meta"><span>Oct 18, 2026 · 2 min read</span><span class="read">Read →</span></div>
+        </div>
+      </a>
+      <a class="post-card" href="guides/generative-ai-career-essentials-practice-test/" data-cat="Generative AI" data-search="career essentials in generative ai: 125-question practice test an unofficial 125-question practice test on generative ai: copilot in microsoft 365, llms, gans and vaes, prompt engineering, machine-learning types, data fundamentals and ai ethics — with instant scoring, a per-topic breakdown and explanations. generative ai">
+        <div class="thumb" style="background:linear-gradient(135deg,#0A66C2,#7b5cd6)" aria-hidden="true">AI</div>
+        <div class="body">
+          <div class="cat">Generative AI</div>
+          <h3>Career Essentials in Generative AI: 125-Question Practice Test</h3>
+          <p class="excerpt">An unofficial 125-question practice test on generative AI: Copilot in Microsoft 365, LLMs, GANs and VAEs, prompt engineering, machine-learning types, data fundamentals and AI ethics — with instant scoring, a per-topic breakdown and explanations.</p>
+          <div class="meta"><span>Sep 21, 2026 · 125 questions</span><span class="read">Read →</span></div>
+        </div>
+      </a>
+      <a class="post-card" href="guides/lean-six-sigma-practice-test/" data-cat="Lean Six Sigma" data-search="lean six sigma &amp; sustainability: 15-question practice test 15 practice questions on the 5-whys, pdca, the downtime wastes, stakeholder engagement and the pillars of sustainability — with instant scoring and explanations. lean six sigma">
+        <div class="thumb" style="background:linear-gradient(135deg,#276749,#2f9e63)" aria-hidden="true">L6</div>
+        <div class="body">
+          <div class="cat">Lean Six Sigma</div>
+          <h3>Lean Six Sigma &amp; Sustainability: 15-Question Practice Test</h3>
+          <p class="excerpt">15 practice questions on the 5-Whys, PDCA, the DOWNTIME wastes, stakeholder engagement and the pillars of sustainability — with instant scoring and explanations.</p>
+          <div class="meta"><span>Sep 27, 2026 · 15 questions</span><span class="read">Read →</span></div>
+        </div>
+      </a>
     </div>
-  </header>
+    <div class="empty-state" id="emptyState" hidden>
+      <div class="big" aria-hidden="true">🔍</div>
+      <h3>No guides found</h3>
+      <p>Try a different keyword or category.</p>
+    </div>
+  </div>
+</section>
 
-  <main id="app"></main>
-
-  <footer class="site-footer">
-    <div class="container">
-      <div class="footer-grid">
-        <div>
-          <h5>SkillPrep</h5>
-          <p style="font-size:.9rem;max-width:340px">Concept-first study guides for LinkedIn Skill Assessments. Learn the "why" behind every question — no dumps, just understanding.</p>
-        </div>
-        <div>
-          <h5>Explore</h5>
-          <a href="#/">All guides</a>
-          <a href="#/about">About</a>
-          <a href="#/contact">Contact</a>
-        </div>
-        <div>
-          <h5>Popular guides</h5>
-          <a href="#/post/excel-assessment-guide">Excel Assessment</a>
-          <a href="#/post/python-assessment-guide">Python Assessment</a>
-          <a href="#/post/sql-assessment-guide">SQL Assessment</a>
-        </div>
+<section class="section alt">
+  <div class="container">
+    <h2 class="section-title">How SkillPrep helps you learn</h2>
+    <div class="feature-grid">
+      <div class="feature"><h3>Concepts first</h3><p>Every guide explains the reasoning behind the answer, so you can handle questions you have never seen.</p></div>
+      <div class="feature"><h3>Explained answers</h3><p>164 practice questions, each with a short explanation of why the right answer is right.</p></div>
+      <div class="feature"><h3>Sources you can check</h3><p>Guides link to official documentation and show when they were last reviewed.</p></div>
+      <div class="feature"><h3>Independent &amp; unofficial</h3><p>We are not affiliated with LinkedIn, Microsoft or any vendor, and we don't claim access to any official exam.</p></div>
+    </div>
+  </div>
+</section>
+</main>
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div>
+        <h2 class="foot-h">SkillPrep</h2>
+        <p class="foot-about">Concept-first study guides and practice tests for everyday work skills. Learn the "why" behind every answer.</p>
       </div>
-      <div class="footer-bottom">
-        <span>© 2026 SkillPrep. All rights reserved.</span>
-        <span>Not affiliated with LinkedIn Corporation. "LinkedIn" is a trademark of LinkedIn Corporation.</span>
+      <div>
+        <h2 class="foot-h">Explore</h2>
+        <a href="./">All guides</a>
+        <a href="about/">About</a>
+        <a href="contact/">Contact</a>
+        <a href="privacy/">Privacy</a>
+        <a href="terms/">Terms</a>
+      </div>
+      <div>
+        <h2 class="foot-h">Popular guides</h2>
+        <a href="guides/excel-study-guide/">Excel Study Guide</a>
+        <a href="guides/python-study-guide/">Python Fundamentals</a>
+        <a href="guides/javascript-study-guide/">JavaScript Fundamentals</a>
       </div>
     </div>
-  </footer>
-
-  <button class="back-top" id="backTop" aria-label="Back to top">↑</button>
-
-  <script src="js/data.js"></script>
-  <script src="js/genai.js"></script>
-  <script src="js/lean-sigma.js"></script>
-  <script src="js/app.js"></script>
+    <div class="footer-bottom">
+      <span>© 2026 SkillPrep. All rights reserved.</span>
+      <span>Independent educational site. Not affiliated with LinkedIn, Microsoft or any other vendor; product names are trademarks of their owners.</span>
+    </div>
+  </div>
+</footer>
+<button class="back-top" id="backTop" type="button" aria-label="Back to top">↑</button>
+<script src="js/site.js" defer></script>
 </body>
 </html>
