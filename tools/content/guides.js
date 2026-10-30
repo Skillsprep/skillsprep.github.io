@@ -128,7 +128,7 @@ print(add("banana"))</code></pre>
             <label class="opt"><input type="radio" name="q1"> set</label>
             <button class="check-btn">Check answer</button>
           </div>
-          <div class="q-explain"><b>Why:</b> Tuples cannot be modified after creation, so they can be dictionary keys and set members. Lists, dicts, and sets are all mutable.</div>
+          <div class="q-explain"><b>Why:</b> Tuples cannot be modified after creation. Note that they can be used as dictionary keys and set members <b>only if</b> all their elements are hashable (e.g. a tuple containing a list cannot be a dictionary key). Lists, dicts, and sets are all mutable.</div>
         </div>
         <div class="quiz" data-quiz>
           <div class="q-head"><span>Question 2 of 3</span><span>Exceptions</span></div>
@@ -422,7 +422,7 @@ HAVING AVG(salary) > 50000;  -- filters GROUPS after</code></pre>
           <li><b>On-page SEO</b> — title tags, meta descriptions, headings, internal links, keyword usage</li>
           <li><b>Off-page SEO</b> — backlinks and mentions from other sites (a major ranking signal)</li>
           <li><b>Technical SEO</b> — site speed, mobile-friendliness, crawlability, sitemaps, structured data</li>
-          <li><b>CTR</b> = clicks ÷ impressions; <b>Bounce rate</b> = single-page sessions ÷ all sessions</li>
+          <li><b>CTR</b> = clicks ÷ impressions; <b>Bounce rate</b> = in Google Analytics 4, the percentage of sessions that were not engaged (older GA3 definition was single-page sessions ÷ all sessions).</li>
         </ul>
         <div class="callout"><b>Common question</b> "What most improves a page's authority?" → quality backlinks. "What helps search engines understand page structure?" → heading tags / semantic HTML / structured data.</div>` },
       { h: "Funnel metrics", body: `
