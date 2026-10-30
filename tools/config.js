@@ -52,7 +52,8 @@ module.exports = {
     ],
     "digital-marketing-study-guide": [
       ["SEO Starter Guide — Google Search Central", "https://developers.google.com/search/docs/fundamentals/seo-starter-guide"],
-      ["CAN-SPAM Act: A Compliance Guide for Business — FTC", "https://www.ftc.gov/business-guidance/resources/can-spam-act-compliance-guide-business"]
+      ["CAN-SPAM Act: A Compliance Guide for Business — FTC", "https://www.ftc.gov/business-guidance/resources/can-spam-act-compliance-guide-business"],
+      ["Bounce rate — Google Analytics Help", "https://support.google.com/analytics/answer/12195621"]
     ],
     "git-study-guide": [
       ["git-revert — Git documentation", "https://git-scm.com/docs/git-revert"],
@@ -67,7 +68,8 @@ module.exports = {
     ],
     "generative-ai-career-essentials-practice-test": [
       ["AI Risk Management Framework — NIST", "https://www.nist.gov/itl/ai-risk-management-framework"],
-      ["The EU Artificial Intelligence Act", "https://artificialintelligenceact.eu/"]
+      ["The EU Artificial Intelligence Act", "https://artificialintelligenceact.eu/"],
+      ["Microsoft Copilot documentation — Microsoft Learn", "https://learn.microsoft.com/en-us/copilot/"]
     ],
     "lean-six-sigma-practice-test": [
       ["PDCA cycle — ASQ", "https://asq.org/quality-resources/pdca-cycle"],
