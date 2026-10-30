@@ -9,6 +9,21 @@
     return null;
   }
 
+  /* ---------- dark mode toggle ---------- */
+  var themeToggle = $("#themeToggle");
+  if (themeToggle) {
+    themeToggle.addEventListener("click", function () {
+      var isDark = document.documentElement.getAttribute("data-theme") === "dark";
+      if (isDark) {
+        document.documentElement.removeAttribute("data-theme");
+        store("skillprep:theme", "light");
+      } else {
+        document.documentElement.setAttribute("data-theme", "dark");
+        store("skillprep:theme", "dark");
+      }
+    });
+  }
+
   /* ---------- mobile menu ---------- */
   var burger = $("#burger"), nav = $("#mainNav");
   if (burger && nav) {
@@ -16,6 +31,24 @@
     burger.addEventListener("click", function () { setMenu(!nav.classList.contains("open")); });
     nav.addEventListener("click", function (e) { if (e.target.closest("a")) setMenu(false); });
     document.addEventListener("keydown", function (e) { if (e.key === "Escape" && nav.classList.contains("open")) { setMenu(false); burger.focus(); } });
+  }
+
+  /* ---------- share button ---------- */
+  var shareBtn = $("#shareBtn");
+  if (shareBtn) {
+    shareBtn.addEventListener("click", function () {
+      var url = shareBtn.getAttribute("data-url");
+      var title = shareBtn.getAttribute("data-title");
+      if (navigator.share) {
+        navigator.share({ title: title, url: url }).catch(function () {});
+      } else {
+        navigator.clipboard.writeText(url).then(function () {
+          var oldText = shareBtn.textContent;
+          shareBtn.textContent = "Copied!";
+          setTimeout(function () { shareBtn.textContent = oldText; }, 2000);
+        });
+      }
+    });
   }
 
   /* ---------- back-to-top + reading progress (single scroll listener) ---------- */
