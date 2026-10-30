@@ -125,6 +125,7 @@ function layout({ title, desc, path: pagePath, prefix, nav, body, ld = [], type 
   return `<!DOCTYPE html>
 <html lang="en">
 <head>
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9455217122501464" crossorigin="anonymous"></script>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>${esc(title)}</title>
@@ -146,6 +147,7 @@ function layout({ title, desc, path: pagePath, prefix, nav, body, ld = [], type 
 <meta name="twitter:image" content="${OG_IMAGE}">
 <link rel="icon" href="${link("assets/favicon.svg")}" type="image/svg+xml">
 <link rel="stylesheet" href="${link("css/style.css")}">
+<script>(function(){try{if(localStorage.getItem("skillprep:theme")==="dark"){document.documentElement.setAttribute("data-theme","dark");}}catch(e){}})();</script>
 ${extraHead}${ld.map(jsonLd).join("\n")}
 </head>
 <body>
@@ -159,6 +161,7 @@ ${extraHead}${ld.map(jsonLd).join("\n")}
       ${navItem("about", "About", link("about/"))}
       ${navItem("contact", "Contact", link("contact/"))}
     </nav>
+    <button class="theme-toggle" id="themeToggle" type="button" aria-label="Toggle dark mode">◐</button>
   </div>
 </header>
 <main id="main">
@@ -320,6 +323,10 @@ function guidePage(p) {
     <div class="box rel">
       <h2 class="box-h">Related guides</h2>
       ${rel.map((r) => `<a href="${prefix}${r.url}">${esc(r.title)}</a>`).join("\n      ")}
+    </div>
+    <div class="box">
+      <h2 class="box-h">Share this guide</h2>
+      <button type="button" class="btn btn-share" id="shareBtn" data-url="${SITE + p.url}" data-title="${esc(p.title)}">Copy Link</button>
     </div>
     <div class="box">
       <h2 class="box-h">Spotted a mistake?</h2>
