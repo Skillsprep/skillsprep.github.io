@@ -9,6 +9,21 @@
     return null;
   }
 
+  /* ---------- dark mode toggle ---------- */
+  var themeToggle = $("#themeToggle");
+  if (themeToggle) {
+    themeToggle.addEventListener("click", function () {
+      var isDark = document.documentElement.getAttribute("data-theme") === "dark";
+      if (isDark) {
+        document.documentElement.removeAttribute("data-theme");
+        store("skillprep:theme", "light");
+      } else {
+        document.documentElement.setAttribute("data-theme", "dark");
+        store("skillprep:theme", "dark");
+      }
+    });
+  }
+
   /* ---------- mobile menu ---------- */
   var burger = $("#burger"), nav = $("#mainNav");
   if (burger && nav) {
@@ -16,6 +31,24 @@
     burger.addEventListener("click", function () { setMenu(!nav.classList.contains("open")); });
     nav.addEventListener("click", function (e) { if (e.target.closest("a")) setMenu(false); });
     document.addEventListener("keydown", function (e) { if (e.key === "Escape" && nav.classList.contains("open")) { setMenu(false); burger.focus(); } });
+  }
+
+  /* ---------- share button ---------- */
+  var shareBtn = $("#shareBtn");
+  if (shareBtn) {
+    shareBtn.addEventListener("click", function () {
+      var url = shareBtn.getAttribute("data-url");
+      var title = shareBtn.getAttribute("data-title");
+      if (navigator.share) {
+        navigator.share({ title: title, url: url }).catch(function () {});
+      } else {
+        navigator.clipboard.writeText(url).then(function () {
+          var oldText = shareBtn.textContent;
+          shareBtn.textContent = "Copied!";
+          setTimeout(function () { shareBtn.textContent = oldText; }, 2000);
+        });
+      }
+    });
   }
 
   /* ---------- back-to-top + reading progress (single scroll listener) ---------- */
@@ -242,25 +275,34 @@
     });
   }
 
-
 // Cross-device progress syncing
 const syncBtn = document.createElement("button");
 syncBtn.className = "btn";
-syncBtn.style.position = "fixed";
-syncBtn.style.bottom = "60px";
-syncBtn.style.right = "10px";
+syncBtn.style.margin = "1rem 0";
 syncBtn.textContent = "Copy Progress Link";
 syncBtn.onclick = function() {
-    const progress = localStorage.getItem("skillprep-progress");
-    if (!progress) {
+    let progressData = {};
+    for (let i = 0; i < localStorage.length; i++) {
+        let key = localStorage.key(i);
+        if (key.startsWith("skillprep:")) {
+            progressData[key] = localStorage.getItem(key);
+        }
+    }
+
+    if (Object.keys(progressData).length === 0) {
         alert("No progress to sync.");
         return;
     }
     const url = new URL(window.location.href);
-    url.searchParams.set("sync_progress", btoa(progress));
+    url.searchParams.set("sync_progress", btoa(JSON.stringify(progressData)));
     navigator.clipboard.writeText(url.toString()).then(() => alert("Progress link copied to clipboard!"));
 };
-document.body.appendChild(syncBtn);
+
+// Add to the top of mock tests
+document.querySelectorAll(".mock-hint").forEach(hint => {
+    hint.parentElement.insertBefore(syncBtn, hint);
+});
+
 
 // Load progress from URL if present
 const urlParams = new URLSearchParams(window.location.search);
@@ -268,14 +310,17 @@ const syncData = urlParams.get("sync_progress");
 if (syncData) {
     try {
         const decoded = atob(syncData);
-        // Basic validation
         if (decoded.startsWith("{")) {
-            localStorage.setItem("skillprep-progress", decoded);
+            const data = JSON.parse(decoded);
+            for (let key in data) {
+                if (key.startsWith("skillprep:")) {
+                    localStorage.setItem(key, data[key]);
+                }
+            }
             urlParams.delete("sync_progress");
             const newUrl = window.location.pathname + (urlParams.toString() ? "?" + urlParams.toString() : "");
             window.history.replaceState({}, document.title, newUrl);
             alert("Progress loaded successfully!");
-            // Reload to apply
             window.location.reload();
         }
     } catch (e) {

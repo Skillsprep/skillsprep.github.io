@@ -1,7 +1,6 @@
 #!/usr/bin/env node
 /* SkillPrep static site generator.
  *   node tools/build.js
- * Reads tools/content/*.js + tools/config.js and writes crawlable HTML pages into the
  * site root (index.html, guides/<slug>/index.html, about/, contact/, privacy/, terms/,
  * 404.html, sitemap.xml, robots.txt). No dependencies. */
 "use strict";
@@ -107,7 +106,7 @@ const posts = POSTS.map((p, idx) => {
   const readTime = /question/.test(p.readTime) ? p.readTime : Math.max(2, Math.round(words / 200)) + " min read";
   return { ...p, idx, sections, published: isoDate(p.date), reviewed: cfg.lastReviewed, readTime, url: `guides/${p.slug}/`, sources: cfg.sources[p.slug] || [] };
 });
-const CATS = [...new Set(posts.map((p) => p.category))];
+const CATS = [...new Set(posts.map((p) => p.category))].filter(c => c !== "Getting started" && c !== "Getting Started");
 const inlineQs = posts.reduce((n, p) => n + (p.sections.map((s) => s.body).join("").match(/data-quiz/g) || []).length, 0);
 const TOTAL_QS = inlineQs + BANKS.GENAI_QUESTIONS.length + BANKS.LEAN_QUESTIONS.length;
 // sanity: slugs unique, every legacy mapping lands on a real page
@@ -147,6 +146,7 @@ function layout({ title, desc, path: pagePath, prefix, nav, body, ld = [], type 
 <meta name="twitter:image" content="${OG_IMAGE}">
 <link rel="icon" href="${link("assets/favicon.svg")}" type="image/svg+xml">
 <link rel="stylesheet" href="${link("css/style.css")}">
+<script>(function(){try{if(localStorage.getItem("skillprep:theme")==="dark"){document.documentElement.setAttribute("data-theme","dark");}}catch(e){}})();</script>
 ${extraHead}${ld.map(jsonLd).join("\n")}
 </head>
 <body>
@@ -160,6 +160,7 @@ ${extraHead}${ld.map(jsonLd).join("\n")}
       ${navItem("about", "About", link("about/"))}
       ${navItem("contact", "Contact", link("contact/"))}
     </nav>
+    <button class="theme-toggle" id="themeToggle" type="button" aria-label="Toggle dark mode">◐</button>
   </div>
 </header>
 <main id="main">
@@ -321,6 +322,10 @@ function guidePage(p) {
     <div class="box rel">
       <h2 class="box-h">Related guides</h2>
       ${rel.map((r) => `<a href="${prefix}${r.url}">${esc(r.title)}</a>`).join("\n      ")}
+    </div>
+    <div class="box">
+      <h2 class="box-h">Share this guide</h2>
+      <button type="button" class="btn btn-share" id="shareBtn" data-url="${SITE + p.url}" data-title="${esc(p.title)}">Copy Link</button>
     </div>
     <div class="box">
       <h2 class="box-h">Spotted a mistake?</h2>

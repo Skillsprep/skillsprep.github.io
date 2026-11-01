@@ -23,6 +23,7 @@
 <meta name="twitter:image" content="https://skillsprep.github.io/assets/og-image.png">
 <link rel="icon" href="../../assets/favicon.svg" type="image/svg+xml">
 <link rel="stylesheet" href="../../css/style.css">
+<script>(function(){try{if(localStorage.getItem("skillprep:theme")==="dark"){document.documentElement.setAttribute("data-theme","dark");}}catch(e){}})();</script>
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"Python Fundamentals: Study Guide + Practice Quiz","description":"Data structures, comprehensions, exceptions, and functions — the Python fundamentals that interviews and skills tests keep returning to, with explained practice questions.","datePublished":"2026-09-03","dateModified":"2026-10-18","author":{"@type":"Organization","name":"SkillPrep editorial team"},"publisher":{"@type":"Organization","name":"SkillPrep","logo":{"@type":"ImageObject","url":"https://skillsprep.github.io/assets/favicon.svg"}},"mainEntityOfPage":"https://skillsprep.github.io/guides/python-study-guide/","image":"https://skillsprep.github.io/assets/og-image.png","articleSection":"Python","inLanguage":"en"}</script>
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://skillsprep.github.io/"},{"@type":"ListItem","position":2,"name":"Python","item":"https://skillsprep.github.io/#guides"},{"@type":"ListItem","position":3,"name":"Python Fundamentals: Study Guide + Practice Quiz","item":"https://skillsprep.github.io/guides/python-study-guide/"}]}</script>
 </head>
@@ -37,6 +38,7 @@
       <a href="../../about/">About</a>
       <a href="../../contact/">Contact</a>
     </nav>
+    <button class="theme-toggle" id="themeToggle" type="button" aria-label="Toggle dark mode">◐</button>
   </div>
 </header>
 <main id="main">
@@ -97,7 +99,7 @@ print(add("banana"))</code></pre>
             <label class="opt"><input type="radio" name="python-study-guide-q1"> set</label>
             <button type="button" class="check-btn">Check answer</button><span class="q-result" role="status" aria-live="polite"></span>
           </div>
-          <div class="q-explain"><b>Why:</b> Tuples cannot be modified after creation, so they can be dictionary keys and set members. Lists, dicts, and sets are all mutable.</div>
+          <div class="q-explain"><b>Why:</b> Tuples cannot be modified after creation. Note that they can be used as dictionary keys and set members <b>only if</b> all their elements are hashable (e.g. a tuple containing a list cannot be a dictionary key). Lists, dicts, and sets are all mutable.</div>
         </div>
         <div class="quiz" data-quiz>
           <div class="q-head"><span>Question 2 of 5</span><span>Exceptions</span></div>
@@ -181,6 +183,10 @@ print(add("banana"))</code></pre>
       <a href="../../guides/excel-study-guide/">Excel Study Guide: Lookups, Pivot Tables &amp; Core Functions</a>
       <a href="../../guides/javascript-study-guide/">JavaScript Fundamentals: Key Concepts Explained</a>
       <a href="../../guides/project-management-study-guide/">Project Management Study Guide: Concepts That Matter</a>
+    </div>
+    <div class="box">
+      <h2 class="box-h">Share this guide</h2>
+      <button type="button" class="btn btn-share" id="shareBtn" data-url="https://skillsprep.github.io/guides/python-study-guide/" data-title="Python Fundamentals: Study Guide + Practice Quiz">Copy Link</button>
     </div>
     <div class="box">
       <h2 class="box-h">Spotted a mistake?</h2>
