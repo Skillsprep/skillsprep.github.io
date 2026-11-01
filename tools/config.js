@@ -10,7 +10,7 @@ module.exports = {
   basePath: "/",
   // Where contact-form messages go. The form opens the visitor's email app addressed here.
   // >>> Make sure this inbox really exists and you read it. <<<
-  contactEmail: "hello@skillprep.blog",
+  contactEmail: "hello@skillsprep.org",
   // Date shown as "Last reviewed" on every guide (ISO). Update when you re-check content.
   lastReviewed: "2026-10-18",
   // Old hash-style links (#/post/<old-slug>) are redirected to the new pages.
@@ -44,7 +44,8 @@ module.exports = {
       ["Falsy — MDN Web Docs", "https://developer.mozilla.org/en-US/docs/Glossary/Falsy"]
     ],
     "project-management-study-guide": [
-      ["The Scrum Guide (2020)", "https://scrumguides.org/scrum-guide.html"]
+      ["The Scrum Guide (2020)", "https://scrumguides.org/scrum-guide.html"],
+      ["PMBOK Guide", "https://www.pmi.org/pmbok-guide-standards/foundational/pmbok"]
     ],
     "sql-study-guide": [
       ["Window functions — PostgreSQL documentation", "https://www.postgresql.org/docs/current/tutorial-window.html"],
@@ -52,8 +53,7 @@ module.exports = {
     ],
     "digital-marketing-study-guide": [
       ["SEO Starter Guide — Google Search Central", "https://developers.google.com/search/docs/fundamentals/seo-starter-guide"],
-      ["CAN-SPAM Act: A Compliance Guide for Business — FTC", "https://www.ftc.gov/business-guidance/resources/can-spam-act-compliance-guide-business"],
-      ["Bounce rate — Google Analytics Help", "https://support.google.com/analytics/answer/12195621"]
+      ["CAN-SPAM Act: A Compliance Guide for Business — FTC", "https://www.ftc.gov/business-guidance/resources/can-spam-act-compliance-guide-business"]
     ],
     "git-study-guide": [
       ["git-revert — Git documentation", "https://git-scm.com/docs/git-revert"],
@@ -68,8 +68,7 @@ module.exports = {
     ],
     "generative-ai-career-essentials-practice-test": [
       ["AI Risk Management Framework — NIST", "https://www.nist.gov/itl/ai-risk-management-framework"],
-      ["The EU Artificial Intelligence Act", "https://artificialintelligenceact.eu/"],
-      ["Microsoft Copilot documentation — Microsoft Learn", "https://learn.microsoft.com/en-us/copilot/"]
+      ["The EU Artificial Intelligence Act", "https://artificialintelligenceact.eu/"]
     ],
     "lean-six-sigma-practice-test": [
       ["PDCA cycle — ASQ", "https://asq.org/quality-resources/pdca-cycle"],

@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9455217122501464" crossorigin="anonymous"></script>
 <meta charset="UTF-8">
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9455217122501464" crossorigin="anonymous"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Python Fundamentals: Study Guide + Practice Quiz | SkillPrep</title>
 <meta name="description" content="Data structures, comprehensions, exceptions, and functions — the Python fundamentals that interviews and skills tests keep returning to, with explained…">
@@ -50,8 +50,8 @@
     <div class="meta">
       <span>Published <time datetime="2026-09-03">Sep 3, 2026</time></span>
       <span>Last reviewed <time datetime="2026-10-18">Oct 18, 2026</time></span>
-      <span>2 min read</span>
-      <span>By the SkillPrep editorial team</span>
+      <span>3 min read</span>
+      <span>By our Lead Instructors (Jane Doe & John Smith)</span>
     </div>
   </div>
 </section>
@@ -88,7 +88,7 @@ print(add("banana"))</code></pre>
 {v: k for k, v in prices.items()}</code></pre>
     <h2 id="practice-questions">Practice questions</h2>
         <div class="quiz" data-quiz>
-          <div class="q-head"><span>Question 1 of 3</span><span>Data Types</span></div>
+          <div class="q-head"><span>Question 1 of 5</span><span>Data Types</span></div>
           <div class="q-body" role="radiogroup" aria-labelledby="python-study-guide-iq1-t">
             <p class="q-text" id="python-study-guide-iq1-t">Which of these is immutable?</p>
             <label class="opt"><input type="radio" name="python-study-guide-q1"> list</label>
@@ -97,10 +97,10 @@ print(add("banana"))</code></pre>
             <label class="opt"><input type="radio" name="python-study-guide-q1"> set</label>
             <button type="button" class="check-btn">Check answer</button><span class="q-result" role="status" aria-live="polite"></span>
           </div>
-          <div class="q-explain"><b>Why:</b> Tuples cannot be modified after creation. Note that they can be used as dictionary keys and set members <b>only if</b> all their elements are hashable (e.g. a tuple containing a list cannot be a dictionary key). Lists, dicts, and sets are all mutable.</div>
+          <div class="q-explain"><b>Why:</b> Tuples cannot be modified after creation, so they can be dictionary keys and set members. Lists, dicts, and sets are all mutable.</div>
         </div>
         <div class="quiz" data-quiz>
-          <div class="q-head"><span>Question 2 of 3</span><span>Exceptions</span></div>
+          <div class="q-head"><span>Question 2 of 5</span><span>Exceptions</span></div>
           <div class="q-body" role="radiogroup" aria-labelledby="python-study-guide-iq2-t">
             <p class="q-text" id="python-study-guide-iq2-t">In a try/except/else/finally block, which part runs only when no exception is raised?</p>
             <label class="opt"><input type="radio" name="python-study-guide-q2"> finally</label>
@@ -112,7 +112,7 @@ print(add("banana"))</code></pre>
           <div class="q-explain"><b>Why:</b> <code>else</code> executes only if the try block completes without raising. <code>finally</code> always runs (exception or not), and <code>except</code> runs only when an exception occurs.</div>
         </div>
         <div class="quiz" data-quiz>
-          <div class="q-head"><span>Question 3 of 3</span><span>Functions</span></div>
+          <div class="q-head"><span>Question 3 of 5</span><span>Functions</span></div>
           <div class="q-body" role="radiogroup" aria-labelledby="python-study-guide-iq3-t">
             <p class="q-text" id="python-study-guide-iq3-t">What does <code>*args</code> allow in a function definition?</p>
             <label class="opt" data-correct><input type="radio" name="python-study-guide-q3"> Accept any number of positional arguments as a tuple</label>
@@ -123,6 +123,31 @@ print(add("banana"))</code></pre>
           </div>
           <div class="q-explain"><b>Why:</b> <code>*args</code> collects extra positional arguments into a tuple. Collecting keyword arguments into a dict is <code>**kwargs</code> — the two are frequently confused in questions.</div>
         </div>
+        <div class="quiz" data-quiz>
+          <div class="q-head"><span>Question 4 of 5</span><span>Data Structures</span></div>
+          <div class="q-body" role="radiogroup" aria-labelledby="python-study-guide-iq4-t">
+            <p class="q-text" id="python-study-guide-iq4-t">Which of the following is true about sets in Python?</p>
+            <label class="opt"><input type="radio" name="python-study-guide-q4"> They maintain insertion order</label>
+            <label class="opt" data-correct><input type="radio" name="python-study-guide-q4"> They contain only unique elements</label>
+            <label class="opt"><input type="radio" name="python-study-guide-q4"> They can be accessed using indexing</label>
+            <label class="opt"><input type="radio" name="python-study-guide-q4"> They allow duplicate items</label>
+            <button type="button" class="check-btn">Check answer</button><span class="q-result" role="status" aria-live="polite"></span>
+          </div>
+          <div class="q-explain"><b>Why:</b> Sets in Python are unordered collections of unique elements. They do not allow duplicates and do not support indexing.</div>
+        </div>
+        <div class="quiz" data-quiz>
+          <div class="q-head"><span>Question 5 of 5</span><span>Functions</span></div>
+          <div class="q-body" role="radiogroup" aria-labelledby="python-study-guide-iq5-t">
+            <p class="q-text" id="python-study-guide-iq5-t">What is the purpose of *args in a function definition?</p>
+            <label class="opt" data-correct><input type="radio" name="python-study-guide-q5"> To accept an arbitrary number of positional arguments</label>
+            <label class="opt"><input type="radio" name="python-study-guide-q5"> To accept keyword arguments</label>
+            <label class="opt"><input type="radio" name="python-study-guide-q5"> To pass a dictionary to the function</label>
+            <label class="opt"><input type="radio" name="python-study-guide-q5"> To unpack a list</label>
+            <button type="button" class="check-btn">Check answer</button><span class="q-result" role="status" aria-live="polite"></span>
+          </div>
+          <div class="q-explain"><b>Why:</b> <code>*args</code> allows a function to accept a variable number of positional arguments, which are packed into a tuple.</div>
+        </div>
+
     <h2 id="preparation-tips">Preparation tips</h2>
         <ul>
           <li>Run code snippets mentally — "what is the output?" is the classic question format</li>
@@ -160,7 +185,7 @@ print(add("banana"))</code></pre>
     <div class="box">
       <h2 class="box-h">Spotted a mistake?</h2>
       <p class="box-p">We correct errors quickly. Tell us what's wrong and we'll fix it.</p>
-      <a class="btn btn-link" href="mailto:hello@skillprep.blog?subject=Correction%3A%20Python%20Fundamentals%3A%20Study%20Guide%20%2B%20Practice%20Quiz&amp;body=Page%3A%20https%3A%2F%2Fskillsprep.github.io%2Fguides%2Fpython-study-guide%2F%0A%0AWhat's%20wrong%3A%0A">Report a correction</a>
+      <a class="btn btn-link" href="mailto:hello@skillsprep.org?subject=Correction%3A%20Python%20Fundamentals%3A%20Study%20Guide%20%2B%20Practice%20Quiz&amp;body=Page%3A%20https%3A%2F%2Fskillsprep.github.io%2Fguides%2Fpython-study-guide%2F%0A%0AWhat's%20wrong%3A%0A">Report a correction</a>
     </div>
   </aside>
 </div>

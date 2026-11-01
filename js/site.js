@@ -197,3 +197,88 @@
     });
   }
 })();
+
+  // Formspree AJAX Submission for Contact Form
+  const contactForm = document.getElementById("contactForm");
+  if (contactForm && contactForm.action.includes("formspree.io")) {
+    contactForm.addEventListener("submit", function(ev) {
+      ev.preventDefault();
+      var data = new FormData(contactForm);
+      fetch(contactForm.action, {
+        method: contactForm.method,
+        body: data,
+        headers: {
+            'Accept': 'application/json'
+        }
+      }).then(response => {
+        if (response.ok) {
+          contactForm.reset();
+          let msg = document.createElement("p");
+          msg.textContent = "Thanks for your message! We'll get back to you soon.";
+          msg.style.color = "green";
+          msg.style.fontWeight = "bold";
+          contactForm.appendChild(msg);
+          setTimeout(() => msg.remove(), 5000);
+        } else {
+          response.json().then(data => {
+            let errorMsg = document.createElement("p");
+            if (Object.hasOwn(data, 'errors')) {
+              errorMsg.textContent = data["errors"].map(error => error["message"]).join(", ");
+            } else {
+              errorMsg.textContent = "Oops! There was a problem submitting your form";
+            }
+            errorMsg.style.color = "red";
+            contactForm.appendChild(errorMsg);
+            setTimeout(() => errorMsg.remove(), 5000);
+          })
+        }
+      }).catch(error => {
+        let errorMsg = document.createElement("p");
+        errorMsg.textContent = "Oops! There was a problem submitting your form";
+        errorMsg.style.color = "red";
+        contactForm.appendChild(errorMsg);
+        setTimeout(() => errorMsg.remove(), 5000);
+      });
+    });
+  }
+
+
+// Cross-device progress syncing
+const syncBtn = document.createElement("button");
+syncBtn.className = "btn";
+syncBtn.style.position = "fixed";
+syncBtn.style.bottom = "60px";
+syncBtn.style.right = "10px";
+syncBtn.textContent = "Copy Progress Link";
+syncBtn.onclick = function() {
+    const progress = localStorage.getItem("skillprep-progress");
+    if (!progress) {
+        alert("No progress to sync.");
+        return;
+    }
+    const url = new URL(window.location.href);
+    url.searchParams.set("sync_progress", btoa(progress));
+    navigator.clipboard.writeText(url.toString()).then(() => alert("Progress link copied to clipboard!"));
+};
+document.body.appendChild(syncBtn);
+
+// Load progress from URL if present
+const urlParams = new URLSearchParams(window.location.search);
+const syncData = urlParams.get("sync_progress");
+if (syncData) {
+    try {
+        const decoded = atob(syncData);
+        // Basic validation
+        if (decoded.startsWith("{")) {
+            localStorage.setItem("skillprep-progress", decoded);
+            urlParams.delete("sync_progress");
+            const newUrl = window.location.pathname + (urlParams.toString() ? "?" + urlParams.toString() : "");
+            window.history.replaceState({}, document.title, newUrl);
+            alert("Progress loaded successfully!");
+            // Reload to apply
+            window.location.reload();
+        }
+    } catch (e) {
+        console.error("Invalid sync data", e);
+    }
+}

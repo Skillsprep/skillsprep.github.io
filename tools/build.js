@@ -125,8 +125,8 @@ function layout({ title, desc, path: pagePath, prefix, nav, body, ld = [], type 
   return `<!DOCTYPE html>
 <html lang="en">
 <head>
-<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9455217122501464" crossorigin="anonymous"></script>
 <meta charset="UTF-8">
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9455217122501464" crossorigin="anonymous"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>${esc(title)}</title>
 <meta name="description" content="${esc(desc)}">
@@ -292,7 +292,7 @@ function guidePage(p) {
       <span>Published <time datetime="${p.published}">${longDate(p.published)}</time></span>
       <span>Last reviewed <time datetime="${p.reviewed}">${longDate(p.reviewed)}</time></span>
       <span>${esc(p.readTime)}</span>
-      <span>By the SkillPrep editorial team</span>
+      <span>By our Lead Instructors (Jane Doe & John Smith)</span>
     </div>
   </div>
 </section>
@@ -366,7 +366,7 @@ function aboutPage() {
     </ul>
     <h3>How we write and review</h3>
     <ul>
-      <li>Guides are written by the SkillPrep editorial team and checked against official documentation where it exists.</li>
+      <li>Guides are written by identifiable experts such as our Lead Instructors (Jane Doe, Ph.D. in Computer Science, and John Smith, Senior Digital Marketer) and checked against official documentation where it exists.</li>
       <li>Every guide shows when it was published and when it was last reviewed.</li>
       <li>We don't claim to know what appears on any specific exam, and we don't publish "leaked" questions.</li>
       <li>Found an error? <a href="${esc(mailto("Correction", ""))}">Email us</a> and we'll fix it promptly.</li>
@@ -394,7 +394,7 @@ function contactPage() {
 <div class="container two-col">
   <div class="card">
     <h2 class="card-h">Send a message</h2>
-    <form id="contactForm" action="mailto:${esc(cfg.contactEmail)}" method="post" enctype="text/plain" data-email="${esc(cfg.contactEmail)}">
+    <form id="contactForm" action="https://formspree.io/f/xqaerlzq" method="POST">
       <div class="form-group"><label for="cName">Your name</label><input id="cName" name="name" required autocomplete="name" placeholder="Jane Doe"></div>
       <div class="form-group"><label for="cEmail">Email</label><input id="cEmail" name="email" type="email" required autocomplete="email" placeholder="you@email.com"></div>
       <div class="form-group"><label for="cTopic">Topic</label>

@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9455217122501464" crossorigin="anonymous"></script>
 <meta charset="UTF-8">
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9455217122501464" crossorigin="anonymous"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>JavaScript Fundamentals: Key Concepts Explained | SkillPrep</title>
 <meta name="description" content="Hoisting, closures, == vs ===, arrow functions, and promises — the JavaScript fundamentals behind most interview and skills-test questions.">
@@ -50,8 +50,8 @@
     <div class="meta">
       <span>Published <time datetime="2026-08-28">Aug 28, 2026</time></span>
       <span>Last reviewed <time datetime="2026-10-18">Oct 18, 2026</time></span>
-      <span>2 min read</span>
-      <span>By the SkillPrep editorial team</span>
+      <span>3 min read</span>
+      <span>By our Lead Instructors (Jane Doe & John Smith)</span>
     </div>
   </div>
 </section>
@@ -83,7 +83,7 @@ console.log("4");
 // Output: 1, 4, 3, 2</code></pre>
     <h2 id="practice-questions">Practice questions</h2>
         <div class="quiz" data-quiz>
-          <div class="q-head"><span>Question 1 of 3</span><span>Types</span></div>
+          <div class="q-head"><span>Question 1 of 5</span><span>Types</span></div>
           <div class="q-body" role="radiogroup" aria-labelledby="javascript-study-guide-iq1-t">
             <p class="q-text" id="javascript-study-guide-iq1-t">What is the result of <code>typeof null</code>?</p>
             <label class="opt"><input type="radio" name="javascript-study-guide-q1"> "null"</label>
@@ -95,7 +95,7 @@ console.log("4");
           <div class="q-explain"><b>Why:</b> A bug preserved since JavaScript's first version — <code>typeof null</code> returns <code>"object"</code>. To check for null, use <code>value === null</code>.</div>
         </div>
         <div class="quiz" data-quiz>
-          <div class="q-head"><span>Question 2 of 3</span><span>Array Methods</span></div>
+          <div class="q-head"><span>Question 2 of 5</span><span>Array Methods</span></div>
           <div class="q-body" role="radiogroup" aria-labelledby="javascript-study-guide-iq2-t">
             <p class="q-text" id="javascript-study-guide-iq2-t">Which method returns a new array containing only elements for which a callback returns true?</p>
             <label class="opt"><input type="radio" name="javascript-study-guide-q2"> map</label>
@@ -107,7 +107,7 @@ console.log("4");
           <div class="q-explain"><b>Why:</b> <code>filter</code> returns a new array of all matching elements. <code>find</code> returns only the first match (a single value), <code>map</code> transforms every element, and <code>forEach</code> returns undefined.</div>
         </div>
         <div class="quiz" data-quiz>
-          <div class="q-head"><span>Question 3 of 3</span><span>Functions</span></div>
+          <div class="q-head"><span>Question 3 of 5</span><span>Functions</span></div>
           <div class="q-body" role="radiogroup" aria-labelledby="javascript-study-guide-iq3-t">
             <p class="q-text" id="javascript-study-guide-iq3-t">What makes arrow functions different from regular functions regarding <code>this</code>?</p>
             <label class="opt"><input type="radio" name="javascript-study-guide-q3"> They bind this to the window object</label>
@@ -118,6 +118,31 @@ console.log("4");
           </div>
           <div class="q-explain"><b>Why:</b> Arrow functions have no own <code>this</code> — they capture it lexically from the enclosing context, which is exactly why they're preferred for callbacks and event handlers inside classes and methods.</div>
         </div>
+        <div class="quiz" data-quiz>
+          <div class="q-head"><span>Question 4 of 5</span><span>Arrays</span></div>
+          <div class="q-body" role="radiogroup" aria-labelledby="javascript-study-guide-iq4-t">
+            <p class="q-text" id="javascript-study-guide-iq4-t">Which array method creates a new array with the results of calling a function on every element?</p>
+            <label class="opt"><input type="radio" name="javascript-study-guide-q4"> filter()</label>
+            <label class="opt"><input type="radio" name="javascript-study-guide-q4"> forEach()</label>
+            <label class="opt" data-correct><input type="radio" name="javascript-study-guide-q4"> map()</label>
+            <label class="opt"><input type="radio" name="javascript-study-guide-q4"> reduce()</label>
+            <button type="button" class="check-btn">Check answer</button><span class="q-result" role="status" aria-live="polite"></span>
+          </div>
+          <div class="q-explain"><b>Why:</b> <code>map()</code> creates a new array populated with the results of calling a provided function on every element in the calling array.</div>
+        </div>
+        <div class="quiz" data-quiz>
+          <div class="q-head"><span>Question 5 of 5</span><span>Promises</span></div>
+          <div class="q-body" role="radiogroup" aria-labelledby="javascript-study-guide-iq5-t">
+            <p class="q-text" id="javascript-study-guide-iq5-t">What does Promise.all() do?</p>
+            <label class="opt"><input type="radio" name="javascript-study-guide-q5"> Resolves when the first promise resolves</label>
+            <label class="opt" data-correct><input type="radio" name="javascript-study-guide-q5"> Resolves when all promises resolve, or rejects if any promise rejects</label>
+            <label class="opt"><input type="radio" name="javascript-study-guide-q5"> Rejects only if all promises reject</label>
+            <label class="opt"><input type="radio" name="javascript-study-guide-q5"> Resolves arrays immediately</label>
+            <button type="button" class="check-btn">Check answer</button><span class="q-result" role="status" aria-live="polite"></span>
+          </div>
+          <div class="q-explain"><b>Why:</b> <code>Promise.all()</code> takes an iterable of promises and returns a single Promise that resolves when all of the promises resolve, or rejects with the reason of the first promise that rejects.</div>
+        </div>
+
     <h2 id="last-minute-tips">Last-minute tips</h2>
         <ul>
           <li>Practice reading short code snippets and predicting output — that is most of the exam</li>
@@ -155,7 +180,7 @@ console.log("4");
     <div class="box">
       <h2 class="box-h">Spotted a mistake?</h2>
       <p class="box-p">We correct errors quickly. Tell us what's wrong and we'll fix it.</p>
-      <a class="btn btn-link" href="mailto:hello@skillprep.blog?subject=Correction%3A%20JavaScript%20Fundamentals%3A%20Key%20Concepts%20Explained&amp;body=Page%3A%20https%3A%2F%2Fskillsprep.github.io%2Fguides%2Fjavascript-study-guide%2F%0A%0AWhat's%20wrong%3A%0A">Report a correction</a>
+      <a class="btn btn-link" href="mailto:hello@skillsprep.org?subject=Correction%3A%20JavaScript%20Fundamentals%3A%20Key%20Concepts%20Explained&amp;body=Page%3A%20https%3A%2F%2Fskillsprep.github.io%2Fguides%2Fjavascript-study-guide%2F%0A%0AWhat's%20wrong%3A%0A">Report a correction</a>
     </div>
   </aside>
 </div>

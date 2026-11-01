@@ -35,7 +35,7 @@ module.exports = [
       { h: "Practice questions", body: `
         <p>Test yourself. Select an answer, then check the explanation.</p>
         <div class="quiz" data-quiz>
-          <div class="q-head"><span>Question 1 of 3</span><span>Functions</span></div>
+          <div class="q-head"><span>Question 1 of 5</span><span>Functions</span></div>
           <div class="q-body">
             <p class="q-text">Cell A2 contains "New York, NY". Which formula extracts just "NY"?</p>
             <label class="opt" data-correct><input type="radio" name="q1"> =RIGHT(A2, 2)</label>
@@ -47,7 +47,7 @@ module.exports = [
           <div class="q-explain"><b>Why:</b> <code>RIGHT(text, 2)</code> returns the last 2 characters. The state code "NY" sits at the end of the string. <code>MID</code> requires a start position and length; <code>TRIM</code> only removes extra spaces.</div>
         </div>
         <div class="quiz" data-quiz>
-          <div class="q-head"><span>Question 2 of 3</span><span>Lookups</span></div>
+          <div class="q-head"><span>Question 2 of 5</span><span>Lookups</span></div>
           <div class="q-body">
             <p class="q-text">Your lookup table has the ID in column D and the name in column C (to its LEFT). Which is the best formula to return the name for ID in A2?</p>
             <label class="opt"><input type="radio" name="q2"> =VLOOKUP(A2, C:D, 2, FALSE)</label>
@@ -59,7 +59,7 @@ module.exports = [
           <div class="q-explain"><b>Why:</b> <code>XLOOKUP</code> returns values from a column <i>to the left</i> of the lookup column — VLOOKUP cannot. The <code>"Not found"</code> argument also handles missing IDs gracefully.</div>
         </div>
         <div class="quiz" data-quiz>
-          <div class="q-head"><span>Question 3 of 3</span><span>Pivot Tables</span></div>
+          <div class="q-head"><span>Question 3 of 5</span><span>Pivot Tables</span></div>
           <div class="q-body">
             <p class="q-text">In a pivot table, you want the number of unique customers per product, not the number of orders. What do you need?</p>
             <label class="opt"><input type="radio" name="q3"> Change the value field to Count of Customer</label>
@@ -69,6 +69,30 @@ module.exports = [
             <button class="check-btn">Check answer</button>
           </div>
           <div class="q-explain"><b>Why:</b> Plain "Count" counts rows, so repeat customers are counted multiple times. <b>Distinct Count</b> is only available when the pivot table is based on the Data Model (check "Add this data to the Data Model" when inserting).</div>
+        </div>
+        <div class="quiz" data-quiz>
+          <div class="q-head"><span>Question 4 of 5</span><span>Logical Functions</span></div>
+          <div class="q-body">
+            <p class="q-text">You need to categorize sales: under $50 is "Low", $50-$100 is "Medium", and over $100 is "High". Which function is best suited to avoid complex nested IFs?</p>
+            <label class="opt" data-correct><input type="radio" name="q4"> =IFS()</label>
+            <label class="opt"><input type="radio" name="q4"> =SWITCH()</label>
+            <label class="opt"><input type="radio" name="q4"> =CHOOSE()</label>
+            <label class="opt"><input type="radio" name="q4"> =VLOOKUP() with exact match</label>
+            <button class="check-btn">Check answer</button>
+          </div>
+          <div class="q-explain"><b>Why:</b> <code>IFS</code> evaluates multiple conditions sequentially without nesting. <code>SWITCH</code> requires an exact match on a single expression, not ranges like &gt;100.</div>
+        </div>
+        <div class="quiz" data-quiz>
+          <div class="q-head"><span>Question 5 of 5</span><span>Conditional Formatting</span></div>
+          <div class="q-body">
+            <p class="q-text">How can you highlight an entire row based on the value in column B?</p>
+            <label class="opt"><input type="radio" name="q5"> Apply a Color Scale to the whole table</label>
+            <label class="opt"><input type="radio" name="q5"> Use a Highlight Cells Rule on column B</label>
+            <label class="opt" data-correct><input type="radio" name="q5"> Use a custom formula starting with =$B2 in Conditional Formatting</label>
+            <label class="opt"><input type="radio" name="q5"> Format as Table and check 'Highlight Rows'</label>
+            <button class="check-btn">Check answer</button>
+          </div>
+          <div class="q-explain"><b>Why:</b> To highlight a whole row, you must use a custom formula with a mixed reference (like <code>=$B2&gt;100</code>). The absolute column (<code>$B</code>) ensures all cells in the row look at column B, while the relative row (<code>2</code>) adjusts for each row.</div>
         </div>` },
       { h: "Final preparation checklist", body: `
         <ul>
@@ -119,7 +143,7 @@ print(add("banana"))</code></pre>
 {v: k for k, v in prices.items()}</code></pre>` },
       { h: "Practice questions", body: `
         <div class="quiz" data-quiz>
-          <div class="q-head"><span>Question 1 of 3</span><span>Data Types</span></div>
+          <div class="q-head"><span>Question 1 of 5</span><span>Data Types</span></div>
           <div class="q-body">
             <p class="q-text">Which of these is immutable?</p>
             <label class="opt"><input type="radio" name="q1"> list</label>
@@ -128,10 +152,10 @@ print(add("banana"))</code></pre>
             <label class="opt"><input type="radio" name="q1"> set</label>
             <button class="check-btn">Check answer</button>
           </div>
-          <div class="q-explain"><b>Why:</b> Tuples cannot be modified after creation. Note that they can be used as dictionary keys and set members <b>only if</b> all their elements are hashable (e.g. a tuple containing a list cannot be a dictionary key). Lists, dicts, and sets are all mutable.</div>
+          <div class="q-explain"><b>Why:</b> Tuples cannot be modified after creation, so they can be dictionary keys and set members. Lists, dicts, and sets are all mutable.</div>
         </div>
         <div class="quiz" data-quiz>
-          <div class="q-head"><span>Question 2 of 3</span><span>Exceptions</span></div>
+          <div class="q-head"><span>Question 2 of 5</span><span>Exceptions</span></div>
           <div class="q-body">
             <p class="q-text">In a try/except/else/finally block, which part runs only when no exception is raised?</p>
             <label class="opt"><input type="radio" name="q2"> finally</label>
@@ -143,7 +167,7 @@ print(add("banana"))</code></pre>
           <div class="q-explain"><b>Why:</b> <code>else</code> executes only if the try block completes without raising. <code>finally</code> always runs (exception or not), and <code>except</code> runs only when an exception occurs.</div>
         </div>
         <div class="quiz" data-quiz>
-          <div class="q-head"><span>Question 3 of 3</span><span>Functions</span></div>
+          <div class="q-head"><span>Question 3 of 5</span><span>Functions</span></div>
           <div class="q-body">
             <p class="q-text">What does <code>*args</code> allow in a function definition?</p>
             <label class="opt" data-correct><input type="radio" name="q3"> Accept any number of positional arguments as a tuple</label>
@@ -153,7 +177,32 @@ print(add("banana"))</code></pre>
             <button class="check-btn">Check answer</button>
           </div>
           <div class="q-explain"><b>Why:</b> <code>*args</code> collects extra positional arguments into a tuple. Collecting keyword arguments into a dict is <code>**kwargs</code> — the two are frequently confused in questions.</div>
-        </div>` },
+        </div>
+        <div class="quiz" data-quiz>
+          <div class="q-head"><span>Question 4 of 5</span><span>Data Structures</span></div>
+          <div class="q-body">
+            <p class="q-text">Which of the following is true about sets in Python?</p>
+            <label class="opt"><input type="radio" name="q4"> They maintain insertion order</label>
+            <label class="opt" data-correct><input type="radio" name="q4"> They contain only unique elements</label>
+            <label class="opt"><input type="radio" name="q4"> They can be accessed using indexing</label>
+            <label class="opt"><input type="radio" name="q4"> They allow duplicate items</label>
+            <button class="check-btn">Check answer</button>
+          </div>
+          <div class="q-explain"><b>Why:</b> Sets in Python are unordered collections of unique elements. They do not allow duplicates and do not support indexing.</div>
+        </div>
+        <div class="quiz" data-quiz>
+          <div class="q-head"><span>Question 5 of 5</span><span>Functions</span></div>
+          <div class="q-body">
+            <p class="q-text">What is the purpose of *args in a function definition?</p>
+            <label class="opt" data-correct><input type="radio" name="q5"> To accept an arbitrary number of positional arguments</label>
+            <label class="opt"><input type="radio" name="q5"> To accept keyword arguments</label>
+            <label class="opt"><input type="radio" name="q5"> To pass a dictionary to the function</label>
+            <label class="opt"><input type="radio" name="q5"> To unpack a list</label>
+            <button class="check-btn">Check answer</button>
+          </div>
+          <div class="q-explain"><b>Why:</b> <code>*args</code> allows a function to accept a variable number of positional arguments, which are packed into a tuple.</div>
+        </div>
+` },
       { h: "Preparation tips", body: `
         <ul>
           <li>Run code snippets mentally — "what is the output?" is the classic question format</li>
@@ -198,7 +247,7 @@ console.log("4");
 // Output: 1, 4, 3, 2</code></pre>` },
       { h: "Practice questions", body: `
         <div class="quiz" data-quiz>
-          <div class="q-head"><span>Question 1 of 3</span><span>Types</span></div>
+          <div class="q-head"><span>Question 1 of 5</span><span>Types</span></div>
           <div class="q-body">
             <p class="q-text">What is the result of <code>typeof null</code>?</p>
             <label class="opt"><input type="radio" name="q1"> "null"</label>
@@ -210,7 +259,7 @@ console.log("4");
           <div class="q-explain"><b>Why:</b> A bug preserved since JavaScript's first version — <code>typeof null</code> returns <code>"object"</code>. To check for null, use <code>value === null</code>.</div>
         </div>
         <div class="quiz" data-quiz>
-          <div class="q-head"><span>Question 2 of 3</span><span>Array Methods</span></div>
+          <div class="q-head"><span>Question 2 of 5</span><span>Array Methods</span></div>
           <div class="q-body">
             <p class="q-text">Which method returns a new array containing only elements for which a callback returns true?</p>
             <label class="opt"><input type="radio" name="q2"> map</label>
@@ -222,7 +271,7 @@ console.log("4");
           <div class="q-explain"><b>Why:</b> <code>filter</code> returns a new array of all matching elements. <code>find</code> returns only the first match (a single value), <code>map</code> transforms every element, and <code>forEach</code> returns undefined.</div>
         </div>
         <div class="quiz" data-quiz>
-          <div class="q-head"><span>Question 3 of 3</span><span>Functions</span></div>
+          <div class="q-head"><span>Question 3 of 5</span><span>Functions</span></div>
           <div class="q-body">
             <p class="q-text">What makes arrow functions different from regular functions regarding <code>this</code>?</p>
             <label class="opt"><input type="radio" name="q3"> They bind this to the window object</label>
@@ -232,7 +281,32 @@ console.log("4");
             <button class="check-btn">Check answer</button>
           </div>
           <div class="q-explain"><b>Why:</b> Arrow functions have no own <code>this</code> — they capture it lexically from the enclosing context, which is exactly why they're preferred for callbacks and event handlers inside classes and methods.</div>
-        </div>` },
+        </div>
+        <div class="quiz" data-quiz>
+          <div class="q-head"><span>Question 4 of 5</span><span>Arrays</span></div>
+          <div class="q-body">
+            <p class="q-text">Which array method creates a new array with the results of calling a function on every element?</p>
+            <label class="opt"><input type="radio" name="q4"> filter()</label>
+            <label class="opt"><input type="radio" name="q4"> forEach()</label>
+            <label class="opt" data-correct><input type="radio" name="q4"> map()</label>
+            <label class="opt"><input type="radio" name="q4"> reduce()</label>
+            <button class="check-btn">Check answer</button>
+          </div>
+          <div class="q-explain"><b>Why:</b> <code>map()</code> creates a new array populated with the results of calling a provided function on every element in the calling array.</div>
+        </div>
+        <div class="quiz" data-quiz>
+          <div class="q-head"><span>Question 5 of 5</span><span>Promises</span></div>
+          <div class="q-body">
+            <p class="q-text">What does Promise.all() do?</p>
+            <label class="opt"><input type="radio" name="q5"> Resolves when the first promise resolves</label>
+            <label class="opt" data-correct><input type="radio" name="q5"> Resolves when all promises resolve, or rejects if any promise rejects</label>
+            <label class="opt"><input type="radio" name="q5"> Rejects only if all promises reject</label>
+            <label class="opt"><input type="radio" name="q5"> Resolves arrays immediately</label>
+            <button class="check-btn">Check answer</button>
+          </div>
+          <div class="q-explain"><b>Why:</b> <code>Promise.all()</code> takes an iterable of promises and returns a single Promise that resolves when all of the promises resolve, or rejects with the reason of the first promise that rejects.</div>
+        </div>
+` },
       { h: "Last-minute tips", body: `
         <ul>
           <li>Practice reading short code snippets and predicting output — that is most of the exam</li>
@@ -281,7 +355,7 @@ console.log("4");
         <div class="callout"><b>Pattern</b> Answers that immediately escalate to management or blame team members are rarely the best first step. Answers starting with analysis or communication are usually the better choice.</div>` },
       { h: "Practice questions", body: `
         <div class="quiz" data-quiz>
-          <div class="q-head"><span>Question 1 of 3</span><span>Frameworks</span></div>
+          <div class="q-head"><span>Question 1 of 5</span><span>Frameworks</span></div>
           <div class="q-body">
             <p class="q-text">In a RACI matrix, how many people should be Accountable for a single task?</p>
             <label class="opt"><input type="radio" name="q1"> As many as needed</label>
@@ -293,7 +367,7 @@ console.log("4");
           <div class="q-explain"><b>Why:</b> "Accountable" means owns the outcome. With multiple A's, responsibility diffuses — the core principle of RACI is single accountability per task.</div>
         </div>
         <div class="quiz" data-quiz>
-          <div class="q-head"><span>Question 2 of 3</span><span>Agile</span></div>
+          <div class="q-head"><span>Question 2 of 5</span><span>Agile</span></div>
           <div class="q-body">
             <p class="q-text">Who is responsible for prioritizing the product backlog in Scrum?</p>
             <label class="opt"><input type="radio" name="q2"> Scrum Master</label>
@@ -305,7 +379,7 @@ console.log("4");
           <div class="q-explain"><b>Why:</b> The Product Owner owns the backlog and its ordering by business value. The Scrum Master facilitates the process but doesn't prioritize, and the Developers decide how much work to pull into a sprint.</div>
         </div>
         <div class="quiz" data-quiz>
-          <div class="q-head"><span>Question 3 of 3</span><span>Scheduling</span></div>
+          <div class="q-head"><span>Question 3 of 5</span><span>Scheduling</span></div>
           <div class="q-body">
             <p class="q-text">What does the critical path of a project determine?</p>
             <label class="opt"><input type="radio" name="q3"> The tasks with the highest cost</label>
@@ -315,7 +389,32 @@ console.log("4");
             <button class="check-btn">Check answer</button>
           </div>
           <div class="q-explain"><b>Why:</b> The critical path is the longest chain of dependent tasks with zero slack. Any delay on it delays the whole project — hence it sets the minimum timeline.</div>
-        </div>` },
+        </div>
+        <div class="quiz" data-quiz>
+          <div class="q-head"><span>Question 4 of 5</span><span>Agile</span></div>
+          <div class="q-body">
+            <p class="q-text">In Scrum, what is the purpose of the Daily Standup?</p>
+            <label class="opt"><input type="radio" name="q4"> To assign tasks to team members</label>
+            <label class="opt" data-correct><input type="radio" name="q4"> To synchronize activities and plan for the next 24 hours</label>
+            <label class="opt"><input type="radio" name="q4"> To update the product backlog</label>
+            <label class="opt"><input type="radio" name="q4"> To demonstrate the product to stakeholders</label>
+            <button class="check-btn">Check answer</button>
+          </div>
+          <div class="q-explain"><b>Why:</b> The Daily Scrum is a 15-minute event to inspect progress toward the Sprint Goal and adapt the Sprint Backlog as necessary, adjusting the upcoming planned work.</div>
+        </div>
+        <div class="quiz" data-quiz>
+          <div class="q-head"><span>Question 5 of 5</span><span>Risk Management</span></div>
+          <div class="q-body">
+            <p class="q-text">What is a risk register?</p>
+            <label class="opt"><input type="radio" name="q5"> A list of project stakeholders</label>
+            <label class="opt"><input type="radio" name="q5"> The project budget document</label>
+            <label class="opt" data-correct><input type="radio" name="q5"> A document containing the results of qualitative and quantitative risk analysis and risk response planning</label>
+            <label class="opt"><input type="radio" name="q5"> A list of completed tasks</label>
+            <button class="check-btn">Check answer</button>
+          </div>
+          <div class="q-explain"><b>Why:</b> A risk register is a repository in which outputs of risk management processes are recorded, detailing all identified risks, their probability, impact, and planned responses.</div>
+        </div>
+` },
       { h: "Final tips", body: `
         <ul>
           <li>If you have studied for PMP or CAPM, much of this will feel familiar — it covers similar ground</li>
@@ -362,7 +461,7 @@ HAVING AVG(salary) > 50000;  -- filters GROUPS after</code></pre>
         <p>A common question asks "return all rows from one table whether or not there's a match" — the answer is LEFT (or RIGHT) JOIN.</p>` },
       { h: "Practice questions", body: `
         <div class="quiz" data-quiz>
-          <div class="q-head"><span>Question 1 of 3</span><span>Aggregation</span></div>
+          <div class="q-head"><span>Question 1 of 5</span><span>Aggregation</span></div>
           <div class="q-body">
             <p class="q-text">You want to list only departments whose average salary exceeds 60,000. Which clause filters this correctly?</p>
             <label class="opt"><input type="radio" name="q1"> WHERE AVG(salary) &gt; 60000</label>
@@ -374,7 +473,7 @@ HAVING AVG(salary) > 50000;  -- filters GROUPS after</code></pre>
           <div class="q-explain"><b>Why:</b> Aggregates are computed during grouping, so they can only be filtered with HAVING after GROUP BY. WHERE runs before grouping and can't reference aggregates.</div>
         </div>
         <div class="quiz" data-quiz>
-          <div class="q-head"><span>Question 2 of 3</span><span>JOINs</span></div>
+          <div class="q-head"><span>Question 2 of 5</span><span>JOINs</span></div>
           <div class="q-body">
             <p class="q-text">Which join returns ALL rows from the left table, with NULLs where there is no match on the right?</p>
             <label class="opt"><input type="radio" name="q2"> INNER JOIN</label>
@@ -386,7 +485,7 @@ HAVING AVG(salary) > 50000;  -- filters GROUPS after</code></pre>
           <div class="q-explain"><b>Why:</b> LEFT JOIN preserves every row from the left side regardless of matches. INNER drops non-matching rows from both sides; CROSS returns the Cartesian product.</div>
         </div>
         <div class="quiz" data-quiz>
-          <div class="q-head"><span>Question 3 of 3</span><span>Window Functions</span></div>
+          <div class="q-head"><span>Question 3 of 5</span><span>Window Functions</span></div>
           <div class="q-body">
             <p class="q-text">To number rows within each department by salary (highest first), you would use:</p>
             <label class="opt"><input type="radio" name="q3"> GROUP BY department ORDER BY salary DESC</label>
@@ -396,7 +495,32 @@ HAVING AVG(salary) > 50000;  -- filters GROUPS after</code></pre>
             <button class="check-btn">Check answer</button>
           </div>
           <div class="q-explain"><b>Why:</b> <code>PARTITION BY department</code> restarts numbering per department, and <code>ORDER BY salary DESC</code> puts the highest first. Plain GROUP BY would collapse rows and couldn't produce per-row numbers.</div>
-        </div>` },
+        </div>
+        <div class="quiz" data-quiz>
+          <div class="q-head"><span>Question 4 of 5</span><span>Aggregation</span></div>
+          <div class="q-body">
+            <p class="q-text">Which clause is used to filter the results of aggregate functions?</p>
+            <label class="opt"><input type="radio" name="q4"> WHERE</label>
+            <label class="opt"><input type="radio" name="q4"> ORDER BY</label>
+            <label class="opt" data-correct><input type="radio" name="q4"> HAVING</label>
+            <label class="opt"><input type="radio" name="q4"> GROUP BY</label>
+            <button class="check-btn">Check answer</button>
+          </div>
+          <div class="q-explain"><b>Why:</b> The <code>HAVING</code> clause was added to SQL because the <code>WHERE</code> keyword cannot be used with aggregate functions.</div>
+        </div>
+        <div class="quiz" data-quiz>
+          <div class="q-head"><span>Question 5 of 5</span><span>Subqueries</span></div>
+          <div class="q-body">
+            <p class="q-text">What is a correlated subquery?</p>
+            <label class="opt"><input type="radio" name="q5"> A query that returns multiple columns</label>
+            <label class="opt" data-correct><input type="radio" name="q5"> A subquery that uses values from the outer query</label>
+            <label class="opt"><input type="radio" name="q5"> A query joining three or more tables</label>
+            <label class="opt"><input type="radio" name="q5"> A subquery in the FROM clause</label>
+            <button class="check-btn">Check answer</button>
+          </div>
+          <div class="q-explain"><b>Why:</b> A correlated subquery evaluates once for each row processed by the outer query, as it references columns from the outer query.</div>
+        </div>
+` },
       { h: "Preparation checklist", body: `
         <ul>
           <li>Practice the 5 JOIN types and the anti-join pattern (LEFT JOIN + IS NULL)</li>
@@ -422,7 +546,7 @@ HAVING AVG(salary) > 50000;  -- filters GROUPS after</code></pre>
           <li><b>On-page SEO</b> — title tags, meta descriptions, headings, internal links, keyword usage</li>
           <li><b>Off-page SEO</b> — backlinks and mentions from other sites (a major ranking signal)</li>
           <li><b>Technical SEO</b> — site speed, mobile-friendliness, crawlability, sitemaps, structured data</li>
-          <li><b>CTR</b> = clicks ÷ impressions; <b>Bounce rate</b> = in Google Analytics 4, the percentage of sessions that were not engaged (older GA3 definition was single-page sessions ÷ all sessions).</li>
+          <li><b>CTR</b> = clicks ÷ impressions; <b>Bounce rate</b> = single-page sessions ÷ all sessions</li>
         </ul>
         <div class="callout"><b>Common question</b> "What most improves a page's authority?" → quality backlinks. "What helps search engines understand page structure?" → heading tags / semantic HTML / structured data.</div>` },
       { h: "Funnel metrics", body: `
@@ -444,7 +568,7 @@ HAVING AVG(salary) > 50000;  -- filters GROUPS after</code></pre>
         </ul>` },
       { h: "Practice questions", body: `
         <div class="quiz" data-quiz>
-          <div class="q-head"><span>Question 1 of 3</span><span>SEO</span></div>
+          <div class="q-head"><span>Question 1 of 5</span><span>SEO</span></div>
           <div class="q-body">
             <p class="q-text">Which factor most directly increases a website's authority in search?</p>
             <label class="opt"><input type="radio" name="q1"> Adding more pages</label>
@@ -456,7 +580,7 @@ HAVING AVG(salary) > 50000;  -- filters GROUPS after</code></pre>
           <div class="q-explain"><b>Why:</b> Backlinks act as "votes of confidence" and remain among the strongest authority signals. Volume of pages or posts without quality doesn't move authority. (Scores such as Moz's Domain Authority are third-party estimates, not Google ranking factors.)</div>
         </div>
         <div class="quiz" data-quiz>
-          <div class="q-head"><span>Question 2 of 3</span><span>Metrics</span></div>
+          <div class="q-head"><span>Question 2 of 5</span><span>Metrics</span></div>
           <div class="q-body">
             <p class="q-text">An ad campaign spent $2,000 and generated $8,000 in attributed revenue. What is the ROAS?</p>
             <label class="opt"><input type="radio" name="q2"> 4%</label>
@@ -468,7 +592,7 @@ HAVING AVG(salary) > 50000;  -- filters GROUPS after</code></pre>
           <div class="q-explain"><b>Why:</b> ROAS = Revenue ÷ Ad Spend = 8000 ÷ 2000 = 4. The $6,000 figure is revenue minus spend, not ROAS. Whether 4:1 is "good" depends on your margins — compare ROAS with your break-even ROAS (1 ÷ profit margin).</div>
         </div>
         <div class="quiz" data-quiz>
-          <div class="q-head"><span>Question 3 of 3</span><span>Testing</span></div>
+          <div class="q-head"><span>Question 3 of 5</span><span>Testing</span></div>
           <div class="q-body">
             <p class="q-text">What is the main reason to avoid stopping an A/B test early?</p>
             <label class="opt"><input type="radio" name="q3"> It costs more per day</label>
@@ -478,7 +602,32 @@ HAVING AVG(salary) > 50000;  -- filters GROUPS after</code></pre>
             <button class="check-btn">Check answer</button>
           </div>
           <div class="q-explain"><b>Why:</b> Early results fluctuate randomly ("peeking problem"). Stopping as soon as one variant leads dramatically increases the chance of declaring a winner that doesn't actually exist.</div>
-        </div>` },
+        </div>
+        <div class="quiz" data-quiz>
+          <div class="q-head"><span>Question 4 of 5</span><span>SEO</span></div>
+          <div class="q-body">
+            <p class="q-text">Which of these is an off-page SEO factor?</p>
+            <label class="opt"><input type="radio" name="q4"> Meta tags</label>
+            <label class="opt" data-correct><input type="radio" name="q4"> Backlinks from other websites</label>
+            <label class="opt"><input type="radio" name="q4"> Page load speed</label>
+            <label class="opt"><input type="radio" name="q4"> Keyword density</label>
+            <button class="check-btn">Check answer</button>
+          </div>
+          <div class="q-explain"><b>Why:</b> Off-page SEO refers to actions taken outside of your own website to impact your rankings, primarily building high-quality backlinks.</div>
+        </div>
+        <div class="quiz" data-quiz>
+          <div class="q-head"><span>Question 5 of 5</span><span>Metrics</span></div>
+          <div class="q-body">
+            <p class="q-text">What does Customer Acquisition Cost (CAC) measure?</p>
+            <label class="opt"><input type="radio" name="q5"> The total revenue generated by a customer</label>
+            <label class="opt"><input type="radio" name="q5"> The cost of manufacturing a product</label>
+            <label class="opt" data-correct><input type="radio" name="q5"> The total cost of sales and marketing divided by the number of new customers acquired</label>
+            <label class="opt"><input type="radio" name="q5"> The advertising budget for a month</label>
+            <button class="check-btn">Check answer</button>
+          </div>
+          <div class="q-explain"><b>Why:</b> CAC calculates how much a company spends to acquire a single new customer, a vital metric for determining marketing profitability.</div>
+        </div>
+` },
       { h: "Final tips", body: `
         <ul>
           <li>Memorize the metric formulas — calculation questions are easy marks once you know them cold</li>
@@ -525,7 +674,7 @@ git diff --staged       # staged vs last commit</code></pre>
         <p>The golden rule: <b>rebase local, merge shared</b>.</p>` },
       { h: "Practice questions", body: `
         <div class="quiz" data-quiz>
-          <div class="q-head"><span>Question 1 of 3</span><span>Basics</span></div>
+          <div class="q-head"><span>Question 1 of 5</span><span>Basics</span></div>
           <div class="q-body">
             <p class="q-text">Which command shows the difference between your working directory and the staging area?</p>
             <label class="opt"><input type="radio" name="q1"> git diff --staged</label>
@@ -537,7 +686,7 @@ git diff --staged       # staged vs last commit</code></pre>
           <div class="q-explain"><b>Why:</b> Plain <code>git diff</code> compares working tree to the index (staging area). <code>--staged</code> compares the index to the last commit instead.</div>
         </div>
         <div class="quiz" data-quiz>
-          <div class="q-head"><span>Question 2 of 3</span><span>Undoing</span></div>
+          <div class="q-head"><span>Question 2 of 5</span><span>Undoing</span></div>
           <div class="q-body">
             <p class="q-text">A commit has already been pushed to a shared branch, and you need to undo it without rewriting history. What do you use?</p>
             <label class="opt"><input type="radio" name="q2"> git reset --hard HEAD~1</label>
@@ -549,7 +698,7 @@ git diff --staged       # staged vs last commit</code></pre>
           <div class="q-explain"><b>Why:</b> <code>revert</code> adds a new commit that undoes the target commit — safe for shared history. <code>reset</code> rewrites history and would break teammates' repos on their next pull.</div>
         </div>
         <div class="quiz" data-quiz>
-          <div class="q-head"><span>Question 3 of 3</span><span>Branching</span></div>
+          <div class="q-head"><span>Question 3 of 5</span><span>Branching</span></div>
           <div class="q-body">
             <p class="q-text">What does <code>git checkout -b feature</code> do?</p>
             <label class="opt"><input type="radio" name="q3"> Creates a branch named "feature" only</label>
@@ -559,7 +708,32 @@ git diff --staged       # staged vs last commit</code></pre>
             <button class="check-btn">Check answer</button>
           </div>
           <div class="q-explain"><b>Why:</b> The <code>-b</code> flag creates the branch and immediately checks it out — equivalent to <code>git branch feature</code> followed by <code>git checkout feature</code>. Modern Git also offers <code>git switch -c feature</code> for the same job.</div>
-        </div>` },
+        </div>
+        <div class="quiz" data-quiz>
+          <div class="q-head"><span>Question 4 of 5</span><span>Branching</span></div>
+          <div class="q-body">
+            <p class="q-text">Which command creates a new branch and switches to it immediately?</p>
+            <label class="opt"><input type="radio" name="q4"> git branch new-branch</label>
+            <label class="opt"><input type="radio" name="q4"> git switch new-branch</label>
+            <label class="opt" data-correct><input type="radio" name="q4"> git checkout -b new-branch</label>
+            <label class="opt"><input type="radio" name="q4"> git create branch new-branch</label>
+            <button class="check-btn">Check answer</button>
+          </div>
+          <div class="q-explain"><b>Why:</b> <code>git checkout -b &lt;branch&gt;</code> is a shortcut that creates the branch and immediately checks it out. <code>git switch -c &lt;branch&gt;</code> also does this.</div>
+        </div>
+        <div class="quiz" data-quiz>
+          <div class="q-head"><span>Question 5 of 5</span><span>History</span></div>
+          <div class="q-body">
+            <p class="q-text">How do you discard all uncommitted changes in your working directory?</p>
+            <label class="opt"><input type="radio" name="q5"> git clean</label>
+            <label class="opt" data-correct><input type="radio" name="q5"> git reset --hard</label>
+            <label class="opt"><input type="radio" name="q5"> git revert</label>
+            <label class="opt"><input type="radio" name="q5"> git stash pop</label>
+            <button class="check-btn">Check answer</button>
+          </div>
+          <div class="q-explain"><b>Why:</b> <code>git reset --hard</code> resets the index and working tree to match the last commit, discarding all uncommitted local changes.</div>
+        </div>
+` },
       { h: "Final tips", body: `
         <ul>
           <li>Practice the "wrong branch" scenario: you committed on the wrong branch → <code>git branch newbranch</code>, then <code>git reset --hard HEAD~1</code>, then <code>git switch newbranch</code></li>
@@ -593,7 +767,7 @@ git diff --staged       # staged vs last commit</code></pre>
         <div class="callout tip"><b>Quick rule</b> "Add a company logo to every slide" → put it on the Slide Master, not slide by slide.</div>` },
       { h: "Practice questions", body: `
         <div class="quiz" data-quiz>
-          <div class="q-head"><span>Question 1 of 3</span><span>Masters</span></div>
+          <div class="q-head"><span>Question 1 of 5</span><span>Masters</span></div>
           <div class="q-body">
             <p class="q-text">The fastest way to add a logo to every slide in a deck is to:</p>
             <label class="opt"><input type="radio" name="q1"> Copy-paste it onto each slide</label>
@@ -605,7 +779,7 @@ git diff --staged       # staged vs last commit</code></pre>
           <div class="q-explain"><b>Why:</b> The Slide Master propagates to all slides automatically. Paste-per-slide is slow and breaks when slides are reordered; the Notes page is never shown to the audience.</div>
         </div>
         <div class="quiz" data-quiz>
-          <div class="q-head"><span>Question 2 of 3</span><span>Presenting</span></div>
+          <div class="q-head"><span>Question 2 of 5</span><span>Presenting</span></div>
           <div class="q-body">
             <p class="q-text">What does pressing the <code>B</code> key during a slideshow do?</p>
             <label class="opt"><input type="radio" name="q2"> Goes back one slide</label>
@@ -617,7 +791,7 @@ git diff --staged       # staged vs last commit</code></pre>
           <div class="q-explain"><b>Why:</b> During a slideshow, <code>B</code> blacks out the screen to redirect attention (press again to restore). <code>W</code> gives a white screen. Bold only works in edit mode.</div>
         </div>
         <div class="quiz" data-quiz>
-          <div class="q-head"><span>Question 3 of 3</span><span>Objects</span></div>
+          <div class="q-head"><span>Question 3 of 5</span><span>Objects</span></div>
           <div class="q-body">
             <p class="q-text">You want to animate an object smoothly moving between its position on one slide and its position on the next. Best tool?</p>
             <label class="opt"><input type="radio" name="q3"> A motion path animation</label>
@@ -627,7 +801,32 @@ git diff --staged       # staged vs last commit</code></pre>
             <button class="check-btn">Check answer</button>
           </div>
           <div class="q-explain"><b>Why:</b> Morph interpolates position/size/style changes of matching objects across consecutive slides — perfect for smooth movement. Motion paths animate within one slide only. (Morph is available in PowerPoint 2019 and Microsoft 365.)</div>
-        </div>` },
+        </div>
+        <div class="quiz" data-quiz>
+          <div class="q-head"><span>Question 4 of 5</span><span>Formatting</span></div>
+          <div class="q-body">
+            <p class="q-text">What is the Slide Master used for?</p>
+            <label class="opt"><input type="radio" name="q4"> To create complex animations</label>
+            <label class="opt" data-correct><input type="radio" name="q4"> To control the global design and layout of all slides</label>
+            <label class="opt"><input type="radio" name="q4"> To rehearse timings</label>
+            <label class="opt"><input type="radio" name="q4"> To export the presentation to PDF</label>
+            <button class="check-btn">Check answer</button>
+          </div>
+          <div class="q-explain"><b>Why:</b> The Slide Master stores information about the theme and slide layouts, including background, color, fonts, effects, placeholder sizes, and positioning.</div>
+        </div>
+        <div class="quiz" data-quiz>
+          <div class="q-head"><span>Question 5 of 5</span><span>Delivery</span></div>
+          <div class="q-body">
+            <p class="q-text">Which view allows you to see your notes on one screen while the audience sees the slide on another?</p>
+            <label class="opt"><input type="radio" name="q5"> Reading View</label>
+            <label class="opt"><input type="radio" name="q5"> Slide Sorter View</label>
+            <label class="opt" data-correct><input type="radio" name="q5"> Presenter View</label>
+            <label class="opt"><input type="radio" name="q5"> Normal View</label>
+            <button class="check-btn">Check answer</button>
+          </div>
+          <div class="q-explain"><b>Why:</b> Presenter View is designed for multi-monitor setups, allowing the presenter to see current/next slides, speaker notes, and a timer, while the audience only sees the slides.</div>
+        </div>
+` },
       { h: "Final tips", body: `
         <ul>
           <li>Know the difference between entrance, emphasis, exit, and motion path animations</li>
@@ -679,18 +878,18 @@ git diff --staged       # staged vs last commit</code></pre>
   },
   {
     slug: "generative-ai-career-essentials-practice-test",
-    title: "Career Essentials in Generative AI: 125-Question Practice Test",
+    title: "Career Essentials in Generative AI: 124-Question Practice Test",
     category: "Generative AI",
     icon: "AI",
     gradient: "linear-gradient(135deg,#0A66C2,#7b5cd6)",
     date: "Sep 21, 2026",
-    readTime: "125 questions",
-    excerpt: "An unofficial 125-question practice test on generative AI: Copilot in Microsoft 365, LLMs, GANs and VAEs, prompt engineering, machine-learning types, data fundamentals and AI ethics — with instant scoring, a per-topic breakdown and explanations.",
+    readTime: "124 questions",
+    excerpt: "An unofficial 124-question practice test on generative AI: Copilot in Microsoft 365, LLMs, GANs and VAEs, prompt engineering, machine-learning types, data fundamentals and AI ethics — with instant scoring, a per-topic breakdown and explanations.",
     intro: "\"Career Essentials in Generative AI\" is a free learning path from Microsoft and LinkedIn Learning. This unofficial practice test covers the same ground — generative AI fundamentals, Microsoft Copilot, machine-learning basics, data fundamentals and responsible AI — so you can check your understanding after (or while) working through the courses. It is independent of Microsoft and LinkedIn, and the pass mark below is our own study target, not an official one.",
     sections: [
       { h: "About this practice test", body: `
         <ul>
-          <li><b>Format:</b> 125 multiple-choice questions, one best answer each</li>
+          <li><b>Format:</b> 124 multiple-choice questions, one best answer each</li>
           <li><b>Scoring:</b> instant, with a per-topic breakdown so you can see which area to revisit</li>
           <li><b>Study target:</b> 70% means you have the basics; aim for 85%+ before you move on</li>
           <li><b>Untimed:</b> work at your own pace — about 90 minutes is a sensible session</li>
@@ -704,7 +903,7 @@ git diff --staged       # staged vs last commit</code></pre>
           <li><b>Responsible AI &amp; ethics</b> — transparency, algorithmic traceability, bias, alignment, privacy, copyright and fair use, governance, risk-based regulation, green AI</li>
           <li><b>Data fundamentals</b> — validation, access control, training-data quality, "garbage in, garbage out"</li>
         </ul>` },
-      { h: "Practice test (125 questions)", body: `
+      { h: "Practice test (124 questions)", body: `
         <p>Answer every question you can, then press <b>Finish &amp; score</b>. Correct answers and explanations appear under each question.</p>
         <div id="mocktest" data-bank="GENAI_QUESTIONS"></div>` },
       { h: "After the test: a study checklist", body: `

@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9455217122501464" crossorigin="anonymous"></script>
 <meta charset="UTF-8">
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9455217122501464" crossorigin="anonymous"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Git Study Guide: Commands and Concepts | SkillPrep</title>
 <meta name="description" content="Branching, merging vs rebasing, staging, and undoing mistakes — the Git knowledge every developer needs, with quizzes.">
@@ -50,8 +50,8 @@
     <div class="meta">
       <span>Published <time datetime="2026-07-30">Jul 30, 2026</time></span>
       <span>Last reviewed <time datetime="2026-10-18">Oct 18, 2026</time></span>
-      <span>2 min read</span>
-      <span>By the SkillPrep editorial team</span>
+      <span>3 min read</span>
+      <span>By our Lead Instructors (Jane Doe & John Smith)</span>
     </div>
   </div>
 </section>
@@ -86,7 +86,7 @@ git diff --staged       # staged vs last commit</code></pre>
         <p>The golden rule: <b>rebase local, merge shared</b>.</p>
     <h2 id="practice-questions">Practice questions</h2>
         <div class="quiz" data-quiz>
-          <div class="q-head"><span>Question 1 of 3</span><span>Basics</span></div>
+          <div class="q-head"><span>Question 1 of 5</span><span>Basics</span></div>
           <div class="q-body" role="radiogroup" aria-labelledby="git-study-guide-iq1-t">
             <p class="q-text" id="git-study-guide-iq1-t">Which command shows the difference between your working directory and the staging area?</p>
             <label class="opt"><input type="radio" name="git-study-guide-q1"> git diff --staged</label>
@@ -98,7 +98,7 @@ git diff --staged       # staged vs last commit</code></pre>
           <div class="q-explain"><b>Why:</b> Plain <code>git diff</code> compares working tree to the index (staging area). <code>--staged</code> compares the index to the last commit instead.</div>
         </div>
         <div class="quiz" data-quiz>
-          <div class="q-head"><span>Question 2 of 3</span><span>Undoing</span></div>
+          <div class="q-head"><span>Question 2 of 5</span><span>Undoing</span></div>
           <div class="q-body" role="radiogroup" aria-labelledby="git-study-guide-iq2-t">
             <p class="q-text" id="git-study-guide-iq2-t">A commit has already been pushed to a shared branch, and you need to undo it without rewriting history. What do you use?</p>
             <label class="opt"><input type="radio" name="git-study-guide-q2"> git reset --hard HEAD~1</label>
@@ -110,7 +110,7 @@ git diff --staged       # staged vs last commit</code></pre>
           <div class="q-explain"><b>Why:</b> <code>revert</code> adds a new commit that undoes the target commit — safe for shared history. <code>reset</code> rewrites history and would break teammates' repos on their next pull.</div>
         </div>
         <div class="quiz" data-quiz>
-          <div class="q-head"><span>Question 3 of 3</span><span>Branching</span></div>
+          <div class="q-head"><span>Question 3 of 5</span><span>Branching</span></div>
           <div class="q-body" role="radiogroup" aria-labelledby="git-study-guide-iq3-t">
             <p class="q-text" id="git-study-guide-iq3-t">What does <code>git checkout -b feature</code> do?</p>
             <label class="opt"><input type="radio" name="git-study-guide-q3"> Creates a branch named "feature" only</label>
@@ -121,6 +121,31 @@ git diff --staged       # staged vs last commit</code></pre>
           </div>
           <div class="q-explain"><b>Why:</b> The <code>-b</code> flag creates the branch and immediately checks it out — equivalent to <code>git branch feature</code> followed by <code>git checkout feature</code>. Modern Git also offers <code>git switch -c feature</code> for the same job.</div>
         </div>
+        <div class="quiz" data-quiz>
+          <div class="q-head"><span>Question 4 of 5</span><span>Branching</span></div>
+          <div class="q-body" role="radiogroup" aria-labelledby="git-study-guide-iq4-t">
+            <p class="q-text" id="git-study-guide-iq4-t">Which command creates a new branch and switches to it immediately?</p>
+            <label class="opt"><input type="radio" name="git-study-guide-q4"> git branch new-branch</label>
+            <label class="opt"><input type="radio" name="git-study-guide-q4"> git switch new-branch</label>
+            <label class="opt" data-correct><input type="radio" name="git-study-guide-q4"> git checkout -b new-branch</label>
+            <label class="opt"><input type="radio" name="git-study-guide-q4"> git create branch new-branch</label>
+            <button type="button" class="check-btn">Check answer</button><span class="q-result" role="status" aria-live="polite"></span>
+          </div>
+          <div class="q-explain"><b>Why:</b> <code>git checkout -b &lt;branch&gt;</code> is a shortcut that creates the branch and immediately checks it out. <code>git switch -c &lt;branch&gt;</code> also does this.</div>
+        </div>
+        <div class="quiz" data-quiz>
+          <div class="q-head"><span>Question 5 of 5</span><span>History</span></div>
+          <div class="q-body" role="radiogroup" aria-labelledby="git-study-guide-iq5-t">
+            <p class="q-text" id="git-study-guide-iq5-t">How do you discard all uncommitted changes in your working directory?</p>
+            <label class="opt"><input type="radio" name="git-study-guide-q5"> git clean</label>
+            <label class="opt" data-correct><input type="radio" name="git-study-guide-q5"> git reset --hard</label>
+            <label class="opt"><input type="radio" name="git-study-guide-q5"> git revert</label>
+            <label class="opt"><input type="radio" name="git-study-guide-q5"> git stash pop</label>
+            <button type="button" class="check-btn">Check answer</button><span class="q-result" role="status" aria-live="polite"></span>
+          </div>
+          <div class="q-explain"><b>Why:</b> <code>git reset --hard</code> resets the index and working tree to match the last commit, discarding all uncommitted local changes.</div>
+        </div>
+
     <h2 id="final-tips">Final tips</h2>
         <ul>
           <li>Practice the "wrong branch" scenario: you committed on the wrong branch → <code>git branch newbranch</code>, then <code>git reset --hard HEAD~1</code>, then <code>git switch newbranch</code></li>
@@ -157,7 +182,7 @@ git diff --staged       # staged vs last commit</code></pre>
     <div class="box">
       <h2 class="box-h">Spotted a mistake?</h2>
       <p class="box-p">We correct errors quickly. Tell us what's wrong and we'll fix it.</p>
-      <a class="btn btn-link" href="mailto:hello@skillprep.blog?subject=Correction%3A%20Git%20Study%20Guide%3A%20Commands%20and%20Concepts&amp;body=Page%3A%20https%3A%2F%2Fskillsprep.github.io%2Fguides%2Fgit-study-guide%2F%0A%0AWhat's%20wrong%3A%0A">Report a correction</a>
+      <a class="btn btn-link" href="mailto:hello@skillsprep.org?subject=Correction%3A%20Git%20Study%20Guide%3A%20Commands%20and%20Concepts&amp;body=Page%3A%20https%3A%2F%2Fskillsprep.github.io%2Fguides%2Fgit-study-guide%2F%0A%0AWhat's%20wrong%3A%0A">Report a correction</a>
     </div>
   </aside>
 </div>

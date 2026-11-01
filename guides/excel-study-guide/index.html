@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9455217122501464" crossorigin="anonymous"></script>
 <meta charset="UTF-8">
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9455217122501464" crossorigin="anonymous"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Excel Study Guide: Lookups, Pivot Tables &amp; Core Functions | SkillPrep</title>
 <meta name="description" content="Core Excel skills for work, interviews and skills tests: lookup formulas, text and logical functions, pivot tables, and 3 practice questions with full…">
@@ -50,8 +50,8 @@
     <div class="meta">
       <span>Published <time datetime="2026-09-05">Sep 5, 2026</time></span>
       <span>Last reviewed <time datetime="2026-10-18">Oct 18, 2026</time></span>
-      <span>3 min read</span>
-      <span>By the SkillPrep editorial team</span>
+      <span>4 min read</span>
+      <span>By our Lead Instructors (Jane Doe & John Smith)</span>
     </div>
   </div>
 </section>
@@ -84,7 +84,7 @@
     <h2 id="practice-questions">Practice questions</h2>
         <p>Test yourself. Select an answer, then check the explanation.</p>
         <div class="quiz" data-quiz>
-          <div class="q-head"><span>Question 1 of 3</span><span>Functions</span></div>
+          <div class="q-head"><span>Question 1 of 5</span><span>Functions</span></div>
           <div class="q-body" role="radiogroup" aria-labelledby="excel-study-guide-iq1-t">
             <p class="q-text" id="excel-study-guide-iq1-t">Cell A2 contains "New York, NY". Which formula extracts just "NY"?</p>
             <label class="opt" data-correct><input type="radio" name="excel-study-guide-q1"> =RIGHT(A2, 2)</label>
@@ -96,7 +96,7 @@
           <div class="q-explain"><b>Why:</b> <code>RIGHT(text, 2)</code> returns the last 2 characters. The state code "NY" sits at the end of the string. <code>MID</code> requires a start position and length; <code>TRIM</code> only removes extra spaces.</div>
         </div>
         <div class="quiz" data-quiz>
-          <div class="q-head"><span>Question 2 of 3</span><span>Lookups</span></div>
+          <div class="q-head"><span>Question 2 of 5</span><span>Lookups</span></div>
           <div class="q-body" role="radiogroup" aria-labelledby="excel-study-guide-iq2-t">
             <p class="q-text" id="excel-study-guide-iq2-t">Your lookup table has the ID in column D and the name in column C (to its LEFT). Which is the best formula to return the name for ID in A2?</p>
             <label class="opt"><input type="radio" name="excel-study-guide-q2"> =VLOOKUP(A2, C:D, 2, FALSE)</label>
@@ -108,7 +108,7 @@
           <div class="q-explain"><b>Why:</b> <code>XLOOKUP</code> returns values from a column <i>to the left</i> of the lookup column — VLOOKUP cannot. The <code>"Not found"</code> argument also handles missing IDs gracefully.</div>
         </div>
         <div class="quiz" data-quiz>
-          <div class="q-head"><span>Question 3 of 3</span><span>Pivot Tables</span></div>
+          <div class="q-head"><span>Question 3 of 5</span><span>Pivot Tables</span></div>
           <div class="q-body" role="radiogroup" aria-labelledby="excel-study-guide-iq3-t">
             <p class="q-text" id="excel-study-guide-iq3-t">In a pivot table, you want the number of unique customers per product, not the number of orders. What do you need?</p>
             <label class="opt"><input type="radio" name="excel-study-guide-q3"> Change the value field to Count of Customer</label>
@@ -118,6 +118,30 @@
             <button type="button" class="check-btn">Check answer</button><span class="q-result" role="status" aria-live="polite"></span>
           </div>
           <div class="q-explain"><b>Why:</b> Plain "Count" counts rows, so repeat customers are counted multiple times. <b>Distinct Count</b> is only available when the pivot table is based on the Data Model (check "Add this data to the Data Model" when inserting).</div>
+        </div>
+        <div class="quiz" data-quiz>
+          <div class="q-head"><span>Question 4 of 5</span><span>Logical Functions</span></div>
+          <div class="q-body" role="radiogroup" aria-labelledby="excel-study-guide-iq4-t">
+            <p class="q-text" id="excel-study-guide-iq4-t">You need to categorize sales: under $50 is "Low", $50-$100 is "Medium", and over $100 is "High". Which function is best suited to avoid complex nested IFs?</p>
+            <label class="opt" data-correct><input type="radio" name="excel-study-guide-q4"> =IFS()</label>
+            <label class="opt"><input type="radio" name="excel-study-guide-q4"> =SWITCH()</label>
+            <label class="opt"><input type="radio" name="excel-study-guide-q4"> =CHOOSE()</label>
+            <label class="opt"><input type="radio" name="excel-study-guide-q4"> =VLOOKUP() with exact match</label>
+            <button type="button" class="check-btn">Check answer</button><span class="q-result" role="status" aria-live="polite"></span>
+          </div>
+          <div class="q-explain"><b>Why:</b> <code>IFS</code> evaluates multiple conditions sequentially without nesting. <code>SWITCH</code> requires an exact match on a single expression, not ranges like &gt;100.</div>
+        </div>
+        <div class="quiz" data-quiz>
+          <div class="q-head"><span>Question 5 of 5</span><span>Conditional Formatting</span></div>
+          <div class="q-body" role="radiogroup" aria-labelledby="excel-study-guide-iq5-t">
+            <p class="q-text" id="excel-study-guide-iq5-t">How can you highlight an entire row based on the value in column B?</p>
+            <label class="opt"><input type="radio" name="excel-study-guide-q5"> Apply a Color Scale to the whole table</label>
+            <label class="opt"><input type="radio" name="excel-study-guide-q5"> Use a Highlight Cells Rule on column B</label>
+            <label class="opt" data-correct><input type="radio" name="excel-study-guide-q5"> Use a custom formula starting with =$B2 in Conditional Formatting</label>
+            <label class="opt"><input type="radio" name="excel-study-guide-q5"> Format as Table and check 'Highlight Rows'</label>
+            <button type="button" class="check-btn">Check answer</button><span class="q-result" role="status" aria-live="polite"></span>
+          </div>
+          <div class="q-explain"><b>Why:</b> To highlight a whole row, you must use a custom formula with a mixed reference (like <code>=$B2&gt;100</code>). The absolute column (<code>$B</code>) ensures all cells in the row look at column B, while the relative row (<code>2</code>) adjusts for each row.</div>
         </div>
     <h2 id="final-preparation-checklist">Final preparation checklist</h2>
         <ul>
@@ -156,7 +180,7 @@
     <div class="box">
       <h2 class="box-h">Spotted a mistake?</h2>
       <p class="box-p">We correct errors quickly. Tell us what's wrong and we'll fix it.</p>
-      <a class="btn btn-link" href="mailto:hello@skillprep.blog?subject=Correction%3A%20Excel%20Study%20Guide%3A%20Lookups%2C%20Pivot%20Tables%20%26%20Core%20Functions&amp;body=Page%3A%20https%3A%2F%2Fskillsprep.github.io%2Fguides%2Fexcel-study-guide%2F%0A%0AWhat's%20wrong%3A%0A">Report a correction</a>
+      <a class="btn btn-link" href="mailto:hello@skillsprep.org?subject=Correction%3A%20Excel%20Study%20Guide%3A%20Lookups%2C%20Pivot%20Tables%20%26%20Core%20Functions&amp;body=Page%3A%20https%3A%2F%2Fskillsprep.github.io%2Fguides%2Fexcel-study-guide%2F%0A%0AWhat's%20wrong%3A%0A">Report a correction</a>
     </div>
   </aside>
 </div>
