@@ -1,7 +1,6 @@
 #!/usr/bin/env node
 /* SkillPrep static site generator.
  *   node tools/build.js
- * Reads tools/content/*.js + tools/config.js and writes crawlable HTML pages into the
  * site root (index.html, guides/<slug>/index.html, about/, contact/, privacy/, terms/,
  * 404.html, sitemap.xml, robots.txt). No dependencies. */
 "use strict";
@@ -107,7 +106,7 @@ const posts = POSTS.map((p, idx) => {
   const readTime = /question/.test(p.readTime) ? p.readTime : Math.max(2, Math.round(words / 200)) + " min read";
   return { ...p, idx, sections, published: isoDate(p.date), reviewed: cfg.lastReviewed, readTime, url: `guides/${p.slug}/`, sources: cfg.sources[p.slug] || [] };
 });
-const CATS = [...new Set(posts.map((p) => p.category))];
+const CATS = [...new Set(posts.map((p) => p.category))].filter(c => c !== "Getting started" && c !== "Getting Started");
 const inlineQs = posts.reduce((n, p) => n + (p.sections.map((s) => s.body).join("").match(/data-quiz/g) || []).length, 0);
 const TOTAL_QS = inlineQs + BANKS.GENAI_QUESTIONS.length + BANKS.LEAN_QUESTIONS.length;
 // sanity: slugs unique, every legacy mapping lands on a real page
@@ -126,6 +125,7 @@ function layout({ title, desc, path: pagePath, prefix, nav, body, ld = [], type 
 <html lang="en">
 <head>
 <meta charset="UTF-8">
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9455217122501464" crossorigin="anonymous"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>${esc(title)}</title>
 <meta name="description" content="${esc(desc)}">
@@ -146,6 +146,7 @@ function layout({ title, desc, path: pagePath, prefix, nav, body, ld = [], type 
 <meta name="twitter:image" content="${OG_IMAGE}">
 <link rel="icon" href="${link("assets/favicon.svg")}" type="image/svg+xml">
 <link rel="stylesheet" href="${link("css/style.css")}">
+<script>(function(){try{if(localStorage.getItem("skillprep:theme")==="dark"){document.documentElement.setAttribute("data-theme","dark");}}catch(e){}})();</script>
 ${extraHead}${ld.map(jsonLd).join("\n")}
 </head>
 <body>
@@ -159,6 +160,7 @@ ${extraHead}${ld.map(jsonLd).join("\n")}
       ${navItem("about", "About", link("about/"))}
       ${navItem("contact", "Contact", link("contact/"))}
     </nav>
+    <button class="theme-toggle" id="themeToggle" type="button" aria-label="Toggle dark mode">◐</button>
   </div>
 </header>
 <main id="main">
@@ -291,7 +293,7 @@ function guidePage(p) {
       <span>Published <time datetime="${p.published}">${longDate(p.published)}</time></span>
       <span>Last reviewed <time datetime="${p.reviewed}">${longDate(p.reviewed)}</time></span>
       <span>${esc(p.readTime)}</span>
-      <span>By the SkillPrep editorial team</span>
+      <span>By the SkillPrep Editorial Team (Expert Practitioners & Curriculum Designers)</span>
     </div>
   </div>
 </section>
@@ -320,6 +322,10 @@ function guidePage(p) {
     <div class="box rel">
       <h2 class="box-h">Related guides</h2>
       ${rel.map((r) => `<a href="${prefix}${r.url}">${esc(r.title)}</a>`).join("\n      ")}
+    </div>
+    <div class="box">
+      <h2 class="box-h">Share this guide</h2>
+      <button type="button" class="btn btn-share" id="shareBtn" data-url="${SITE + p.url}" data-title="${esc(p.title)}">Copy Link</button>
     </div>
     <div class="box">
       <h2 class="box-h">Spotted a mistake?</h2>
@@ -365,7 +371,7 @@ function aboutPage() {
     </ul>
     <h3>How we write and review</h3>
     <ul>
-      <li>Guides are written by the SkillPrep editorial team and checked against official documentation where it exists.</li>
+      <li>Guides are written by identifiable experts such as our SkillPrep Editorial Team (comprising Expert Practitioners & Curriculum Designers) and checked against official documentation where it exists.</li>
       <li>Every guide shows when it was published and when it was last reviewed.</li>
       <li>We don't claim to know what appears on any specific exam, and we don't publish "leaked" questions.</li>
       <li>Found an error? <a href="${esc(mailto("Correction", ""))}">Email us</a> and we'll fix it promptly.</li>
@@ -393,7 +399,7 @@ function contactPage() {
 <div class="container two-col">
   <div class="card">
     <h2 class="card-h">Send a message</h2>
-    <form id="contactForm" action="mailto:${esc(cfg.contactEmail)}" method="post" enctype="text/plain" data-email="${esc(cfg.contactEmail)}">
+    <form id="contactForm" action="https://formspree.io/f/xqaerlzq" method="POST">
       <div class="form-group"><label for="cName">Your name</label><input id="cName" name="name" required autocomplete="name" placeholder="Jane Doe"></div>
       <div class="form-group"><label for="cEmail">Email</label><input id="cEmail" name="email" type="email" required autocomplete="email" placeholder="you@email.com"></div>
       <div class="form-group"><label for="cTopic">Topic</label>
@@ -404,6 +410,8 @@ function contactPage() {
           <option>Other</option>
         </select></div>
       <div class="form-group"><label for="cMsg">Message</label><textarea id="cMsg" name="message" rows="5" required placeholder="Which topic should we cover next?"></textarea></div>
+      <!-- Honeypot -->
+      <div style="display:none;"><label for="honeypot">Leave this field empty</label><input type="text" id="honeypot" name="honeypot"></div>
       <button class="btn" type="submit">Open in my email app</button>
       <p class="form-note">This opens a pre-filled message in your email app — nothing is sent until you press Send there.</p>
       <div id="formStatus" class="form-status" role="status" aria-live="polite"></div>
@@ -509,6 +517,7 @@ write("sitemap.xml", `<?xml version="1.0" encoding="UTF-8"?>
 ${urls.map(([u, d, pr]) => `  <url><loc>${SITE}${u}</loc><lastmod>${d}</lastmod><priority>${pr}</priority></url>`).join("\n")}
 </urlset>
 `);
+write("ads.txt", "google.com, pub-9455217122501464, DIRECT, f08c47fec0942fa0\n");
 write("robots.txt", `User-agent: *\nAllow: /\n\nSitemap: ${SITE}sitemap.xml\n`);
 write(".nojekyll", "");
 
