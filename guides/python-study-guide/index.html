@@ -2,6 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9455217122501464" crossorigin="anonymous"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Python Fundamentals: Study Guide + Practice Quiz | SkillPrep</title>
 <meta name="description" content="Data structures, comprehensions, exceptions, and functions — the Python fundamentals that interviews and skills tests keep returning to, with explained…">
@@ -22,6 +23,7 @@
 <meta name="twitter:image" content="https://skillsprep.github.io/assets/og-image.png">
 <link rel="icon" href="../../assets/favicon.svg" type="image/svg+xml">
 <link rel="stylesheet" href="../../css/style.css">
+<script>(function(){try{if(localStorage.getItem("skillprep:theme")==="dark"){document.documentElement.setAttribute("data-theme","dark");}}catch(e){}})();</script>
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"Python Fundamentals: Study Guide + Practice Quiz","description":"Data structures, comprehensions, exceptions, and functions — the Python fundamentals that interviews and skills tests keep returning to, with explained practice questions.","datePublished":"2026-09-03","dateModified":"2026-10-18","author":{"@type":"Organization","name":"SkillPrep editorial team"},"publisher":{"@type":"Organization","name":"SkillPrep","logo":{"@type":"ImageObject","url":"https://skillsprep.github.io/assets/favicon.svg"}},"mainEntityOfPage":"https://skillsprep.github.io/guides/python-study-guide/","image":"https://skillsprep.github.io/assets/og-image.png","articleSection":"Python","inLanguage":"en"}</script>
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://skillsprep.github.io/"},{"@type":"ListItem","position":2,"name":"Python","item":"https://skillsprep.github.io/#guides"},{"@type":"ListItem","position":3,"name":"Python Fundamentals: Study Guide + Practice Quiz","item":"https://skillsprep.github.io/guides/python-study-guide/"}]}</script>
 </head>
@@ -36,6 +38,7 @@
       <a href="../../about/">About</a>
       <a href="../../contact/">Contact</a>
     </nav>
+    <button class="theme-toggle" id="themeToggle" type="button" aria-label="Toggle dark mode">◐</button>
   </div>
 </header>
 <main id="main">
@@ -49,8 +52,8 @@
     <div class="meta">
       <span>Published <time datetime="2026-09-03">Sep 3, 2026</time></span>
       <span>Last reviewed <time datetime="2026-10-18">Oct 18, 2026</time></span>
-      <span>2 min read</span>
-      <span>By the SkillPrep editorial team</span>
+      <span>6 min read</span>
+      <span>By the SkillPrep Editorial Team (Expert Practitioners & Curriculum Designers)</span>
     </div>
   </div>
 </section>
@@ -85,9 +88,15 @@ print(add("banana"))</code></pre>
 [x**2 for x in range(10) if x % 2 == 0]
 # swap keys/values
 {v: k for k, v in prices.items()}</code></pre>
+    <h2 id="practical-learning-exercises">Practical learning exercises</h2>
+        <ul>
+          <li><b>Exercise 1 (Data Structures):</b> Write a script that takes a list of dictionaries (representing users) and uses a list comprehension to extract just the email addresses of active users.</li>
+          <li><b>Exercise 2 (Functions & Error Handling):</b> Create a function that reads a JSON file and parses it. Implement a try/except block to catch FileNotFoundError and json.JSONDecodeError, logging a helpful message instead of crashing.</li>
+          <li><b>Exercise 3 (OOP):</b> Design a simple BankAccount class with methods for deposit, withdraw, and get_balance. Ensure withdraw raises a ValueError if the amount exceeds the balance.</li>
+        </ul>
     <h2 id="practice-questions">Practice questions</h2>
         <div class="quiz" data-quiz>
-          <div class="q-head"><span>Question 1 of 3</span><span>Data Types</span></div>
+          <div class="q-head"><span>Question 1 of 20</span><span>Data Types</span></div>
           <div class="q-body" role="radiogroup" aria-labelledby="python-study-guide-iq1-t">
             <p class="q-text" id="python-study-guide-iq1-t">Which of these is immutable?</p>
             <label class="opt"><input type="radio" name="python-study-guide-q1"> list</label>
@@ -96,10 +105,10 @@ print(add("banana"))</code></pre>
             <label class="opt"><input type="radio" name="python-study-guide-q1"> set</label>
             <button type="button" class="check-btn">Check answer</button><span class="q-result" role="status" aria-live="polite"></span>
           </div>
-          <div class="q-explain"><b>Why:</b> Tuples cannot be modified after creation, so they can be dictionary keys and set members. Lists, dicts, and sets are all mutable.</div>
+          <div class="q-explain"><b>Why:</b> Tuples cannot be modified after creation. Note that they can be used as dictionary keys and set members <b>only if</b> all their elements are hashable (e.g. a tuple containing a list cannot be a dictionary key). Lists, dicts, and sets are all mutable.</div>
         </div>
         <div class="quiz" data-quiz>
-          <div class="q-head"><span>Question 2 of 3</span><span>Exceptions</span></div>
+          <div class="q-head"><span>Question 2 of 20</span><span>Exceptions</span></div>
           <div class="q-body" role="radiogroup" aria-labelledby="python-study-guide-iq2-t">
             <p class="q-text" id="python-study-guide-iq2-t">In a try/except/else/finally block, which part runs only when no exception is raised?</p>
             <label class="opt"><input type="radio" name="python-study-guide-q2"> finally</label>
@@ -111,7 +120,7 @@ print(add("banana"))</code></pre>
           <div class="q-explain"><b>Why:</b> <code>else</code> executes only if the try block completes without raising. <code>finally</code> always runs (exception or not), and <code>except</code> runs only when an exception occurs.</div>
         </div>
         <div class="quiz" data-quiz>
-          <div class="q-head"><span>Question 3 of 3</span><span>Functions</span></div>
+          <div class="q-head"><span>Question 3 of 20</span><span>Functions</span></div>
           <div class="q-body" role="radiogroup" aria-labelledby="python-study-guide-iq3-t">
             <p class="q-text" id="python-study-guide-iq3-t">What does <code>*args</code> allow in a function definition?</p>
             <label class="opt" data-correct><input type="radio" name="python-study-guide-q3"> Accept any number of positional arguments as a tuple</label>
@@ -121,6 +130,211 @@ print(add("banana"))</code></pre>
             <button type="button" class="check-btn">Check answer</button><span class="q-result" role="status" aria-live="polite"></span>
           </div>
           <div class="q-explain"><b>Why:</b> <code>*args</code> collects extra positional arguments into a tuple. Collecting keyword arguments into a dict is <code>**kwargs</code> — the two are frequently confused in questions.</div>
+        </div>
+        <div class="quiz" data-quiz>
+          <div class="q-head"><span>Question 4 of 20</span><span>Data Structures</span></div>
+          <div class="q-body" role="radiogroup" aria-labelledby="python-study-guide-iq4-t">
+            <p class="q-text" id="python-study-guide-iq4-t">Which of the following is true about sets in Python?</p>
+            <label class="opt"><input type="radio" name="python-study-guide-q4"> They maintain insertion order</label>
+            <label class="opt" data-correct><input type="radio" name="python-study-guide-q4"> They contain only unique elements</label>
+            <label class="opt"><input type="radio" name="python-study-guide-q4"> They can be accessed using indexing</label>
+            <label class="opt"><input type="radio" name="python-study-guide-q4"> They allow duplicate items</label>
+            <button type="button" class="check-btn">Check answer</button><span class="q-result" role="status" aria-live="polite"></span>
+          </div>
+          <div class="q-explain"><b>Why:</b> Sets in Python are unordered collections of unique elements. They do not allow duplicates and do not support indexing.</div>
+        </div>
+        <div class="quiz" data-quiz>
+          <div class="q-head"><span>Question 5 of 20</span><span>Functions</span></div>
+          <div class="q-body" role="radiogroup" aria-labelledby="python-study-guide-iq5-t">
+            <p class="q-text" id="python-study-guide-iq5-t">What is the purpose of *args in a function definition?</p>
+            <label class="opt" data-correct><input type="radio" name="python-study-guide-q5"> To accept an arbitrary number of positional arguments</label>
+            <label class="opt"><input type="radio" name="python-study-guide-q5"> To accept keyword arguments</label>
+            <label class="opt"><input type="radio" name="python-study-guide-q5"> To pass a dictionary to the function</label>
+            <label class="opt"><input type="radio" name="python-study-guide-q5"> To unpack a list</label>
+            <button type="button" class="check-btn">Check answer</button><span class="q-result" role="status" aria-live="polite"></span>
+          </div>
+          <div class="q-explain"><b>Why:</b> <code>*args</code> allows a function to accept a variable number of positional arguments, which are packed into a tuple.</div>
+        </div>
+
+        <div class="quiz" data-quiz>
+          <div class="q-head"><span>Question 6 of 20</span><span>Lists</span></div>
+          <div class="q-body" role="radiogroup" aria-labelledby="python-study-guide-iq6-t">
+            <p class="q-text" id="python-study-guide-iq6-t">What is the output of &#96;[1, 2, 3] * 2&#96;?</p>
+            <label class="opt"><input type="radio" name="python-study-guide-q6"> &#96;[2, 4, 6]&#96;</label>
+            <label class="opt" data-correct><input type="radio" name="python-study-guide-q6"> &#96;[1, 2, 3, 1, 2, 3]&#96;</label>
+            <label class="opt"><input type="radio" name="python-study-guide-q6"> TypeError</label>
+            <label class="opt"><input type="radio" name="python-study-guide-q6"> &#96;[1, 1, 2, 2, 3, 3]&#96;</label>
+            <button type="button" class="check-btn">Check answer</button><span class="q-result" role="status" aria-live="polite"></span>
+          </div>
+          <div class="q-explain"><b>Why:</b> Multiplying a list by an integer repeats the elements.</div>
+        </div>
+        <div class="quiz" data-quiz>
+          <div class="q-head"><span>Question 7 of 20</span><span>Dictionaries</span></div>
+          <div class="q-body" role="radiogroup" aria-labelledby="python-study-guide-iq7-t">
+            <p class="q-text" id="python-study-guide-iq7-t">How do you safely get a value from a dictionary without risking a KeyError?</p>
+            <label class="opt"><input type="radio" name="python-study-guide-q7"> &#96;my_dict['key']&#96;</label>
+            <label class="opt" data-correct><input type="radio" name="python-study-guide-q7"> &#96;my_dict.get('key')&#96;</label>
+            <label class="opt"><input type="radio" name="python-study-guide-q7"> &#96;my_dict.fetch('key')&#96;</label>
+            <label class="opt"><input type="radio" name="python-study-guide-q7"> &#96;my_dict.has_key('key')&#96;</label>
+            <button type="button" class="check-btn">Check answer</button><span class="q-result" role="status" aria-live="polite"></span>
+          </div>
+          <div class="q-explain"><b>Why:</b> &#96;dict.get()&#96; returns None (or a specified default) if the key is missing.</div>
+        </div>
+        <div class="quiz" data-quiz>
+          <div class="q-head"><span>Question 8 of 20</span><span>Strings</span></div>
+          <div class="q-body" role="radiogroup" aria-labelledby="python-study-guide-iq8-t">
+            <p class="q-text" id="python-study-guide-iq8-t">Which method is used to remove whitespace from both ends of a string?</p>
+            <label class="opt"><input type="radio" name="python-study-guide-q8"> &#96;trim()&#96;</label>
+            <label class="opt" data-correct><input type="radio" name="python-study-guide-q8"> &#96;strip()&#96;</label>
+            <label class="opt"><input type="radio" name="python-study-guide-q8"> &#96;clean()&#96;</label>
+            <label class="opt"><input type="radio" name="python-study-guide-q8"> &#96;remove_space()&#96;</label>
+            <button type="button" class="check-btn">Check answer</button><span class="q-result" role="status" aria-live="polite"></span>
+          </div>
+          <div class="q-explain"><b>Why:</b> &#96;strip()&#96; removes leading and trailing characters (spaces by default).</div>
+        </div>
+        <div class="quiz" data-quiz>
+          <div class="q-head"><span>Question 9 of 20</span><span>Control Flow</span></div>
+          <div class="q-body" role="radiogroup" aria-labelledby="python-study-guide-iq9-t">
+            <p class="q-text" id="python-study-guide-iq9-t">What does the &#96;pass&#96; statement do?</p>
+            <label class="opt"><input type="radio" name="python-study-guide-q9"> Exits the current loop</label>
+            <label class="opt"><input type="radio" name="python-study-guide-q9"> Skips to the next iteration</label>
+            <label class="opt" data-correct><input type="radio" name="python-study-guide-q9"> Does nothing; it's a null operation</label>
+            <label class="opt"><input type="radio" name="python-study-guide-q9"> Returns None from a function</label>
+            <button type="button" class="check-btn">Check answer</button><span class="q-result" role="status" aria-live="polite"></span>
+          </div>
+          <div class="q-explain"><b>Why:</b> &#96;pass&#96; is a placeholder when a statement is syntactically required but no code needs to execute.</div>
+        </div>
+        <div class="quiz" data-quiz>
+          <div class="q-head"><span>Question 10 of 20</span><span>List Comprehensions</span></div>
+          <div class="q-body" role="radiogroup" aria-labelledby="python-study-guide-iq10-t">
+            <p class="q-text" id="python-study-guide-iq10-t">Which comprehension creates a list of even numbers from 0 to 9?</p>
+            <label class="opt" data-correct><input type="radio" name="python-study-guide-q10"> &#96;[x for x in range(10) if x % 2 == 0]&#96;</label>
+            <label class="opt"><input type="radio" name="python-study-guide-q10"> &#96;[x if x % 2 == 0 for x in range(10)]&#96;</label>
+            <label class="opt"><input type="radio" name="python-study-guide-q10"> &#96;[even x in range(10)]&#96;</label>
+            <label class="opt"><input type="radio" name="python-study-guide-q10"> &#96;list(even for range(10))&#96;</label>
+            <button type="button" class="check-btn">Check answer</button><span class="q-result" role="status" aria-live="polite"></span>
+          </div>
+          <div class="q-explain"><b>Why:</b> The &#96;if&#96; condition filters the elements produced by the &#96;for&#96; loop.</div>
+        </div>
+        <div class="quiz" data-quiz>
+          <div class="q-head"><span>Question 11 of 20</span><span>Functions</span></div>
+          <div class="q-body" role="radiogroup" aria-labelledby="python-study-guide-iq11-t">
+            <p class="q-text" id="python-study-guide-iq11-t">What does &#96;**kwargs&#96; do in a function definition?</p>
+            <label class="opt"><input type="radio" name="python-study-guide-q11"> Accepts arbitrary positional arguments</label>
+            <label class="opt" data-correct><input type="radio" name="python-study-guide-q11"> Accepts arbitrary keyword arguments as a dictionary</label>
+            <label class="opt"><input type="radio" name="python-study-guide-q11"> Unpacks a tuple</label>
+            <label class="opt"><input type="radio" name="python-study-guide-q11"> Defines default arguments</label>
+            <button type="button" class="check-btn">Check answer</button><span class="q-result" role="status" aria-live="polite"></span>
+          </div>
+          <div class="q-explain"><b>Why:</b> &#96;**kwargs&#96; collects extra keyword arguments into a dictionary.</div>
+        </div>
+        <div class="quiz" data-quiz>
+          <div class="q-head"><span>Question 12 of 20</span><span>Modules</span></div>
+          <div class="q-body" role="radiogroup" aria-labelledby="python-study-guide-iq12-t">
+            <p class="q-text" id="python-study-guide-iq12-t">How do you import only the &#96;pi&#96; constant from the &#96;math&#96; module?</p>
+            <label class="opt"><input type="radio" name="python-study-guide-q12"> &#96;import math.pi&#96;</label>
+            <label class="opt" data-correct><input type="radio" name="python-study-guide-q12"> &#96;from math import pi&#96;</label>
+            <label class="opt"><input type="radio" name="python-study-guide-q12"> &#96;include pi from math&#96;</label>
+            <label class="opt"><input type="radio" name="python-study-guide-q12"> &#96;import pi&#96;</label>
+            <button type="button" class="check-btn">Check answer</button><span class="q-result" role="status" aria-live="polite"></span>
+          </div>
+          <div class="q-explain"><b>Why:</b> The &#96;from module import name&#96; syntax imports a specific attribute.</div>
+        </div>
+        <div class="quiz" data-quiz>
+          <div class="q-head"><span>Question 13 of 20</span><span>File I/O</span></div>
+          <div class="q-body" role="radiogroup" aria-labelledby="python-study-guide-iq13-t">
+            <p class="q-text" id="python-study-guide-iq13-t">What is the best practice for opening a file to ensure it gets closed automatically?</p>
+            <label class="opt"><input type="radio" name="python-study-guide-q13"> &#96;file = open('data.txt')&#96;</label>
+            <label class="opt" data-correct><input type="radio" name="python-study-guide-q13"> &#96;with open('data.txt') as f:&#96;</label>
+            <label class="opt"><input type="radio" name="python-study-guide-q13"> &#96;open_and_close('data.txt')&#96;</label>
+            <label class="opt"><input type="radio" name="python-study-guide-q13"> &#96;file.read('data.txt')&#96;</label>
+            <button type="button" class="check-btn">Check answer</button><span class="q-result" role="status" aria-live="polite"></span>
+          </div>
+          <div class="q-explain"><b>Why:</b> The &#96;with&#96; statement acts as a context manager, automatically closing the file even if exceptions occur.</div>
+        </div>
+        <div class="quiz" data-quiz>
+          <div class="q-head"><span>Question 14 of 20</span><span>OOP</span></div>
+          <div class="q-body" role="radiogroup" aria-labelledby="python-study-guide-iq14-t">
+            <p class="q-text" id="python-study-guide-iq14-t">What is the purpose of the &#96;__init__&#96; method in a class?</p>
+            <label class="opt"><input type="radio" name="python-study-guide-q14"> To destroy an object</label>
+            <label class="opt" data-correct><input type="radio" name="python-study-guide-q14"> To initialize the object's state upon creation</label>
+            <label class="opt"><input type="radio" name="python-study-guide-q14"> To define static methods</label>
+            <label class="opt"><input type="radio" name="python-study-guide-q14"> To return a string representation of the object</label>
+            <button type="button" class="check-btn">Check answer</button><span class="q-result" role="status" aria-live="polite"></span>
+          </div>
+          <div class="q-explain"><b>Why:</b> &#96;__init__&#96; is the constructor method called when a new instance is created.</div>
+        </div>
+        <div class="quiz" data-quiz>
+          <div class="q-head"><span>Question 15 of 20</span><span>Exceptions</span></div>
+          <div class="q-body" role="radiogroup" aria-labelledby="python-study-guide-iq15-t">
+            <p class="q-text" id="python-study-guide-iq15-t">Which block is executed regardless of whether an exception occurred?</p>
+            <label class="opt"><input type="radio" name="python-study-guide-q15"> &#96;except&#96;</label>
+            <label class="opt"><input type="radio" name="python-study-guide-q15"> &#96;else&#96;</label>
+            <label class="opt" data-correct><input type="radio" name="python-study-guide-q15"> &#96;finally&#96;</label>
+            <label class="opt"><input type="radio" name="python-study-guide-q15"> &#96;catch&#96;</label>
+            <button type="button" class="check-btn">Check answer</button><span class="q-result" role="status" aria-live="polite"></span>
+          </div>
+          <div class="q-explain"><b>Why:</b> The &#96;finally&#96; block is always executed, making it useful for cleanup tasks.</div>
+        </div>
+        <div class="quiz" data-quiz>
+          <div class="q-head"><span>Question 16 of 20</span><span>Data Types</span></div>
+          <div class="q-body" role="radiogroup" aria-labelledby="python-study-guide-iq16-t">
+            <p class="q-text" id="python-study-guide-iq16-t">Which of the following is mutable?</p>
+            <label class="opt"><input type="radio" name="python-study-guide-q16"> Tuple</label>
+            <label class="opt"><input type="radio" name="python-study-guide-q16"> String</label>
+            <label class="opt" data-correct><input type="radio" name="python-study-guide-q16"> Set</label>
+            <label class="opt"><input type="radio" name="python-study-guide-q16"> Integer</label>
+            <button type="button" class="check-btn">Check answer</button><span class="q-result" role="status" aria-live="polite"></span>
+          </div>
+          <div class="q-explain"><b>Why:</b> Sets are mutable collections, while tuples, strings, and integers are immutable.</div>
+        </div>
+        <div class="quiz" data-quiz>
+          <div class="q-head"><span>Question 17 of 20</span><span>Iteration</span></div>
+          <div class="q-body" role="radiogroup" aria-labelledby="python-study-guide-iq17-t">
+            <p class="q-text" id="python-study-guide-iq17-t">What function is used to iterate over a sequence alongside an index?</p>
+            <label class="opt"><input type="radio" name="python-study-guide-q17"> &#96;zip()&#96;</label>
+            <label class="opt" data-correct><input type="radio" name="python-study-guide-q17"> &#96;enumerate()&#96;</label>
+            <label class="opt"><input type="radio" name="python-study-guide-q17"> &#96;index_iter()&#96;</label>
+            <label class="opt"><input type="radio" name="python-study-guide-q17"> &#96;range()&#96;</label>
+            <button type="button" class="check-btn">Check answer</button><span class="q-result" role="status" aria-live="polite"></span>
+          </div>
+          <div class="q-explain"><b>Why:</b> &#96;enumerate()&#96; yields pairs containing a count (from zero) and a value yielded by the iterable argument.</div>
+        </div>
+        <div class="quiz" data-quiz>
+          <div class="q-head"><span>Question 18 of 20</span><span>Scope</span></div>
+          <div class="q-body" role="radiogroup" aria-labelledby="python-study-guide-iq18-t">
+            <p class="q-text" id="python-study-guide-iq18-t">If a variable is defined inside a function, its scope is:</p>
+            <label class="opt"><input type="radio" name="python-study-guide-q18"> Global</label>
+            <label class="opt" data-correct><input type="radio" name="python-study-guide-q18"> Local</label>
+            <label class="opt"><input type="radio" name="python-study-guide-q18"> Nonlocal</label>
+            <label class="opt"><input type="radio" name="python-study-guide-q18"> Built-in</label>
+            <button type="button" class="check-btn">Check answer</button><span class="q-result" role="status" aria-live="polite"></span>
+          </div>
+          <div class="q-explain"><b>Why:</b> Variables assigned within a function are local to that function unless declared otherwise.</div>
+        </div>
+        <div class="quiz" data-quiz>
+          <div class="q-head"><span>Question 19 of 20</span><span>Virtual Environments</span></div>
+          <div class="q-body" role="radiogroup" aria-labelledby="python-study-guide-iq19-t">
+            <p class="q-text" id="python-study-guide-iq19-t">Why use a virtual environment?</p>
+            <label class="opt"><input type="radio" name="python-study-guide-q19"> To make Python run faster</label>
+            <label class="opt" data-correct><input type="radio" name="python-study-guide-q19"> To isolate project dependencies and avoid version conflicts</label>
+            <label class="opt"><input type="radio" name="python-study-guide-q19"> To compile Python to machine code</label>
+            <label class="opt"><input type="radio" name="python-study-guide-q19"> To run Python in a web browser</label>
+            <button type="button" class="check-btn">Check answer</button><span class="q-result" role="status" aria-live="polite"></span>
+          </div>
+          <div class="q-explain"><b>Why:</b> Virtual environments keep packages separate for different projects.</div>
+        </div>
+        <div class="quiz" data-quiz>
+          <div class="q-head"><span>Question 20 of 20</span><span>Formatting</span></div>
+          <div class="q-body" role="radiogroup" aria-labelledby="python-study-guide-iq20-t">
+            <p class="q-text" id="python-study-guide-iq20-t">What does the 'f' signify in &#96;f'Hello {name}'&#96;?</p>
+            <label class="opt"><input type="radio" name="python-study-guide-q20"> Float</label>
+            <label class="opt" data-correct><input type="radio" name="python-study-guide-q20"> Format (f-string)</label>
+            <label class="opt"><input type="radio" name="python-study-guide-q20"> Function</label>
+            <label class="opt"><input type="radio" name="python-study-guide-q20"> File</label>
+            <button type="button" class="check-btn">Check answer</button><span class="q-result" role="status" aria-live="polite"></span>
+          </div>
+          <div class="q-explain"><b>Why:</b> F-strings provide a concise, readable way to embed expressions inside string literals.</div>
         </div>
     <h2 id="preparation-tips">Preparation tips</h2>
         <ul>
@@ -145,6 +359,7 @@ print(add("banana"))</code></pre>
         <a href="#topics-to-know-cold" data-toc="topics-to-know-cold">Topics to know cold</a>
         <a href="#the-classic-mutable-default-argument-trap" data-toc="the-classic-mutable-default-argument-trap">The classic mutable default argument trap</a>
         <a href="#comprehension-patterns" data-toc="comprehension-patterns">Comprehension patterns</a>
+        <a href="#practical-learning-exercises" data-toc="practical-learning-exercises">Practical learning exercises</a>
         <a href="#practice-questions" data-toc="practice-questions">Practice questions</a>
         <a href="#preparation-tips" data-toc="preparation-tips">Preparation tips</a>
         <a href="#sources" data-toc="sources">Sources &amp; further reading</a>
@@ -157,9 +372,13 @@ print(add("banana"))</code></pre>
       <a href="../../guides/project-management-study-guide/">Project Management Study Guide: Concepts That Matter</a>
     </div>
     <div class="box">
+      <h2 class="box-h">Share this guide</h2>
+      <button type="button" class="btn btn-share" id="shareBtn" data-url="https://skillsprep.github.io/guides/python-study-guide/" data-title="Python Fundamentals: Study Guide + Practice Quiz">Copy Link</button>
+    </div>
+    <div class="box">
       <h2 class="box-h">Spotted a mistake?</h2>
       <p class="box-p">We correct errors quickly. Tell us what's wrong and we'll fix it.</p>
-      <a class="btn btn-link" href="mailto:hello@skillprep.blog?subject=Correction%3A%20Python%20Fundamentals%3A%20Study%20Guide%20%2B%20Practice%20Quiz&amp;body=Page%3A%20https%3A%2F%2Fskillsprep.github.io%2Fguides%2Fpython-study-guide%2F%0A%0AWhat's%20wrong%3A%0A">Report a correction</a>
+      <a class="btn btn-link" href="mailto:hello@skillsprep.org?subject=Correction%3A%20Python%20Fundamentals%3A%20Study%20Guide%20%2B%20Practice%20Quiz&amp;body=Page%3A%20https%3A%2F%2Fskillsprep.github.io%2Fguides%2Fpython-study-guide%2F%0A%0AWhat's%20wrong%3A%0A">Report a correction</a>
     </div>
   </aside>
 </div>
