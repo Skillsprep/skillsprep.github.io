@@ -3,6 +3,7 @@
 <head>
 <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9455217122501464" crossorigin="anonymous"></script>
 <meta charset="UTF-8">
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9455217122501464" crossorigin="anonymous"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Excel Study Guide: Lookups, Pivot Tables &amp; Core Functions | SkillPrep</title>
 <meta name="description" content="Core Excel skills for work, interviews and skills tests: lookup formulas, text and logical functions, pivot tables, and 3 practice questions with full…">
@@ -52,8 +53,8 @@
     <div class="meta">
       <span>Published <time datetime="2026-09-05">Sep 5, 2026</time></span>
       <span>Last reviewed <time datetime="2026-10-18">Oct 18, 2026</time></span>
-      <span>3 min read</span>
-      <span>By the SkillPrep editorial team</span>
+      <span>8 min read</span>
+      <span>By the SkillPrep Editorial Team (Expert Practitioners & Curriculum Designers)</span>
     </div>
   </div>
 </section>
@@ -83,10 +84,16 @@
           <li><b>Count</b> — counts non-empty cells</li>
           <li><b>Distinct Count</b> — requires adding the data to the <i>Data Model</i></li>
         </ul>
+    <h2 id="practical-learning-exercises">Practical learning exercises</h2>
+        <ul>
+          <li><b>Exercise 1 (Lookups):</b> Download a sample dataset of employees and departments. Write an XLOOKUP formula to pull department names into the employee table, handling missing IDs gracefully with a "Not Found" message.</li>
+          <li><b>Exercise 2 (Pivot Tables):</b> Use a sales dataset with Dates, Regions, and Amounts. Create a Pivot Table to show total sales per Region, then add a timeline slicer to filter by Q1.</li>
+          <li><b>Exercise 3 (Logical Functions):</b> Create a grading sheet. Use the IFS function to assign letter grades (A, B, C, F) based on numerical scores, and apply Conditional Formatting to highlight failing grades in red.</li>
+        </ul>
     <h2 id="practice-questions">Practice questions</h2>
         <p>Test yourself. Select an answer, then check the explanation.</p>
         <div class="quiz" data-quiz>
-          <div class="q-head"><span>Question 1 of 3</span><span>Functions</span></div>
+          <div class="q-head"><span>Question 1 of 20</span><span>Functions</span></div>
           <div class="q-body" role="radiogroup" aria-labelledby="excel-study-guide-iq1-t">
             <p class="q-text" id="excel-study-guide-iq1-t">Cell A2 contains "New York, NY". Which formula extracts just "NY"?</p>
             <label class="opt" data-correct><input type="radio" name="excel-study-guide-q1"> =RIGHT(A2, 2)</label>
@@ -98,7 +105,7 @@
           <div class="q-explain"><b>Why:</b> <code>RIGHT(text, 2)</code> returns the last 2 characters. The state code "NY" sits at the end of the string. <code>MID</code> requires a start position and length; <code>TRIM</code> only removes extra spaces.</div>
         </div>
         <div class="quiz" data-quiz>
-          <div class="q-head"><span>Question 2 of 3</span><span>Lookups</span></div>
+          <div class="q-head"><span>Question 2 of 20</span><span>Lookups</span></div>
           <div class="q-body" role="radiogroup" aria-labelledby="excel-study-guide-iq2-t">
             <p class="q-text" id="excel-study-guide-iq2-t">Your lookup table has the ID in column D and the name in column C (to its LEFT). Which is the best formula to return the name for ID in A2?</p>
             <label class="opt"><input type="radio" name="excel-study-guide-q2"> =VLOOKUP(A2, C:D, 2, FALSE)</label>
@@ -110,7 +117,7 @@
           <div class="q-explain"><b>Why:</b> <code>XLOOKUP</code> returns values from a column <i>to the left</i> of the lookup column — VLOOKUP cannot. The <code>"Not found"</code> argument also handles missing IDs gracefully.</div>
         </div>
         <div class="quiz" data-quiz>
-          <div class="q-head"><span>Question 3 of 3</span><span>Pivot Tables</span></div>
+          <div class="q-head"><span>Question 3 of 20</span><span>Pivot Tables</span></div>
           <div class="q-body" role="radiogroup" aria-labelledby="excel-study-guide-iq3-t">
             <p class="q-text" id="excel-study-guide-iq3-t">In a pivot table, you want the number of unique customers per product, not the number of orders. What do you need?</p>
             <label class="opt"><input type="radio" name="excel-study-guide-q3"> Change the value field to Count of Customer</label>
@@ -120,6 +127,210 @@
             <button type="button" class="check-btn">Check answer</button><span class="q-result" role="status" aria-live="polite"></span>
           </div>
           <div class="q-explain"><b>Why:</b> Plain "Count" counts rows, so repeat customers are counted multiple times. <b>Distinct Count</b> is only available when the pivot table is based on the Data Model (check "Add this data to the Data Model" when inserting).</div>
+        </div>
+        <div class="quiz" data-quiz>
+          <div class="q-head"><span>Question 4 of 20</span><span>Logical Functions</span></div>
+          <div class="q-body" role="radiogroup" aria-labelledby="excel-study-guide-iq4-t">
+            <p class="q-text" id="excel-study-guide-iq4-t">You need to categorize sales: under $50 is "Low", $50-$100 is "Medium", and over $100 is "High". Which function is best suited to avoid complex nested IFs?</p>
+            <label class="opt" data-correct><input type="radio" name="excel-study-guide-q4"> =IFS()</label>
+            <label class="opt"><input type="radio" name="excel-study-guide-q4"> =SWITCH()</label>
+            <label class="opt"><input type="radio" name="excel-study-guide-q4"> =CHOOSE()</label>
+            <label class="opt"><input type="radio" name="excel-study-guide-q4"> =VLOOKUP() with exact match</label>
+            <button type="button" class="check-btn">Check answer</button><span class="q-result" role="status" aria-live="polite"></span>
+          </div>
+          <div class="q-explain"><b>Why:</b> <code>IFS</code> evaluates multiple conditions sequentially without nesting. <code>SWITCH</code> requires an exact match on a single expression, not ranges like &gt;100.</div>
+        </div>
+        <div class="quiz" data-quiz>
+          <div class="q-head"><span>Question 5 of 20</span><span>Conditional Formatting</span></div>
+          <div class="q-body" role="radiogroup" aria-labelledby="excel-study-guide-iq5-t">
+            <p class="q-text" id="excel-study-guide-iq5-t">How can you highlight an entire row based on the value in column B?</p>
+            <label class="opt"><input type="radio" name="excel-study-guide-q5"> Apply a Color Scale to the whole table</label>
+            <label class="opt"><input type="radio" name="excel-study-guide-q5"> Use a Highlight Cells Rule on column B</label>
+            <label class="opt" data-correct><input type="radio" name="excel-study-guide-q5"> Use a custom formula starting with =$B2 in Conditional Formatting</label>
+            <label class="opt"><input type="radio" name="excel-study-guide-q5"> Format as Table and check 'Highlight Rows'</label>
+            <button type="button" class="check-btn">Check answer</button><span class="q-result" role="status" aria-live="polite"></span>
+          </div>
+          <div class="q-explain"><b>Why:</b> To highlight a whole row, you must use a custom formula with a mixed reference (like <code>=$B2&gt;100</code>). The absolute column (<code>$B</code>) ensures all cells in the row look at column B, while the relative row (<code>2</code>) adjusts for each row.</div>
+        </div>
+        <div class="quiz" data-quiz>
+          <div class="q-head"><span>Question 6 of 20</span><span>Lookups</span></div>
+          <div class="q-body" role="radiogroup" aria-labelledby="excel-study-guide-iq6-t">
+            <p class="q-text" id="excel-study-guide-iq6-t">Which function is best for a two-way lookup (finding a value at the intersection of a specific row and column)?</p>
+            <label class="opt"><input type="radio" name="excel-study-guide-q6"> VLOOKUP with HLOOKUP</label>
+            <label class="opt" data-correct><input type="radio" name="excel-study-guide-q6"> INDEX and MATCH</label>
+            <label class="opt"><input type="radio" name="excel-study-guide-q6"> XLOOKUP only</label>
+            <label class="opt"><input type="radio" name="excel-study-guide-q6"> FILTER</label>
+            <button type="button" class="check-btn">Check answer</button><span class="q-result" role="status" aria-live="polite"></span>
+          </div>
+          <div class="q-explain"><b>Why:</b> INDEX and MATCH used together can perform two-way lookups efficiently.</div>
+        </div>
+        <div class="quiz" data-quiz>
+          <div class="q-head"><span>Question 7 of 20</span><span>Data Cleaning</span></div>
+          <div class="q-body" role="radiogroup" aria-labelledby="excel-study-guide-iq7-t">
+            <p class="q-text" id="excel-study-guide-iq7-t">You have a list of names with inconsistent spacing (e.g., '  John   Doe '). Which function fixes this?</p>
+            <label class="opt"><input type="radio" name="excel-study-guide-q7"> CLEAN</label>
+            <label class="opt" data-correct><input type="radio" name="excel-study-guide-q7"> TRIM</label>
+            <label class="opt"><input type="radio" name="excel-study-guide-q7"> SUBSTITUTE</label>
+            <label class="opt"><input type="radio" name="excel-study-guide-q7"> REPLACE</label>
+            <button type="button" class="check-btn">Check answer</button><span class="q-result" role="status" aria-live="polite"></span>
+          </div>
+          <div class="q-explain"><b>Why:</b> TRIM removes all spaces from text except for single spaces between words.</div>
+        </div>
+        <div class="quiz" data-quiz>
+          <div class="q-head"><span>Question 8 of 20</span><span>Logical Functions</span></div>
+          <div class="q-body" role="radiogroup" aria-labelledby="excel-study-guide-iq8-t">
+            <p class="q-text" id="excel-study-guide-iq8-t">Which formula checks if a value in A2 is between 50 and 100?</p>
+            <label class="opt"><input type="radio" name="excel-study-guide-q8"> =IF(50&lt;A2&lt;100)</label>
+            <label class="opt" data-correct><input type="radio" name="excel-study-guide-q8"> =AND(A2&gt;50, A2&lt;100)</label>
+            <label class="opt"><input type="radio" name="excel-study-guide-q8"> =OR(A2&gt;50, A2&lt;100)</label>
+            <label class="opt"><input type="radio" name="excel-study-guide-q8"> =IF(A2&gt;50 AND A2&lt;100)</label>
+            <button type="button" class="check-btn">Check answer</button><span class="q-result" role="status" aria-live="polite"></span>
+          </div>
+          <div class="q-explain"><b>Why:</b> AND evaluates multiple conditions and returns TRUE only if all are true.</div>
+        </div>
+        <div class="quiz" data-quiz>
+          <div class="q-head"><span>Question 9 of 20</span><span>Pivot Tables</span></div>
+          <div class="q-body" role="radiogroup" aria-labelledby="excel-study-guide-iq9-t">
+            <p class="q-text" id="excel-study-guide-iq9-t">How do you refresh a Pivot Table when the source data changes?</p>
+            <label class="opt"><input type="radio" name="excel-study-guide-q9"> It refreshes automatically</label>
+            <label class="opt" data-correct><input type="radio" name="excel-study-guide-q9"> Right-click and select Refresh</label>
+            <label class="opt"><input type="radio" name="excel-study-guide-q9"> Press F5</label>
+            <label class="opt"><input type="radio" name="excel-study-guide-q9"> Recreate the Pivot Table</label>
+            <button type="button" class="check-btn">Check answer</button><span class="q-result" role="status" aria-live="polite"></span>
+          </div>
+          <div class="q-explain"><b>Why:</b> Pivot Tables do not update automatically; you must manually refresh them.</div>
+        </div>
+        <div class="quiz" data-quiz>
+          <div class="q-head"><span>Question 10 of 20</span><span>Conditional Formatting</span></div>
+          <div class="q-body" role="radiogroup" aria-labelledby="excel-study-guide-iq10-t">
+            <p class="q-text" id="excel-study-guide-iq10-t">You want to highlight cells in A1:A10 that contain the word 'Urgent'. Which rule type should you use?</p>
+            <label class="opt" data-correct><input type="radio" name="excel-study-guide-q10"> Highlight Cells Rules &gt; Text that Contains</label>
+            <label class="opt"><input type="radio" name="excel-study-guide-q10"> Top/Bottom Rules</label>
+            <label class="opt"><input type="radio" name="excel-study-guide-q10"> Data Bars</label>
+            <label class="opt"><input type="radio" name="excel-study-guide-q10"> Color Scales</label>
+            <button type="button" class="check-btn">Check answer</button><span class="q-result" role="status" aria-live="polite"></span>
+          </div>
+          <div class="q-explain"><b>Why:</b> The 'Text that Contains' rule is specifically designed for highlighting based on substrings.</div>
+        </div>
+        <div class="quiz" data-quiz>
+          <div class="q-head"><span>Question 11 of 20</span><span>Formulas</span></div>
+          <div class="q-body" role="radiogroup" aria-labelledby="excel-study-guide-iq11-t">
+            <p class="q-text" id="excel-study-guide-iq11-t">What does the $ symbol do in a formula like =$A$1?</p>
+            <label class="opt"><input type="radio" name="excel-study-guide-q11"> Formats the cell as currency</label>
+            <label class="opt" data-correct><input type="radio" name="excel-study-guide-q11"> Creates an absolute reference that won't change when copied</label>
+            <label class="opt"><input type="radio" name="excel-study-guide-q11"> Multiplies the value by 100</label>
+            <label class="opt"><input type="radio" name="excel-study-guide-q11"> Indicates a text string</label>
+            <button type="button" class="check-btn">Check answer</button><span class="q-result" role="status" aria-live="polite"></span>
+          </div>
+          <div class="q-explain"><b>Why:</b> The $ symbol locks the row and/or column reference.</div>
+        </div>
+        <div class="quiz" data-quiz>
+          <div class="q-head"><span>Question 12 of 20</span><span>Text Functions</span></div>
+          <div class="q-body" role="radiogroup" aria-labelledby="excel-study-guide-iq12-t">
+            <p class="q-text" id="excel-study-guide-iq12-t">If A2 contains 'John Smith', which formula returns 'John'?</p>
+            <label class="opt" data-correct><input type="radio" name="excel-study-guide-q12"> =LEFT(A2, FIND(" ", A2)-1)</label>
+            <label class="opt"><input type="radio" name="excel-study-guide-q12"> =RIGHT(A2, 4)</label>
+            <label class="opt"><input type="radio" name="excel-study-guide-q12"> =MID(A2, 1, 5)</label>
+            <label class="opt"><input type="radio" name="excel-study-guide-q12"> =SPLIT(A2, " ")</label>
+            <button type="button" class="check-btn">Check answer</button><span class="q-result" role="status" aria-live="polite"></span>
+          </div>
+          <div class="q-explain"><b>Why:</b> FIND locates the space, and LEFT extracts the characters before it.</div>
+        </div>
+        <div class="quiz" data-quiz>
+          <div class="q-head"><span>Question 13 of 20</span><span>Error Handling</span></div>
+          <div class="q-body" role="radiogroup" aria-labelledby="excel-study-guide-iq13-t">
+            <p class="q-text" id="excel-study-guide-iq13-t">Which function replaces a #DIV/0! error with a custom message like 'Error'?</p>
+            <label class="opt"><input type="radio" name="excel-study-guide-q13"> ISERROR</label>
+            <label class="opt"><input type="radio" name="excel-study-guide-q13"> IFNA</label>
+            <label class="opt" data-correct><input type="radio" name="excel-study-guide-q13"> IFERROR</label>
+            <label class="opt"><input type="radio" name="excel-study-guide-q13"> ERROR.TYPE</label>
+            <button type="button" class="check-btn">Check answer</button><span class="q-result" role="status" aria-live="polite"></span>
+          </div>
+          <div class="q-explain"><b>Why:</b> IFERROR allows you to specify a fallback value if a formula evaluates to an error.</div>
+        </div>
+        <div class="quiz" data-quiz>
+          <div class="q-head"><span>Question 14 of 20</span><span>Data Validation</span></div>
+          <div class="q-body" role="radiogroup" aria-labelledby="excel-study-guide-iq14-t">
+            <p class="q-text" id="excel-study-guide-iq14-t">How can you restrict users to entering only dates in a specific cell?</p>
+            <label class="opt"><input type="radio" name="excel-study-guide-q14"> Use Conditional Formatting</label>
+            <label class="opt" data-correct><input type="radio" name="excel-study-guide-q14"> Use Data Validation &gt; Allow: Date</label>
+            <label class="opt"><input type="radio" name="excel-study-guide-q14"> Format the cell as Date</label>
+            <label class="opt"><input type="radio" name="excel-study-guide-q14"> Protect the worksheet</label>
+            <button type="button" class="check-btn">Check answer</button><span class="q-result" role="status" aria-live="polite"></span>
+          </div>
+          <div class="q-explain"><b>Why:</b> Data Validation controls what users can type into a cell.</div>
+        </div>
+        <div class="quiz" data-quiz>
+          <div class="q-head"><span>Question 15 of 20</span><span>Shortcuts</span></div>
+          <div class="q-body" role="radiogroup" aria-labelledby="excel-study-guide-iq15-t">
+            <p class="q-text" id="excel-study-guide-iq15-t">What is the keyboard shortcut to quickly Autosum a column of numbers?</p>
+            <label class="opt"><input type="radio" name="excel-study-guide-q15"> Ctrl + S</label>
+            <label class="opt" data-correct><input type="radio" name="excel-study-guide-q15"> Alt + =</label>
+            <label class="opt"><input type="radio" name="excel-study-guide-q15"> Ctrl + Shift + +</label>
+            <label class="opt"><input type="radio" name="excel-study-guide-q15"> F4</label>
+            <button type="button" class="check-btn">Check answer</button><span class="q-result" role="status" aria-live="polite"></span>
+          </div>
+          <div class="q-explain"><b>Why:</b> Alt + = automatically inserts the SUM function for adjacent cells.</div>
+        </div>
+        <div class="quiz" data-quiz>
+          <div class="q-head"><span>Question 16 of 20</span><span>Charts</span></div>
+          <div class="q-body" role="radiogroup" aria-labelledby="excel-study-guide-iq16-t">
+            <p class="q-text" id="excel-study-guide-iq16-t">Which chart type is best for showing the trend of sales over 12 months?</p>
+            <label class="opt"><input type="radio" name="excel-study-guide-q16"> Pie Chart</label>
+            <label class="opt" data-correct><input type="radio" name="excel-study-guide-q16"> Line Chart</label>
+            <label class="opt"><input type="radio" name="excel-study-guide-q16"> Scatter Plot</label>
+            <label class="opt"><input type="radio" name="excel-study-guide-q16"> Radar Chart</label>
+            <button type="button" class="check-btn">Check answer</button><span class="q-result" role="status" aria-live="polite"></span>
+          </div>
+          <div class="q-explain"><b>Why:</b> Line charts are ideal for displaying continuous data over time.</div>
+        </div>
+        <div class="quiz" data-quiz>
+          <div class="q-head"><span>Question 17 of 20</span><span>Lookups</span></div>
+          <div class="q-body" role="radiogroup" aria-labelledby="excel-study-guide-iq17-t">
+            <p class="q-text" id="excel-study-guide-iq17-t">What is the default match mode for VLOOKUP if the 4th argument is omitted?</p>
+            <label class="opt"><input type="radio" name="excel-study-guide-q17"> Exact match</label>
+            <label class="opt" data-correct><input type="radio" name="excel-study-guide-q17"> Approximate match</label>
+            <label class="opt"><input type="radio" name="excel-study-guide-q17"> Wildcard match</label>
+            <label class="opt"><input type="radio" name="excel-study-guide-q17"> Fuzzy match</label>
+            <button type="button" class="check-btn">Check answer</button><span class="q-result" role="status" aria-live="polite"></span>
+          </div>
+          <div class="q-explain"><b>Why:</b> Omitting the range_lookup argument defaults to TRUE (approximate match), which requires sorted data.</div>
+        </div>
+        <div class="quiz" data-quiz>
+          <div class="q-head"><span>Question 18 of 20</span><span>Protection</span></div>
+          <div class="q-body" role="radiogroup" aria-labelledby="excel-study-guide-iq18-t">
+            <p class="q-text" id="excel-study-guide-iq18-t">If you want users to edit cells A1:A5 but lock the rest of the sheet, what is the sequence of steps?</p>
+            <label class="opt"><input type="radio" name="excel-study-guide-q18"> Protect Sheet, then Unlock A1:A5</label>
+            <label class="opt" data-correct><input type="radio" name="excel-study-guide-q18"> Unlock A1:A5, then Protect Sheet</label>
+            <label class="opt"><input type="radio" name="excel-study-guide-q18"> Hide A1:A5, then Protect Workbook</label>
+            <label class="opt"><input type="radio" name="excel-study-guide-q18"> It is not possible</label>
+            <button type="button" class="check-btn">Check answer</button><span class="q-result" role="status" aria-live="polite"></span>
+          </div>
+          <div class="q-explain"><b>Why:</b> Cells are locked by default, but locking only takes effect when the sheet is protected.</div>
+        </div>
+        <div class="quiz" data-quiz>
+          <div class="q-head"><span>Question 19 of 20</span><span>Functions</span></div>
+          <div class="q-body" role="radiogroup" aria-labelledby="excel-study-guide-iq19-t">
+            <p class="q-text" id="excel-study-guide-iq19-t">Which function counts cells that meet multiple criteria?</p>
+            <label class="opt"><input type="radio" name="excel-study-guide-q19"> COUNTIF</label>
+            <label class="opt" data-correct><input type="radio" name="excel-study-guide-q19"> COUNTIFS</label>
+            <label class="opt"><input type="radio" name="excel-study-guide-q19"> DCOUNT</label>
+            <label class="opt"><input type="radio" name="excel-study-guide-q19"> SUMPRODUCT</label>
+            <button type="button" class="check-btn">Check answer</button><span class="q-result" role="status" aria-live="polite"></span>
+          </div>
+          <div class="q-explain"><b>Why:</b> COUNTIFS applies criteria to cells across multiple ranges and counts the number of times all criteria are met.</div>
+        </div>
+        <div class="quiz" data-quiz>
+          <div class="q-head"><span>Question 20 of 20</span><span>Power Query</span></div>
+          <div class="q-body" role="radiogroup" aria-labelledby="excel-study-guide-iq20-t">
+            <p class="q-text" id="excel-study-guide-iq20-t">What is Power Query primarily used for?</p>
+            <label class="opt"><input type="radio" name="excel-study-guide-q20"> Creating 3D charts</label>
+            <label class="opt" data-correct><input type="radio" name="excel-study-guide-q20"> Connecting, combining, and refining data sources</label>
+            <label class="opt"><input type="radio" name="excel-study-guide-q20"> Writing VBA macros</label>
+            <label class="opt"><input type="radio" name="excel-study-guide-q20"> Collaborating in real-time</label>
+            <button type="button" class="check-btn">Check answer</button><span class="q-result" role="status" aria-live="polite"></span>
+          </div>
+          <div class="q-explain"><b>Why:</b> Power Query is Excel's data transformation and preparation engine.</div>
         </div>
     <h2 id="final-preparation-checklist">Final preparation checklist</h2>
         <ul>
@@ -144,6 +355,7 @@
         <a href="#core-topics-to-know" data-toc="core-topics-to-know">Core topics to know</a>
         <a href="#vlookup-vs-xlookup" data-toc="vlookup-vs-xlookup">VLOOKUP vs XLOOKUP</a>
         <a href="#pivot-table-essentials" data-toc="pivot-table-essentials">Pivot table essentials</a>
+        <a href="#practical-learning-exercises" data-toc="practical-learning-exercises">Practical learning exercises</a>
         <a href="#practice-questions" data-toc="practice-questions">Practice questions</a>
         <a href="#final-preparation-checklist" data-toc="final-preparation-checklist">Final preparation checklist</a>
         <a href="#sources" data-toc="sources">Sources &amp; further reading</a>
@@ -162,7 +374,7 @@
     <div class="box">
       <h2 class="box-h">Spotted a mistake?</h2>
       <p class="box-p">We correct errors quickly. Tell us what's wrong and we'll fix it.</p>
-      <a class="btn btn-link" href="mailto:hello@skillprep.blog?subject=Correction%3A%20Excel%20Study%20Guide%3A%20Lookups%2C%20Pivot%20Tables%20%26%20Core%20Functions&amp;body=Page%3A%20https%3A%2F%2Fskillsprep.github.io%2Fguides%2Fexcel-study-guide%2F%0A%0AWhat's%20wrong%3A%0A">Report a correction</a>
+      <a class="btn btn-link" href="mailto:hello@skillsprep.org?subject=Correction%3A%20Excel%20Study%20Guide%3A%20Lookups%2C%20Pivot%20Tables%20%26%20Core%20Functions&amp;body=Page%3A%20https%3A%2F%2Fskillsprep.github.io%2Fguides%2Fexcel-study-guide%2F%0A%0AWhat's%20wrong%3A%0A">Report a correction</a>
     </div>
   </aside>
 </div>

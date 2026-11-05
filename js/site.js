@@ -230,3 +230,162 @@
     });
   }
 })();
+
+  // Formspree AJAX Submission for Contact Form
+  const contactForm = document.getElementById("contactForm");
+  if (contactForm && contactForm.action.includes("formspree.io")) {
+    contactForm.addEventListener("submit", function(ev) {
+      ev.preventDefault();
+
+      // Honeypot check
+      const hp = document.getElementById("honeypot");
+      if (hp && hp.value) {
+          // Silent rejection for bots
+          return;
+      }
+
+      var data = new FormData(contactForm);
+      fetch(contactForm.action, {
+        method: contactForm.method,
+        body: data,
+        headers: {
+            'Accept': 'application/json'
+        }
+      }).then(response => {
+        if (response.ok) {
+          contactForm.reset();
+          let msg = document.createElement("p");
+          msg.textContent = "Thanks for your message! We'll get back to you soon.";
+          msg.style.color = "green";
+          msg.style.fontWeight = "bold";
+          contactForm.appendChild(msg);
+          setTimeout(() => msg.remove(), 5000);
+        } else {
+          response.json().then(data => {
+            let errorMsg = document.createElement("p");
+            if (Object.hasOwn(data, 'errors')) {
+              errorMsg.textContent = data["errors"].map(error => error["message"]).join(", ");
+            } else {
+              errorMsg.textContent = "Oops! There was a problem submitting your form";
+            }
+            errorMsg.style.color = "red";
+            contactForm.appendChild(errorMsg);
+            setTimeout(() => errorMsg.remove(), 5000);
+          })
+        }
+      }).catch(error => {
+        let errorMsg = document.createElement("p");
+        errorMsg.textContent = "Oops! There was a problem submitting your form";
+        errorMsg.style.color = "red";
+        contactForm.appendChild(errorMsg);
+        setTimeout(() => errorMsg.remove(), 5000);
+      });
+    });
+  }
+
+// Progress Export/Import (JSON)
+const progressContainer = document.createElement("div");
+progressContainer.className = "progress-sync-ui";
+progressContainer.style.margin = "1rem 0";
+progressContainer.style.display = "flex";
+progressContainer.style.gap = "10px";
+
+const exportBtn = document.createElement("button");
+exportBtn.className = "btn";
+exportBtn.textContent = "Export Progress (JSON)";
+exportBtn.onclick = function() {
+    let progressData = {};
+    for (let i = 0; i < localStorage.length; i++) {
+        let key = localStorage.key(i);
+        if (key.startsWith("skillprep:")) {
+            progressData[key] = localStorage.getItem(key);
+        }
+    }
+    if (Object.keys(progressData).length === 0) {
+        alert("No progress to export.");
+        return;
+    }
+    const blob = new Blob([JSON.stringify(progressData, null, 2)], { type: "application/json" });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement("a");
+    a.href = url;
+    a.download = "skillprep_progress.json";
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    URL.revokeObjectURL(url);
+};
+
+const importLabel = document.createElement("label");
+importLabel.className = "btn btn-alt";
+importLabel.textContent = "Import Progress (JSON)";
+importLabel.style.cursor = "pointer";
+
+const importInput = document.createElement("input");
+importInput.type = "file";
+importInput.accept = ".json";
+importInput.style.display = "none";
+importInput.onchange = function(e) {
+    const file = e.target.files[0];
+    if (!file) return;
+    const reader = new FileReader();
+    reader.onload = function(evt) {
+        try {
+            const data = JSON.parse(evt.target.result);
+            let importedCount = 0;
+            for (let key in data) {
+                if (key.startsWith("skillprep:")) {
+                    localStorage.setItem(key, data[key]);
+                    importedCount++;
+                }
+            }
+            if (importedCount > 0) {
+                alert("Successfully imported progress!");
+                window.location.reload();
+            } else {
+                alert("No valid SkillPrep progress found in this file.");
+            }
+        } catch (err) {
+            alert("Invalid JSON file.");
+        }
+        e.target.value = "";
+    };
+    reader.readAsText(file);
+};
+importLabel.appendChild(importInput);
+
+progressContainer.appendChild(exportBtn);
+progressContainer.appendChild(importLabel);
+
+
+
+// Since cloneNode doesn't clone events, a better way is to instantiate it per element.
+document.querySelectorAll(".mock-hint").forEach(hint => {
+    const pContainer = document.createElement("div");
+    pContainer.className = "progress-sync-ui";
+    pContainer.style.margin = "1rem 0";
+    pContainer.style.display = "flex";
+    pContainer.style.gap = "10px";
+
+    const eBtn = document.createElement("button");
+    eBtn.className = "btn";
+    eBtn.textContent = "Export Progress";
+    eBtn.onclick = exportBtn.onclick;
+
+    const iLabel = document.createElement("label");
+    iLabel.className = "btn btn-alt";
+    iLabel.textContent = "Import Progress";
+    iLabel.style.cursor = "pointer";
+
+    const iInput = document.createElement("input");
+    iInput.type = "file";
+    iInput.accept = ".json";
+    iInput.style.display = "none";
+    iInput.onchange = importInput.onchange;
+
+    iLabel.appendChild(iInput);
+    pContainer.appendChild(eBtn);
+    pContainer.appendChild(iLabel);
+
+    hint.parentElement.insertBefore(pContainer, hint);
+});

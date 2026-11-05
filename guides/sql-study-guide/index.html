@@ -3,6 +3,7 @@
 <head>
 <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9455217122501464" crossorigin="anonymous"></script>
 <meta charset="UTF-8">
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9455217122501464" crossorigin="anonymous"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>SQL Study Guide: Queries You Should Master | SkillPrep</title>
 <meta name="description" content="JOINs, GROUP BY, window functions, and subqueries — the SQL patterns behind most interview and skills-test questions, explained with examples.">
@@ -52,8 +53,8 @@
     <div class="meta">
       <span>Published <time datetime="2026-08-15">Aug 15, 2026</time></span>
       <span>Last reviewed <time datetime="2026-10-18">Oct 18, 2026</time></span>
-      <span>2 min read</span>
-      <span>By the SkillPrep editorial team</span>
+      <span>7 min read</span>
+      <span>By the SkillPrep Editorial Team (Expert Practitioners & Curriculum Designers)</span>
     </div>
   </div>
 </section>
@@ -86,9 +87,15 @@ HAVING AVG(salary) > 50000;  -- filters GROUPS after</code></pre>
           <li><b>FULL OUTER</b> — everyone from both sides, NULLs filling gaps (not supported in MySQL)</li>
         </ul>
         <p>A common question asks "return all rows from one table whether or not there's a match" — the answer is LEFT (or RIGHT) JOIN.</p>
+    <h2 id="practical-learning-exercises">Practical learning exercises</h2>
+        <ul>
+          <li><b>Exercise 1 (Joins):</b> Write a query to join a Customers table and an Orders table. Return all customers, including those who haven't placed an order (using a LEFT JOIN), and handle NULLs with the COALESCE function.</li>
+          <li><b>Exercise 2 (Aggregations):</b> Group an Employees table by Department and use aggregate functions to find the average salary and the total number of employees per department. Filter out departments with fewer than 5 employees using the HAVING clause.</li>
+          <li><b>Exercise 3 (Window Functions):</b> Write a query using ROW_NUMBER() OVER(PARTITION BY department ORDER BY salary DESC) to find the highest-paid employee in each department.</li>
+        </ul>
     <h2 id="practice-questions">Practice questions</h2>
         <div class="quiz" data-quiz>
-          <div class="q-head"><span>Question 1 of 3</span><span>Aggregation</span></div>
+          <div class="q-head"><span>Question 1 of 20</span><span>Aggregation</span></div>
           <div class="q-body" role="radiogroup" aria-labelledby="sql-study-guide-iq1-t">
             <p class="q-text" id="sql-study-guide-iq1-t">You want to list only departments whose average salary exceeds 60,000. Which clause filters this correctly?</p>
             <label class="opt"><input type="radio" name="sql-study-guide-q1"> WHERE AVG(salary) &gt; 60000</label>
@@ -100,7 +107,7 @@ HAVING AVG(salary) > 50000;  -- filters GROUPS after</code></pre>
           <div class="q-explain"><b>Why:</b> Aggregates are computed during grouping, so they can only be filtered with HAVING after GROUP BY. WHERE runs before grouping and can't reference aggregates.</div>
         </div>
         <div class="quiz" data-quiz>
-          <div class="q-head"><span>Question 2 of 3</span><span>JOINs</span></div>
+          <div class="q-head"><span>Question 2 of 20</span><span>JOINs</span></div>
           <div class="q-body" role="radiogroup" aria-labelledby="sql-study-guide-iq2-t">
             <p class="q-text" id="sql-study-guide-iq2-t">Which join returns ALL rows from the left table, with NULLs where there is no match on the right?</p>
             <label class="opt"><input type="radio" name="sql-study-guide-q2"> INNER JOIN</label>
@@ -112,7 +119,7 @@ HAVING AVG(salary) > 50000;  -- filters GROUPS after</code></pre>
           <div class="q-explain"><b>Why:</b> LEFT JOIN preserves every row from the left side regardless of matches. INNER drops non-matching rows from both sides; CROSS returns the Cartesian product.</div>
         </div>
         <div class="quiz" data-quiz>
-          <div class="q-head"><span>Question 3 of 3</span><span>Window Functions</span></div>
+          <div class="q-head"><span>Question 3 of 20</span><span>Window Functions</span></div>
           <div class="q-body" role="radiogroup" aria-labelledby="sql-study-guide-iq3-t">
             <p class="q-text" id="sql-study-guide-iq3-t">To number rows within each department by salary (highest first), you would use:</p>
             <label class="opt"><input type="radio" name="sql-study-guide-q3"> GROUP BY department ORDER BY salary DESC</label>
@@ -122,6 +129,211 @@ HAVING AVG(salary) > 50000;  -- filters GROUPS after</code></pre>
             <button type="button" class="check-btn">Check answer</button><span class="q-result" role="status" aria-live="polite"></span>
           </div>
           <div class="q-explain"><b>Why:</b> <code>PARTITION BY department</code> restarts numbering per department, and <code>ORDER BY salary DESC</code> puts the highest first. Plain GROUP BY would collapse rows and couldn't produce per-row numbers.</div>
+        </div>
+        <div class="quiz" data-quiz>
+          <div class="q-head"><span>Question 4 of 20</span><span>Aggregation</span></div>
+          <div class="q-body" role="radiogroup" aria-labelledby="sql-study-guide-iq4-t">
+            <p class="q-text" id="sql-study-guide-iq4-t">Which clause is used to filter the results of aggregate functions?</p>
+            <label class="opt"><input type="radio" name="sql-study-guide-q4"> WHERE</label>
+            <label class="opt"><input type="radio" name="sql-study-guide-q4"> ORDER BY</label>
+            <label class="opt" data-correct><input type="radio" name="sql-study-guide-q4"> HAVING</label>
+            <label class="opt"><input type="radio" name="sql-study-guide-q4"> GROUP BY</label>
+            <button type="button" class="check-btn">Check answer</button><span class="q-result" role="status" aria-live="polite"></span>
+          </div>
+          <div class="q-explain"><b>Why:</b> The <code>HAVING</code> clause was added to SQL because the <code>WHERE</code> keyword cannot be used with aggregate functions.</div>
+        </div>
+        <div class="quiz" data-quiz>
+          <div class="q-head"><span>Question 5 of 20</span><span>Subqueries</span></div>
+          <div class="q-body" role="radiogroup" aria-labelledby="sql-study-guide-iq5-t">
+            <p class="q-text" id="sql-study-guide-iq5-t">What is a correlated subquery?</p>
+            <label class="opt"><input type="radio" name="sql-study-guide-q5"> A query that returns multiple columns</label>
+            <label class="opt" data-correct><input type="radio" name="sql-study-guide-q5"> A subquery that uses values from the outer query</label>
+            <label class="opt"><input type="radio" name="sql-study-guide-q5"> A query joining three or more tables</label>
+            <label class="opt"><input type="radio" name="sql-study-guide-q5"> A subquery in the FROM clause</label>
+            <button type="button" class="check-btn">Check answer</button><span class="q-result" role="status" aria-live="polite"></span>
+          </div>
+          <div class="q-explain"><b>Why:</b> A correlated subquery evaluates once for each row processed by the outer query, as it references columns from the outer query.</div>
+        </div>
+
+        <div class="quiz" data-quiz>
+          <div class="q-head"><span>Question 6 of 20</span><span>Filtering</span></div>
+          <div class="q-body" role="radiogroup" aria-labelledby="sql-study-guide-iq6-t">
+            <p class="q-text" id="sql-study-guide-iq6-t">Which clause is used to filter the results of an aggregate function like SUM or COUNT?</p>
+            <label class="opt"><input type="radio" name="sql-study-guide-q6"> WHERE</label>
+            <label class="opt" data-correct><input type="radio" name="sql-study-guide-q6"> HAVING</label>
+            <label class="opt"><input type="radio" name="sql-study-guide-q6"> FILTER</label>
+            <label class="opt"><input type="radio" name="sql-study-guide-q6"> GROUP BY</label>
+            <button type="button" class="check-btn">Check answer</button><span class="q-result" role="status" aria-live="polite"></span>
+          </div>
+          <div class="q-explain"><b>Why:</b> The HAVING clause filters groups after aggregation, whereas WHERE filters rows before aggregation.</div>
+        </div>
+        <div class="quiz" data-quiz>
+          <div class="q-head"><span>Question 7 of 20</span><span>Joins</span></div>
+          <div class="q-body" role="radiogroup" aria-labelledby="sql-study-guide-iq7-t">
+            <p class="q-text" id="sql-study-guide-iq7-t">What does an INNER JOIN return?</p>
+            <label class="opt"><input type="radio" name="sql-study-guide-q7"> All rows from the left table</label>
+            <label class="opt"><input type="radio" name="sql-study-guide-q7"> All rows from both tables</label>
+            <label class="opt" data-correct><input type="radio" name="sql-study-guide-q7"> Only rows with matching values in both tables</label>
+            <label class="opt"><input type="radio" name="sql-study-guide-q7"> A cartesian product</label>
+            <button type="button" class="check-btn">Check answer</button><span class="q-result" role="status" aria-live="polite"></span>
+          </div>
+          <div class="q-explain"><b>Why:</b> INNER JOIN strictly requires a match in both joined tables.</div>
+        </div>
+        <div class="quiz" data-quiz>
+          <div class="q-head"><span>Question 8 of 20</span><span>Nulls</span></div>
+          <div class="q-body" role="radiogroup" aria-labelledby="sql-study-guide-iq8-t">
+            <p class="q-text" id="sql-study-guide-iq8-t">How do you check if a column value is NULL?</p>
+            <label class="opt"><input type="radio" name="sql-study-guide-q8"> &#96;column = NULL&#96;</label>
+            <label class="opt" data-correct><input type="radio" name="sql-study-guide-q8"> &#96;column IS NULL&#96;</label>
+            <label class="opt"><input type="radio" name="sql-study-guide-q8"> &#96;column == NULL&#96;</label>
+            <label class="opt"><input type="radio" name="sql-study-guide-q8"> &#96;ISNULL(column)&#96;</label>
+            <button type="button" class="check-btn">Check answer</button><span class="q-result" role="status" aria-live="polite"></span>
+          </div>
+          <div class="q-explain"><b>Why:</b> NULL cannot be evaluated with equality operators; you must use the &#96;IS NULL&#96; operator.</div>
+        </div>
+        <div class="quiz" data-quiz>
+          <div class="q-head"><span>Question 9 of 20</span><span>Sorting</span></div>
+          <div class="q-body" role="radiogroup" aria-labelledby="sql-study-guide-iq9-t">
+            <p class="q-text" id="sql-study-guide-iq9-t">Which keyword sorts the result set in descending order?</p>
+            <label class="opt"><input type="radio" name="sql-study-guide-q9"> ASC</label>
+            <label class="opt" data-correct><input type="radio" name="sql-study-guide-q9"> DESC</label>
+            <label class="opt"><input type="radio" name="sql-study-guide-q9"> DOWN</label>
+            <label class="opt"><input type="radio" name="sql-study-guide-q9"> SORT BY</label>
+            <button type="button" class="check-btn">Check answer</button><span class="q-result" role="status" aria-live="polite"></span>
+          </div>
+          <div class="q-explain"><b>Why:</b> DESC specifies descending order in an ORDER BY clause.</div>
+        </div>
+        <div class="quiz" data-quiz>
+          <div class="q-head"><span>Question 10 of 20</span><span>Functions</span></div>
+          <div class="q-body" role="radiogroup" aria-labelledby="sql-study-guide-iq10-t">
+            <p class="q-text" id="sql-study-guide-iq10-t">Which function returns the number of non-null values in a column?</p>
+            <label class="opt"><input type="radio" name="sql-study-guide-q10"> &#96;SUM(column)&#96;</label>
+            <label class="opt"><input type="radio" name="sql-study-guide-q10"> &#96;COUNT(*)&#96;</label>
+            <label class="opt" data-correct><input type="radio" name="sql-study-guide-q10"> &#96;COUNT(column)&#96;</label>
+            <label class="opt"><input type="radio" name="sql-study-guide-q10"> &#96;TOTAL(column)&#96;</label>
+            <button type="button" class="check-btn">Check answer</button><span class="q-result" role="status" aria-live="polite"></span>
+          </div>
+          <div class="q-explain"><b>Why:</b> &#96;COUNT(column)&#96; counts non-null entries, while &#96;COUNT(*)&#96; counts all rows.</div>
+        </div>
+        <div class="quiz" data-quiz>
+          <div class="q-head"><span>Question 11 of 20</span><span>Set Operators</span></div>
+          <div class="q-body" role="radiogroup" aria-labelledby="sql-study-guide-iq11-t">
+            <p class="q-text" id="sql-study-guide-iq11-t">What is the difference between UNION and UNION ALL?</p>
+            <label class="opt"><input type="radio" name="sql-study-guide-q11"> UNION ALL removes duplicates, UNION keeps them</label>
+            <label class="opt" data-correct><input type="radio" name="sql-study-guide-q11"> UNION removes duplicates, UNION ALL keeps them</label>
+            <label class="opt"><input type="radio" name="sql-study-guide-q11"> They are the same</label>
+            <label class="opt"><input type="radio" name="sql-study-guide-q11"> UNION applies to columns, UNION ALL to rows</label>
+            <button type="button" class="check-btn">Check answer</button><span class="q-result" role="status" aria-live="polite"></span>
+          </div>
+          <div class="q-explain"><b>Why:</b> UNION performs a distinct operation (which is slower), while UNION ALL simply appends result sets.</div>
+        </div>
+        <div class="quiz" data-quiz>
+          <div class="q-head"><span>Question 12 of 20</span><span>Wildcards</span></div>
+          <div class="q-body" role="radiogroup" aria-labelledby="sql-study-guide-iq12-t">
+            <p class="q-text" id="sql-study-guide-iq12-t">In the LIKE operator, what does the &#96;%&#96; symbol represent?</p>
+            <label class="opt"><input type="radio" name="sql-study-guide-q12"> A single character</label>
+            <label class="opt" data-correct><input type="radio" name="sql-study-guide-q12"> Zero, one, or multiple characters</label>
+            <label class="opt"><input type="radio" name="sql-study-guide-q12"> A number</label>
+            <label class="opt"><input type="radio" name="sql-study-guide-q12"> An exact match</label>
+            <button type="button" class="check-btn">Check answer</button><span class="q-result" role="status" aria-live="polite"></span>
+          </div>
+          <div class="q-explain"><b>Why:</b> &#96;%&#96; is a wildcard for any sequence of characters.</div>
+        </div>
+        <div class="quiz" data-quiz>
+          <div class="q-head"><span>Question 13 of 20</span><span>Data Manipulation</span></div>
+          <div class="q-body" role="radiogroup" aria-labelledby="sql-study-guide-iq13-t">
+            <p class="q-text" id="sql-study-guide-iq13-t">Which statement is used to modify existing records in a table?</p>
+            <label class="opt"><input type="radio" name="sql-study-guide-q13"> ALTER</label>
+            <label class="opt"><input type="radio" name="sql-study-guide-q13"> MODIFY</label>
+            <label class="opt" data-correct><input type="radio" name="sql-study-guide-q13"> UPDATE</label>
+            <label class="opt"><input type="radio" name="sql-study-guide-q13"> CHANGE</label>
+            <button type="button" class="check-btn">Check answer</button><span class="q-result" role="status" aria-live="polite"></span>
+          </div>
+          <div class="q-explain"><b>Why:</b> UPDATE changes data inside a table, while ALTER changes the table structure.</div>
+        </div>
+        <div class="quiz" data-quiz>
+          <div class="q-head"><span>Question 14 of 20</span><span>Constraints</span></div>
+          <div class="q-body" role="radiogroup" aria-labelledby="sql-study-guide-iq14-t">
+            <p class="q-text" id="sql-study-guide-iq14-t">What does a PRIMARY KEY constraint do?</p>
+            <label class="opt"><input type="radio" name="sql-study-guide-q14"> Allows duplicate values</label>
+            <label class="opt" data-correct><input type="radio" name="sql-study-guide-q14"> Uniquely identifies each record in a table and cannot contain NULLs</label>
+            <label class="opt"><input type="radio" name="sql-study-guide-q14"> Creates a relationship to another table</label>
+            <label class="opt"><input type="radio" name="sql-study-guide-q14"> Encrypts the data</label>
+            <button type="button" class="check-btn">Check answer</button><span class="q-result" role="status" aria-live="polite"></span>
+          </div>
+          <div class="q-explain"><b>Why:</b> A primary key enforces entity integrity (unique and not null).</div>
+        </div>
+        <div class="quiz" data-quiz>
+          <div class="q-head"><span>Question 15 of 20</span><span>Window Functions</span></div>
+          <div class="q-body" role="radiogroup" aria-labelledby="sql-study-guide-iq15-t">
+            <p class="q-text" id="sql-study-guide-iq15-t">Which clause is essential when writing a window function?</p>
+            <label class="opt"><input type="radio" name="sql-study-guide-q15"> GROUP BY</label>
+            <label class="opt" data-correct><input type="radio" name="sql-study-guide-q15"> OVER()</label>
+            <label class="opt"><input type="radio" name="sql-study-guide-q15"> HAVING</label>
+            <label class="opt"><input type="radio" name="sql-study-guide-q15"> WINDOW</label>
+            <button type="button" class="check-btn">Check answer</button><span class="q-result" role="status" aria-live="polite"></span>
+          </div>
+          <div class="q-explain"><b>Why:</b> The OVER clause defines the window (set of rows) the function operates on.</div>
+        </div>
+        <div class="quiz" data-quiz>
+          <div class="q-head"><span>Question 16 of 20</span><span>Subqueries</span></div>
+          <div class="q-body" role="radiogroup" aria-labelledby="sql-study-guide-iq16-t">
+            <p class="q-text" id="sql-study-guide-iq16-t">Can a subquery return multiple columns?</p>
+            <label class="opt"><input type="radio" name="sql-study-guide-q16"> Yes, if used with the IN operator</label>
+            <label class="opt" data-correct><input type="radio" name="sql-study-guide-q16"> Yes, if used in the FROM clause (as a derived table) or with EXISTS</label>
+            <label class="opt"><input type="radio" name="sql-study-guide-q16"> No, it can only return a single value</label>
+            <label class="opt"><input type="radio" name="sql-study-guide-q16"> No, SQL does not support subqueries</label>
+            <button type="button" class="check-btn">Check answer</button><span class="q-result" role="status" aria-live="polite"></span>
+          </div>
+          <div class="q-explain"><b>Why:</b> When used in the FROM clause, a subquery acts as a temporary table and can have multiple columns.</div>
+        </div>
+        <div class="quiz" data-quiz>
+          <div class="q-head"><span>Question 17 of 20</span><span>Transactions</span></div>
+          <div class="q-body" role="radiogroup" aria-labelledby="sql-study-guide-iq17-t">
+            <p class="q-text" id="sql-study-guide-iq17-t">What command undoes a transaction if an error occurs?</p>
+            <label class="opt"><input type="radio" name="sql-study-guide-q17"> COMMIT</label>
+            <label class="opt"><input type="radio" name="sql-study-guide-q17"> UNDO</label>
+            <label class="opt" data-correct><input type="radio" name="sql-study-guide-q17"> ROLLBACK</label>
+            <label class="opt"><input type="radio" name="sql-study-guide-q17"> REVERT</label>
+            <button type="button" class="check-btn">Check answer</button><span class="q-result" role="status" aria-live="polite"></span>
+          </div>
+          <div class="q-explain"><b>Why:</b> ROLLBACK reverts the database to the state it was in before the transaction began.</div>
+        </div>
+        <div class="quiz" data-quiz>
+          <div class="q-head"><span>Question 18 of 20</span><span>Aliases</span></div>
+          <div class="q-body" role="radiogroup" aria-labelledby="sql-study-guide-iq18-t">
+            <p class="q-text" id="sql-study-guide-iq18-t">How do you assign an alias to a column in a query?</p>
+            <label class="opt" data-correct><input type="radio" name="sql-study-guide-q18"> &#96;column AS alias&#96;</label>
+            <label class="opt"><input type="radio" name="sql-study-guide-q18"> &#96;column = alias&#96;</label>
+            <label class="opt"><input type="radio" name="sql-study-guide-q18"> &#96;ALIAS(column)&#96;</label>
+            <label class="opt"><input type="radio" name="sql-study-guide-q18"> &#96;column -&gt; alias&#96;</label>
+            <button type="button" class="check-btn">Check answer</button><span class="q-result" role="status" aria-live="polite"></span>
+          </div>
+          <div class="q-explain"><b>Why:</b> The AS keyword (or just a space) is used to create a temporary alias for a column or table.</div>
+        </div>
+        <div class="quiz" data-quiz>
+          <div class="q-head"><span>Question 19 of 20</span><span>Data Types</span></div>
+          <div class="q-body" role="radiogroup" aria-labelledby="sql-study-guide-iq19-t">
+            <p class="q-text" id="sql-study-guide-iq19-t">Which data type is best for storing a fixed-length string, like a 2-letter state code?</p>
+            <label class="opt"><input type="radio" name="sql-study-guide-q19"> VARCHAR</label>
+            <label class="opt"><input type="radio" name="sql-study-guide-q19"> TEXT</label>
+            <label class="opt" data-correct><input type="radio" name="sql-study-guide-q19"> CHAR</label>
+            <label class="opt"><input type="radio" name="sql-study-guide-q19"> BLOB</label>
+            <button type="button" class="check-btn">Check answer</button><span class="q-result" role="status" aria-live="polite"></span>
+          </div>
+          <div class="q-explain"><b>Why:</b> CHAR is used for fixed-length strings and is often more efficient for that purpose.</div>
+        </div>
+        <div class="quiz" data-quiz>
+          <div class="q-head"><span>Question 20 of 20</span><span>Optimization</span></div>
+          <div class="q-body" role="radiogroup" aria-labelledby="sql-study-guide-iq20-t">
+            <p class="q-text" id="sql-study-guide-iq20-t">What database object improves the speed of data retrieval operations?</p>
+            <label class="opt"><input type="radio" name="sql-study-guide-q20"> View</label>
+            <label class="opt" data-correct><input type="radio" name="sql-study-guide-q20"> Index</label>
+            <label class="opt"><input type="radio" name="sql-study-guide-q20"> Trigger</label>
+            <label class="opt"><input type="radio" name="sql-study-guide-q20"> Stored Procedure</label>
+            <button type="button" class="check-btn">Check answer</button><span class="q-result" role="status" aria-live="polite"></span>
+          </div>
+          <div class="q-explain"><b>Why:</b> Indexes work like a book's index, allowing the database to find rows quickly without scanning the whole table.</div>
         </div>
     <h2 id="preparation-checklist">Preparation checklist</h2>
         <ul>
@@ -146,6 +358,7 @@ HAVING AVG(salary) > 50000;  -- filters GROUPS after</code></pre>
         <a href="#must-know-query-patterns" data-toc="must-know-query-patterns">Must-know query patterns</a>
         <a href="#where-vs-having-the-classic-trap" data-toc="where-vs-having-the-classic-trap">WHERE vs HAVING — the classic trap</a>
         <a href="#join-types-at-a-glance" data-toc="join-types-at-a-glance">JOIN types at a glance</a>
+        <a href="#practical-learning-exercises" data-toc="practical-learning-exercises">Practical learning exercises</a>
         <a href="#practice-questions" data-toc="practice-questions">Practice questions</a>
         <a href="#preparation-checklist" data-toc="preparation-checklist">Preparation checklist</a>
         <a href="#sources" data-toc="sources">Sources &amp; further reading</a>
@@ -164,7 +377,7 @@ HAVING AVG(salary) > 50000;  -- filters GROUPS after</code></pre>
     <div class="box">
       <h2 class="box-h">Spotted a mistake?</h2>
       <p class="box-p">We correct errors quickly. Tell us what's wrong and we'll fix it.</p>
-      <a class="btn btn-link" href="mailto:hello@skillprep.blog?subject=Correction%3A%20SQL%20Study%20Guide%3A%20Queries%20You%20Should%20Master&amp;body=Page%3A%20https%3A%2F%2Fskillsprep.github.io%2Fguides%2Fsql-study-guide%2F%0A%0AWhat's%20wrong%3A%0A">Report a correction</a>
+      <a class="btn btn-link" href="mailto:hello@skillsprep.org?subject=Correction%3A%20SQL%20Study%20Guide%3A%20Queries%20You%20Should%20Master&amp;body=Page%3A%20https%3A%2F%2Fskillsprep.github.io%2Fguides%2Fsql-study-guide%2F%0A%0AWhat's%20wrong%3A%0A">Report a correction</a>
     </div>
   </aside>
 </div>

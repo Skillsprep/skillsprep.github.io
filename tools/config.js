@@ -10,7 +10,7 @@ module.exports = {
   basePath: "/",
   // Where contact-form messages go. The form opens the visitor's email app addressed here.
   // >>> Make sure this inbox really exists and you read it. <<<
-  contactEmail: "hello@skillprep.blog",
+  contactEmail: "hello@skillsprep.org",
   // Date shown as "Last reviewed" on every guide (ISO). Update when you re-check content.
   lastReviewed: "2026-10-18",
   // Old hash-style links (#/post/<old-slug>) are redirected to the new pages.
@@ -44,7 +44,8 @@ module.exports = {
       ["Falsy — MDN Web Docs", "https://developer.mozilla.org/en-US/docs/Glossary/Falsy"]
     ],
     "project-management-study-guide": [
-      ["The Scrum Guide (2020)", "https://scrumguides.org/scrum-guide.html"]
+      ["The Scrum Guide (2020)", "https://scrumguides.org/scrum-guide.html"],
+      ["PMBOK Guide", "https://www.pmi.org/pmbok-guide-standards/foundational/pmbok"]
     ],
     "sql-study-guide": [
       ["Window functions — PostgreSQL documentation", "https://www.postgresql.org/docs/current/tutorial-window.html"],

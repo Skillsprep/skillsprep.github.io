@@ -21,7 +21,8 @@
   --blue-light: #162438;
   --navy: #e3e9f2;
   --ink: #d7e4f5;
-  --muted: #8b9db5;
+  --muted: #94a3b8;
+
   --bg: #090e17;
   --card: #111a27;
   --line: #2a3b53;
@@ -317,7 +318,7 @@ footer.site-footer { background: var(--navy); color: #a9c3e3; padding: 44px 0 24
   padding: 10px 16px; border-radius: 0 0 10px 10px; font-weight: 700;
 }
 .skip-link:focus { top: 0; text-decoration: none; }
-:focus-visible { outline: 3px solid var(--accent); outline-offset: 2px; border-radius: 4px; }
+:focus-visible { outline: 3px solid var(--accent); outline-offset: 3px; border-radius: 4px; box-shadow: 0 0 0 2px var(--bg); }
 .search-bar input:focus-visible, .form-group input:focus-visible, .form-group textarea:focus-visible, .form-group select:focus-visible { outline: 3px solid var(--blue); outline-offset: 0; }
 .quiz .opt:focus-within { border-color: var(--blue); box-shadow: 0 0 0 3px var(--blue-light); }
 [hidden] { display: none !important; }
