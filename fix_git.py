@@ -19,4 +19,3 @@ text = text.replace(old_tips, new_tips)
 
 with open("tools/content/guides.js", "w") as f:
     f.write(text)
-
