@@ -52,7 +52,7 @@
     <div class="meta">
       <span>Published <time datetime="2026-08-28">Aug 28, 2026</time></span>
       <span>Last reviewed <time datetime="2026-10-18">Oct 18, 2026</time></span>
-      <span>6 min read</span>
+      <span>7 min read</span>
       <span>By the SkillPrep Editorial Team (Expert Practitioners & Curriculum Designers)</span>
     </div>
   </div>
@@ -178,14 +178,14 @@ console.log("4");
         <div class="quiz" data-quiz>
           <div class="q-head"><span>Question 8 of 20</span><span>Promises</span></div>
           <div class="q-body" role="radiogroup" aria-labelledby="javascript-study-guide-iq8-t">
-            <p class="q-text" id="javascript-study-guide-iq8-t">What is the equivalent of &#96;Promise.resolve(5)&#96; using async/await syntax?</p>
-            <label class="opt" data-correct><input type="radio" name="javascript-study-guide-q8"> &#96;async function() { return 5; }&#96;</label>
+            <p class="q-text" id="javascript-study-guide-iq8-t">What is an executing equivalent of &#96;Promise.resolve(5)&#96; using an immediately invoked async function expression (IIFE)?</p>
+            <label class="opt" data-correct><input type="radio" name="javascript-study-guide-q8"> &#96;(async () =&gt; 5)()&#96;</label>
+            <label class="opt"><input type="radio" name="javascript-study-guide-q8"> &#96;async function() { return 5; }&#96;</label>
             <label class="opt"><input type="radio" name="javascript-study-guide-q8"> &#96;await 5&#96;</label>
-            <label class="opt"><input type="radio" name="javascript-study-guide-q8"> &#96;function() { await 5; }&#96;</label>
-            <label class="opt"><input type="radio" name="javascript-study-guide-q8"> &#96;async(5)&#96;</label>
+            <label class="opt"><input type="radio" name="javascript-study-guide-q8"> &#96;function() { await 5; }()&#96;</label>
             <button type="button" class="check-btn">Check answer</button><span class="q-result" role="status" aria-live="polite"></span>
           </div>
-          <div class="q-explain"><b>Why:</b> An &#96;async&#96; function implicitly wraps its return value in a Promise.</div>
+          <div class="q-explain"><b>Why:</b> An executing &#96;async&#96; function implicitly wraps its return value in a Promise, immediately producing a resolved Promise of 5. Simply defining the function (without calling it) only creates a function reference. <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise/resolve" target="_blank" rel="noopener">MDN Web Docs</a></div>
         </div>
         <div class="quiz" data-quiz>
           <div class="q-head"><span>Question 9 of 20</span><span>Scope</span></div>

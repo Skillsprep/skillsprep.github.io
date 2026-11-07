@@ -52,7 +52,7 @@
     <div class="meta">
       <span>Published <time datetime="2026-08-08">Aug 8, 2026</time></span>
       <span>Last reviewed <time datetime="2026-10-18">Oct 18, 2026</time></span>
-      <span>7 min read</span>
+      <span>8 min read</span>
       <span>By the SkillPrep Editorial Team (Expert Practitioners & Curriculum Designers)</span>
     </div>
   </div>
@@ -181,14 +181,14 @@
         <div class="quiz" data-quiz>
           <div class="q-head"><span>Question 8 of 20</span><span>PPC</span></div>
           <div class="q-body" role="radiogroup" aria-labelledby="digital-marketing-study-guide-iq8-t">
-            <p class="q-text" id="digital-marketing-study-guide-iq8-t">In Google Ads, what determines your ad rank?</p>
-            <label class="opt"><input type="radio" name="digital-marketing-study-guide-q8"> Only your maximum bid</label>
-            <label class="opt"><input type="radio" name="digital-marketing-study-guide-q8"> Only your quality score</label>
-            <label class="opt" data-correct><input type="radio" name="digital-marketing-study-guide-q8"> Your bid amount multiplied by your Quality Score</label>
-            <label class="opt"><input type="radio" name="digital-marketing-study-guide-q8"> The age of your account</label>
+            <p class="q-text" id="digital-marketing-study-guide-iq8-t">In Google Ads, what determines your Ad Rank at auction time?</p>
+            <label class="opt"><input type="radio" name="digital-marketing-study-guide-q8"> Your maximum bid multiplied by your 1-10 Quality Score</label>
+            <label class="opt" data-correct><input type="radio" name="digital-marketing-study-guide-q8"> Multiple auction-time factors including bid, ad/landing page quality, competitiveness, search context, and format impact</label>
+            <label class="opt"><input type="radio" name="digital-marketing-study-guide-q8"> Only your maximum bid and the age of your Google Ads account</label>
+            <label class="opt"><input type="radio" name="digital-marketing-study-guide-q8"> The daily budget divided by the number of clicks</label>
             <button type="button" class="check-btn">Check answer</button><span class="q-result" role="status" aria-live="polite"></span>
           </div>
-          <div class="q-explain"><b>Why:</b> Ad Rank balances how much you're willing to pay with how relevant and useful your ad is.</div>
+          <div class="q-explain"><b>Why:</b> Ad Rank is determined by multiple real-time factors including bid, auction competitiveness, context, format impact, and ad/landing page quality. Quality Score (the 1-10 number) is a diagnostic tool, not a direct auction input. <a href="https://support.google.com/google-ads/answer/1722122" target="_blank" rel="noopener">Official Reference</a></div>
         </div>
         <div class="quiz" data-quiz>
           <div class="q-head"><span>Question 9 of 20</span><span>Social Media</span></div>
@@ -205,14 +205,14 @@
         <div class="quiz" data-quiz>
           <div class="q-head"><span>Question 10 of 20</span><span>Analytics</span></div>
           <div class="q-body" role="radiogroup" aria-labelledby="digital-marketing-study-guide-iq10-t">
-            <p class="q-text" id="digital-marketing-study-guide-iq10-t">What is a 'bounce' in Google Analytics?</p>
-            <label class="opt"><input type="radio" name="digital-marketing-study-guide-q10"> A user who visits multiple pages rapidly</label>
-            <label class="opt" data-correct><input type="radio" name="digital-marketing-study-guide-q10"> A single-page session where the user leaves without interacting</label>
-            <label class="opt"><input type="radio" name="digital-marketing-study-guide-q10"> An email that cannot be delivered</label>
-            <label class="opt"><input type="radio" name="digital-marketing-study-guide-q10"> A broken link</label>
+            <p class="q-text" id="digital-marketing-study-guide-iq10-t">How is bounce rate defined in Google Analytics 4 (GA4)?</p>
+            <label class="opt"><input type="radio" name="digital-marketing-study-guide-q10"> A single-page session where the user leaves without interacting</label>
+            <label class="opt" data-correct><input type="radio" name="digital-marketing-study-guide-q10"> The percentage of sessions that were not engaged sessions</label>
+            <label class="opt"><input type="radio" name="digital-marketing-study-guide-q10"> When an email marketing campaign cannot be delivered</label>
+            <label class="opt"><input type="radio" name="digital-marketing-study-guide-q10"> The number of times a user clicks the back button</label>
             <button type="button" class="check-btn">Check answer</button><span class="q-result" role="status" aria-live="polite"></span>
           </div>
-          <div class="q-explain"><b>Why:</b> A bounce occurs when a user lands on a page and leaves without triggering any other requests.</div>
+          <div class="q-explain"><b>Why:</b> In GA4, bounce rate is the percentage of sessions that were not "engaged sessions." An engaged session lasts longer than 10 seconds, has a key event, or has at least 2 pageviews. (The older UA definition was simply a single-page session without interaction.) <a href="https://support.google.com/analytics/answer/12195621" target="_blank" rel="noopener">Official Reference</a></div>
         </div>
         <div class="quiz" data-quiz>
           <div class="q-head"><span>Question 11 of 20</span><span>Email</span></div>
@@ -316,11 +316,11 @@
             <p class="q-text" id="digital-marketing-study-guide-iq19-t">What is the purpose of a robots.txt file?</p>
             <label class="opt"><input type="radio" name="digital-marketing-study-guide-q19"> To animate website graphics</label>
             <label class="opt" data-correct><input type="radio" name="digital-marketing-study-guide-q19"> To tell search engine crawlers which pages they can or cannot request</label>
-            <label class="opt"><input type="radio" name="digital-marketing-study-guide-q19"> To hack other websites</label>
+            <label class="opt"><input type="radio" name="digital-marketing-study-guide-q19"> To strictly prevent pages from being indexed by search engines</label>
             <label class="opt"><input type="radio" name="digital-marketing-study-guide-q19"> To store user passwords</label>
             <button type="button" class="check-btn">Check answer</button><span class="q-result" role="status" aria-live="polite"></span>
           </div>
-          <div class="q-explain"><b>Why:</b> Robots.txt manages crawler traffic and prevents indexing of irrelevant files.</div>
+          <div class="q-explain"><b>Why:</b> A robots.txt file manages crawler traffic to avoid overloading your site. It is <strong>not</strong> a mechanism to keep a webpage out of Google. To prevent indexing, you must use <code>noindex</code> tags. <a href="https://developers.google.com/search/docs/crawling-indexing/robots/intro" target="_blank" rel="noopener">Official Reference</a></div>
         </div>
         <div class="quiz" data-quiz>
           <div class="q-head"><span>Question 20 of 20</span><span>PPC</span></div>

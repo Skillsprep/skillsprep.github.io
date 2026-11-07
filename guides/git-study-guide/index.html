@@ -308,7 +308,7 @@ git diff --staged       # staged vs last commit</code></pre>
             <label class="opt"><input type="radio" name="git-study-guide-q18"> To hide code from other collaborators</label>
             <button type="button" class="check-btn">Check answer</button><span class="q-result" role="status" aria-live="polite"></span>
           </div>
-          <div class="q-explain"><b>Why:</b> It prevents temporary files, build artifacts, or secrets from being accidentally committed.</div>
+          <div class="q-explain"><b>Why:</b> It prevents temporary files, build artifacts, or uncommitted secrets from being accidentally committed. Note: adding an already-tracked file to <code>.gitignore</code> does not remove it from tracking or history. <a href="https://git-scm.com/docs/gitignore" target="_blank" rel="noopener">Official Reference</a></div>
         </div>
         <div class="quiz" data-quiz>
           <div class="q-head"><span>Question 19 of 20</span><span>Inspection</span></div>
@@ -338,7 +338,8 @@ git diff --staged       # staged vs last commit</code></pre>
         <ul>
           <li>Practice the "wrong branch" scenario: you committed on the wrong branch → <code>git branch newbranch</code>, then <code>git reset --hard HEAD~1</code>, then <code>git switch newbranch</code></li>
           <li>Know <code>git stash</code> / <code>stash pop</code> for parking unfinished work</li>
-          <li>Understand <code>.gitignore</code> purpose — ignoring build artifacts and secrets</li>
+          <li>Understand <code>.gitignore</code> purpose — preventing untracked build artifacts and secrets from being committed.</li>
+          <li><b>Security Warning:</b> <code>.gitignore</code> does not automatically remove files already tracked by Git. If you accidentally commit a secret, adding it to <code>.gitignore</code> later is not safe. You must remove the secret from tracking (e.g., <code>git rm --cached</code>), immediately rotate/revoke the exposed credentials, and consider cleaning the repository history.</li>
         </ul>
     <h2 id="sources">Sources &amp; further reading</h2>
     <ul class="sources"><li><a href="https://git-scm.com/docs/git-revert" rel="noopener noreferrer" target="_blank">git-revert — Git documentation</a></li><li><a href="https://git-scm.com/docs/git-restore" rel="noopener noreferrer" target="_blank">git-restore — Git documentation</a></li><li><a href="https://git-scm.com/book/en/v2/Git-Branching-Rebasing" rel="noopener noreferrer" target="_blank">Rebasing — Pro Git book</a></li></ul>

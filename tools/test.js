@@ -8,11 +8,19 @@ const lean = require('./content/lean.js');
 let errors = 0;
 
 function checkQuestions(topic, qs) {
+    const ids = new Set();
     qs.forEach((q, i) => {
         if (!q.q || typeof q.q !== 'string') {
             console.error(`[Error] ${topic} Question ${i+1}: Missing or invalid question text.`);
             errors++;
+        } else {
+            if (ids.has(q.q)) {
+                console.error(`[Error] ${topic} Question ${i+1}: Duplicate question found ("${q.q}").`);
+                errors++;
+            }
+            ids.add(q.q);
         }
+
         if (!q.o || !Array.isArray(q.o) || q.o.length < 2) {
             console.error(`[Error] ${topic} Question ${i+1}: Missing or invalid options.`);
             errors++;
