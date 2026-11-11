@@ -34,7 +34,7 @@
 html { scroll-behavior: smooth; scroll-padding-top: 84px; }
 
 body {
-  font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+  font-family: 'Inter', 'Segoe UI', system-ui, -apple-system, sans-serif;
   background: var(--bg);
   color: var(--ink);
   line-height: 1.65;
@@ -136,15 +136,22 @@ nav.main-nav a.active::after {
 .chip.active { background: var(--blue); border-color: var(--blue); color: #fff; }
 
 /* ===== Post Cards ===== */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
 .post-grid {
   display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 22px;
 }
 .post-card {
   background: var(--card); border-radius: var(--radius); overflow: hidden;
   box-shadow: var(--shadow); border: 1px solid var(--line);
-  display: flex; flex-direction: column; transition: transform .18s ease, box-shadow .18s ease;
+  display: flex; flex-direction: column; transition: transform 0.25s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+  animation: fadeIn 0.4s ease-out forwards;
 }
-.post-card:hover { transform: translateY(-4px); box-shadow: 0 12px 32px rgba(13,27,42,0.14); text-decoration: none; }
+.post-card:hover { transform: translateY(-6px); box-shadow: 0 20px 40px rgba(13,27,42,0.12); text-decoration: none; }
+[data-theme="dark"] .post-card:hover { box-shadow: 0 20px 40px rgba(0,0,0,0.5); }
 .post-card .thumb {
   height: 140px; display: grid; place-items: center;
   font-size: 2.6rem; font-weight: 800; color: #fff;
@@ -211,13 +218,17 @@ nav.main-nav a.active::after {
 .quiz .q-body { padding: 16px; background: var(--card); }
 .quiz .q-text { font-weight: 600; margin-bottom: 12px; color: var(--navy); }
 .quiz .opt {
-  display: block; padding: 10px 14px; border: 1.5px solid var(--line); border-radius: 10px;
-  margin: 8px 0; cursor: pointer; font-size: 0.93rem; transition: border-color .15s;
+  display: block; padding: 12px 16px; border: 2px solid var(--line); border-radius: 12px;
+  margin: 10px 0; cursor: pointer; font-size: 0.95rem; transition: all .2s ease;
+  background: var(--card);
 }
-.quiz .opt:hover { border-color: var(--blue); }
-.quiz .opt input { margin-right: 8px; }
+.quiz .opt:hover { border-color: var(--blue); background: var(--blue-light); }
+.quiz .opt:has(input:checked) { border-color: var(--blue); box-shadow: 0 0 0 2px var(--blue-light); }
+.quiz .opt input { margin-right: 12px; transform: scale(1.1); }
 .quiz .opt.correct { border-color: var(--green); background: #e9f7f0; }
+[data-theme="dark"] .quiz .opt.correct { background: rgba(31, 157, 99, 0.15); }
 .quiz .opt.wrong { border-color: #d23f3f; background: #fdeaea; }
+[data-theme="dark"] .quiz .opt.wrong { background: rgba(210, 63, 63, 0.15); }
 .quiz .q-explain {
   display: none; padding: 12px 16px; background: #f2f6fc; border-top: 1px solid var(--line);
   font-size: 0.9rem;
@@ -269,6 +280,23 @@ nav.main-nav a.active::after {
   border-radius: 10px; font-weight: 700; font-size: 0.95rem; cursor: pointer;
 }
 .btn:hover { background: var(--blue-dark); }
+
+/* ===== Cookie Consent ===== */
+.cookie-consent {
+  position: fixed; bottom: 20px; left: 50%; transform: translateX(-50%); z-index: 100;
+  width: calc(100% - 40px); max-width: 600px;
+  background: var(--card); border: 1px solid var(--line);
+  border-radius: var(--radius); box-shadow: var(--shadow);
+  padding: 18px 24px;
+  backdrop-filter: blur(10px);
+}
+[data-theme="dark"] .cookie-consent { background: rgba(17, 26, 39, 0.95); }
+.cookie-inner { display: flex; align-items: center; justify-content: space-between; gap: 20px; flex-wrap: wrap; }
+.cookie-inner p { margin: 0; font-size: 0.9rem; color: var(--ink); flex: 1; min-width: 250px; }
+.cookie-actions { display: flex; gap: 10px; }
+.cookie-actions .btn { padding: 8px 16px; font-size: 0.85rem; }
+.cookie-actions .btn-alt { background: transparent; color: var(--ink); border: 1px solid var(--line); }
+.cookie-actions .btn-alt:hover { background: var(--line); }
 
 /* ===== Footer ===== */
 footer.site-footer { background: var(--navy); color: #a9c3e3; padding: 44px 0 24px; margin-top: 40px; }

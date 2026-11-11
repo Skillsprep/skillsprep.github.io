@@ -22,12 +22,17 @@
 <meta name="twitter:description" content="Branching, merging vs rebasing, staging, and undoing mistakes — the Git knowledge every developer needs, with quizzes.">
 <meta name="twitter:image" content="https://skillsprep.github.io/assets/og-image.png">
 <link rel="icon" href="../../assets/favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="../../css/style.css">
 <script>(function(){try{if(localStorage.getItem("skillprep:theme")==="dark"){document.documentElement.setAttribute("data-theme","dark");}}catch(e){}})();</script>
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"Git Study Guide: Commands and Concepts","description":"Branching, merging vs rebasing, staging, and undoing mistakes — the Git knowledge every developer needs, with quizzes.","datePublished":"2026-07-30","dateModified":"2026-10-18","author":{"@type":"Organization","name":"SkillPrep editorial team"},"publisher":{"@type":"Organization","name":"SkillPrep","logo":{"@type":"ImageObject","url":"https://skillsprep.github.io/assets/favicon.svg"}},"mainEntityOfPage":"https://skillsprep.github.io/guides/git-study-guide/","image":"https://skillsprep.github.io/assets/og-image.png","articleSection":"Git","inLanguage":"en"}</script>
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://skillsprep.github.io/"},{"@type":"ListItem","position":2,"name":"Git","item":"https://skillsprep.github.io/#guides"},{"@type":"ListItem","position":3,"name":"Git Study Guide: Commands and Concepts","item":"https://skillsprep.github.io/guides/git-study-guide/"}]}</script>
+<script async custom-element="amp-auto-ads" src="https://cdn.ampproject.org/v0/amp-auto-ads-0.1.js"></script>
 </head>
 <body>
+<amp-auto-ads type="adsense" data-ad-client="ca-pub-9455217122501464"></amp-auto-ads>
 <a class="skip-link" href="#main">Skip to content</a>
 <header class="site-header">
   <div class="container header-inner">
@@ -338,7 +343,8 @@ git diff --staged       # staged vs last commit</code></pre>
         <ul>
           <li>Practice the "wrong branch" scenario: you committed on the wrong branch → <code>git branch newbranch</code>, then <code>git reset --hard HEAD~1</code>, then <code>git switch newbranch</code></li>
           <li>Know <code>git stash</code> / <code>stash pop</code> for parking unfinished work</li>
-          <li>Understand <code>.gitignore</code> purpose — ignoring build artifacts and secrets</li>
+          <li>Understand <code>.gitignore</code> purpose — preventing untracked build artifacts and secrets from being committed.</li>
+          <li><b>Security Warning:</b> <code>.gitignore</code> does not automatically remove files already tracked by Git. If you accidentally commit a secret, adding it to <code>.gitignore</code> later is not safe. You must remove the secret from tracking (e.g., <code>git rm --cached</code>), immediately rotate/revoke the exposed credentials, and consider cleaning the repository history.</li>
         </ul>
     <h2 id="sources">Sources &amp; further reading</h2>
     <ul class="sources"><li><a href="https://git-scm.com/docs/git-revert" rel="noopener noreferrer" target="_blank">git-revert — Git documentation</a></li><li><a href="https://git-scm.com/docs/git-restore" rel="noopener noreferrer" target="_blank">git-restore — Git documentation</a></li><li><a href="https://git-scm.com/book/en/v2/Git-Branching-Rebasing" rel="noopener noreferrer" target="_blank">Rebasing — Pro Git book</a></li></ul>
@@ -409,6 +415,15 @@ git diff --staged       # staged vs last commit</code></pre>
   </div>
 </footer>
 <button class="back-top" id="backTop" type="button" aria-label="Back to top">↑</button>
+<div id="cookieConsent" class="cookie-consent" hidden>
+  <div class="cookie-inner">
+    <p>We use local storage (cookies) to save your practice test progress. We also serve personalized ads via Google AdSense.</p>
+    <div class="cookie-actions">
+      <button id="cookieAccept" class="btn">Got it</button>
+      <button id="cookieDecline" class="btn btn-alt">Decline</button>
+    </div>
+  </div>
+</div>
 <script src="../../js/site.js" defer></script>
 </body>
 </html>

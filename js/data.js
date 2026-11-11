@@ -697,7 +697,7 @@ git diff --staged       # staged vs last commit</code></pre>
       { h: "How the exam works", body: `
         <ul>
           <li><b>Format:</b> multiple choice, one best answer per question</li>
-          <li><b>Length:</b> ~124 questions, drawn from all five courses</li>
+          <li><b>Length:</b> ~164 questions, drawn from all five courses</li>
           <li><b>Weighting:</b> ethics and responsible-AI scenarios make up the biggest share, followed by generative AI fundamentals and Copilot product questions</li>
           <li><b>Passing:</b> roughly 70%+; some questions repeat in different wording, so read carefully</li>
         </ul>

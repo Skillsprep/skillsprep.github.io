@@ -2040,7 +2040,8 @@ git diff --staged       # staged vs last commit</code></pre>
         <ul>
           <li>Practice the "wrong branch" scenario: you committed on the wrong branch → <code>git branch newbranch</code>, then <code>git reset --hard HEAD~1</code>, then <code>git switch newbranch</code></li>
           <li>Know <code>git stash</code> / <code>stash pop</code> for parking unfinished work</li>
-          <li>Understand <code>.gitignore</code> purpose — ignoring build artifacts and secrets</li>
+          <li>Understand <code>.gitignore</code> purpose — preventing untracked build artifacts and secrets from being committed.</li>
+          <li><b>Security Warning:</b> <code>.gitignore</code> does not automatically remove files already tracked by Git. If you accidentally commit a secret, adding it to <code>.gitignore</code> later is not safe. You must remove the secret from tracking (e.g., <code>git rm --cached</code>), immediately rotate/revoke the exposed credentials, and consider cleaning the repository history.</li>
         </ul>` }
     ]
   },
