@@ -190,13 +190,13 @@
       var q = state.q.toLowerCase(), shown = 0;
       cards.forEach(function (c) {
         var ok = (state.cat === "All" || c.getAttribute("data-cat") === state.cat) && (!q || c.getAttribute("data-search").indexOf(q) !== -1);
-        c.hidden = !ok;
+        c.hidden = !ok; 
         if (ok) {
           shown++;
           // Trigger animation reflow
           c.style.animation = 'none';
           c.offsetHeight; /* trigger reflow */
-          c.style.animation = null;
+          c.style.animation = null; 
         }
       });
       chips.forEach(function (c) { var on = c.getAttribute("data-cat") === state.cat; c.classList.toggle("active", on); c.setAttribute("aria-pressed", String(on)); });
@@ -250,7 +250,7 @@
           // Silent rejection for bots
           return;
       }
-
+      
       var data = new FormData(contactForm);
       fetch(contactForm.action, {
         method: contactForm.method,
@@ -396,3 +396,26 @@ document.querySelectorAll(".mock-hint").forEach(hint => {
     
     hint.parentElement.insertBefore(pContainer, hint);
 });
+
+// Cookie Consent Logic
+(function() {
+  var consent = document.getElementById("cookieConsent");
+  var btnAccept = document.getElementById("cookieAccept");
+  var btnDecline = document.getElementById("cookieDecline");
+  
+  if (consent && btnAccept && btnDecline) {
+    if (!localStorage.getItem("skillprep:cookie_consent")) {
+      consent.hidden = false;
+    }
+    
+    btnAccept.addEventListener("click", function() {
+      localStorage.setItem("skillprep:cookie_consent", "accepted");
+      consent.hidden = true;
+    });
+    
+    btnDecline.addEventListener("click", function() {
+      localStorage.setItem("skillprep:cookie_consent", "declined");
+      consent.hidden = true;
+    });
+  }
+})();

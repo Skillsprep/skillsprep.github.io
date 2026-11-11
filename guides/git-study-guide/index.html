@@ -313,7 +313,7 @@ git diff --staged       # staged vs last commit</code></pre>
             <label class="opt"><input type="radio" name="git-study-guide-q18"> To hide code from other collaborators</label>
             <button type="button" class="check-btn">Check answer</button><span class="q-result" role="status" aria-live="polite"></span>
           </div>
-          <div class="q-explain"><b>Why:</b> It prevents temporary files, build artifacts, or secrets from being accidentally committed.</div>
+          <div class="q-explain"><b>Why:</b> It prevents temporary files, build artifacts, or uncommitted secrets from being accidentally committed. Note: adding an already-tracked file to <code>.gitignore</code> does not remove it from tracking or history. <a href="https://git-scm.com/docs/gitignore" target="_blank" rel="noopener">Official Reference</a></div>
         </div>
         <div class="quiz" data-quiz>
           <div class="q-head"><span>Question 19 of 20</span><span>Inspection</span></div>
