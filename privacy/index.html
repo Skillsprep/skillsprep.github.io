@@ -21,8 +21,13 @@
 <meta name="twitter:description" content="How SkillPrep handles data: no accounts, no tracking cookies, no analytics.">
 <meta name="twitter:image" content="https://skillsprep.github.io/assets/og-image.png">
 <link rel="icon" href="../assets/favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="../css/style.css">
+<script>(function(){try{if(localStorage.getItem("skillprep:theme")==="dark"){document.documentElement.setAttribute("data-theme","dark");}}catch(e){}})();</script>
 
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9455217122501464" crossorigin="anonymous"></script>
 </head>
 <body>
 <a class="skip-link" href="#main">Skip to content</a>
@@ -35,6 +40,7 @@
       <a href="../about/">About</a>
       <a href="../contact/">Contact</a>
     </nav>
+    <button class="theme-toggle" id="themeToggle" type="button" aria-label="Toggle dark mode">◐</button>
   </div>
 </header>
 <main id="main">
@@ -55,7 +61,7 @@
     <h2>Changes</h2>
     <p>If we ever add analytics, advertising or sign-ups, we will update this page <i>before</i> collecting any personal data.</p>
     <h2>Questions</h2>
-    <p>Email <a href="mailto:hello@skillprep.blog">hello@skillprep.blog</a>.</p>
+    <p>Email <a href="mailto:hello@skillsprep.org">hello@skillsprep.org</a>.</p>
   </div>
 </div>
 </main>
@@ -88,6 +94,15 @@
   </div>
 </footer>
 <button class="back-top" id="backTop" type="button" aria-label="Back to top">↑</button>
+<div id="cookieConsent" class="cookie-consent" hidden>
+  <div class="cookie-inner">
+    <p>We use local storage (cookies) to save your practice test progress. We also serve personalized ads via Google AdSense.</p>
+    <div class="cookie-actions">
+      <button id="cookieAccept" class="btn">Got it</button>
+      <button id="cookieDecline" class="btn btn-alt">Decline</button>
+    </div>
+  </div>
+</div>
 <script src="../js/site.js" defer></script>
 </body>
 </html>

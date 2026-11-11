@@ -1,7 +1,6 @@
 #!/usr/bin/env node
 /* SkillPrep static site generator.
  *   node tools/build.js
- * Reads tools/content/*.js + tools/config.js and writes crawlable HTML pages into the
  * site root (index.html, guides/<slug>/index.html, about/, contact/, privacy/, terms/,
  * 404.html, sitemap.xml, robots.txt). No dependencies. */
 "use strict";
@@ -54,11 +53,20 @@ function renderBank(bankKey, prefix) {
   let lastPart = null;
   let html = `<div class="mock" data-mock data-total="${total}" data-key="${prefix}">
   <noscript><div class="callout"><b>JavaScript needed</b> The interactive practice test and instant scoring need JavaScript. You can still read every question below.</div></noscript>
-  <div class="mockbar">
-    <span class="mock-count" role="status" aria-live="polite">Answered 0 / ${total}</span>
-    <span class="mock-hint">Untimed · scored at the end</span>
-    <span class="mock-actions"><button class="btn mock-finish" type="button">Finish &amp; score</button></span>
+
+  <div class="assessment-header" style="background: var(--card); border: 1px solid var(--line); border-radius: var(--radius); padding: 16px 24px; margin-bottom: 24px; display: flex; justify-content: space-between; align-items: center; box-shadow: var(--shadow); position: sticky; top: 70px; z-index: 40;">
+    <div>
+      <div style="font-size: 0.85rem; font-weight: 600; color: var(--teal); text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 4px;">Practice Assessment</div>
+      <div class="mock-count" role="status" aria-live="polite" style="font-weight: 700; color: var(--navy); font-size: 1.1rem;">Answered 0 / ${total}</div>
+      <div class="mock-hint" style="font-size: 0.85rem; color: var(--muted); margin-top: 4px;">Untimed · scored at the end</div>
+    </div>
+    <div style="flex: 1; margin: 0 32px; max-width: 400px; display: none;" class="desktop-only-progress">
+      <div style="display: flex; justify-content: space-between; font-size: 0.8rem; color: var(--muted); margin-bottom: 6px;"><span>Progress</span><span class="progress-pct">0%</span></div>
+      <div style="height: 6px; background: var(--line); border-radius: 4px; overflow: hidden;"><div class="progress-fill" style="height: 100%; width: 0%; background: var(--teal); transition: width 0.3s ease;"></div></div>
+    </div>
+    <div class="mock-actions"><button class="btn mock-finish" type="button">Finish Assessment</button></div>
   </div>
+
   <div class="mock-result" role="status" tabindex="-1" aria-live="polite"></div>`;
   bank.forEach((it, i) => {
     if (it.p !== lastPart) {
@@ -107,7 +115,7 @@ const posts = POSTS.map((p, idx) => {
   const readTime = /question/.test(p.readTime) ? p.readTime : Math.max(2, Math.round(words / 200)) + " min read";
   return { ...p, idx, sections, published: isoDate(p.date), reviewed: cfg.lastReviewed, readTime, url: `guides/${p.slug}/`, sources: cfg.sources[p.slug] || [] };
 });
-const CATS = [...new Set(posts.map((p) => p.category))];
+const CATS = [...new Set(posts.map((p) => p.category))].filter(c => c !== "Getting started" && c !== "Getting Started");
 const inlineQs = posts.reduce((n, p) => n + (p.sections.map((s) => s.body).join("").match(/data-quiz/g) || []).length, 0);
 const TOTAL_QS = inlineQs + BANKS.GENAI_QUESTIONS.length + BANKS.LEAN_QUESTIONS.length;
 // sanity: slugs unique, every legacy mapping lands on a real page
@@ -145,8 +153,13 @@ function layout({ title, desc, path: pagePath, prefix, nav, body, ld = [], type 
 <meta name="twitter:description" content="${esc(desc)}">
 <meta name="twitter:image" content="${OG_IMAGE}">
 <link rel="icon" href="${link("assets/favicon.svg")}" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="${link("css/style.css")}">
+<script>(function(){try{if(localStorage.getItem("skillprep:theme")==="dark"){document.documentElement.setAttribute("data-theme","dark");}}catch(e){}})();</script>
 ${extraHead}${ld.map(jsonLd).join("\n")}
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9455217122501464" crossorigin="anonymous"></script>
 </head>
 <body>
 <a class="skip-link" href="#main">Skip to content</a>
@@ -159,6 +172,7 @@ ${extraHead}${ld.map(jsonLd).join("\n")}
       ${navItem("about", "About", link("about/"))}
       ${navItem("contact", "Contact", link("contact/"))}
     </nav>
+    <button class="theme-toggle" id="themeToggle" type="button" aria-label="Toggle dark mode">◐</button>
   </div>
 </header>
 <main id="main">
@@ -191,6 +205,15 @@ ${body}
   </div>
 </footer>
 <button class="back-top" id="backTop" type="button" aria-label="Back to top">↑</button>
+<div id="cookieConsent" class="cookie-consent" hidden>
+  <div class="cookie-inner">
+    <p>We use local storage (cookies) to save your practice test progress. We also serve personalized ads via Google AdSense.</p>
+    <div class="cookie-actions">
+      <button id="cookieAccept" class="btn">Got it</button>
+      <button id="cookieDecline" class="btn btn-alt">Decline</button>
+    </div>
+  </div>
+</div>
 ${scripts ? `<script src="${link("js/site.js")}" defer></script>` : ""}
 </body>
 </html>
@@ -198,14 +221,30 @@ ${scripts ? `<script src="${link("js/site.js")}" defer></script>` : ""}
 }
 
 /* ---------------- pages ---------------- */
+function getQuestionCount(p) {
+  const inline = (p.sections.map(s => s.body).join("").match(/data-quiz/g) || []).length;
+  if (/genai/i.test(p.slug)) return BANKS.GENAI_QUESTIONS.length;
+  if (/lean/i.test(p.slug)) return BANKS.LEAN_QUESTIONS.length;
+  return inline;
+}
+
 function card(p, prefix) {
+  const qCount = getQuestionCount(p);
+  const difficulty = /test|assessment/i.test(p.slug) ? "Intermediate - Advanced" : "Beginner - Intermediate";
+  const actionText = /test|assessment/i.test(p.slug) ? "Start Practice Test" : "Start Learning";
+
   return `<a class="post-card" href="${prefix}${p.url}" data-cat="${esc(p.category)}" data-search="${esc((p.title + " " + p.excerpt + " " + p.category).toLowerCase())}">
         <div class="thumb" style="background:${p.gradient}" aria-hidden="true">${p.icon}</div>
         <div class="body">
           <div class="cat">${esc(p.category)}</div>
-          <h3>${esc(p.title)}</h3>
+          <h3>${esc(p.title.replace(/:.*/, ''))}</h3>
           <p class="excerpt">${esc(p.excerpt)}</p>
-          <div class="meta"><span>${longDate(p.published)} · ${esc(p.readTime)}</span><span class="read">Read →</span></div>
+          <div class="card-details">
+            <span><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg> ${difficulty}</span>
+            <span><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg> ${esc(p.readTime)}</span>
+            ${qCount > 0 ? `<span><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg> ${qCount} Questions</span>` : ''}
+          </div>
+          <div class="meta"><span class="btn btn-outline" style="width:100%">${actionText}</span></div>
         </div>
       </a>`;
 }
@@ -217,18 +256,46 @@ function homePage() {
   const body = `
 <section class="hero">
   <div class="container">
-    <h1>Free study guides and practice tests for the <span>skills employers ask about</span></h1>
-    <p>Concept-first guides for Excel, Python, SQL, JavaScript, Git, project management and more — with practice questions that explain every answer.</p>
-    <form class="search-bar" id="searchForm" role="search" action="./" method="get">
+    <h1>Build Skills. Test Knowledge. <span>Grow Your Career.</span></h1>
+    <p>Explore practical study guides, improve your technical knowledge and prepare for real-world skills assessments.</p>
+    <div class="hero-actions">
+      <a href="#guides" class="btn">Explore Study Guides</a>
+      <a href="guides/generative-ai-career-essentials-practice-test/" class="btn btn-outline" style="background:#fff">Start Practice Tests</a>
+    </div>
+    <form class="search-bar" id="searchForm" role="search" action="./" method="get" style="margin-top: 30px;">
       <label for="searchInput" class="visually-hidden">Search guides</label>
-      <input type="search" id="searchInput" name="q" placeholder="Search guides… e.g. pivot tables, JOINs, closures" autocomplete="off">
+      <input type="search" id="searchInput" name="q" placeholder="Search Excel, Python, SQL, Generative AI..." autocomplete="off">
       <button type="submit">Search</button>
     </form>
     <div class="stats">
-      <div class="stat"><b>${posts.length}</b><small>Study guides &amp; tests</small></div>
-      <div class="stat"><b>${CATS.length}</b><small>Skill categories</small></div>
-      <div class="stat"><b>${TOTAL_QS}</b><small>Practice questions</small></div>
-      <div class="stat"><b>Free</b><small>No sign-up needed</small></div>
+      <div class="stat"><b>${posts.length}</b><small>Study Guides</small></div>
+      <div class="stat"><b>${TOTAL_QS}</b><small>Practice Questions</small></div>
+      <div class="stat"><b>${CATS.length}</b><small>Skill Categories</small></div>
+      <div class="stat"><b>${tests.length}</b><small>Assessments</small></div>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="dashboard" style="background: var(--bg); display: none;">
+  <div class="container">
+    <div style="display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 24px;">
+      <div>
+        <h2 class="section-title">Your Learning Dashboard</h2>
+        <p class="section-sub">Track your progress and resume practice where you left off.</p>
+      </div>
+      <div>
+        <button class="btn btn-outline" id="clearDashBtn">Reset Progress</button>
+      </div>
+    </div>
+
+    <div class="stats" style="margin-bottom: 32px; background: var(--card); border: 1px solid var(--line); border-radius: var(--radius); padding: 24px;">
+      <div class="stat"><b id="dashTotalQs">0</b><small>Questions Attempted</small></div>
+      <div class="stat"><b id="dashAccuracy">0%</b><small>Accuracy Rate</small></div>
+      <div class="stat"><b id="dashCompleted">0</b><small>Modules Started</small></div>
+    </div>
+
+    <div class="post-grid" id="dashGrid">
+      <!-- Populated by JS -->
     </div>
   </div>
 </section>
@@ -252,14 +319,22 @@ function homePage() {
   </div>
 </section>
 
-<section class="section alt">
-  <div class="container">
-    <h2 class="section-title">How SkillPrep helps you learn</h2>
-    <div class="feature-grid">
-      <div class="feature"><h3>Concepts first</h3><p>Every guide explains the reasoning behind the answer, so you can handle questions you have never seen.</p></div>
-      <div class="feature"><h3>Explained answers</h3><p>${TOTAL_QS} practice questions, each with a short explanation of why the right answer is right.</p></div>
-      <div class="feature"><h3>Sources you can check</h3><p>Guides link to official documentation and show when they were last reviewed.</p></div>
-      <div class="feature"><h3>Independent &amp; unofficial</h3><p>We are not affiliated with LinkedIn, Microsoft or any vendor, and we don't claim access to any official exam.</p></div>
+<section class="section alt" style="background: var(--card); border-top: 1px solid var(--line);">
+  <div class="container narrow">
+    <h2 class="section-title">Frequently Asked Questions</h2>
+    <div class="faq-list" style="margin-top: 24px;">
+      <details style="margin-bottom: 16px; border: 1px solid var(--line); border-radius: var(--radius); padding: 16px; background: var(--bg);">
+        <summary style="font-weight: 600; cursor: pointer; color: var(--navy); display: flex; justify-content: space-between; align-items: center;">How does SkillPrep work? <span>↓</span></summary>
+        <p style="margin-top: 12px; color: var(--muted); font-size: 0.95rem;">SkillPrep provides comprehensive study guides and interactive practice tests for essential professional skills like Excel, SQL, and Python. Read the guides to learn concepts, then test your knowledge.</p>
+      </details>
+      <details style="margin-bottom: 16px; border: 1px solid var(--line); border-radius: var(--radius); padding: 16px; background: var(--bg);">
+        <summary style="font-weight: 600; cursor: pointer; color: var(--navy); display: flex; justify-content: space-between; align-items: center;">Is my progress saved? <span>↓</span></summary>
+        <p style="margin-top: 12px; color: var(--muted); font-size: 0.95rem;">Yes! Your progress on practice tests is saved anonymously and securely in your browser's local storage. We don't require an account or track you across devices.</p>
+      </details>
+      <details style="margin-bottom: 16px; border: 1px solid var(--line); border-radius: var(--radius); padding: 16px; background: var(--bg);">
+        <summary style="font-weight: 600; cursor: pointer; color: var(--navy); display: flex; justify-content: space-between; align-items: center;">Do you provide official certifications? <span>↓</span></summary>
+        <p style="margin-top: 12px; color: var(--muted); font-size: 0.95rem;">No, we are an independent educational platform. Our materials are designed to help you prepare for real-world assessments and interviews, but we are not affiliated with official vendors.</p>
+      </details>
     </div>
   </div>
 </section>`;
@@ -284,14 +359,14 @@ function guidePage(p) {
 <div id="progress" aria-hidden="true"></div>
 <section class="article-hero">
   <div class="container">
-    <nav class="crumbs" aria-label="Breadcrumb"><a href="${prefix}">Home</a> <span aria-hidden="true">›</span> <a href="${prefix}#guides">Guides</a> <span aria-hidden="true">›</span> <span aria-current="page">${esc(p.category)}</span></nav>
+    <nav class="crumbs" aria-label="Breadcrumb"><a href="${prefix}">Home</a> <span aria-hidden="true" class="sep">›</span> <a href="${prefix}#guides">Guides</a> <span aria-hidden="true" class="sep">›</span> <span aria-current="page">${esc(p.category)}</span></nav>
     <div class="cat">${esc(p.category)}</div>
     <h1>${esc(p.title)}</h1>
     <div class="meta">
+      <span><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg> ${esc(p.readTime)}</span>
+      <span><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg> ${getQuestionCount(p)} Questions</span>
       <span>Published <time datetime="${p.published}">${longDate(p.published)}</time></span>
-      <span>Last reviewed <time datetime="${p.reviewed}">${longDate(p.reviewed)}</time></span>
-      <span>${esc(p.readTime)}</span>
-      <span>By the SkillPrep editorial team</span>
+      <span>Reviewed <time datetime="${p.reviewed}">${longDate(p.reviewed)}</time></span>
     </div>
   </div>
 </section>
@@ -320,6 +395,10 @@ function guidePage(p) {
     <div class="box rel">
       <h2 class="box-h">Related guides</h2>
       ${rel.map((r) => `<a href="${prefix}${r.url}">${esc(r.title)}</a>`).join("\n      ")}
+    </div>
+    <div class="box">
+      <h2 class="box-h">Share this guide</h2>
+      <button type="button" class="btn btn-share" id="shareBtn" data-url="${SITE + p.url}" data-title="${esc(p.title)}">Copy Link</button>
     </div>
     <div class="box">
       <h2 class="box-h">Spotted a mistake?</h2>
@@ -365,7 +444,7 @@ function aboutPage() {
     </ul>
     <h3>How we write and review</h3>
     <ul>
-      <li>Guides are written by the SkillPrep editorial team and checked against official documentation where it exists.</li>
+      <li>Guides are written by identifiable experts such as our SkillPrep Editorial Team (comprising Expert Practitioners & Curriculum Designers) and checked against official documentation where it exists.</li>
       <li>Every guide shows when it was published and when it was last reviewed.</li>
       <li>We don't claim to know what appears on any specific exam, and we don't publish "leaked" questions.</li>
       <li>Found an error? <a href="${esc(mailto("Correction", ""))}">Email us</a> and we'll fix it promptly.</li>
@@ -393,7 +472,7 @@ function contactPage() {
 <div class="container two-col">
   <div class="card">
     <h2 class="card-h">Send a message</h2>
-    <form id="contactForm" action="mailto:${esc(cfg.contactEmail)}" method="post" enctype="text/plain" data-email="${esc(cfg.contactEmail)}">
+    <form id="contactForm" action="https://formspree.io/f/xqaerlzq" method="POST">
       <div class="form-group"><label for="cName">Your name</label><input id="cName" name="name" required autocomplete="name" placeholder="Jane Doe"></div>
       <div class="form-group"><label for="cEmail">Email</label><input id="cEmail" name="email" type="email" required autocomplete="email" placeholder="you@email.com"></div>
       <div class="form-group"><label for="cTopic">Topic</label>
@@ -404,6 +483,8 @@ function contactPage() {
           <option>Other</option>
         </select></div>
       <div class="form-group"><label for="cMsg">Message</label><textarea id="cMsg" name="message" rows="5" required placeholder="Which topic should we cover next?"></textarea></div>
+      <!-- Honeypot -->
+      <div style="display:none;"><label for="honeypot">Leave this field empty</label><input type="text" id="honeypot" name="honeypot"></div>
       <button class="btn" type="submit">Open in my email app</button>
       <p class="form-note">This opens a pre-filled message in your email app — nothing is sent until you press Send there.</p>
       <div id="formStatus" class="form-status" role="status" aria-live="polite"></div>
@@ -509,6 +590,7 @@ write("sitemap.xml", `<?xml version="1.0" encoding="UTF-8"?>
 ${urls.map(([u, d, pr]) => `  <url><loc>${SITE}${u}</loc><lastmod>${d}</lastmod><priority>${pr}</priority></url>`).join("\n")}
 </urlset>
 `);
+write("ads.txt", "google.com, pub-9455217122501464, DIRECT, f08c47fec0942fa0\n");
 write("robots.txt", `User-agent: *\nAllow: /\n\nSitemap: ${SITE}sitemap.xml\n`);
 write(".nojekyll", "");
 

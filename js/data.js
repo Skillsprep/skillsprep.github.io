@@ -691,13 +691,13 @@ git diff --staged       # staged vs last commit</code></pre>
     gradient: "linear-gradient(135deg,#0A66C2,#7b5cd6)",
     date: "Sep 21, 2026",
     readTime: "45 min read",
-    excerpt: "All 125 real exam questions from the Career Essentials in Generative AI certification — Copilot, LLMs, GANs & VAEs, prompt engineering, machine learning types, and AI ethics — in one interactive mock test with instant scoring and explanations.",
+    excerpt: "All 164 real exam questions from the Career Essentials in Generative AI certification — Copilot, LLMs, GANs & VAEs, prompt engineering, machine learning types, and AI ethics — in one interactive mock test with instant scoring and explanations.",
     intro: "The \"Career Essentials in Generative AI\" learning path by Microsoft and LinkedIn is one of the most popular free AI certifications on LinkedIn Learning. The final assessment draws from five courses: What Is Generative AI?, Generative AI: The Evolution of Thoughtful Online Search, Streamlining Your Work with Microsoft Bing Chat, Ethics in the Age of Generative AI, and Introduction to Artificial Intelligence. This guide collects 122 real exam questions — organized exactly the way the exam is — into one full-length interactive mock test.",
     sections: [
       { h: "How the exam works", body: `
         <ul>
           <li><b>Format:</b> multiple choice, one best answer per question</li>
-          <li><b>Length:</b> ~125 questions, drawn from all five courses</li>
+          <li><b>Length:</b> ~164 questions, drawn from all five courses</li>
           <li><b>Weighting:</b> ethics and responsible-AI scenarios make up the biggest share, followed by generative AI fundamentals and Copilot product questions</li>
           <li><b>Passing:</b> roughly 70%+; some questions repeat in different wording, so read carefully</li>
         </ul>
@@ -713,8 +713,8 @@ git diff --staged       # staged vs last commit</code></pre>
           <li><b>Data fundamentals</b> — validation, access control, training data quality, "garbage in, garbage out"</li>
         </ul>` },
       { h: "How to use this mock test", body: `
-        <p>Answer all 125 questions at your own pace (suggested 90 minutes), then hit <b>Finish &amp; score</b>. You'll get your percentage, a pass/fail verdict, and every correct answer with an explanation so you can review your misses. Aim for 85%+ before sitting the real exam.</p>` },
-      { h: "Full mock test (125 questions)", body: `
+        <p>Answer all 164 questions at your own pace (suggested 90 minutes), then hit <b>Finish &amp; score</b>. You'll get your percentage, a pass/fail verdict, and every correct answer with an explanation so you can review your misses. Aim for 85%+ before sitting the real exam.</p>` },
+      { h: "Full mock test (164 questions)", body: `
         <div id="mocktest" data-bank="GENAI_QUESTIONS"></div>` },
       { h: "Final preparation checklist", body: `
         <ul>

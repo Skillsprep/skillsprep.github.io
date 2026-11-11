@@ -21,8 +21,13 @@
 <meta name="twitter:description" content="Request a study guide, report a correction or get in touch with the SkillPrep team.">
 <meta name="twitter:image" content="https://skillsprep.github.io/assets/og-image.png">
 <link rel="icon" href="../assets/favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="../css/style.css">
+<script>(function(){try{if(localStorage.getItem("skillprep:theme")==="dark"){document.documentElement.setAttribute("data-theme","dark");}}catch(e){}})();</script>
 
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9455217122501464" crossorigin="anonymous"></script>
 </head>
 <body>
 <a class="skip-link" href="#main">Skip to content</a>
@@ -35,6 +40,7 @@
       <a href="../about/">About</a>
       <a href="../contact/" aria-current="page" class="active">Contact</a>
     </nav>
+    <button class="theme-toggle" id="themeToggle" type="button" aria-label="Toggle dark mode">◐</button>
   </div>
 </header>
 <main id="main">
@@ -42,7 +48,7 @@
 <div class="container two-col">
   <div class="card">
     <h2 class="card-h">Send a message</h2>
-    <form id="contactForm" action="mailto:hello@skillprep.blog" method="post" enctype="text/plain" data-email="hello@skillprep.blog">
+    <form id="contactForm" action="https://formspree.io/f/xqaerlzq" method="POST">
       <div class="form-group"><label for="cName">Your name</label><input id="cName" name="name" required autocomplete="name" placeholder="Jane Doe"></div>
       <div class="form-group"><label for="cEmail">Email</label><input id="cEmail" name="email" type="email" required autocomplete="email" placeholder="you@email.com"></div>
       <div class="form-group"><label for="cTopic">Topic</label>
@@ -53,6 +59,8 @@
           <option>Other</option>
         </select></div>
       <div class="form-group"><label for="cMsg">Message</label><textarea id="cMsg" name="message" rows="5" required placeholder="Which topic should we cover next?"></textarea></div>
+      <!-- Honeypot -->
+      <div style="display:none;"><label for="honeypot">Leave this field empty</label><input type="text" id="honeypot" name="honeypot"></div>
       <button class="btn" type="submit">Open in my email app</button>
       <p class="form-note">This opens a pre-filled message in your email app — nothing is sent until you press Send there.</p>
       <div id="formStatus" class="form-status" role="status" aria-live="polite"></div>
@@ -61,7 +69,7 @@
   <div>
     <div class="card" style="margin-bottom:22px">
       <h3 class="card-h">Email</h3>
-      <p><a href="mailto:hello@skillprep.blog">hello@skillprep.blog</a></p>
+      <p><a href="mailto:hello@skillsprep.org">hello@skillsprep.org</a></p>
     </div>
     <div class="callout tip"><b>Guide requests welcome!</b> The most-requested topic each month gets priority.</div>
   </div>
@@ -96,6 +104,15 @@
   </div>
 </footer>
 <button class="back-top" id="backTop" type="button" aria-label="Back to top">↑</button>
+<div id="cookieConsent" class="cookie-consent" hidden>
+  <div class="cookie-inner">
+    <p>We use local storage (cookies) to save your practice test progress. We also serve personalized ads via Google AdSense.</p>
+    <div class="cookie-actions">
+      <button id="cookieAccept" class="btn">Got it</button>
+      <button id="cookieDecline" class="btn btn-alt">Decline</button>
+    </div>
+  </div>
+</div>
 <script src="../js/site.js" defer></script>
 </body>
 </html>

@@ -9,6 +9,21 @@
     return null;
   }
 
+  /* ---------- dark mode toggle ---------- */
+  var themeToggle = $("#themeToggle");
+  if (themeToggle) {
+    themeToggle.addEventListener("click", function () {
+      var isDark = document.documentElement.getAttribute("data-theme") === "dark";
+      if (isDark) {
+        document.documentElement.removeAttribute("data-theme");
+        store("skillprep:theme", "light");
+      } else {
+        document.documentElement.setAttribute("data-theme", "dark");
+        store("skillprep:theme", "dark");
+      }
+    });
+  }
+
   /* ---------- mobile menu ---------- */
   var burger = $("#burger"), nav = $("#mainNav");
   if (burger && nav) {
@@ -16,6 +31,24 @@
     burger.addEventListener("click", function () { setMenu(!nav.classList.contains("open")); });
     nav.addEventListener("click", function (e) { if (e.target.closest("a")) setMenu(false); });
     document.addEventListener("keydown", function (e) { if (e.key === "Escape" && nav.classList.contains("open")) { setMenu(false); burger.focus(); } });
+  }
+
+  /* ---------- share button ---------- */
+  var shareBtn = $("#shareBtn");
+  if (shareBtn) {
+    shareBtn.addEventListener("click", function () {
+      var url = shareBtn.getAttribute("data-url");
+      var title = shareBtn.getAttribute("data-title");
+      if (navigator.share) {
+        navigator.share({ title: title, url: url }).catch(function () {});
+      } else {
+        navigator.clipboard.writeText(url).then(function () {
+          var oldText = shareBtn.textContent;
+          shareBtn.textContent = "Copied!";
+          setTimeout(function () { shareBtn.textContent = oldText; }, 2000);
+        });
+      }
+    });
   }
 
   /* ---------- back-to-top + reading progress (single scroll listener) ---------- */
@@ -82,7 +115,17 @@
     if (best !== null && best !== "") $(".mock-hint", box).textContent = "Untimed · scored at the end · your best: " + best + "%";
 
     function answered() { return $$("input:checked", box).length; }
-    box.addEventListener("change", function () { if (!finished) countEl.textContent = "Answered " + answered() + " / " + total; });
+    function updateProgress() {
+      if (finished) return;
+      var ans = answered();
+      countEl.textContent = "Answered " + ans + " / " + total;
+      var pct = Math.round((ans / total) * 100);
+      var progPct = $(".progress-pct", box);
+      var progFill = $(".progress-fill", box);
+      if (progPct) progPct.textContent = pct + "%";
+      if (progFill) progFill.style.width = pct + "%";
+    }
+    box.addEventListener("change", updateProgress);
 
     function reset() {
       finished = false;
@@ -121,6 +164,12 @@
       var prevBest = store(key);
       var isBest = prevBest === null || prevBest === "" || pct > Number(prevBest);
       if (isBest) store(key, String(pct));
+
+      // Update global dashboard progress tracking
+      // format: skillprep:progress:pathname = "answeredCount,correctCount,totalCount"
+      var path = window.location.pathname.replace(/^\/|\/$/g, "") + "/";
+      if (!path || path === "/") path = box.getAttribute("data-key");
+      localStorage.setItem("skillprep:progress:" + path, done + "," + score + "," + total);
       var rows = order.map(function (p) {
         var s = parts[p], pp = Math.round((s.ok / s.n) * 100);
         return '<tr><th scope="row">' + esc(p) + "</th><td>" + s.ok + " / " + s.n + '</td><td><span class="pbar"><i style="width:' + pp + '%" class="' + (pp >= 70 ? "ok" : "weak") + '"></i></span> ' + pp + "%" + (pp < 70 ? ' <b class="flag">revisit</b>' : "") + "</td></tr>";
@@ -157,7 +206,14 @@
       var q = state.q.toLowerCase(), shown = 0;
       cards.forEach(function (c) {
         var ok = (state.cat === "All" || c.getAttribute("data-cat") === state.cat) && (!q || c.getAttribute("data-search").indexOf(q) !== -1);
-        c.hidden = !ok; if (ok) shown++;
+        c.hidden = !ok;
+        if (ok) {
+          shown++;
+          // Trigger animation reflow
+          c.style.animation = 'none';
+          c.offsetHeight; /* trigger reflow */
+          c.style.animation = null;
+        }
       });
       chips.forEach(function (c) { var on = c.getAttribute("data-cat") === state.cat; c.classList.toggle("active", on); c.setAttribute("aria-pressed", String(on)); });
       title.textContent = state.cat === "All" ? "All guides" : state.cat + " guides";
@@ -194,6 +250,244 @@
       var a = document.createElement("a"); a.href = "mailto:" + addr; a.textContent = addr;
       status.appendChild(msg); status.appendChild(a); status.appendChild(document.createTextNode("."));
       window.location.href = url;
+    });
+  }
+})();
+
+  // Formspree AJAX Submission for Contact Form
+  const contactForm = document.getElementById("contactForm");
+  if (contactForm && contactForm.action.includes("formspree.io")) {
+    contactForm.addEventListener("submit", function(ev) {
+      ev.preventDefault();
+
+      // Honeypot check
+      const hp = document.getElementById("honeypot");
+      if (hp && hp.value) {
+          // Silent rejection for bots
+          return;
+      }
+
+      var data = new FormData(contactForm);
+      fetch(contactForm.action, {
+        method: contactForm.method,
+        body: data,
+        headers: {
+            'Accept': 'application/json'
+        }
+      }).then(response => {
+        if (response.ok) {
+          contactForm.reset();
+          let msg = document.createElement("p");
+          msg.textContent = "Thanks for your message! We'll get back to you soon.";
+          msg.style.color = "green";
+          msg.style.fontWeight = "bold";
+          contactForm.appendChild(msg);
+          setTimeout(() => msg.remove(), 5000);
+        } else {
+          response.json().then(data => {
+            let errorMsg = document.createElement("p");
+            if (Object.hasOwn(data, 'errors')) {
+              errorMsg.textContent = data["errors"].map(error => error["message"]).join(", ");
+            } else {
+              errorMsg.textContent = "Oops! There was a problem submitting your form";
+            }
+            errorMsg.style.color = "red";
+            contactForm.appendChild(errorMsg);
+            setTimeout(() => errorMsg.remove(), 5000);
+          })
+        }
+      }).catch(error => {
+        let errorMsg = document.createElement("p");
+        errorMsg.textContent = "Oops! There was a problem submitting your form";
+        errorMsg.style.color = "red";
+        contactForm.appendChild(errorMsg);
+        setTimeout(() => errorMsg.remove(), 5000);
+      });
+    });
+  }
+
+// Progress Export/Import (JSON)
+const progressContainer = document.createElement("div");
+progressContainer.className = "progress-sync-ui";
+progressContainer.style.margin = "1rem 0";
+progressContainer.style.display = "flex";
+progressContainer.style.gap = "10px";
+
+const exportBtn = document.createElement("button");
+exportBtn.className = "btn";
+exportBtn.textContent = "Export Progress (JSON)";
+exportBtn.onclick = function() {
+    let progressData = {};
+    for (let i = 0; i < localStorage.length; i++) {
+        let key = localStorage.key(i);
+        if (key.startsWith("skillprep:")) {
+            progressData[key] = localStorage.getItem(key);
+        }
+    }
+    if (Object.keys(progressData).length === 0) {
+        alert("No progress to export.");
+        return;
+    }
+    const blob = new Blob([JSON.stringify(progressData, null, 2)], { type: "application/json" });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement("a");
+    a.href = url;
+    a.download = "skillprep_progress.json";
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    URL.revokeObjectURL(url);
+};
+
+const importLabel = document.createElement("label");
+importLabel.className = "btn btn-alt";
+importLabel.textContent = "Import Progress (JSON)";
+importLabel.style.cursor = "pointer";
+
+const importInput = document.createElement("input");
+importInput.type = "file";
+importInput.accept = ".json";
+importInput.style.display = "none";
+importInput.onchange = function(e) {
+    const file = e.target.files[0];
+    if (!file) return;
+    const reader = new FileReader();
+    reader.onload = function(evt) {
+        try {
+            const data = JSON.parse(evt.target.result);
+            let importedCount = 0;
+            for (let key in data) {
+                if (key.startsWith("skillprep:")) {
+                    localStorage.setItem(key, data[key]);
+                    importedCount++;
+                }
+            }
+            if (importedCount > 0) {
+                alert("Successfully imported progress!");
+                window.location.reload();
+            } else {
+                alert("No valid SkillPrep progress found in this file.");
+            }
+        } catch (err) {
+            alert("Invalid JSON file.");
+        }
+        e.target.value = "";
+    };
+    reader.readAsText(file);
+};
+importLabel.appendChild(importInput);
+
+progressContainer.appendChild(exportBtn);
+progressContainer.appendChild(importLabel);
+
+
+
+// Since cloneNode doesn't clone events, a better way is to instantiate it per element.
+document.querySelectorAll(".mock-hint").forEach(hint => {
+    const pContainer = document.createElement("div");
+    pContainer.className = "progress-sync-ui";
+    pContainer.style.margin = "1rem 0";
+    pContainer.style.display = "flex";
+    pContainer.style.gap = "10px";
+
+    const eBtn = document.createElement("button");
+    eBtn.className = "btn";
+    eBtn.textContent = "Export Progress";
+    eBtn.onclick = exportBtn.onclick;
+
+    const iLabel = document.createElement("label");
+    iLabel.className = "btn btn-alt";
+    iLabel.textContent = "Import Progress";
+    iLabel.style.cursor = "pointer";
+
+    const iInput = document.createElement("input");
+    iInput.type = "file";
+    iInput.accept = ".json";
+    iInput.style.display = "none";
+    iInput.onchange = importInput.onchange;
+
+    iLabel.appendChild(iInput);
+    pContainer.appendChild(eBtn);
+    pContainer.appendChild(iLabel);
+
+    hint.parentElement.insertBefore(pContainer, hint);
+});
+
+// Cookie Consent Logic
+(function() {
+  var consent = document.getElementById("cookieConsent");
+  var btnAccept = document.getElementById("cookieAccept");
+  var btnDecline = document.getElementById("cookieDecline");
+
+  if (consent && btnAccept && btnDecline) {
+    if (!localStorage.getItem("skillprep:cookie_consent")) {
+      consent.hidden = false;
+    }
+
+    btnAccept.addEventListener("click", function() {
+      localStorage.setItem("skillprep:cookie_consent", "accepted");
+      consent.hidden = true;
+    });
+
+    btnDecline.addEventListener("click", function() {
+      localStorage.setItem("skillprep:cookie_consent", "declined");
+      consent.hidden = true;
+    });
+  }
+})();
+
+(function() {
+  const dash = document.getElementById("dashboard");
+  if (!dash) return;
+  const cards = document.querySelectorAll("#grid .post-card");
+  const dashGrid = document.getElementById("dashGrid");
+  const dashTotalQs = document.getElementById("dashTotalQs");
+  const dashAccuracy = document.getElementById("dashAccuracy");
+  const dashCompleted = document.getElementById("dashCompleted");
+  const clearDashBtn = document.getElementById("clearDashBtn");
+
+  let totalAttempts = 0;
+  let correctAttempts = 0;
+  let modulesStarted = 0;
+  let hasData = false;
+
+  cards.forEach(card => {
+    const link = card.getAttribute("href").replace("./", "").replace("../../", "");
+    if (!link) return;
+    const progressKey = "skillprep:progress:" + link;
+    const stored = localStorage.getItem(progressKey);
+    if (stored) {
+      hasData = true;
+      modulesStarted++;
+      const [answeredCount, correctCount, totalCount] = stored.split(",").map(Number);
+      totalAttempts += answeredCount;
+      correctAttempts += correctCount;
+
+      const cardClone = card.cloneNode(true);
+      // update action button text
+      const btn = cardClone.querySelector(".btn");
+      if (btn) btn.textContent = "Resume Learning";
+      dashGrid.appendChild(cardClone);
+    }
+  });
+
+  if (hasData) {
+    dash.style.display = "block";
+    dashTotalQs.textContent = totalAttempts;
+    dashAccuracy.textContent = totalAttempts > 0 ? Math.round((correctAttempts / totalAttempts) * 100) + "%" : "0%";
+    dashCompleted.textContent = modulesStarted;
+  }
+
+  if (clearDashBtn) {
+    clearDashBtn.addEventListener("click", () => {
+      if (confirm("Are you sure you want to reset your learning progress? This cannot be undone.")) {
+        Object.keys(localStorage).forEach(key => {
+          if (key.startsWith("skillprep:progress:")) {
+            localStorage.removeItem(key);
+          }
+        });
+        window.location.reload();
+      }
     });
   }
 })();

@@ -21,9 +21,14 @@
 <meta name="twitter:description" content="Hoisting, closures, == vs ===, arrow functions, and promises — the JavaScript fundamentals behind most interview and skills-test questions.">
 <meta name="twitter:image" content="https://skillsprep.github.io/assets/og-image.png">
 <link rel="icon" href="../../assets/favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="../../css/style.css">
+<script>(function(){try{if(localStorage.getItem("skillprep:theme")==="dark"){document.documentElement.setAttribute("data-theme","dark");}}catch(e){}})();</script>
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"JavaScript Fundamentals: Key Concepts Explained","description":"Hoisting, closures, == vs ===, arrow functions, and promises — the JavaScript fundamentals behind most interview and skills-test questions.","datePublished":"2026-08-28","dateModified":"2026-10-18","author":{"@type":"Organization","name":"SkillPrep editorial team"},"publisher":{"@type":"Organization","name":"SkillPrep","logo":{"@type":"ImageObject","url":"https://skillsprep.github.io/assets/favicon.svg"}},"mainEntityOfPage":"https://skillsprep.github.io/guides/javascript-study-guide/","image":"https://skillsprep.github.io/assets/og-image.png","articleSection":"JavaScript","inLanguage":"en"}</script>
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://skillsprep.github.io/"},{"@type":"ListItem","position":2,"name":"JavaScript","item":"https://skillsprep.github.io/#guides"},{"@type":"ListItem","position":3,"name":"JavaScript Fundamentals: Key Concepts Explained","item":"https://skillsprep.github.io/guides/javascript-study-guide/"}]}</script>
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9455217122501464" crossorigin="anonymous"></script>
 </head>
 <body>
 <a class="skip-link" href="#main">Skip to content</a>
@@ -36,6 +41,7 @@
       <a href="../../about/">About</a>
       <a href="../../contact/">Contact</a>
     </nav>
+    <button class="theme-toggle" id="themeToggle" type="button" aria-label="Toggle dark mode">◐</button>
   </div>
 </header>
 <main id="main">
@@ -43,14 +49,14 @@
 <div id="progress" aria-hidden="true"></div>
 <section class="article-hero">
   <div class="container">
-    <nav class="crumbs" aria-label="Breadcrumb"><a href="../../">Home</a> <span aria-hidden="true">›</span> <a href="../../#guides">Guides</a> <span aria-hidden="true">›</span> <span aria-current="page">JavaScript</span></nav>
+    <nav class="crumbs" aria-label="Breadcrumb"><a href="../../">Home</a> <span aria-hidden="true" class="sep">›</span> <a href="../../#guides">Guides</a> <span aria-hidden="true" class="sep">›</span> <span aria-current="page">JavaScript</span></nav>
     <div class="cat">JavaScript</div>
     <h1>JavaScript Fundamentals: Key Concepts Explained</h1>
     <div class="meta">
+      <span><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg> 7 min read</span>
+      <span><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg> 20 Questions</span>
       <span>Published <time datetime="2026-08-28">Aug 28, 2026</time></span>
-      <span>Last reviewed <time datetime="2026-10-18">Oct 18, 2026</time></span>
-      <span>2 min read</span>
-      <span>By the SkillPrep editorial team</span>
+      <span>Reviewed <time datetime="2026-10-18">Oct 18, 2026</time></span>
     </div>
   </div>
 </section>
@@ -80,9 +86,15 @@ setTimeout(() => console.log("2"));
 Promise.resolve().then(() => console.log("3"));
 console.log("4");
 // Output: 1, 4, 3, 2</code></pre>
+    <h2 id="practical-learning-exercises">Practical learning exercises</h2>
+        <ul>
+          <li><b>Exercise 1 (DOM & Events):</b> Create a simple HTML page with a button and a list. Write a JS script that adds a new list item with the current timestamp every time the button is clicked.</li>
+          <li><b>Exercise 2 (Async/Await):</b> Use the fetch API to retrieve data from a public API (like JSONPlaceholder). Parse the JSON and render the titles of the first 5 posts onto the page, handling network errors with try/catch.</li>
+          <li><b>Exercise 3 (Array Methods):</b> Take an array of product objects (with name, price, and category). Chain .filter() to get only 'electronics', then .map() to extract their names, then .join() to create a comma-separated string.</li>
+        </ul>
     <h2 id="practice-questions">Practice questions</h2>
         <div class="quiz" data-quiz>
-          <div class="q-head"><span>Question 1 of 3</span><span>Types</span></div>
+          <div class="q-head"><span>Question 1 of 20</span><span>Types</span></div>
           <div class="q-body" role="radiogroup" aria-labelledby="javascript-study-guide-iq1-t">
             <p class="q-text" id="javascript-study-guide-iq1-t">What is the result of <code>typeof null</code>?</p>
             <label class="opt"><input type="radio" name="javascript-study-guide-q1"> "null"</label>
@@ -94,7 +106,7 @@ console.log("4");
           <div class="q-explain"><b>Why:</b> A bug preserved since JavaScript's first version — <code>typeof null</code> returns <code>"object"</code>. To check for null, use <code>value === null</code>.</div>
         </div>
         <div class="quiz" data-quiz>
-          <div class="q-head"><span>Question 2 of 3</span><span>Array Methods</span></div>
+          <div class="q-head"><span>Question 2 of 20</span><span>Array Methods</span></div>
           <div class="q-body" role="radiogroup" aria-labelledby="javascript-study-guide-iq2-t">
             <p class="q-text" id="javascript-study-guide-iq2-t">Which method returns a new array containing only elements for which a callback returns true?</p>
             <label class="opt"><input type="radio" name="javascript-study-guide-q2"> map</label>
@@ -106,7 +118,7 @@ console.log("4");
           <div class="q-explain"><b>Why:</b> <code>filter</code> returns a new array of all matching elements. <code>find</code> returns only the first match (a single value), <code>map</code> transforms every element, and <code>forEach</code> returns undefined.</div>
         </div>
         <div class="quiz" data-quiz>
-          <div class="q-head"><span>Question 3 of 3</span><span>Functions</span></div>
+          <div class="q-head"><span>Question 3 of 20</span><span>Functions</span></div>
           <div class="q-body" role="radiogroup" aria-labelledby="javascript-study-guide-iq3-t">
             <p class="q-text" id="javascript-study-guide-iq3-t">What makes arrow functions different from regular functions regarding <code>this</code>?</p>
             <label class="opt"><input type="radio" name="javascript-study-guide-q3"> They bind this to the window object</label>
@@ -116,6 +128,211 @@ console.log("4");
             <button type="button" class="check-btn">Check answer</button><span class="q-result" role="status" aria-live="polite"></span>
           </div>
           <div class="q-explain"><b>Why:</b> Arrow functions have no own <code>this</code> — they capture it lexically from the enclosing context, which is exactly why they're preferred for callbacks and event handlers inside classes and methods.</div>
+        </div>
+        <div class="quiz" data-quiz>
+          <div class="q-head"><span>Question 4 of 20</span><span>Arrays</span></div>
+          <div class="q-body" role="radiogroup" aria-labelledby="javascript-study-guide-iq4-t">
+            <p class="q-text" id="javascript-study-guide-iq4-t">Which array method creates a new array with the results of calling a function on every element?</p>
+            <label class="opt"><input type="radio" name="javascript-study-guide-q4"> filter()</label>
+            <label class="opt"><input type="radio" name="javascript-study-guide-q4"> forEach()</label>
+            <label class="opt" data-correct><input type="radio" name="javascript-study-guide-q4"> map()</label>
+            <label class="opt"><input type="radio" name="javascript-study-guide-q4"> reduce()</label>
+            <button type="button" class="check-btn">Check answer</button><span class="q-result" role="status" aria-live="polite"></span>
+          </div>
+          <div class="q-explain"><b>Why:</b> <code>map()</code> creates a new array populated with the results of calling a provided function on every element in the calling array.</div>
+        </div>
+        <div class="quiz" data-quiz>
+          <div class="q-head"><span>Question 5 of 20</span><span>Promises</span></div>
+          <div class="q-body" role="radiogroup" aria-labelledby="javascript-study-guide-iq5-t">
+            <p class="q-text" id="javascript-study-guide-iq5-t">What does Promise.all() do?</p>
+            <label class="opt"><input type="radio" name="javascript-study-guide-q5"> Resolves when the first promise resolves</label>
+            <label class="opt" data-correct><input type="radio" name="javascript-study-guide-q5"> Resolves when all promises resolve, or rejects if any promise rejects</label>
+            <label class="opt"><input type="radio" name="javascript-study-guide-q5"> Rejects only if all promises reject</label>
+            <label class="opt"><input type="radio" name="javascript-study-guide-q5"> Resolves arrays immediately</label>
+            <button type="button" class="check-btn">Check answer</button><span class="q-result" role="status" aria-live="polite"></span>
+          </div>
+          <div class="q-explain"><b>Why:</b> <code>Promise.all()</code> takes an iterable of promises and returns a single Promise that resolves when all of the promises resolve, or rejects with the reason of the first promise that rejects.</div>
+        </div>
+
+        <div class="quiz" data-quiz>
+          <div class="q-head"><span>Question 6 of 20</span><span>DOM</span></div>
+          <div class="q-body" role="radiogroup" aria-labelledby="javascript-study-guide-iq6-t">
+            <p class="q-text" id="javascript-study-guide-iq6-t">Which method is best for selecting a single element by its class name?</p>
+            <label class="opt"><input type="radio" name="javascript-study-guide-q6"> &#96;document.getElementsByClassName()&#96;</label>
+            <label class="opt" data-correct><input type="radio" name="javascript-study-guide-q6"> &#96;document.querySelector()&#96;</label>
+            <label class="opt"><input type="radio" name="javascript-study-guide-q6"> &#96;document.querySelectorAll()&#96;</label>
+            <label class="opt"><input type="radio" name="javascript-study-guide-q6"> &#96;document.getElementById()&#96;</label>
+            <button type="button" class="check-btn">Check answer</button><span class="q-result" role="status" aria-live="polite"></span>
+          </div>
+          <div class="q-explain"><b>Why:</b> &#96;querySelector&#96; returns the first element that matches the CSS selector.</div>
+        </div>
+        <div class="quiz" data-quiz>
+          <div class="q-head"><span>Question 7 of 20</span><span>Events</span></div>
+          <div class="q-body" role="radiogroup" aria-labelledby="javascript-study-guide-iq7-t">
+            <p class="q-text" id="javascript-study-guide-iq7-t">What is event delegation?</p>
+            <label class="opt"><input type="radio" name="javascript-study-guide-q7"> Removing event listeners to save memory</label>
+            <label class="opt" data-correct><input type="radio" name="javascript-study-guide-q7"> Attaching a single event listener to a parent element to manage events for its children</label>
+            <label class="opt"><input type="radio" name="javascript-study-guide-q7"> Preventing the default action of an event</label>
+            <label class="opt"><input type="radio" name="javascript-study-guide-q7"> Dispatching custom events</label>
+            <button type="button" class="check-btn">Check answer</button><span class="q-result" role="status" aria-live="polite"></span>
+          </div>
+          <div class="q-explain"><b>Why:</b> Delegation takes advantage of event bubbling to handle events on dynamic child elements efficiently.</div>
+        </div>
+        <div class="quiz" data-quiz>
+          <div class="q-head"><span>Question 8 of 20</span><span>Promises</span></div>
+          <div class="q-body" role="radiogroup" aria-labelledby="javascript-study-guide-iq8-t">
+            <p class="q-text" id="javascript-study-guide-iq8-t">What is an executing equivalent of &#96;Promise.resolve(5)&#96; using an immediately invoked async function expression (IIFE)?</p>
+            <label class="opt" data-correct><input type="radio" name="javascript-study-guide-q8"> &#96;(async () =&gt; 5)()&#96;</label>
+            <label class="opt"><input type="radio" name="javascript-study-guide-q8"> &#96;async function() { return 5; }&#96;</label>
+            <label class="opt"><input type="radio" name="javascript-study-guide-q8"> &#96;await 5&#96;</label>
+            <label class="opt"><input type="radio" name="javascript-study-guide-q8"> &#96;function() { await 5; }()&#96;</label>
+            <button type="button" class="check-btn">Check answer</button><span class="q-result" role="status" aria-live="polite"></span>
+          </div>
+          <div class="q-explain"><b>Why:</b> An executing &#96;async&#96; function implicitly wraps its return value in a Promise, immediately producing a resolved Promise of 5. Simply defining the function (without calling it) only creates a function reference. <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise/resolve" target="_blank" rel="noopener">MDN Web Docs</a></div>
+        </div>
+        <div class="quiz" data-quiz>
+          <div class="q-head"><span>Question 9 of 20</span><span>Scope</span></div>
+          <div class="q-body" role="radiogroup" aria-labelledby="javascript-study-guide-iq9-t">
+            <p class="q-text" id="javascript-study-guide-iq9-t">What is the difference between &#96;let&#96; and &#96;var&#96;?</p>
+            <label class="opt"><input type="radio" name="javascript-study-guide-q9"> &#96;var&#96; is block-scoped, &#96;let&#96; is function-scoped</label>
+            <label class="opt" data-correct><input type="radio" name="javascript-study-guide-q9"> &#96;let&#96; is block-scoped, &#96;var&#96; is function-scoped</label>
+            <label class="opt"><input type="radio" name="javascript-study-guide-q9"> They are identical</label>
+            <label class="opt"><input type="radio" name="javascript-study-guide-q9"> &#96;let&#96; cannot be reassigned</label>
+            <button type="button" class="check-btn">Check answer</button><span class="q-result" role="status" aria-live="polite"></span>
+          </div>
+          <div class="q-explain"><b>Why:</b> &#96;let&#96; respects block scope (like inside an if statement), while &#96;var&#96; is hoisted to the function scope.</div>
+        </div>
+        <div class="quiz" data-quiz>
+          <div class="q-head"><span>Question 10 of 20</span><span>Arrays</span></div>
+          <div class="q-body" role="radiogroup" aria-labelledby="javascript-study-guide-iq10-t">
+            <p class="q-text" id="javascript-study-guide-iq10-t">Which array method adds an element to the beginning of an array?</p>
+            <label class="opt"><input type="radio" name="javascript-study-guide-q10"> &#96;push()&#96;</label>
+            <label class="opt"><input type="radio" name="javascript-study-guide-q10"> &#96;pop()&#96;</label>
+            <label class="opt"><input type="radio" name="javascript-study-guide-q10"> &#96;shift()&#96;</label>
+            <label class="opt" data-correct><input type="radio" name="javascript-study-guide-q10"> &#96;unshift()&#96;</label>
+            <button type="button" class="check-btn">Check answer</button><span class="q-result" role="status" aria-live="polite"></span>
+          </div>
+          <div class="q-explain"><b>Why:</b> &#96;unshift()&#96; adds to the front, &#96;push()&#96; adds to the end.</div>
+        </div>
+        <div class="quiz" data-quiz>
+          <div class="q-head"><span>Question 11 of 20</span><span>Types</span></div>
+          <div class="q-body" role="radiogroup" aria-labelledby="javascript-study-guide-iq11-t">
+            <p class="q-text" id="javascript-study-guide-iq11-t">What does &#96;typeof null&#96; evaluate to?</p>
+            <label class="opt"><input type="radio" name="javascript-study-guide-q11"> &#96;"null"&#96;</label>
+            <label class="opt"><input type="radio" name="javascript-study-guide-q11"> &#96;"undefined"&#96;</label>
+            <label class="opt" data-correct><input type="radio" name="javascript-study-guide-q11"> &#96;"object"&#96;</label>
+            <label class="opt"><input type="radio" name="javascript-study-guide-q11"> &#96;"number"&#96;</label>
+            <button type="button" class="check-btn">Check answer</button><span class="q-result" role="status" aria-live="polite"></span>
+          </div>
+          <div class="q-explain"><b>Why:</b> Due to a historical bug in JavaScript, &#96;typeof null&#96; returns &#96;"object"&#96;.</div>
+        </div>
+        <div class="quiz" data-quiz>
+          <div class="q-head"><span>Question 12 of 20</span><span>Equality</span></div>
+          <div class="q-body" role="radiogroup" aria-labelledby="javascript-study-guide-iq12-t">
+            <p class="q-text" id="javascript-study-guide-iq12-t">Why is &#96;==&#96; generally avoided in favor of &#96;===&#96;?</p>
+            <label class="opt"><input type="radio" name="javascript-study-guide-q12"> &#96;===&#96; is faster</label>
+            <label class="opt" data-correct><input type="radio" name="javascript-study-guide-q12"> &#96;==&#96; performs type coercion, which can lead to unexpected results</label>
+            <label class="opt"><input type="radio" name="javascript-study-guide-q12"> &#96;===&#96; works with objects</label>
+            <label class="opt"><input type="radio" name="javascript-study-guide-q12"> &#96;==&#96; is deprecated</label>
+            <button type="button" class="check-btn">Check answer</button><span class="q-result" role="status" aria-live="polite"></span>
+          </div>
+          <div class="q-explain"><b>Why:</b> &#96;===&#96; checks both value and type, preventing confusing coercions like &#96;0 == false&#96; (which is true).</div>
+        </div>
+        <div class="quiz" data-quiz>
+          <div class="q-head"><span>Question 13 of 20</span><span>Objects</span></div>
+          <div class="q-body" role="radiogroup" aria-labelledby="javascript-study-guide-iq13-t">
+            <p class="q-text" id="javascript-study-guide-iq13-t">How do you extract the 'name' property from an object &#96;user&#96; into a variable?</p>
+            <label class="opt" data-correct><input type="radio" name="javascript-study-guide-q13"> &#96;let { name } = user;&#96;</label>
+            <label class="opt"><input type="radio" name="javascript-study-guide-q13"> &#96;let name = user[name];&#96;</label>
+            <label class="opt"><input type="radio" name="javascript-study-guide-q13"> &#96;let { user.name };&#96;</label>
+            <label class="opt"><input type="radio" name="javascript-study-guide-q13"> &#96;const name = destructure(user);&#96;</label>
+            <button type="button" class="check-btn">Check answer</button><span class="q-result" role="status" aria-live="polite"></span>
+          </div>
+          <div class="q-explain"><b>Why:</b> This is object destructuring syntax.</div>
+        </div>
+        <div class="quiz" data-quiz>
+          <div class="q-head"><span>Question 14 of 20</span><span>Functions</span></div>
+          <div class="q-body" role="radiogroup" aria-labelledby="javascript-study-guide-iq14-t">
+            <p class="q-text" id="javascript-study-guide-iq14-t">How does the &#96;this&#96; keyword behave in an arrow function?</p>
+            <label class="opt"><input type="radio" name="javascript-study-guide-q14"> It refers to the window object</label>
+            <label class="opt"><input type="radio" name="javascript-study-guide-q14"> It binds to the element that fired the event</label>
+            <label class="opt" data-correct><input type="radio" name="javascript-study-guide-q14"> It inherits &#96;this&#96; from the enclosing lexical context</label>
+            <label class="opt"><input type="radio" name="javascript-study-guide-q14"> It is undefined</label>
+            <button type="button" class="check-btn">Check answer</button><span class="q-result" role="status" aria-live="polite"></span>
+          </div>
+          <div class="q-explain"><b>Why:</b> Arrow functions do not have their own &#96;this&#96; context; they capture it from the surrounding scope.</div>
+        </div>
+        <div class="quiz" data-quiz>
+          <div class="q-head"><span>Question 15 of 20</span><span>Async</span></div>
+          <div class="q-body" role="radiogroup" aria-labelledby="javascript-study-guide-iq15-t">
+            <p class="q-text" id="javascript-study-guide-iq15-t">What happens if a &#96;fetch()&#96; request encounters an HTTP 404 error?</p>
+            <label class="opt"><input type="radio" name="javascript-study-guide-q15"> The promise rejects immediately</label>
+            <label class="opt" data-correct><input type="radio" name="javascript-study-guide-q15"> The promise resolves normally, but &#96;response.ok&#96; is false</label>
+            <label class="opt"><input type="radio" name="javascript-study-guide-q15"> An exception is thrown</label>
+            <label class="opt"><input type="radio" name="javascript-study-guide-q15"> It automatically retries</label>
+            <button type="button" class="check-btn">Check answer</button><span class="q-result" role="status" aria-live="polite"></span>
+          </div>
+          <div class="q-explain"><b>Why:</b> &#96;fetch&#96; only rejects on network failure. HTTP errors (404, 500) resolve normally, so you must check &#96;response.ok&#96;.</div>
+        </div>
+        <div class="quiz" data-quiz>
+          <div class="q-head"><span>Question 16 of 20</span><span>Modules</span></div>
+          <div class="q-body" role="radiogroup" aria-labelledby="javascript-study-guide-iq16-t">
+            <p class="q-text" id="javascript-study-guide-iq16-t">How do you export a function as the default export of a module?</p>
+            <label class="opt" data-correct><input type="radio" name="javascript-study-guide-q16"> &#96;export default function myFunc() {}&#96;</label>
+            <label class="opt"><input type="radio" name="javascript-study-guide-q16"> &#96;module.exports = myFunc;&#96;</label>
+            <label class="opt"><input type="radio" name="javascript-study-guide-q16"> &#96;export myFunc;&#96;</label>
+            <label class="opt"><input type="radio" name="javascript-study-guide-q16"> &#96;default export myFunc;&#96;</label>
+            <button type="button" class="check-btn">Check answer</button><span class="q-result" role="status" aria-live="polite"></span>
+          </div>
+          <div class="q-explain"><b>Why:</b> ES6 modules use the &#96;export default&#96; syntax.</div>
+        </div>
+        <div class="quiz" data-quiz>
+          <div class="q-head"><span>Question 17 of 20</span><span>Storage</span></div>
+          <div class="q-body" role="radiogroup" aria-labelledby="javascript-study-guide-iq17-t">
+            <p class="q-text" id="javascript-study-guide-iq17-t">Which storage mechanism is cleared when the page session ends?</p>
+            <label class="opt"><input type="radio" name="javascript-study-guide-q17"> localStorage</label>
+            <label class="opt" data-correct><input type="radio" name="javascript-study-guide-q17"> sessionStorage</label>
+            <label class="opt"><input type="radio" name="javascript-study-guide-q17"> Cookies</label>
+            <label class="opt"><input type="radio" name="javascript-study-guide-q17"> IndexedDB</label>
+            <button type="button" class="check-btn">Check answer</button><span class="q-result" role="status" aria-live="polite"></span>
+          </div>
+          <div class="q-explain"><b>Why:</b> sessionStorage data is available only for the duration of the page session.</div>
+        </div>
+        <div class="quiz" data-quiz>
+          <div class="q-head"><span>Question 18 of 20</span><span>JSON</span></div>
+          <div class="q-body" role="radiogroup" aria-labelledby="javascript-study-guide-iq18-t">
+            <p class="q-text" id="javascript-study-guide-iq18-t">Which method converts a JS object into a JSON string?</p>
+            <label class="opt"><input type="radio" name="javascript-study-guide-q18"> &#96;JSON.parse()&#96;</label>
+            <label class="opt" data-correct><input type="radio" name="javascript-study-guide-q18"> &#96;JSON.stringify()&#96;</label>
+            <label class="opt"><input type="radio" name="javascript-study-guide-q18"> &#96;Object.toString()&#96;</label>
+            <label class="opt"><input type="radio" name="javascript-study-guide-q18"> &#96;JSON.serialize()&#96;</label>
+            <button type="button" class="check-btn">Check answer</button><span class="q-result" role="status" aria-live="polite"></span>
+          </div>
+          <div class="q-explain"><b>Why:</b> &#96;JSON.stringify()&#96; serializes objects to JSON.</div>
+        </div>
+        <div class="quiz" data-quiz>
+          <div class="q-head"><span>Question 19 of 20</span><span>Classes</span></div>
+          <div class="q-body" role="radiogroup" aria-labelledby="javascript-study-guide-iq19-t">
+            <p class="q-text" id="javascript-study-guide-iq19-t">How do you call the constructor of a parent class from a subclass?</p>
+            <label class="opt" data-correct><input type="radio" name="javascript-study-guide-q19"> &#96;super()&#96;</label>
+            <label class="opt"><input type="radio" name="javascript-study-guide-q19"> &#96;parent()&#96;</label>
+            <label class="opt"><input type="radio" name="javascript-study-guide-q19"> &#96;this.super()&#96;</label>
+            <label class="opt"><input type="radio" name="javascript-study-guide-q19"> &#96;Base()&#96;</label>
+            <button type="button" class="check-btn">Check answer</button><span class="q-result" role="status" aria-live="polite"></span>
+          </div>
+          <div class="q-explain"><b>Why:</b> The &#96;super()&#96; function calls the parent class constructor.</div>
+        </div>
+        <div class="quiz" data-quiz>
+          <div class="q-head"><span>Question 20 of 20</span><span>Events</span></div>
+          <div class="q-body" role="radiogroup" aria-labelledby="javascript-study-guide-iq20-t">
+            <p class="q-text" id="javascript-study-guide-iq20-t">What does &#96;event.preventDefault()&#96; do?</p>
+            <label class="opt"><input type="radio" name="javascript-study-guide-q20"> Stops event bubbling</label>
+            <label class="opt" data-correct><input type="radio" name="javascript-study-guide-q20"> Prevents the browser's default behavior for that event (e.g., submitting a form)</label>
+            <label class="opt"><input type="radio" name="javascript-study-guide-q20"> Removes the event listener</label>
+            <label class="opt"><input type="radio" name="javascript-study-guide-q20"> Refreshes the page</label>
+            <button type="button" class="check-btn">Check answer</button><span class="q-result" role="status" aria-live="polite"></span>
+          </div>
+          <div class="q-explain"><b>Why:</b> It stops the default action, like preventing a link from navigating or a form from submitting.</div>
         </div>
     <h2 id="last-minute-tips">Last-minute tips</h2>
         <ul>
@@ -140,6 +357,7 @@ console.log("4");
         <a href="#core-topics-to-know" data-toc="core-topics-to-know">Core topics to know</a>
         <a href="#truthy-and-falsy-values" data-toc="truthy-and-falsy-values">Truthy and falsy values</a>
         <a href="#async-execution-order" data-toc="async-execution-order">Async execution order</a>
+        <a href="#practical-learning-exercises" data-toc="practical-learning-exercises">Practical learning exercises</a>
         <a href="#practice-questions" data-toc="practice-questions">Practice questions</a>
         <a href="#last-minute-tips" data-toc="last-minute-tips">Last-minute tips</a>
         <a href="#sources" data-toc="sources">Sources &amp; further reading</a>
@@ -152,9 +370,13 @@ console.log("4");
       <a href="../../guides/project-management-study-guide/">Project Management Study Guide: Concepts That Matter</a>
     </div>
     <div class="box">
+      <h2 class="box-h">Share this guide</h2>
+      <button type="button" class="btn btn-share" id="shareBtn" data-url="https://skillsprep.github.io/guides/javascript-study-guide/" data-title="JavaScript Fundamentals: Key Concepts Explained">Copy Link</button>
+    </div>
+    <div class="box">
       <h2 class="box-h">Spotted a mistake?</h2>
       <p class="box-p">We correct errors quickly. Tell us what's wrong and we'll fix it.</p>
-      <a class="btn btn-link" href="mailto:hello@skillprep.blog?subject=Correction%3A%20JavaScript%20Fundamentals%3A%20Key%20Concepts%20Explained&amp;body=Page%3A%20https%3A%2F%2Fskillsprep.github.io%2Fguides%2Fjavascript-study-guide%2F%0A%0AWhat's%20wrong%3A%0A">Report a correction</a>
+      <a class="btn btn-link" href="mailto:hello@skillsprep.org?subject=Correction%3A%20JavaScript%20Fundamentals%3A%20Key%20Concepts%20Explained&amp;body=Page%3A%20https%3A%2F%2Fskillsprep.github.io%2Fguides%2Fjavascript-study-guide%2F%0A%0AWhat's%20wrong%3A%0A">Report a correction</a>
     </div>
   </aside>
 </div>
@@ -188,6 +410,15 @@ console.log("4");
   </div>
 </footer>
 <button class="back-top" id="backTop" type="button" aria-label="Back to top">↑</button>
+<div id="cookieConsent" class="cookie-consent" hidden>
+  <div class="cookie-inner">
+    <p>We use local storage (cookies) to save your practice test progress. We also serve personalized ads via Google AdSense.</p>
+    <div class="cookie-actions">
+      <button id="cookieAccept" class="btn">Got it</button>
+      <button id="cookieDecline" class="btn btn-alt">Decline</button>
+    </div>
+  </div>
+</div>
 <script src="../../js/site.js" defer></script>
 </body>
 </html>

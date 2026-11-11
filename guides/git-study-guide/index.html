@@ -21,9 +21,14 @@
 <meta name="twitter:description" content="Branching, merging vs rebasing, staging, and undoing mistakes — the Git knowledge every developer needs, with quizzes.">
 <meta name="twitter:image" content="https://skillsprep.github.io/assets/og-image.png">
 <link rel="icon" href="../../assets/favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="../../css/style.css">
+<script>(function(){try{if(localStorage.getItem("skillprep:theme")==="dark"){document.documentElement.setAttribute("data-theme","dark");}}catch(e){}})();</script>
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"Git Study Guide: Commands and Concepts","description":"Branching, merging vs rebasing, staging, and undoing mistakes — the Git knowledge every developer needs, with quizzes.","datePublished":"2026-07-30","dateModified":"2026-10-18","author":{"@type":"Organization","name":"SkillPrep editorial team"},"publisher":{"@type":"Organization","name":"SkillPrep","logo":{"@type":"ImageObject","url":"https://skillsprep.github.io/assets/favicon.svg"}},"mainEntityOfPage":"https://skillsprep.github.io/guides/git-study-guide/","image":"https://skillsprep.github.io/assets/og-image.png","articleSection":"Git","inLanguage":"en"}</script>
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://skillsprep.github.io/"},{"@type":"ListItem","position":2,"name":"Git","item":"https://skillsprep.github.io/#guides"},{"@type":"ListItem","position":3,"name":"Git Study Guide: Commands and Concepts","item":"https://skillsprep.github.io/guides/git-study-guide/"}]}</script>
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9455217122501464" crossorigin="anonymous"></script>
 </head>
 <body>
 <a class="skip-link" href="#main">Skip to content</a>
@@ -36,6 +41,7 @@
       <a href="../../about/">About</a>
       <a href="../../contact/">Contact</a>
     </nav>
+    <button class="theme-toggle" id="themeToggle" type="button" aria-label="Toggle dark mode">◐</button>
   </div>
 </header>
 <main id="main">
@@ -43,14 +49,14 @@
 <div id="progress" aria-hidden="true"></div>
 <section class="article-hero">
   <div class="container">
-    <nav class="crumbs" aria-label="Breadcrumb"><a href="../../">Home</a> <span aria-hidden="true">›</span> <a href="../../#guides">Guides</a> <span aria-hidden="true">›</span> <span aria-current="page">Git</span></nav>
+    <nav class="crumbs" aria-label="Breadcrumb"><a href="../../">Home</a> <span aria-hidden="true" class="sep">›</span> <a href="../../#guides">Guides</a> <span aria-hidden="true" class="sep">›</span> <span aria-current="page">Git</span></nav>
     <div class="cat">Git</div>
     <h1>Git Study Guide: Commands and Concepts</h1>
     <div class="meta">
+      <span><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg> 7 min read</span>
+      <span><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg> 20 Questions</span>
       <span>Published <time datetime="2026-07-30">Jul 30, 2026</time></span>
-      <span>Last reviewed <time datetime="2026-10-18">Oct 18, 2026</time></span>
-      <span>2 min read</span>
-      <span>By the SkillPrep editorial team</span>
+      <span>Reviewed <time datetime="2026-10-18">Oct 18, 2026</time></span>
     </div>
   </div>
 </section>
@@ -83,9 +89,15 @@ git diff --staged       # staged vs last commit</code></pre>
           <li><b>Rebase</b> — replays your commits on top of another branch, producing linear history. Never rebase commits others have pulled.</li>
         </ul>
         <p>The golden rule: <b>rebase local, merge shared</b>.</p>
+    <h2 id="practical-learning-exercises">Practical learning exercises</h2>
+        <ul>
+          <li><b>Exercise 1 (Branching):</b> In a local repo, create a new branch called feature-login. Make a change to a file, stage it, commit it with a descriptive message, and switch back to main.</li>
+          <li><b>Exercise 2 (Merging & Conflicts):</b> Intentionally create a merge conflict. Modify the same line of a file in both main and a test branch. Attempt to merge the branch into main, resolve the conflict markers in your editor, and complete the merge.</li>
+          <li><b>Exercise 3 (History):</b> Use git log --oneline --graph to view your history. Then use git revert to safely undo your last commit by creating a new inverse commit.</li>
+        </ul>
     <h2 id="practice-questions">Practice questions</h2>
         <div class="quiz" data-quiz>
-          <div class="q-head"><span>Question 1 of 3</span><span>Basics</span></div>
+          <div class="q-head"><span>Question 1 of 20</span><span>Basics</span></div>
           <div class="q-body" role="radiogroup" aria-labelledby="git-study-guide-iq1-t">
             <p class="q-text" id="git-study-guide-iq1-t">Which command shows the difference between your working directory and the staging area?</p>
             <label class="opt"><input type="radio" name="git-study-guide-q1"> git diff --staged</label>
@@ -97,7 +109,7 @@ git diff --staged       # staged vs last commit</code></pre>
           <div class="q-explain"><b>Why:</b> Plain <code>git diff</code> compares working tree to the index (staging area). <code>--staged</code> compares the index to the last commit instead.</div>
         </div>
         <div class="quiz" data-quiz>
-          <div class="q-head"><span>Question 2 of 3</span><span>Undoing</span></div>
+          <div class="q-head"><span>Question 2 of 20</span><span>Undoing</span></div>
           <div class="q-body" role="radiogroup" aria-labelledby="git-study-guide-iq2-t">
             <p class="q-text" id="git-study-guide-iq2-t">A commit has already been pushed to a shared branch, and you need to undo it without rewriting history. What do you use?</p>
             <label class="opt"><input type="radio" name="git-study-guide-q2"> git reset --hard HEAD~1</label>
@@ -109,7 +121,7 @@ git diff --staged       # staged vs last commit</code></pre>
           <div class="q-explain"><b>Why:</b> <code>revert</code> adds a new commit that undoes the target commit — safe for shared history. <code>reset</code> rewrites history and would break teammates' repos on their next pull.</div>
         </div>
         <div class="quiz" data-quiz>
-          <div class="q-head"><span>Question 3 of 3</span><span>Branching</span></div>
+          <div class="q-head"><span>Question 3 of 20</span><span>Branching</span></div>
           <div class="q-body" role="radiogroup" aria-labelledby="git-study-guide-iq3-t">
             <p class="q-text" id="git-study-guide-iq3-t">What does <code>git checkout -b feature</code> do?</p>
             <label class="opt"><input type="radio" name="git-study-guide-q3"> Creates a branch named "feature" only</label>
@@ -120,11 +132,217 @@ git diff --staged       # staged vs last commit</code></pre>
           </div>
           <div class="q-explain"><b>Why:</b> The <code>-b</code> flag creates the branch and immediately checks it out — equivalent to <code>git branch feature</code> followed by <code>git checkout feature</code>. Modern Git also offers <code>git switch -c feature</code> for the same job.</div>
         </div>
+        <div class="quiz" data-quiz>
+          <div class="q-head"><span>Question 4 of 20</span><span>Branching</span></div>
+          <div class="q-body" role="radiogroup" aria-labelledby="git-study-guide-iq4-t">
+            <p class="q-text" id="git-study-guide-iq4-t">Which command creates a new branch and switches to it immediately?</p>
+            <label class="opt"><input type="radio" name="git-study-guide-q4"> git branch new-branch</label>
+            <label class="opt"><input type="radio" name="git-study-guide-q4"> git switch new-branch</label>
+            <label class="opt" data-correct><input type="radio" name="git-study-guide-q4"> git checkout -b new-branch</label>
+            <label class="opt"><input type="radio" name="git-study-guide-q4"> git create branch new-branch</label>
+            <button type="button" class="check-btn">Check answer</button><span class="q-result" role="status" aria-live="polite"></span>
+          </div>
+          <div class="q-explain"><b>Why:</b> <code>git checkout -b &lt;branch&gt;</code> is a shortcut that creates the branch and immediately checks it out. <code>git switch -c &lt;branch&gt;</code> also does this.</div>
+        </div>
+        <div class="quiz" data-quiz>
+          <div class="q-head"><span>Question 5 of 20</span><span>History</span></div>
+          <div class="q-body" role="radiogroup" aria-labelledby="git-study-guide-iq5-t">
+            <p class="q-text" id="git-study-guide-iq5-t">How do you discard all uncommitted changes in your working directory?</p>
+            <label class="opt"><input type="radio" name="git-study-guide-q5"> git clean</label>
+            <label class="opt" data-correct><input type="radio" name="git-study-guide-q5"> git reset --hard</label>
+            <label class="opt"><input type="radio" name="git-study-guide-q5"> git revert</label>
+            <label class="opt"><input type="radio" name="git-study-guide-q5"> git stash pop</label>
+            <button type="button" class="check-btn">Check answer</button><span class="q-result" role="status" aria-live="polite"></span>
+          </div>
+          <div class="q-explain"><b>Why:</b> <code>git reset --hard</code> resets the index and working tree to match the last commit, discarding all uncommitted local changes.</div>
+        </div>
+
+        <div class="quiz" data-quiz>
+          <div class="q-head"><span>Question 6 of 20</span><span>Basics</span></div>
+          <div class="q-body" role="radiogroup" aria-labelledby="git-study-guide-iq6-t">
+            <p class="q-text" id="git-study-guide-iq6-t">What command initializes a new Git repository?</p>
+            <label class="opt"><input type="radio" name="git-study-guide-q6"> &#96;git start&#96;</label>
+            <label class="opt" data-correct><input type="radio" name="git-study-guide-q6"> &#96;git init&#96;</label>
+            <label class="opt"><input type="radio" name="git-study-guide-q6"> &#96;git create&#96;</label>
+            <label class="opt"><input type="radio" name="git-study-guide-q6"> &#96;git new&#96;</label>
+            <button type="button" class="check-btn">Check answer</button><span class="q-result" role="status" aria-live="polite"></span>
+          </div>
+          <div class="q-explain"><b>Why:</b> &#96;git init&#96; creates the hidden .git folder that tracks repository history.</div>
+        </div>
+        <div class="quiz" data-quiz>
+          <div class="q-head"><span>Question 7 of 20</span><span>Staging</span></div>
+          <div class="q-body" role="radiogroup" aria-labelledby="git-study-guide-iq7-t">
+            <p class="q-text" id="git-study-guide-iq7-t">What is the purpose of the staging area (index) in Git?</p>
+            <label class="opt"><input type="radio" name="git-study-guide-q7"> To backup files to the cloud</label>
+            <label class="opt" data-correct><input type="radio" name="git-study-guide-q7"> To prepare and group specific changes before committing them</label>
+            <label class="opt"><input type="radio" name="git-study-guide-q7"> To compile code</label>
+            <label class="opt"><input type="radio" name="git-study-guide-q7"> To resolve merge conflicts automatically</label>
+            <button type="button" class="check-btn">Check answer</button><span class="q-result" role="status" aria-live="polite"></span>
+          </div>
+          <div class="q-explain"><b>Why:</b> The staging area allows you to craft precise commits rather than committing all changed files at once.</div>
+        </div>
+        <div class="quiz" data-quiz>
+          <div class="q-head"><span>Question 8 of 20</span><span>Committing</span></div>
+          <div class="q-body" role="radiogroup" aria-labelledby="git-study-guide-iq8-t">
+            <p class="q-text" id="git-study-guide-iq8-t">Which command records staged changes to the repository history?</p>
+            <label class="opt"><input type="radio" name="git-study-guide-q8"> &#96;git save&#96;</label>
+            <label class="opt"><input type="radio" name="git-study-guide-q8"> &#96;git push&#96;</label>
+            <label class="opt" data-correct><input type="radio" name="git-study-guide-q8"> &#96;git commit&#96;</label>
+            <label class="opt"><input type="radio" name="git-study-guide-q8"> &#96;git add&#96;</label>
+            <button type="button" class="check-btn">Check answer</button><span class="q-result" role="status" aria-live="polite"></span>
+          </div>
+          <div class="q-explain"><b>Why:</b> &#96;git commit&#96; captures a snapshot of the staged changes.</div>
+        </div>
+        <div class="quiz" data-quiz>
+          <div class="q-head"><span>Question 9 of 20</span><span>Remote</span></div>
+          <div class="q-body" role="radiogroup" aria-labelledby="git-study-guide-iq9-t">
+            <p class="q-text" id="git-study-guide-iq9-t">What does &#96;git clone&#96; do?</p>
+            <label class="opt"><input type="radio" name="git-study-guide-q9"> Duplicates a file</label>
+            <label class="opt" data-correct><input type="radio" name="git-study-guide-q9"> Copies a remote repository to your local machine</label>
+            <label class="opt"><input type="radio" name="git-study-guide-q9"> Creates a backup branch</label>
+            <label class="opt"><input type="radio" name="git-study-guide-q9"> Uploads your code to GitHub</label>
+            <button type="button" class="check-btn">Check answer</button><span class="q-result" role="status" aria-live="polite"></span>
+          </div>
+          <div class="q-explain"><b>Why:</b> &#96;git clone&#96; downloads the entire repository, including its history, to your local environment.</div>
+        </div>
+        <div class="quiz" data-quiz>
+          <div class="q-head"><span>Question 10 of 20</span><span>Branching</span></div>
+          <div class="q-body" role="radiogroup" aria-labelledby="git-study-guide-iq10-t">
+            <p class="q-text" id="git-study-guide-iq10-t">How do you create and switch to a new branch in one command?</p>
+            <label class="opt"><input type="radio" name="git-study-guide-q10"> &#96;git branch -c &lt;name&gt;&#96;</label>
+            <label class="opt" data-correct><input type="radio" name="git-study-guide-q10"> &#96;git switch -c &lt;name&gt;&#96; (or &#96;git checkout -b &lt;name&gt;&#96;)</label>
+            <label class="opt"><input type="radio" name="git-study-guide-q10"> &#96;git new &lt;name&gt;&#96;</label>
+            <label class="opt"><input type="radio" name="git-study-guide-q10"> &#96;git branch --switch &lt;name&gt;&#96;</label>
+            <button type="button" class="check-btn">Check answer</button><span class="q-result" role="status" aria-live="polite"></span>
+          </div>
+          <div class="q-explain"><b>Why:</b> &#96;git switch -c&#96; (newer) or &#96;git checkout -b&#96; (older) perform both actions simultaneously.</div>
+        </div>
+        <div class="quiz" data-quiz>
+          <div class="q-head"><span>Question 11 of 20</span><span>History</span></div>
+          <div class="q-body" role="radiogroup" aria-labelledby="git-study-guide-iq11-t">
+            <p class="q-text" id="git-study-guide-iq11-t">Which command shows the status of files (modified, staged, untracked)?</p>
+            <label class="opt"><input type="radio" name="git-study-guide-q11"> &#96;git log&#96;</label>
+            <label class="opt"><input type="radio" name="git-study-guide-q11"> &#96;git diff&#96;</label>
+            <label class="opt" data-correct><input type="radio" name="git-study-guide-q11"> &#96;git status&#96;</label>
+            <label class="opt"><input type="radio" name="git-study-guide-q11"> &#96;git show&#96;</label>
+            <button type="button" class="check-btn">Check answer</button><span class="q-result" role="status" aria-live="polite"></span>
+          </div>
+          <div class="q-explain"><b>Why:</b> &#96;git status&#96; provides an overview of the working tree and staging area.</div>
+        </div>
+        <div class="quiz" data-quiz>
+          <div class="q-head"><span>Question 12 of 20</span><span>Remote</span></div>
+          <div class="q-body" role="radiogroup" aria-labelledby="git-study-guide-iq12-t">
+            <p class="q-text" id="git-study-guide-iq12-t">What is the difference between &#96;git fetch&#96; and &#96;git pull&#96;?</p>
+            <label class="opt"><input type="radio" name="git-study-guide-q12"> Fetch uploads data, pull downloads data</label>
+            <label class="opt" data-correct><input type="radio" name="git-study-guide-q12"> Fetch downloads data without merging, pull downloads and automatically merges</label>
+            <label class="opt"><input type="radio" name="git-study-guide-q12"> They are identical</label>
+            <label class="opt"><input type="radio" name="git-study-guide-q12"> Fetch works on branches, pull works on files</label>
+            <button type="button" class="check-btn">Check answer</button><span class="q-result" role="status" aria-live="polite"></span>
+          </div>
+          <div class="q-explain"><b>Why:</b> &#96;git pull&#96; is essentially &#96;git fetch&#96; followed immediately by &#96;git merge&#96;.</div>
+        </div>
+        <div class="quiz" data-quiz>
+          <div class="q-head"><span>Question 13 of 20</span><span>Undoing</span></div>
+          <div class="q-body" role="radiogroup" aria-labelledby="git-study-guide-iq13-t">
+            <p class="q-text" id="git-study-guide-iq13-t">You made a typo in your last commit message. How can you fix it without creating a new commit?</p>
+            <label class="opt" data-correct><input type="radio" name="git-study-guide-q13"> &#96;git commit --amend&#96;</label>
+            <label class="opt"><input type="radio" name="git-study-guide-q13"> &#96;git revert&#96;</label>
+            <label class="opt"><input type="radio" name="git-study-guide-q13"> &#96;git reset&#96;</label>
+            <label class="opt"><input type="radio" name="git-study-guide-q13"> &#96;git change&#96;</label>
+            <button type="button" class="check-btn">Check answer</button><span class="q-result" role="status" aria-live="polite"></span>
+          </div>
+          <div class="q-explain"><b>Why:</b> &#96;git commit --amend&#96; replaces the most recent commit with a new one containing updated changes/messages.</div>
+        </div>
+        <div class="quiz" data-quiz>
+          <div class="q-head"><span>Question 14 of 20</span><span>Merging</span></div>
+          <div class="q-body" role="radiogroup" aria-labelledby="git-study-guide-iq14-t">
+            <p class="q-text" id="git-study-guide-iq14-t">What happens during a merge conflict?</p>
+            <label class="opt"><input type="radio" name="git-study-guide-q14"> Git deletes the conflicting branch</label>
+            <label class="opt"><input type="radio" name="git-study-guide-q14"> Git chooses the most recent change automatically</label>
+            <label class="opt" data-correct><input type="radio" name="git-study-guide-q14"> Git pauses the merge and asks the user to manually resolve the conflicting lines</label>
+            <label class="opt"><input type="radio" name="git-study-guide-q14"> The repository is corrupted</label>
+            <button type="button" class="check-btn">Check answer</button><span class="q-result" role="status" aria-live="polite"></span>
+          </div>
+          <div class="q-explain"><b>Why:</b> Conflicts occur when identical lines are changed differently. Git inserts markers for you to resolve manually.</div>
+        </div>
+        <div class="quiz" data-quiz>
+          <div class="q-head"><span>Question 15 of 20</span><span>Rebasing</span></div>
+          <div class="q-body" role="radiogroup" aria-labelledby="git-study-guide-iq15-t">
+            <p class="q-text" id="git-study-guide-iq15-t">How does &#96;git rebase&#96; differ from &#96;git merge&#96;?</p>
+            <label class="opt"><input type="radio" name="git-study-guide-q15"> Rebase deletes history, merge keeps it</label>
+            <label class="opt" data-correct><input type="radio" name="git-study-guide-q15"> Rebase rewrites history to create a linear progression, merge creates a merge commit joining histories</label>
+            <label class="opt"><input type="radio" name="git-study-guide-q15"> Rebase is for local files, merge is for remotes</label>
+            <label class="opt"><input type="radio" name="git-study-guide-q15"> There is no difference</label>
+            <button type="button" class="check-btn">Check answer</button><span class="q-result" role="status" aria-live="polite"></span>
+          </div>
+          <div class="q-explain"><b>Why:</b> Rebasing moves the base of a branch to a new commit, keeping history clean but rewriting commit IDs.</div>
+        </div>
+        <div class="quiz" data-quiz>
+          <div class="q-head"><span>Question 16 of 20</span><span>Stashing</span></div>
+          <div class="q-body" role="radiogroup" aria-labelledby="git-study-guide-iq16-t">
+            <p class="q-text" id="git-study-guide-iq16-t">You need to switch branches but have half-finished work you don't want to commit yet. What command should you use?</p>
+            <label class="opt"><input type="radio" name="git-study-guide-q16"> &#96;git save&#96;</label>
+            <label class="opt" data-correct><input type="radio" name="git-study-guide-q16"> &#96;git stash&#96;</label>
+            <label class="opt"><input type="radio" name="git-study-guide-q16"> &#96;git pause&#96;</label>
+            <label class="opt"><input type="radio" name="git-study-guide-q16"> &#96;git hide&#96;</label>
+            <button type="button" class="check-btn">Check answer</button><span class="q-result" role="status" aria-live="polite"></span>
+          </div>
+          <div class="q-explain"><b>Why:</b> &#96;git stash&#96; temporarily shelves changes so you can work on something else.</div>
+        </div>
+        <div class="quiz" data-quiz>
+          <div class="q-head"><span>Question 17 of 20</span><span>Configuration</span></div>
+          <div class="q-body" role="radiogroup" aria-labelledby="git-study-guide-iq17-t">
+            <p class="q-text" id="git-study-guide-iq17-t">How do you set your global Git username?</p>
+            <label class="opt" data-correct><input type="radio" name="git-study-guide-q17"> &#96;git config --global user.name "Name"&#96;</label>
+            <label class="opt"><input type="radio" name="git-study-guide-q17"> &#96;git set name "Name"&#96;</label>
+            <label class="opt"><input type="radio" name="git-study-guide-q17"> &#96;git name = "Name"&#96;</label>
+            <label class="opt"><input type="radio" name="git-study-guide-q17"> &#96;git config user "Name"&#96;</label>
+            <button type="button" class="check-btn">Check answer</button><span class="q-result" role="status" aria-live="polite"></span>
+          </div>
+          <div class="q-explain"><b>Why:</b> The &#96;git config&#96; command manages settings. &#96;--global&#96; applies it to all repos for the user.</div>
+        </div>
+        <div class="quiz" data-quiz>
+          <div class="q-head"><span>Question 18 of 20</span><span>Files</span></div>
+          <div class="q-body" role="radiogroup" aria-labelledby="git-study-guide-iq18-t">
+            <p class="q-text" id="git-study-guide-iq18-t">What is the purpose of a &#96;.gitignore&#96; file?</p>
+            <label class="opt"><input type="radio" name="git-study-guide-q18"> To delete files permanently</label>
+            <label class="opt" data-correct><input type="radio" name="git-study-guide-q18"> To specify intentionally untracked files that Git should ignore</label>
+            <label class="opt"><input type="radio" name="git-study-guide-q18"> To ignore merge conflicts</label>
+            <label class="opt"><input type="radio" name="git-study-guide-q18"> To hide code from other collaborators</label>
+            <button type="button" class="check-btn">Check answer</button><span class="q-result" role="status" aria-live="polite"></span>
+          </div>
+          <div class="q-explain"><b>Why:</b> It prevents temporary files, build artifacts, or uncommitted secrets from being accidentally committed. Note: adding an already-tracked file to <code>.gitignore</code> does not remove it from tracking or history. <a href="https://git-scm.com/docs/gitignore" target="_blank" rel="noopener">Official Reference</a></div>
+        </div>
+        <div class="quiz" data-quiz>
+          <div class="q-head"><span>Question 19 of 20</span><span>Inspection</span></div>
+          <div class="q-body" role="radiogroup" aria-labelledby="git-study-guide-iq19-t">
+            <p class="q-text" id="git-study-guide-iq19-t">Which command shows the exact line-by-line differences of uncommitted changes?</p>
+            <label class="opt"><input type="radio" name="git-study-guide-q19"> &#96;git status&#96;</label>
+            <label class="opt" data-correct><input type="radio" name="git-study-guide-q19"> &#96;git diff&#96;</label>
+            <label class="opt"><input type="radio" name="git-study-guide-q19"> &#96;git log&#96;</label>
+            <label class="opt"><input type="radio" name="git-study-guide-q19"> &#96;git changes&#96;</label>
+            <button type="button" class="check-btn">Check answer</button><span class="q-result" role="status" aria-live="polite"></span>
+          </div>
+          <div class="q-explain"><b>Why:</b> &#96;git diff&#96; compares the working directory with the staging area or last commit.</div>
+        </div>
+        <div class="quiz" data-quiz>
+          <div class="q-head"><span>Question 20 of 20</span><span>Undoing</span></div>
+          <div class="q-body" role="radiogroup" aria-labelledby="git-study-guide-iq20-t">
+            <p class="q-text" id="git-study-guide-iq20-t">Which command safely undoes a published commit by creating a new commit with the opposite changes?</p>
+            <label class="opt"><input type="radio" name="git-study-guide-q20"> &#96;git reset --hard&#96;</label>
+            <label class="opt"><input type="radio" name="git-study-guide-q20"> &#96;git clean&#96;</label>
+            <label class="opt" data-correct><input type="radio" name="git-study-guide-q20"> &#96;git revert&#96;</label>
+            <label class="opt"><input type="radio" name="git-study-guide-q20"> &#96;git rm&#96;</label>
+            <button type="button" class="check-btn">Check answer</button><span class="q-result" role="status" aria-live="polite"></span>
+          </div>
+          <div class="q-explain"><b>Why:</b> &#96;git revert&#96; is safe for shared history because it doesn't rewrite or delete past commits.</div>
+        </div>
     <h2 id="final-tips">Final tips</h2>
         <ul>
           <li>Practice the "wrong branch" scenario: you committed on the wrong branch → <code>git branch newbranch</code>, then <code>git reset --hard HEAD~1</code>, then <code>git switch newbranch</code></li>
           <li>Know <code>git stash</code> / <code>stash pop</code> for parking unfinished work</li>
-          <li>Understand <code>.gitignore</code> purpose — ignoring build artifacts and secrets</li>
+          <li>Understand <code>.gitignore</code> purpose — preventing untracked build artifacts and secrets from being committed.</li>
+          <li><b>Security Warning:</b> <code>.gitignore</code> does not automatically remove files already tracked by Git. If you accidentally commit a secret, adding it to <code>.gitignore</code> later is not safe. You must remove the secret from tracking (e.g., <code>git rm --cached</code>), immediately rotate/revoke the exposed credentials, and consider cleaning the repository history.</li>
         </ul>
     <h2 id="sources">Sources &amp; further reading</h2>
     <ul class="sources"><li><a href="https://git-scm.com/docs/git-revert" rel="noopener noreferrer" target="_blank">git-revert — Git documentation</a></li><li><a href="https://git-scm.com/docs/git-restore" rel="noopener noreferrer" target="_blank">git-restore — Git documentation</a></li><li><a href="https://git-scm.com/book/en/v2/Git-Branching-Rebasing" rel="noopener noreferrer" target="_blank">Rebasing — Pro Git book</a></li></ul>
@@ -142,6 +360,7 @@ git diff --staged       # staged vs last commit</code></pre>
         <a href="#core-workflow-commands" data-toc="core-workflow-commands">Core workflow commands</a>
         <a href="#undoing-things-a-favorite-topic" data-toc="undoing-things-a-favorite-topic">Undoing things — a favorite topic</a>
         <a href="#merge-vs-rebase" data-toc="merge-vs-rebase">Merge vs rebase</a>
+        <a href="#practical-learning-exercises" data-toc="practical-learning-exercises">Practical learning exercises</a>
         <a href="#practice-questions" data-toc="practice-questions">Practice questions</a>
         <a href="#final-tips" data-toc="final-tips">Final tips</a>
         <a href="#sources" data-toc="sources">Sources &amp; further reading</a>
@@ -154,9 +373,13 @@ git diff --staged       # staged vs last commit</code></pre>
       <a href="../../guides/javascript-study-guide/">JavaScript Fundamentals: Key Concepts Explained</a>
     </div>
     <div class="box">
+      <h2 class="box-h">Share this guide</h2>
+      <button type="button" class="btn btn-share" id="shareBtn" data-url="https://skillsprep.github.io/guides/git-study-guide/" data-title="Git Study Guide: Commands and Concepts">Copy Link</button>
+    </div>
+    <div class="box">
       <h2 class="box-h">Spotted a mistake?</h2>
       <p class="box-p">We correct errors quickly. Tell us what's wrong and we'll fix it.</p>
-      <a class="btn btn-link" href="mailto:hello@skillprep.blog?subject=Correction%3A%20Git%20Study%20Guide%3A%20Commands%20and%20Concepts&amp;body=Page%3A%20https%3A%2F%2Fskillsprep.github.io%2Fguides%2Fgit-study-guide%2F%0A%0AWhat's%20wrong%3A%0A">Report a correction</a>
+      <a class="btn btn-link" href="mailto:hello@skillsprep.org?subject=Correction%3A%20Git%20Study%20Guide%3A%20Commands%20and%20Concepts&amp;body=Page%3A%20https%3A%2F%2Fskillsprep.github.io%2Fguides%2Fgit-study-guide%2F%0A%0AWhat's%20wrong%3A%0A">Report a correction</a>
     </div>
   </aside>
 </div>
@@ -190,6 +413,15 @@ git diff --staged       # staged vs last commit</code></pre>
   </div>
 </footer>
 <button class="back-top" id="backTop" type="button" aria-label="Back to top">↑</button>
+<div id="cookieConsent" class="cookie-consent" hidden>
+  <div class="cookie-inner">
+    <p>We use local storage (cookies) to save your practice test progress. We also serve personalized ads via Google AdSense.</p>
+    <div class="cookie-actions">
+      <button id="cookieAccept" class="btn">Got it</button>
+      <button id="cookieDecline" class="btn btn-alt">Decline</button>
+    </div>
+  </div>
+</div>
 <script src="../../js/site.js" defer></script>
 </body>
 </html>
