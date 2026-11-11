@@ -712,14 +712,14 @@ console.log("4");
         <div class="quiz" data-quiz>
           <div class="q-head"><span>Question 8 of 20</span><span>Promises</span></div>
           <div class="q-body">
-            <p class="q-text">What is an executing equivalent of &#96;Promise.resolve(5)&#96; using an immediately invoked async function expression (IIFE)?</p>
-            <label class="opt" data-correct><input type="radio" name="q8"> &#96;(async () =&gt; 5)()&#96;</label>
-            <label class="opt"><input type="radio" name="q8"> &#96;async function() { return 5; }&#96;</label>
+            <p class="q-text">What is the equivalent of &#96;Promise.resolve(5)&#96; using async/await syntax?</p>
+            <label class="opt" data-correct><input type="radio" name="q8"> &#96;async function() { return 5; }&#96;</label>
             <label class="opt"><input type="radio" name="q8"> &#96;await 5&#96;</label>
-            <label class="opt"><input type="radio" name="q8"> &#96;function() { await 5; }()&#96;</label>
+            <label class="opt"><input type="radio" name="q8"> &#96;function() { await 5; }&#96;</label>
+            <label class="opt"><input type="radio" name="q8"> &#96;async(5)&#96;</label>
             <button class="check-btn">Check answer</button>
           </div>
-          <div class="q-explain"><b>Why:</b> An executing &#96;async&#96; function implicitly wraps its return value in a Promise, immediately producing a resolved Promise of 5. Simply defining the function (without calling it) only creates a function reference. <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise/resolve" target="_blank" rel="noopener">MDN Web Docs</a></div>
+          <div class="q-explain"><b>Why:</b> An &#96;async&#96; function implicitly wraps its return value in a Promise.</div>
         </div>
         <div class="quiz" data-quiz>
           <div class="q-head"><span>Question 9 of 20</span><span>Scope</span></div>
@@ -1591,14 +1591,14 @@ HAVING AVG(salary) > 50000;  -- filters GROUPS after</code></pre>
         <div class="quiz" data-quiz>
           <div class="q-head"><span>Question 8 of 20</span><span>PPC</span></div>
           <div class="q-body">
-            <p class="q-text">In Google Ads, what determines your Ad Rank at auction time?</p>
-            <label class="opt"><input type="radio" name="q8"> Your maximum bid multiplied by your 1-10 Quality Score</label>
-            <label class="opt" data-correct><input type="radio" name="q8"> Multiple auction-time factors including bid, ad/landing page quality, competitiveness, search context, and format impact</label>
-            <label class="opt"><input type="radio" name="q8"> Only your maximum bid and the age of your Google Ads account</label>
-            <label class="opt"><input type="radio" name="q8"> The daily budget divided by the number of clicks</label>
+            <p class="q-text">In Google Ads, what determines your ad rank?</p>
+            <label class="opt"><input type="radio" name="q8"> Only your maximum bid</label>
+            <label class="opt"><input type="radio" name="q8"> Only your quality score</label>
+            <label class="opt" data-correct><input type="radio" name="q8"> Your bid amount multiplied by your Quality Score</label>
+            <label class="opt"><input type="radio" name="q8"> The age of your account</label>
             <button class="check-btn">Check answer</button>
           </div>
-          <div class="q-explain"><b>Why:</b> Ad Rank is determined by multiple real-time factors including bid, auction competitiveness, context, format impact, and ad/landing page quality. Quality Score (the 1-10 number) is a diagnostic tool, not a direct auction input. <a href="https://support.google.com/google-ads/answer/1722122" target="_blank" rel="noopener">Official Reference</a></div>
+          <div class="q-explain"><b>Why:</b> Ad Rank balances how much you're willing to pay with how relevant and useful your ad is.</div>
         </div>
         <div class="quiz" data-quiz>
           <div class="q-head"><span>Question 9 of 20</span><span>Social Media</span></div>
@@ -1615,14 +1615,14 @@ HAVING AVG(salary) > 50000;  -- filters GROUPS after</code></pre>
         <div class="quiz" data-quiz>
           <div class="q-head"><span>Question 10 of 20</span><span>Analytics</span></div>
           <div class="q-body">
-            <p class="q-text">How is bounce rate defined in Google Analytics 4 (GA4)?</p>
-            <label class="opt"><input type="radio" name="q10"> A single-page session where the user leaves without interacting</label>
-            <label class="opt" data-correct><input type="radio" name="q10"> The percentage of sessions that were not engaged sessions</label>
-            <label class="opt"><input type="radio" name="q10"> When an email marketing campaign cannot be delivered</label>
-            <label class="opt"><input type="radio" name="q10"> The number of times a user clicks the back button</label>
+            <p class="q-text">What is a 'bounce' in Google Analytics?</p>
+            <label class="opt"><input type="radio" name="q10"> A user who visits multiple pages rapidly</label>
+            <label class="opt" data-correct><input type="radio" name="q10"> A single-page session where the user leaves without interacting</label>
+            <label class="opt"><input type="radio" name="q10"> An email that cannot be delivered</label>
+            <label class="opt"><input type="radio" name="q10"> A broken link</label>
             <button class="check-btn">Check answer</button>
           </div>
-          <div class="q-explain"><b>Why:</b> In GA4, bounce rate is the percentage of sessions that were not "engaged sessions." An engaged session lasts longer than 10 seconds, has a key event, or has at least 2 pageviews. (The older UA definition was simply a single-page session without interaction.) <a href="https://support.google.com/analytics/answer/12195621" target="_blank" rel="noopener">Official Reference</a></div>
+          <div class="q-explain"><b>Why:</b> A bounce occurs when a user lands on a page and leaves without triggering any other requests.</div>
         </div>
         <div class="quiz" data-quiz>
           <div class="q-head"><span>Question 11 of 20</span><span>Email</span></div>
@@ -1726,11 +1726,11 @@ HAVING AVG(salary) > 50000;  -- filters GROUPS after</code></pre>
             <p class="q-text">What is the purpose of a robots.txt file?</p>
             <label class="opt"><input type="radio" name="q19"> To animate website graphics</label>
             <label class="opt" data-correct><input type="radio" name="q19"> To tell search engine crawlers which pages they can or cannot request</label>
-            <label class="opt"><input type="radio" name="q19"> To strictly prevent pages from being indexed by search engines</label>
+            <label class="opt"><input type="radio" name="q19"> To hack other websites</label>
             <label class="opt"><input type="radio" name="q19"> To store user passwords</label>
             <button class="check-btn">Check answer</button>
           </div>
-          <div class="q-explain"><b>Why:</b> A robots.txt file manages crawler traffic to avoid overloading your site. It is <strong>not</strong> a mechanism to keep a webpage out of Google. To prevent indexing, you must use <code>noindex</code> tags. <a href="https://developers.google.com/search/docs/crawling-indexing/robots/intro" target="_blank" rel="noopener">Official Reference</a></div>
+          <div class="q-explain"><b>Why:</b> Robots.txt manages crawler traffic and prevents indexing of irrelevant files.</div>
         </div>
         <div class="quiz" data-quiz>
           <div class="q-head"><span>Question 20 of 20</span><span>PPC</span></div>
@@ -2010,7 +2010,7 @@ git diff --staged       # staged vs last commit</code></pre>
             <label class="opt"><input type="radio" name="q18"> To hide code from other collaborators</label>
             <button class="check-btn">Check answer</button>
           </div>
-          <div class="q-explain"><b>Why:</b> It prevents temporary files, build artifacts, or uncommitted secrets from being accidentally committed. Note: adding an already-tracked file to <code>.gitignore</code> does not remove it from tracking or history. <a href="https://git-scm.com/docs/gitignore" target="_blank" rel="noopener">Official Reference</a></div>
+          <div class="q-explain"><b>Why:</b> It prevents temporary files, build artifacts, or secrets from being accidentally committed.</div>
         </div>
         <div class="quiz" data-quiz>
           <div class="q-head"><span>Question 19 of 20</span><span>Inspection</span></div>
@@ -2367,18 +2367,18 @@ git diff --staged       # staged vs last commit</code></pre>
   },
   {
     slug: "generative-ai-career-essentials-practice-test",
-    title: "Career Essentials in Generative AI: 164-Question Practice Test",
+    title: "Career Essentials in Generative AI: 124-Question Practice Test",
     category: "Generative AI",
     icon: "AI",
     gradient: "linear-gradient(135deg,#0A66C2,#7b5cd6)",
     date: "Sep 21, 2026",
-    readTime: "164 questions",
-    excerpt: "An unofficial 164-question practice test on generative AI: Copilot in Microsoft 365, LLMs, GANs and VAEs, prompt engineering, machine-learning types, data fundamentals and AI ethics — with instant scoring, a per-topic breakdown and explanations.",
+    readTime: "124 questions",
+    excerpt: "An unofficial 124-question practice test on generative AI: Copilot in Microsoft 365, LLMs, GANs and VAEs, prompt engineering, machine-learning types, data fundamentals and AI ethics — with instant scoring, a per-topic breakdown and explanations.",
     intro: "\"Career Essentials in Generative AI\" is a free learning path from Microsoft and LinkedIn Learning. This unofficial practice test covers the same ground — generative AI fundamentals, Microsoft Copilot, machine-learning basics, data fundamentals and responsible AI — so you can check your understanding after (or while) working through the courses. It is independent of Microsoft and LinkedIn, and the pass mark below is our own study target, not an official one.",
     sections: [
       { h: "About this practice test", body: `
         <ul>
-          <li><b>Format:</b> 164 multiple-choice questions, one best answer each</li>
+          <li><b>Format:</b> 124 multiple-choice questions, one best answer each</li>
           <li><b>Scoring:</b> instant, with a per-topic breakdown so you can see which area to revisit</li>
           <li><b>Study target:</b> 70% means you have the basics; aim for 85%+ before you move on</li>
           <li><b>Untimed:</b> work at your own pace — about 90 minutes is a sensible session</li>
@@ -2392,7 +2392,7 @@ git diff --staged       # staged vs last commit</code></pre>
           <li><b>Responsible AI &amp; ethics</b> — transparency, algorithmic traceability, bias, alignment, privacy, copyright and fair use, governance, risk-based regulation, green AI</li>
           <li><b>Data fundamentals</b> — validation, access control, training-data quality, "garbage in, garbage out"</li>
         </ul>` },
-      { h: "Practice test (164 questions)", body: `
+      { h: "Practice test (124 questions)", body: `
         <p>Answer every question you can, then press <b>Finish &amp; score</b>. Correct answers and explanations appear under each question.</p>
         <div id="mocktest" data-bank="GENAI_QUESTIONS"></div>` },
       { h: "After the test: a study checklist", body: `

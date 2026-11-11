@@ -243,7 +243,7 @@
   if (contactForm && contactForm.action.includes("formspree.io")) {
     contactForm.addEventListener("submit", function(ev) {
       ev.preventDefault();
-
+      
       // Honeypot check
       const hp = document.getElementById("honeypot");
       if (hp && hp.value) {
@@ -373,49 +373,26 @@ document.querySelectorAll(".mock-hint").forEach(hint => {
     pContainer.style.margin = "1rem 0";
     pContainer.style.display = "flex";
     pContainer.style.gap = "10px";
-
+    
     const eBtn = document.createElement("button");
     eBtn.className = "btn";
     eBtn.textContent = "Export Progress";
     eBtn.onclick = exportBtn.onclick;
-
+    
     const iLabel = document.createElement("label");
     iLabel.className = "btn btn-alt";
     iLabel.textContent = "Import Progress";
     iLabel.style.cursor = "pointer";
-
+    
     const iInput = document.createElement("input");
     iInput.type = "file";
     iInput.accept = ".json";
     iInput.style.display = "none";
     iInput.onchange = importInput.onchange;
-
+    
     iLabel.appendChild(iInput);
     pContainer.appendChild(eBtn);
     pContainer.appendChild(iLabel);
-
+    
     hint.parentElement.insertBefore(pContainer, hint);
 });
-
-// Cookie Consent Logic
-(function() {
-  var consent = document.getElementById("cookieConsent");
-  var btnAccept = document.getElementById("cookieAccept");
-  var btnDecline = document.getElementById("cookieDecline");
-
-  if (consent && btnAccept && btnDecline) {
-    if (!localStorage.getItem("skillprep:cookie_consent")) {
-      consent.hidden = false;
-    }
-
-    btnAccept.addEventListener("click", function() {
-      localStorage.setItem("skillprep:cookie_consent", "accepted");
-      consent.hidden = true;
-    });
-
-    btnDecline.addEventListener("click", function() {
-      localStorage.setItem("skillprep:cookie_consent", "declined");
-      consent.hidden = true;
-    });
-  }
-})();
