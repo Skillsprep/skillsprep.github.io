@@ -195,6 +195,15 @@ ${body}
   </div>
 </footer>
 <button class="back-top" id="backTop" type="button" aria-label="Back to top">↑</button>
+<div id="cookieConsent" class="cookie-consent" hidden>
+  <div class="cookie-inner">
+    <p>We use local storage (cookies) to save your practice test progress. We also serve personalized ads via Google AdSense.</p>
+    <div class="cookie-actions">
+      <button id="cookieAccept" class="btn">Got it</button>
+      <button id="cookieDecline" class="btn btn-alt">Decline</button>
+    </div>
+  </div>
+</div>
 ${scripts ? `<script src="${link("js/site.js")}" defer></script>` : ""}
 </body>
 </html>

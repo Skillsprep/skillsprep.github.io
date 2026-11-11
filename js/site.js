@@ -389,3 +389,26 @@ document.querySelectorAll(".mock-hint").forEach(hint => {
 
     hint.parentElement.insertBefore(pContainer, hint);
 });
+
+// Cookie Consent Logic
+(function() {
+  var consent = document.getElementById("cookieConsent");
+  var btnAccept = document.getElementById("cookieAccept");
+  var btnDecline = document.getElementById("cookieDecline");
+
+  if (consent && btnAccept && btnDecline) {
+    if (!localStorage.getItem("skillprep:cookie_consent")) {
+      consent.hidden = false;
+    }
+
+    btnAccept.addEventListener("click", function() {
+      localStorage.setItem("skillprep:cookie_consent", "accepted");
+      consent.hidden = true;
+    });
+
+    btnDecline.addEventListener("click", function() {
+      localStorage.setItem("skillprep:cookie_consent", "declined");
+      consent.hidden = true;
+    });
+  }
+})();
