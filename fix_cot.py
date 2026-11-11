@@ -29,4 +29,3 @@ text = text.replace(q29_old, q29_new)
 
 with open("tools/content/genai.js", "w") as f:
     f.write(text)
-

@@ -148,8 +148,10 @@ function layout({ title, desc, path: pagePath, prefix, nav, body, ld = [], type 
 <link rel="stylesheet" href="${link("css/style.css")}">
 <script>(function(){try{if(localStorage.getItem("skillprep:theme")==="dark"){document.documentElement.setAttribute("data-theme","dark");}}catch(e){}})();</script>
 ${extraHead}${ld.map(jsonLd).join("\n")}
+<script async custom-element="amp-auto-ads" src="https://cdn.ampproject.org/v0/amp-auto-ads-0.1.js"></script>
 </head>
 <body>
+<amp-auto-ads type="adsense" data-ad-client="ca-pub-9455217122501464"></amp-auto-ads>
 <a class="skip-link" href="#main">Skip to content</a>
 <header class="site-header">
   <div class="container header-inner">
