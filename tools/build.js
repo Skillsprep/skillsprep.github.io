@@ -53,7 +53,7 @@ function renderBank(bankKey, prefix) {
   let lastPart = null;
   let html = `<div class="mock" data-mock data-total="${total}" data-key="${prefix}">
   <noscript><div class="callout"><b>JavaScript needed</b> The interactive practice test and instant scoring need JavaScript. You can still read every question below.</div></noscript>
-
+  
   <div class="assessment-header" style="background: var(--card); border: 1px solid var(--line); border-radius: var(--radius); padding: 16px 24px; margin-bottom: 24px; display: flex; justify-content: space-between; align-items: center; box-shadow: var(--shadow); position: sticky; top: 70px; z-index: 40;">
     <div>
       <div style="font-size: 0.85rem; font-weight: 600; color: var(--teal); text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 4px;">Practice Assessment</div>
@@ -66,7 +66,7 @@ function renderBank(bankKey, prefix) {
     </div>
     <div class="mock-actions"><button class="btn mock-finish" type="button">Finish Assessment</button></div>
   </div>
-
+  
   <div class="mock-result" role="status" tabindex="-1" aria-live="polite"></div>`;
   bank.forEach((it, i) => {
     if (it.p !== lastPart) {
@@ -134,7 +134,6 @@ function layout({ title, desc, path: pagePath, prefix, nav, body, ld = [], type 
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9455217122501464" crossorigin="anonymous"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>${esc(title)}</title>
 <meta name="description" content="${esc(desc)}">
@@ -160,10 +159,9 @@ function layout({ title, desc, path: pagePath, prefix, nav, body, ld = [], type 
 <link rel="stylesheet" href="${link("css/style.css")}">
 <script>(function(){try{if(localStorage.getItem("skillprep:theme")==="dark"){document.documentElement.setAttribute("data-theme","dark");}}catch(e){}})();</script>
 ${extraHead}${ld.map(jsonLd).join("\n")}
-<script async custom-element="amp-auto-ads" src="https://cdn.ampproject.org/v0/amp-auto-ads-0.1.js"></script>
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9455217122501464" crossorigin="anonymous"></script>
 </head>
 <body>
-<amp-auto-ads type="adsense" data-ad-client="ca-pub-9455217122501464"></amp-auto-ads>
 <a class="skip-link" href="#main">Skip to content</a>
 <header class="site-header">
   <div class="container header-inner">
@@ -234,7 +232,7 @@ function card(p, prefix) {
   const qCount = getQuestionCount(p);
   const difficulty = /test|assessment/i.test(p.slug) ? "Intermediate - Advanced" : "Beginner - Intermediate";
   const actionText = /test|assessment/i.test(p.slug) ? "Start Practice Test" : "Start Learning";
-
+  
   return `<a class="post-card" href="${prefix}${p.url}" data-cat="${esc(p.category)}" data-search="${esc((p.title + " " + p.excerpt + " " + p.category).toLowerCase())}">
         <div class="thumb" style="background:${p.gradient}" aria-hidden="true">${p.icon}</div>
         <div class="body">
@@ -289,13 +287,13 @@ function homePage() {
         <button class="btn btn-outline" id="clearDashBtn">Reset Progress</button>
       </div>
     </div>
-
+    
     <div class="stats" style="margin-bottom: 32px; background: var(--card); border: 1px solid var(--line); border-radius: var(--radius); padding: 24px;">
       <div class="stat"><b id="dashTotalQs">0</b><small>Questions Attempted</small></div>
       <div class="stat"><b id="dashAccuracy">0%</b><small>Accuracy Rate</small></div>
       <div class="stat"><b id="dashCompleted">0</b><small>Modules Started</small></div>
     </div>
-
+    
     <div class="post-grid" id="dashGrid">
       <!-- Populated by JS -->
     </div>
@@ -368,9 +366,7 @@ function guidePage(p) {
       <span><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg> ${esc(p.readTime)}</span>
       <span><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg> ${getQuestionCount(p)} Questions</span>
       <span>Published <time datetime="${p.published}">${longDate(p.published)}</time></span>
-      <span>Last reviewed <time datetime="${p.reviewed}">${longDate(p.reviewed)}</time></span>
-      <span>${esc(p.readTime)}</span>
-      <span>By the SkillPrep Editorial Team (Expert Practitioners & Curriculum Designers)</span>
+      <span>Reviewed <time datetime="${p.reviewed}">${longDate(p.reviewed)}</time></span>
     </div>
   </div>
 </section>

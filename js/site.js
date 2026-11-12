@@ -164,8 +164,8 @@
       var prevBest = store(key);
       var isBest = prevBest === null || prevBest === "" || pct > Number(prevBest);
       if (isBest) store(key, String(pct));
-
-      // Update global dashboard progress tracking
+      
+      // Update global dashboard progress tracking 
       // format: skillprep:progress:pathname = "answeredCount,correctCount,totalCount"
       var path = window.location.pathname.replace(/^\/|\/$/g, "") + "/";
       if (!path || path === "/") path = box.getAttribute("data-key");
@@ -435,3 +435,60 @@ document.querySelectorAll(".mock-hint").forEach(hint => {
     });
   }
 })();
+
+(function() {
+  const dash = document.getElementById("dashboard");
+  if (!dash) return;
+  const cards = document.querySelectorAll("#grid .post-card");
+  const dashGrid = document.getElementById("dashGrid");
+  const dashTotalQs = document.getElementById("dashTotalQs");
+  const dashAccuracy = document.getElementById("dashAccuracy");
+  const dashCompleted = document.getElementById("dashCompleted");
+  const clearDashBtn = document.getElementById("clearDashBtn");
+
+  let totalAttempts = 0;
+  let correctAttempts = 0;
+  let modulesStarted = 0;
+  let hasData = false;
+
+  cards.forEach(card => {
+    const link = card.getAttribute("href").replace("./", "").replace("../../", "");
+    if (!link) return;
+    const progressKey = "skillprep:progress:" + link;
+    const stored = localStorage.getItem(progressKey);
+    if (stored) {
+      hasData = true;
+      modulesStarted++;
+      const [answeredCount, correctCount, totalCount] = stored.split(",").map(Number);
+      totalAttempts += answeredCount;
+      correctAttempts += correctCount;
+
+      const cardClone = card.cloneNode(true);
+      // update action button text
+      const btn = cardClone.querySelector(".btn");
+      if (btn) btn.textContent = "Resume Learning";
+      dashGrid.appendChild(cardClone);
+    }
+  });
+
+  if (hasData) {
+    dash.style.display = "block";
+    dashTotalQs.textContent = totalAttempts;
+    dashAccuracy.textContent = totalAttempts > 0 ? Math.round((correctAttempts / totalAttempts) * 100) + "%" : "0%";
+    dashCompleted.textContent = modulesStarted;
+  }
+
+  if (clearDashBtn) {
+    clearDashBtn.addEventListener("click", () => {
+      if (confirm("Are you sure you want to reset your learning progress? This cannot be undone.")) {
+        Object.keys(localStorage).forEach(key => {
+          if (key.startsWith("skillprep:progress:")) {
+            localStorage.removeItem(key);
+          }
+        });
+        window.location.reload();
+      }
+    });
+  }
+})();
+
