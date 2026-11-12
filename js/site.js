@@ -115,7 +115,17 @@
     if (best !== null && best !== "") $(".mock-hint", box).textContent = "Untimed · scored at the end · your best: " + best + "%";
 
     function answered() { return $$("input:checked", box).length; }
-    box.addEventListener("change", function () { if (!finished) countEl.textContent = "Answered " + answered() + " / " + total; });
+    function updateProgress() {
+      if (finished) return;
+      var ans = answered();
+      countEl.textContent = "Answered " + ans + " / " + total;
+      var pct = Math.round((ans / total) * 100);
+      var progPct = $(".progress-pct", box);
+      var progFill = $(".progress-fill", box);
+      if (progPct) progPct.textContent = pct + "%";
+      if (progFill) progFill.style.width = pct + "%";
+    }
+    box.addEventListener("change", updateProgress);
 
     function reset() {
       finished = false;
@@ -154,6 +164,12 @@
       var prevBest = store(key);
       var isBest = prevBest === null || prevBest === "" || pct > Number(prevBest);
       if (isBest) store(key, String(pct));
+
+      // Update global dashboard progress tracking
+      // format: skillprep:progress:pathname = "answeredCount,correctCount,totalCount"
+      var path = window.location.pathname.replace(/^\/|\/$/g, "") + "/";
+      if (!path || path === "/") path = box.getAttribute("data-key");
+      localStorage.setItem("skillprep:progress:" + path, done + "," + score + "," + total);
       var rows = order.map(function (p) {
         var s = parts[p], pp = Math.round((s.ok / s.n) * 100);
         return '<tr><th scope="row">' + esc(p) + "</th><td>" + s.ok + " / " + s.n + '</td><td><span class="pbar"><i style="width:' + pp + '%" class="' + (pp >= 70 ? "ok" : "weak") + '"></i></span> ' + pp + "%" + (pp < 70 ? ' <b class="flag">revisit</b>' : "") + "</td></tr>";

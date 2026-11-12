@@ -51,10 +51,12 @@
 <div id="progress" aria-hidden="true"></div>
 <section class="article-hero">
   <div class="container">
-    <nav class="crumbs" aria-label="Breadcrumb"><a href="../../">Home</a> <span aria-hidden="true">›</span> <a href="../../#guides">Guides</a> <span aria-hidden="true">›</span> <span aria-current="page">Lean Six Sigma</span></nav>
+    <nav class="crumbs" aria-label="Breadcrumb"><a href="../../">Home</a> <span aria-hidden="true" class="sep">›</span> <a href="../../#guides">Guides</a> <span aria-hidden="true" class="sep">›</span> <span aria-current="page">Lean Six Sigma</span></nav>
     <div class="cat">Lean Six Sigma</div>
     <h1>Lean Six Sigma &amp; Sustainability: 15-Question Practice Test</h1>
     <div class="meta">
+      <span><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg> 15 questions</span>
+      <span><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg> 15 Questions</span>
       <span>Published <time datetime="2026-09-27">Sep 27, 2026</time></span>
       <span>Last reviewed <time datetime="2026-10-18">Oct 18, 2026</time></span>
       <span>15 questions</span>
@@ -85,11 +87,20 @@
         <p>Answer all 15 questions, then press <b>Finish &amp; score</b>. The set is small enough to master completely, so aim for 100%.</p>
         <div class="mock" data-mock data-total="15" data-key="mocktest-lean">
   <noscript><div class="callout"><b>JavaScript needed</b> The interactive practice test and instant scoring need JavaScript. You can still read every question below.</div></noscript>
-  <div class="mockbar">
-    <span class="mock-count" role="status" aria-live="polite">Answered 0 / 15</span>
-    <span class="mock-hint">Untimed · scored at the end</span>
-    <span class="mock-actions"><button class="btn mock-finish" type="button">Finish &amp; score</button></span>
+
+  <div class="assessment-header" style="background: var(--card); border: 1px solid var(--line); border-radius: var(--radius); padding: 16px 24px; margin-bottom: 24px; display: flex; justify-content: space-between; align-items: center; box-shadow: var(--shadow); position: sticky; top: 70px; z-index: 40;">
+    <div>
+      <div style="font-size: 0.85rem; font-weight: 600; color: var(--teal); text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 4px;">Practice Assessment</div>
+      <div class="mock-count" role="status" aria-live="polite" style="font-weight: 700; color: var(--navy); font-size: 1.1rem;">Answered 0 / 15</div>
+      <div class="mock-hint" style="font-size: 0.85rem; color: var(--muted); margin-top: 4px;">Untimed · scored at the end</div>
+    </div>
+    <div style="flex: 1; margin: 0 32px; max-width: 400px; display: none;" class="desktop-only-progress">
+      <div style="display: flex; justify-content: space-between; font-size: 0.8rem; color: var(--muted); margin-bottom: 6px;"><span>Progress</span><span class="progress-pct">0%</span></div>
+      <div style="height: 6px; background: var(--line); border-radius: 4px; overflow: hidden;"><div class="progress-fill" style="height: 100%; width: 0%; background: var(--teal); transition: width 0.3s ease;"></div></div>
+    </div>
+    <div class="mock-actions"><button class="btn mock-finish" type="button">Finish Assessment</button></div>
   </div>
+
   <div class="mock-result" role="status" tabindex="-1" aria-live="polite"></div>
   <h3 class="mock-part">Process Improvement <span>5 questions</span></h3>
   <div class="quiz" data-q data-part="Process Improvement" data-answer="1" id="mocktest-lean-q1">

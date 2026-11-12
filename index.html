@@ -51,11 +51,15 @@
 
 <section class="hero">
   <div class="container">
-    <h1>Free study guides and practice tests for the <span>skills employers ask about</span></h1>
-    <p>Concept-first guides for Excel, Python, SQL, JavaScript, Git, project management and more — with practice questions that explain every answer.</p>
-    <form class="search-bar" id="searchForm" role="search" action="./" method="get">
+    <h1>Build Skills. Test Knowledge. <span>Grow Your Career.</span></h1>
+    <p>Explore practical study guides, improve your technical knowledge and prepare for real-world skills assessments.</p>
+    <div class="hero-actions">
+      <a href="#guides" class="btn">Explore Study Guides</a>
+      <a href="guides/generative-ai-career-essentials-practice-test/" class="btn btn-outline" style="background:#fff">Start Practice Tests</a>
+    </div>
+    <form class="search-bar" id="searchForm" role="search" action="./" method="get" style="margin-top: 30px;">
       <label for="searchInput" class="visually-hidden">Search guides</label>
-      <input type="search" id="searchInput" name="q" placeholder="Search guides… e.g. pivot tables, JOINs, closures" autocomplete="off">
+      <input type="search" id="searchInput" name="q" placeholder="Search Excel, Python, SQL, Generative AI..." autocomplete="off">
       <button type="submit">Search</button>
     </form>
     <div class="stats">
@@ -89,7 +93,7 @@
         <div class="thumb" style="background:linear-gradient(135deg,#1D6F42,#31a05f)" aria-hidden="true">XL</div>
         <div class="body">
           <div class="cat">Excel</div>
-          <h3>Excel Study Guide: Lookups, Pivot Tables &amp; Core Functions</h3>
+          <h3>Excel Study Guide</h3>
           <p class="excerpt">Core Excel skills for work, interviews and skills tests: lookup formulas, text and logical functions, pivot tables, and 3 practice questions with full explanations.</p>
           <div class="meta"><span>Sep 5, 2026 · 8 min read</span><span class="read">Read →</span></div>
         </div>
@@ -98,7 +102,7 @@
         <div class="thumb" style="background:linear-gradient(135deg,#2b6cb0,#3182ce)" aria-hidden="true">PY</div>
         <div class="body">
           <div class="cat">Python</div>
-          <h3>Python Fundamentals: Study Guide + Practice Quiz</h3>
+          <h3>Python Fundamentals</h3>
           <p class="excerpt">Data structures, comprehensions, exceptions, and functions — the Python fundamentals that interviews and skills tests keep returning to, with explained practice questions.</p>
           <div class="meta"><span>Sep 3, 2026 · 6 min read</span><span class="read">Read →</span></div>
         </div>
@@ -107,7 +111,7 @@
         <div class="thumb" style="background:linear-gradient(135deg,#8a5a0b,#c98a12)" aria-hidden="true">JS</div>
         <div class="body">
           <div class="cat">JavaScript</div>
-          <h3>JavaScript Fundamentals: Key Concepts Explained</h3>
+          <h3>JavaScript Fundamentals</h3>
           <p class="excerpt">Hoisting, closures, == vs ===, arrow functions, and promises — the JavaScript fundamentals behind most interview and skills-test questions.</p>
           <div class="meta"><span>Aug 28, 2026 · 7 min read</span><span class="read">Read →</span></div>
         </div>
@@ -116,7 +120,7 @@
         <div class="thumb" style="background:linear-gradient(135deg,#6b46c1,#9f7aea)" aria-hidden="true">PM</div>
         <div class="body">
           <div class="cat">Project Management</div>
-          <h3>Project Management Study Guide: Concepts That Matter</h3>
+          <h3>Project Management Study Guide</h3>
           <p class="excerpt">Agile vs Waterfall, the Iron Triangle, RACI matrices, and risk management — the core project management concepts, with practice questions.</p>
           <div class="meta"><span>Aug 22, 2026 · 7 min read</span><span class="read">Read →</span></div>
         </div>
@@ -125,7 +129,7 @@
         <div class="thumb" style="background:linear-gradient(135deg,#2c5282,#4299e1)" aria-hidden="true">SQ</div>
         <div class="body">
           <div class="cat">SQL</div>
-          <h3>SQL Study Guide: Queries You Should Master</h3>
+          <h3>SQL Study Guide</h3>
           <p class="excerpt">JOINs, GROUP BY, window functions, and subqueries — the SQL patterns behind most interview and skills-test questions, explained with examples.</p>
           <div class="meta"><span>Aug 15, 2026 · 7 min read</span><span class="read">Read →</span></div>
         </div>
@@ -134,7 +138,7 @@
         <div class="thumb" style="background:linear-gradient(135deg,#b02525,#dc4a4a)" aria-hidden="true">DM</div>
         <div class="body">
           <div class="cat">Marketing</div>
-          <h3>Digital Marketing Study Guide: SEO, Funnels &amp; Metrics</h3>
+          <h3>Digital Marketing Study Guide</h3>
           <p class="excerpt">SEO fundamentals, funnel metrics, A/B testing, and campaign attribution — condensed study notes with practice questions.</p>
           <div class="meta"><span>Aug 8, 2026 · 8 min read</span><span class="read">Read →</span></div>
         </div>
@@ -143,7 +147,7 @@
         <div class="thumb" style="background:linear-gradient(135deg,#c05621,#ed8936)" aria-hidden="true">GT</div>
         <div class="body">
           <div class="cat">Git</div>
-          <h3>Git Study Guide: Commands and Concepts</h3>
+          <h3>Git Study Guide</h3>
           <p class="excerpt">Branching, merging vs rebasing, staging, and undoing mistakes — the Git knowledge every developer needs, with quizzes.</p>
           <div class="meta"><span>Jul 30, 2026 · 7 min read</span><span class="read">Read →</span></div>
         </div>
@@ -152,7 +156,7 @@
         <div class="thumb" style="background:linear-gradient(135deg,#b03a2e,#e07b39)" aria-hidden="true">PP</div>
         <div class="body">
           <div class="cat">PowerPoint</div>
-          <h3>PowerPoint Study Guide: Efficient Slide Skills</h3>
+          <h3>PowerPoint Study Guide</h3>
           <p class="excerpt">Slide masters, presenter view, SmartArt, and the productivity features that separate casual users from efficient ones.</p>
           <div class="meta"><span>Jul 22, 2026 · 7 min read</span><span class="read">Read →</span></div>
         </div>
@@ -161,9 +165,14 @@
         <div class="thumb" style="background:linear-gradient(135deg,#0A66C2,#4a90d9)" aria-hidden="true">LI</div>
         <div class="body">
           <div class="cat">Getting Started</div>
-          <h3>LinkedIn Skill Assessments Are Retired: What to Do Instead</h3>
+          <h3>LinkedIn Skill Assessments Are Retired</h3>
           <p class="excerpt">LinkedIn Skill Assessments are no longer available. Here is what that means for your profile and the best ways to prove and practise your skills today.</p>
-          <div class="meta"><span>Oct 18, 2026 · 2 min read</span><span class="read">Read →</span></div>
+          <div class="card-details">
+            <span><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg> Intermediate - Advanced</span>
+            <span><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg> 2 min read</span>
+
+          </div>
+          <div class="meta"><span class="btn btn-outline" style="width:100%">Start Practice Test</span></div>
         </div>
       </a>
       <a class="post-card" href="guides/generative-ai-career-essentials-practice-test/" data-cat="Generative AI" data-search="career essentials in generative ai: 164-question practice test an unofficial 164-question practice test on generative ai: copilot in microsoft 365, llms, gans and vaes, prompt engineering, machine-learning types, data fundamentals and ai ethics — with instant scoring, a per-topic breakdown and explanations. generative ai">
@@ -179,9 +188,14 @@
         <div class="thumb" style="background:linear-gradient(135deg,#276749,#2f9e63)" aria-hidden="true">L6</div>
         <div class="body">
           <div class="cat">Lean Six Sigma</div>
-          <h3>Lean Six Sigma &amp; Sustainability: 15-Question Practice Test</h3>
+          <h3>Lean Six Sigma &amp; Sustainability</h3>
           <p class="excerpt">15 practice questions on the 5-Whys, PDCA, the DOWNTIME wastes, stakeholder engagement and the pillars of sustainability — with instant scoring and explanations.</p>
-          <div class="meta"><span>Sep 27, 2026 · 15 questions</span><span class="read">Read →</span></div>
+          <div class="card-details">
+            <span><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg> Intermediate - Advanced</span>
+            <span><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg> 15 questions</span>
+            <span><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg> 15 Questions</span>
+          </div>
+          <div class="meta"><span class="btn btn-outline" style="width:100%">Start Practice Test</span></div>
         </div>
       </a>
     </div>
