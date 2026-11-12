@@ -20,7 +20,7 @@ function checkQuestions(topic, qs) {
             }
             ids.add(q.q);
         }
-
+        
         if (!q.o || !Array.isArray(q.o) || q.o.length < 2) {
             console.error(`[Error] ${topic} Question ${i+1}: Missing or invalid options.`);
             errors++;

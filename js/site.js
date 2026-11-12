@@ -206,13 +206,13 @@
       var q = state.q.toLowerCase(), shown = 0;
       cards.forEach(function (c) {
         var ok = (state.cat === "All" || c.getAttribute("data-cat") === state.cat) && (!q || c.getAttribute("data-search").indexOf(q) !== -1);
-        c.hidden = !ok;
+        c.hidden = !ok; 
         if (ok) {
           shown++;
           // Trigger animation reflow
           c.style.animation = 'none';
           c.offsetHeight; /* trigger reflow */
-          c.style.animation = null;
+          c.style.animation = null; 
         }
       });
       chips.forEach(function (c) { var on = c.getAttribute("data-cat") === state.cat; c.classList.toggle("active", on); c.setAttribute("aria-pressed", String(on)); });
@@ -259,14 +259,14 @@
   if (contactForm && contactForm.action.includes("formspree.io")) {
     contactForm.addEventListener("submit", function(ev) {
       ev.preventDefault();
-
+      
       // Honeypot check
       const hp = document.getElementById("honeypot");
       if (hp && hp.value) {
           // Silent rejection for bots
           return;
       }
-
+      
       var data = new FormData(contactForm);
       fetch(contactForm.action, {
         method: contactForm.method,
@@ -389,27 +389,27 @@ document.querySelectorAll(".mock-hint").forEach(hint => {
     pContainer.style.margin = "1rem 0";
     pContainer.style.display = "flex";
     pContainer.style.gap = "10px";
-
+    
     const eBtn = document.createElement("button");
     eBtn.className = "btn";
     eBtn.textContent = "Export Progress";
     eBtn.onclick = exportBtn.onclick;
-
+    
     const iLabel = document.createElement("label");
     iLabel.className = "btn btn-alt";
     iLabel.textContent = "Import Progress";
     iLabel.style.cursor = "pointer";
-
+    
     const iInput = document.createElement("input");
     iInput.type = "file";
     iInput.accept = ".json";
     iInput.style.display = "none";
     iInput.onchange = importInput.onchange;
-
+    
     iLabel.appendChild(iInput);
     pContainer.appendChild(eBtn);
     pContainer.appendChild(iLabel);
-
+    
     hint.parentElement.insertBefore(pContainer, hint);
 });
 
@@ -418,76 +418,20 @@ document.querySelectorAll(".mock-hint").forEach(hint => {
   var consent = document.getElementById("cookieConsent");
   var btnAccept = document.getElementById("cookieAccept");
   var btnDecline = document.getElementById("cookieDecline");
-
+  
   if (consent && btnAccept && btnDecline) {
     if (!localStorage.getItem("skillprep:cookie_consent")) {
       consent.hidden = false;
     }
-
+    
     btnAccept.addEventListener("click", function() {
       localStorage.setItem("skillprep:cookie_consent", "accepted");
       consent.hidden = true;
     });
-
+    
     btnDecline.addEventListener("click", function() {
       localStorage.setItem("skillprep:cookie_consent", "declined");
       consent.hidden = true;
-    });
-  }
-})();
-
-(function() {
-  const dash = document.getElementById("dashboard");
-  if (!dash) return;
-  const cards = document.querySelectorAll("#grid .post-card");
-  const dashGrid = document.getElementById("dashGrid");
-  const dashTotalQs = document.getElementById("dashTotalQs");
-  const dashAccuracy = document.getElementById("dashAccuracy");
-  const dashCompleted = document.getElementById("dashCompleted");
-  const clearDashBtn = document.getElementById("clearDashBtn");
-
-  let totalAttempts = 0;
-  let correctAttempts = 0;
-  let modulesStarted = 0;
-  let hasData = false;
-
-  cards.forEach(card => {
-    const link = card.getAttribute("href").replace("./", "").replace("../../", "");
-    if (!link) return;
-    const progressKey = "skillprep:progress:" + link;
-    const stored = localStorage.getItem(progressKey);
-    if (stored) {
-      hasData = true;
-      modulesStarted++;
-      const [answeredCount, correctCount, totalCount] = stored.split(",").map(Number);
-      totalAttempts += answeredCount;
-      correctAttempts += correctCount;
-
-      const cardClone = card.cloneNode(true);
-      // update action button text
-      const btn = cardClone.querySelector(".btn");
-      if (btn) btn.textContent = "Resume Learning";
-      dashGrid.appendChild(cardClone);
-    }
-  });
-
-  if (hasData) {
-    dash.style.display = "block";
-    dashTotalQs.textContent = totalAttempts;
-    dashAccuracy.textContent = totalAttempts > 0 ? Math.round((correctAttempts / totalAttempts) * 100) + "%" : "0%";
-    dashCompleted.textContent = modulesStarted;
-  }
-
-  if (clearDashBtn) {
-    clearDashBtn.addEventListener("click", () => {
-      if (confirm("Are you sure you want to reset your learning progress? This cannot be undone.")) {
-        Object.keys(localStorage).forEach(key => {
-          if (key.startsWith("skillprep:progress:")) {
-            localStorage.removeItem(key);
-          }
-        });
-        window.location.reload();
-      }
     });
   }
 })();
