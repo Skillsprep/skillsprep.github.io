@@ -7,7 +7,7 @@ module.exports = [
     gradient: "linear-gradient(135deg,#1D6F42,#31a05f)",
     date: "Sep 5, 2026",
     readTime: "9 min read",
-    excerpt: "Core Excel skills for work, interviews and skills tests: lookup formulas, text and logical functions, pivot tables, and 3 practice questions with full explanations.",
+    excerpt: "Core Excel skills for work, interviews and skills tests: lookup formulas, text and logical functions, pivot tables, and 20 practice questions with full explanations.",
     intro: "Excel is one of the most requested skills in office, finance and analyst roles. This guide covers the everyday core — lookups, logical and text functions, and pivot tables — and finishes with practice questions so you can test yourself before an interview or skills test.",
     sections: [
       { h: "Core topics to know", body: `
@@ -2406,18 +2406,18 @@ git diff --staged       # staged vs last commit</code></pre>
   },
   {
     slug: "lean-six-sigma-practice-test",
-    title: "Lean Six Sigma & Sustainability: 15-Question Practice Test",
+    title: "Lean Six Sigma & Sustainability: 30-Question Practice Test",
     category: "Lean Six Sigma",
     icon: "L6",
     gradient: "linear-gradient(135deg,#276749,#2f9e63)",
     date: "Sep 27, 2026",
-    readTime: "15 questions",
-    excerpt: "15 practice questions on the 5-Whys, PDCA, the DOWNTIME wastes, stakeholder engagement and the pillars of sustainability — with instant scoring and explanations.",
-    intro: "Process-improvement and sustainability courses often end each chapter with short quizzes that many learners find trickier than expected. This unofficial 15-question practice test covers the core ideas — root-cause analysis, Lean wastes, the PDCA cycle, stakeholder engagement and sustainability fundamentals — with an explanation for every answer.",
+    readTime: "30 questions",
+    excerpt: "30 practice questions on the 5-Whys, PDCA, the DOWNTIME wastes, stakeholder engagement and the pillars of sustainability — with instant scoring and explanations.",
+    intro: "Process-improvement and sustainability courses often end each chapter with short quizzes that many learners find trickier than expected. This unofficial 30-question practice test covers the core ideas — root-cause analysis, Lean wastes, the PDCA cycle, stakeholder engagement and sustainability fundamentals — with an explanation for every answer.",
     sections: [
       { h: "About this practice test", body: `
         <ul>
-          <li><b>Format:</b> 15 multiple-choice questions, one best answer each</li>
+          <li><b>Format:</b> 30 multiple-choice questions, one best answer each</li>
           <li><b>Scoring:</b> instant, with a per-topic breakdown and explanations</li>
           <li><b>Trap to watch:</b> several questions ask which option is <i>NOT</i> correct — read carefully</li>
           <li><b>Wording varies:</b> different courses and frameworks word some ideas differently (for example, the pillars of sustainability). Where that matters, the explanation says which framing we follow.</li>
@@ -2430,8 +2430,8 @@ git diff --staged       # staged vs last commit</code></pre>
           <li><b>Lean Six Sigma goal</b> — process improvement, defect reduction, waste minimization</li>
           <li><b>Sustainability</b> — project goals and charters, stakeholder engagement, the pillars of sustainability, global interconnection, and the NAE's 14 Grand Challenges for Engineering</li>
         </ul>` },
-      { h: "Practice test (15 questions)", body: `
-        <p>Answer all 15 questions, then press <b>Finish &amp; score</b>. The set is small enough to master completely, so aim for 100%.</p>
+      { h: "Practice test (30 questions)", body: `
+        <p>Answer all 30 questions, then press <b>Finish &amp; score</b>. The set is small enough to master completely, so aim for 100%.</p>
         <div id="mocktest-lean" data-bank="LEAN_QUESTIONS"></div>` },
       { h: "After the test: a study checklist", body: `
         <ul>

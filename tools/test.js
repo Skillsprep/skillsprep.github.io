@@ -3,7 +3,7 @@
 
 const guides = require('./content/guides.js');
 const genai = require('./content/genai.js');
-const lean = require('./content/lean.js');
+const lean = require('./content/lean.js').concat(require('./content/lean_more.js'));
 
 let errors = 0;
 

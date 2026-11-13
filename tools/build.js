@@ -8,7 +8,7 @@ const fs = require("fs");
 const path = require("path");
 const cfg = require("./config");
 const POSTS = require("./content/guides");
-const BANKS = { GENAI_QUESTIONS: require("./content/genai"), LEAN_QUESTIONS: require("./content/lean") };
+const BANKS = { GENAI_QUESTIONS: require("./content/genai"), LEAN_QUESTIONS: require("./content/lean").concat(require("./content/lean_more")) };
 
 const ROOT = path.resolve(__dirname, "..");
 const SITE = cfg.siteUrl.replace(/\/+$/, "") + "/";
@@ -107,12 +107,24 @@ function prepareBody(post, body) {
   return body;
 }
 
-const posts = POSTS.map((p, idx) => {
+// Extra in-depth teaching sections live in tools/content/extra/<slug>.js and are merged in
+// just before the practice/exercise section of each page.
+function withExtras(p) {
+  const f = path.join(__dirname, "content", "extra", p.slug + ".js");
+  if (!fs.existsSync(f)) return p;
+  const extra = require(f);
+  const at = p.sections.findIndex((s) => /^(Practical learning exercises|Practice test|How to use SkillPrep now)/.test(s.h));
+  const sections = p.sections.slice();
+  sections.splice(at < 0 ? sections.length : at, 0, ...extra);
+  return { ...p, sections };
+}
+const posts = POSTS.map(withExtras).map((p, idx) => {
   const sections = p.sections.map((s) => ({ h: s.h, id: slugify(s.h), body: prepareBody(p, s.body) }));
   const ids = new Set();
   sections.forEach((s) => { let b = s.id, n = 2; while (ids.has(s.id)) s.id = b + "-" + n++; ids.add(s.id); });
   const words = stripTags(p.intro + " " + p.sections.map((s) => s.body.replace(/<div id="[\w-]+" data-bank="\w+"><\/div>/, "")).join(" ")).split(" ").length;
-  const readTime = /question/.test(p.readTime) ? p.readTime : Math.max(2, Math.round(words / 200)) + " min read";
+  const bankN = /genai/i.test(p.slug) ? BANKS.GENAI_QUESTIONS.length : /lean/i.test(p.slug) ? BANKS.LEAN_QUESTIONS.length : 0;
+  const readTime = bankN ? "About " + Math.max(5, Math.round(bankN * 0.75)) + " min test" : Math.max(2, Math.round(words / 200)) + " min read";
   return { ...p, idx, sections, published: isoDate(p.date), reviewed: cfg.lastReviewed, readTime, url: `guides/${p.slug}/`, sources: cfg.sources[p.slug] || [] };
 });
 const CATS = [...new Set(posts.map((p) => p.category))].filter(c => c !== "Getting started" && c !== "Getting Started");
@@ -138,6 +150,7 @@ function layout({ title, desc, path: pagePath, prefix, nav, body, ld = [], type 
 <title>${esc(title)}</title>
 <meta name="description" content="${esc(desc)}">
 <link rel="canonical" href="${canonical}">
+<meta name="google-site-verification" content="rOGMro0A_ltGwtwagVfnPJFPmn59apiGYOa0LKMT4n8">
 <meta name="robots" content="${robots}">
 <meta name="theme-color" content="#0D1B2A">
 <meta property="og:site_name" content="${esc(cfg.siteName)}">
@@ -230,8 +243,10 @@ function getQuestionCount(p) {
 
 function card(p, prefix) {
   const qCount = getQuestionCount(p);
-  const difficulty = /test|assessment/i.test(p.slug) ? "Intermediate - Advanced" : "Beginner - Intermediate";
-  const actionText = /test|assessment/i.test(p.slug) ? "Start Practice Test" : "Start Learning";
+  const isTest = /practice-test/.test(p.slug);
+  const difficulty = isTest ? "Intermediate - Advanced" : p.category === "Getting Started" ? "All levels" : "Beginner - Intermediate";
+  const actionText = isTest ? "Start Practice Test" : p.category === "Getting Started" ? "Read Guide" : "Start Learning";
+  const timeLabel = p.readTime;
   
   return `<a class="post-card" href="${prefix}${p.url}" data-cat="${esc(p.category)}" data-search="${esc((p.title + " " + p.excerpt + " " + p.category).toLowerCase())}">
         <div class="thumb" style="background:${p.gradient}" aria-hidden="true">${p.icon}</div>
@@ -241,7 +256,7 @@ function card(p, prefix) {
           <p class="excerpt">${esc(p.excerpt)}</p>
           <div class="card-details">
             <span><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg> ${difficulty}</span>
-            <span><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg> ${esc(p.readTime)}</span>
+            <span><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg> ${esc(timeLabel)}</span>
             ${qCount > 0 ? `<span><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg> ${qCount} Questions</span>` : ''}
           </div>
           <div class="meta"><span class="btn btn-outline" style="width:100%">${actionText}</span></div>
@@ -364,7 +379,7 @@ function guidePage(p) {
     <h1>${esc(p.title)}</h1>
     <div class="meta">
       <span><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg> ${esc(p.readTime)}</span>
-      <span><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg> ${getQuestionCount(p)} Questions</span>
+      ${getQuestionCount(p) > 0 ? `<span><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg> ${getQuestionCount(p)} Questions</span>` : ""}
       <span>Published <time datetime="${p.published}">${longDate(p.published)}</time></span>
       <span>Reviewed <time datetime="${p.reviewed}">${longDate(p.reviewed)}</time></span>
     </div>
