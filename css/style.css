@@ -537,3 +537,15 @@ p a.btn-link, li a.btn-link, .btn-link { text-decoration: none !important; }
 /* fixes: header side padding on narrow screens; keep scored result clear of sticky bars */
 .header-inner { padding-left: 20px; padding-right: 20px; }
 .mock-result, .mock-part, .quiz[id] { scroll-margin-top: 150px; }
+
+/* Guide table of contents on small screens (sidebar TOC is hidden there) */
+.toc-mobile { display: none; }
+@media (max-width: 860px) {
+  .toc-mobile { display: block; margin: 0 0 22px; border: 1px solid var(--line); border-radius: 10px; padding: 10px 14px; background: var(--card, transparent); }
+  .toc-mobile summary { cursor: pointer; font-weight: 700; color: var(--navy); }
+  .toc-mobile .toc { margin-top: 8px; }
+  .toc-mobile .toc a { display: block; padding: 8px 0; border-bottom: 1px solid var(--line); font-size: .92rem; }
+  .toc-mobile .toc a:last-child { border-bottom: none; }
+  .sidebar .toc-box { display: none; }
+}
+@media print { .toc-mobile { display: none !important; } }

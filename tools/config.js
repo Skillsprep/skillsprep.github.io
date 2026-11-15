@@ -26,6 +26,21 @@ module.exports = {
     "generative-ai-microsoft-linkedin-guide": "generative-ai-career-essentials-practice-test",
     "lean-six-sigma-sustainability-mock-test": "lean-six-sigma-practice-test"
   },
+  // Hand-picked "Related guides" shown in each guide's sidebar (slug -> up to 3 slugs). Edit freely;
+  // the build fails if a slug doesn't exist. Guides not listed fall back to the first other guides.
+  related: {
+    "excel-study-guide": ["sql-study-guide", "powerpoint-study-guide", "python-study-guide"],
+    "python-study-guide": ["sql-study-guide", "excel-study-guide", "javascript-study-guide"],
+    "javascript-study-guide": ["git-study-guide", "python-study-guide", "sql-study-guide"],
+    "project-management-study-guide": ["lean-six-sigma-practice-test", "excel-study-guide", "powerpoint-study-guide"],
+    "sql-study-guide": ["excel-study-guide", "python-study-guide", "javascript-study-guide"],
+    "digital-marketing-study-guide": ["excel-study-guide", "powerpoint-study-guide", "generative-ai-career-essentials-practice-test"],
+    "git-study-guide": ["javascript-study-guide", "python-study-guide", "project-management-study-guide"],
+    "powerpoint-study-guide": ["excel-study-guide", "digital-marketing-study-guide", "generative-ai-career-essentials-practice-test"],
+    "linkedin-skill-assessments-retired": ["generative-ai-career-essentials-practice-test", "excel-study-guide", "python-study-guide"],
+    "generative-ai-career-essentials-practice-test": ["powerpoint-study-guide", "digital-marketing-study-guide", "excel-study-guide"],
+    "lean-six-sigma-practice-test": ["project-management-study-guide", "excel-study-guide", "powerpoint-study-guide"]
+  },
   // Authoritative references shown under each guide ("Sources & further reading").
   sources: {
     "excel-study-guide": [

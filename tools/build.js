@@ -146,6 +146,7 @@ const TOTAL_QS = inlineQs + BANKS.GENAI_QUESTIONS.length + BANKS.LEAN_QUESTIONS.
 // sanity: slugs unique, every legacy mapping lands on a real page
 const slugSet = new Set(posts.map((p) => p.slug));
 if (slugSet.size !== posts.length) throw new Error("Duplicate slugs");
+Object.entries(cfg.related || {}).forEach(([k, arr]) => [k, ...arr].forEach((v) => { if (!slugSet.has(v)) throw new Error("related -> missing " + v); }));
 Object.values(cfg.legacySlugs).forEach((v) => { if (!slugSet.has(v)) throw new Error("legacy -> missing " + v); });
 
 /* ---------------- layout ---------------- */
@@ -378,8 +379,9 @@ function homePage() {
 
 function guidePage(p) {
   const prefix = "../../";
+  const curated = ((cfg.related || {})[p.slug] || []).map((slug) => posts.find((x) => x.slug === slug)).filter(Boolean);
   const related = posts.filter((x) => x.category === p.category && x.slug !== p.slug).slice(0, 3);
-  const rel = (related.length ? related : posts.filter((x) => x.slug !== p.slug)).slice(0, 3);
+  const rel = (curated.length ? curated : (related.length ? related : posts.filter((x) => x.slug !== p.slug))).slice(0, 3);
   const prev = posts[p.idx - 1], next = posts[p.idx + 1];
   const isTest = /practice-test/.test(p.slug);
   const body = `
@@ -400,6 +402,13 @@ function guidePage(p) {
 <div class="container article-wrap">
   <article class="article-body">
     <p class="note"><b>Unofficial study resource.</b> ${isTest ? "These practice questions are independent study aids, not official exam content." : "Written independently of any exam provider, employer or software vendor."}</p>
+    <details class="toc-mobile">
+      <summary>On this page</summary>
+      <div class="toc">
+        ${p.sections.map((s) => `<a href="#${s.id}">${esc(s.h)}</a>`).join("\n        ")}
+        ${p.sources.length ? `<a href="#sources">Sources &amp; further reading</a>` : ""}
+      </div>
+    </details>
     <p class="lead">${p.intro}</p>
     ${p.sections.map((s) => `<h2 id="${s.id}">${esc(s.h)}</h2>${s.body}`).join("\n    ")}
     ${p.sources.length ? `<h2 id="sources">Sources &amp; further reading</h2>
@@ -412,7 +421,7 @@ function guidePage(p) {
     <a href="${prefix}#guides" class="btn btn-link">← Back to all guides</a>
   </article>
   <aside class="sidebar">
-    <div class="box">
+    <div class="box toc-box">
       <h2 class="box-h">On this page</h2>
       <div class="toc">
         ${p.sections.map((s) => `<a href="#${s.id}" data-toc="${s.id}">${esc(s.h)}</a>`).join("\n        ")}
