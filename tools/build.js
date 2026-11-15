@@ -41,8 +41,6 @@ function write(rel, content) {
   fs.mkdirSync(path.dirname(f), { recursive: true });
   fs.writeFileSync(f, content);
 }
-const mailto = (subject, body) =>
-  `mailto:${cfg.contactEmail}?subject=${encodeURIComponent(subject)}${body ? "&body=" + encodeURIComponent(body) : ""}`;
 
 /* ---------------- content preparation ---------------- */
 // Rendered question banks -> static HTML (no runtime data files needed).
@@ -417,7 +415,7 @@ function guidePage(p) {
     <div class="box">
       <h2 class="box-h">Spotted a mistake?</h2>
       <p class="box-p">We correct errors quickly. Tell us what's wrong and we'll fix it.</p>
-      <a class="btn btn-link" href="${esc(mailto("Correction: " + p.title, "Page: " + SITE + p.url + "\n\nWhat's wrong:\n"))}">Report a correction</a>
+      <a class="btn btn-link" href="../../contact/">Report a correction</a>
     </div>
   </aside>
 </div>`;
@@ -461,7 +459,7 @@ function aboutPage() {
       <li>Guides are written by identifiable experts such as our SkillPrep Editorial Team (comprising Expert Practitioners & Curriculum Designers) and checked against official documentation where it exists.</li>
       <li>Every guide shows when it was published and when it was last reviewed.</li>
       <li>We don't claim to know what appears on any specific exam, and we don't publish "leaked" questions.</li>
-      <li>Found an error? <a href="${esc(mailto("Correction", ""))}">Email us</a> and we'll fix it promptly.</li>
+      <li>Found an error? <a href="../contact/">Tell us via the contact form</a> and we'll fix it promptly.</li>
     </ul>
     <p class="muted"><i>Disclaimer: SkillPrep is an independent educational site and is not affiliated with, or endorsed by, LinkedIn Corporation, Microsoft or any other vendor. All product names are trademarks of their respective owners.</i></p>
   </div>
@@ -505,10 +503,6 @@ function contactPage() {
     </form>
   </div>
   <div>
-    <div class="card" style="margin-bottom:22px">
-      <h3 class="card-h">Email</h3>
-      <p><a href="mailto:${esc(cfg.contactEmail)}">${esc(cfg.contactEmail)}</a></p>
-    </div>
     <div class="callout tip"><b>Guide requests welcome!</b> The most-requested topic each month gets priority.</div>
   </div>
 </div>`;
@@ -528,8 +522,8 @@ function privacyPage() {
     <p>SkillPrep shows ads served by Google AdSense. Google and its advertising partners may use cookies and similar technologies, and may collect information such as your IP address, browser details and the pages you visit, to serve and measure ads. Ads may be personalised or non-personalised. We do not receive this data and do not control which ads are shown.</p>
     <p>Visitors in the EEA, the UK and Switzerland: Google requires consent for personalised advertising there, and may show non-personalised ads where consent has not been given.</p>
     <p>You can manage or opt out of personalised advertising at <a href="https://adssettings.google.com" rel="noopener">Google Ads Settings</a> or <a href="https://www.aboutads.info" rel="noopener">aboutads.info</a>. To learn how Google uses information from sites that use its services, see <a href="https://policies.google.com/technologies/partner-sites" rel="noopener">How Google uses information</a>.</p>
-    <h2>Contact form and email</h2>
-    <p>When you use the contact form, your name, email address, chosen topic and message are sent to us through Formspree, a third-party form service, which processes them on our behalf (see the <a href="https://formspree.io/legal/privacy-policy/" rel="noopener">Formspree privacy policy</a>). If you email us directly, we receive your address and message. We use this only to reply or to fix the issue you raised.</p>
+    <h2>Contact form</h2>
+    <p>When you use the contact form, your name, email address, chosen topic and message are sent to us through Formspree, a third-party form service, which processes them on our behalf (see the <a href="https://formspree.io/legal/privacy-policy/" rel="noopener">Formspree privacy policy</a>). We use this only to reply or to fix the issue you raised.</p>
     <h2>Fonts</h2>
     <p>Pages load the Inter typeface from Google Fonts, so your browser connects to Google's servers and your IP address is shared with Google when a page loads.</p>
     <h2>Hosting</h2>
@@ -539,7 +533,7 @@ function privacyPage() {
     <h2>Changes</h2>
     <p>If we add analytics, new advertising services or sign-ups, we will update this page <i>before</i> collecting any personal data.</p>
     <h2>Questions</h2>
-    <p>Email <a href="mailto:${esc(cfg.contactEmail)}">${esc(cfg.contactEmail)}</a>.</p>
+    <p>Use the <a href="../contact/">contact form</a>.</p>
   </div>
 </div>`;
   return layout({ title: "Privacy Policy | SkillPrep", desc: "How SkillPrep handles data: no accounts, local-storage progress, Google AdSense advertising, Google Fonts and the Formspree contact form.", path: "privacy/", prefix: "../", nav: "", body });
@@ -557,7 +551,7 @@ function termsPage() {
     <h2>Content</h2>
     <p>You may read, share links to and quote short extracts of our content with attribution. Please don't republish whole guides or practice tests elsewhere without asking.</p>
     <h2>Corrections and takedowns</h2>
-    <p>If you believe something on this site is wrong, or infringes your rights, email <a href="mailto:${esc(cfg.contactEmail)}">${esc(cfg.contactEmail)}</a> and we will review it promptly.</p>
+    <p>If you believe something on this site is wrong, or infringes your rights, contact us through the <a href="../contact/">contact form</a> and we will review it promptly.</p>
     <h2>Liability</h2>
     <p>To the extent the law allows, SkillPrep is not liable for any loss arising from use of the site.</p>
   </div>
