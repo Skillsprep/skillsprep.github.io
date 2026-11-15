@@ -233,25 +233,7 @@
     if (state.q || state.cat !== "All") { var g = $("#guides"); if (g && !window.location.hash) setTimeout(function () { g.scrollIntoView(); }, 0); }
   }
 
-  /* ---------- contact form: honest mailto composer ---------- */
-  var cf = $("#contactForm");
-  if (cf) {
-    cf.addEventListener("submit", function (e) {
-      e.preventDefault();
-      var addr = cf.getAttribute("data-email");
-      var f = function (id) { return $(id, cf).value.trim(); };
-      var subject = "[SkillPrep] " + f("#cTopic");
-      var body = "Name: " + f("#cName") + "\nEmail: " + f("#cEmail") + "\n\n" + f("#cMsg");
-      var url = "mailto:" + addr + "?subject=" + encodeURIComponent(subject) + "&body=" + encodeURIComponent(body);
-      var status = $("#formStatus");
-      status.textContent = "";
-      var msg = document.createElement("span");
-      msg.textContent = "Your email app should now open with the message ready. Nothing has been sent yet — press Send there. If nothing opened, email us directly at ";
-      var a = document.createElement("a"); a.href = "mailto:" + addr; a.textContent = addr;
-      status.appendChild(msg); status.appendChild(a); status.appendChild(document.createTextNode("."));
-      window.location.href = url;
-    });
-  }
+  /* contact form: submitted through Formspree (see handler below); the old mailto composer was removed because it also fired and opened "mailto:null" */
 })();
 
   // Formspree AJAX Submission for Contact Form
@@ -417,20 +399,15 @@ document.querySelectorAll(".mock-hint").forEach(hint => {
 (function() {
   var consent = document.getElementById("cookieConsent");
   var btnAccept = document.getElementById("cookieAccept");
-  var btnDecline = document.getElementById("cookieDecline");
-  
-  if (consent && btnAccept && btnDecline) {
-    if (!localStorage.getItem("skillprep:cookie_consent")) {
+  // Informational notice only: it does not control ads. Dismissal is remembered in localStorage.
+  if (consent && btnAccept) {
+    var seen = null;
+    try { seen = localStorage.getItem("skillprep:cookie_consent"); } catch (e) {}
+    if (!seen) {
       consent.hidden = false;
     }
-    
     btnAccept.addEventListener("click", function() {
-      localStorage.setItem("skillprep:cookie_consent", "accepted");
-      consent.hidden = true;
-    });
-    
-    btnDecline.addEventListener("click", function() {
-      localStorage.setItem("skillprep:cookie_consent", "declined");
+      try { localStorage.setItem("skillprep:cookie_consent", "accepted"); } catch (e) {}
       consent.hidden = true;
     });
   }

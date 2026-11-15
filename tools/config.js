@@ -8,11 +8,10 @@ module.exports = {
   // "/repo-name/" for a project site. Only the 404 page needs it (GitHub Pages serves
   // 404.html from any URL depth); every other page uses relative links.
   basePath: "/",
-  // Where contact-form messages go. The form opens the visitor's email app addressed here.
-  // >>> Make sure this inbox really exists and you read it. <<<
-  contactEmail: "hello@skillsprep.org",
   // Date shown as "Last reviewed" on every guide (ISO). Update when you re-check content.
   lastReviewed: "2026-10-18",
+  // Date shown as "Last updated" on the Privacy page only (kept separate so it doesn't claim guides were re-reviewed).
+  privacyUpdated: "2026-11-14",
   // Old hash-style links (#/post/<old-slug>) are redirected to the new pages.
   legacySlugs: {
     "excel-assessment-guide": "excel-study-guide",
