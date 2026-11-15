@@ -111,6 +111,7 @@
     var total = Number(box.getAttribute("data-total")), key = "skillprep:best:" + box.getAttribute("data-key");
     var qs = $$("[data-q]", box), countEl = $(".mock-count", box), result = $(".mock-result", box);
     var finishBtn = $(".mock-finish", box), actions = $(".mock-actions", box), finished = false;
+    var active = qs, mode = "all", modeLabel = "";   // "all" = full test; otherwise a practice subset (never saved)
     var best = store(key);
     if (best !== null && best !== "") $(".mock-hint", box).textContent = "Untimed · scored at the end · your best: " + best + "%";
 
@@ -118,8 +119,8 @@
     function updateProgress() {
       if (finished) return;
       var ans = answered();
-      countEl.textContent = "Answered " + ans + " / " + total;
-      var pct = Math.round((ans / total) * 100);
+      countEl.textContent = "Answered " + ans + " / " + active.length;
+      var pct = Math.round((ans / active.length) * 100);
       var progPct = $(".progress-pct", box);
       var progFill = $(".progress-fill", box);
       if (progPct) progPct.textContent = pct + "%";
@@ -134,17 +135,51 @@
         $$("input", q).forEach(function (i) { i.checked = false; i.disabled = false; });
         $(".q-explain", q).classList.remove("show");
       });
-      result.innerHTML = ""; countEl.textContent = "Answered 0 / " + total;
+      result.innerHTML = ""; countEl.textContent = "Answered 0 / " + active.length;
       finishBtn.disabled = false; finishBtn.textContent = "Finish & score";
       var rb = $(".mock-retake", actions); if (rb) rb.remove();
+      var rm0 = $(".mock-retry-missed", actions); if (rm0) rm0.remove();
       box.scrollIntoView({ behavior: "smooth", block: "start" });
+    }
+
+    function startSet(list, label) {
+      active = list; mode = list.length === qs.length ? "all" : "set"; modeLabel = label;
+      qs.forEach(function (q) { q.style.display = list.indexOf(q) === -1 ? "none" : ""; });
+      $$(".mock-part", box).forEach(function (h) {
+        var el = h.nextElementSibling, any = false;
+        while (el && !el.classList.contains("mock-part") && !el.classList.contains("mock-tools")) {
+          if (el.hasAttribute("data-q") && el.style.display !== "none") any = true;
+          el = el.nextElementSibling;
+        }
+        h.style.display = any ? "" : "none";
+      });
+      reset();
+      var hint = $(".mock-hint", box);
+      if (mode === "all") { hint.textContent = "Untimed · scored at the end" + (best !== null && best !== "" ? " · your best: " + best + "%" : ""); }
+      else { hint.textContent = "Practice set: " + label + " · untimed · not saved to your best score or progress"; }
+    }
+    // Topic practice: pick one topic to drill without touching saved progress.
+    var topics = []; qs.forEach(function (q) { var t = q.getAttribute("data-part"); if (topics.indexOf(t) === -1) topics.push(t); });
+    if (topics.length > 1) {
+      var tools = document.createElement("div"); tools.className = "mock-tools";
+      var lbl = document.createElement("label"); lbl.textContent = "Practise one topic: ";
+      var sel = document.createElement("select"); sel.className = "mock-topic";
+      var all = document.createElement("option"); all.value = ""; all.textContent = "All topics (full test)"; sel.appendChild(all);
+      topics.forEach(function (t) { var o = document.createElement("option"); o.value = t; o.textContent = t; sel.appendChild(o); });
+      lbl.appendChild(sel); tools.appendChild(lbl);
+      result.parentNode.insertBefore(tools, result);
+      sel.addEventListener("change", function () {
+        if (!finished && answered() > 0 && !confirm("Switching topic clears your current answers. Continue?")) { sel.value = mode === "set" && topics.indexOf(modeLabel) !== -1 ? modeLabel : ""; return; }
+        if (sel.value === "") startSet(qs, "all");
+        else startSet(qs.filter(function (q) { return q.getAttribute("data-part") === sel.value; }), sel.value);
+      });
     }
 
     finishBtn.addEventListener("click", function () {
       if (finished) return;
       finished = true;
-      var score = 0, done = 0, parts = {}, order = [], missed = [];
-      qs.forEach(function (q, n) {
+      var score = 0, done = 0, parts = {}, order = [], missed = [], total = active.length;
+      active.forEach(function (q, n) {
         var ans = Number(q.getAttribute("data-answer")), part = q.getAttribute("data-part");
         if (!parts[part]) { parts[part] = { ok: 0, n: 0 }; order.push(part); }
         parts[part].n++;
@@ -155,21 +190,21 @@
         if (picked) {
           done++;
           if (Number(picked.value) === ans) { score++; parts[part].ok++; }
-          else { picked.closest(".opt").classList.add("wrong"); missed.push({ n: n + 1, id: q.id, skipped: false }); }
-        } else { missed.push({ n: n + 1, id: q.id, skipped: true }); }
+          else { picked.closest(".opt").classList.add("wrong"); missed.push({ n: qs.indexOf(q) + 1, id: q.id, el: q, skipped: false }); }
+        } else { missed.push({ n: qs.indexOf(q) + 1, id: q.id, el: q, skipped: true }); }
       });
       var pct = Math.round((score / total) * 100);
       var verdict = pct >= 85 ? "Excellent — you're well prepared." : pct >= 70 ? "Pass — solid grounding." : "Below 70% — review the weaker topics below and retake.";
       var tone = pct >= 70 ? "good" : "low";
       var prevBest = store(key);
-      var isBest = prevBest === null || prevBest === "" || pct > Number(prevBest);
+      var isBest = mode === "all" && (prevBest === null || prevBest === "" || pct > Number(prevBest));
       if (isBest) store(key, String(pct));
       
       // Update global dashboard progress tracking 
       // format: skillprep:progress:pathname = "answeredCount,correctCount,totalCount"
       var path = window.location.pathname.replace(/^\/|\/$/g, "") + "/";
       if (!path || path === "/") path = box.getAttribute("data-key");
-      localStorage.setItem("skillprep:progress:" + path, done + "," + score + "," + total);
+      if (mode === "all") localStorage.setItem("skillprep:progress:" + path, done + "," + score + "," + total);
       var rows = order.map(function (p) {
         var s = parts[p], pp = Math.round((s.ok / s.n) * 100);
         return '<tr><th scope="row">' + esc(p) + "</th><td>" + s.ok + " / " + s.n + '</td><td><span class="pbar"><i style="width:' + pp + '%" class="' + (pp >= 70 ? "ok" : "weak") + '"></i></span> ' + pp + "%" + (pp < 70 ? ' <b class="flag">revisit</b>' : "") + "</td></tr>";
@@ -180,13 +215,19 @@
       result.innerHTML =
         '<div class="score ' + tone + '"><div class="big">' + score + " / " + total + " (" + pct + "%)</div>" +
         '<div class="verdict">' + verdict + "</div>" +
-        '<div class="sub">Answered ' + done + " of " + total + (isBest ? " · new personal best" : " · your best: " + prevBest + "%") + "</div>" +
+        '<div class="sub">Answered ' + done + " of " + total + (mode !== "all" ? " · practice set (" + modeLabel + ") — not saved" : isBest ? " · new personal best" : " · your best: " + prevBest + "%") + "</div>" +
         '<table class="breakdown"><thead><tr><th scope="col">Topic</th><th scope="col">Score</th><th scope="col">Result</th></tr></thead><tbody>' + rows + "</tbody></table>" +
         review + "</div>";
       countEl.textContent = "Scored " + score + " / " + total;
       finishBtn.disabled = true; finishBtn.textContent = "Scored ✓";
       var rb = document.createElement("button"); rb.type = "button"; rb.className = "btn mock-retake"; rb.textContent = "Retake";
       rb.addEventListener("click", reset); actions.appendChild(rb);
+      if (missed.length) {
+        var rm = document.createElement("button"); rm.type = "button"; rm.className = "btn btn-alt mock-retry-missed";
+        rm.textContent = "Retry " + missed.length + " missed";
+        rm.addEventListener("click", function () { startSet(missed.map(function (m) { return m.el; }), "missed questions"); });
+        actions.appendChild(rm);
+      }
       result.focus({ preventScroll: true });
       result.scrollIntoView({ behavior: "smooth", block: "start" });
     });

@@ -549,3 +549,7 @@ p a.btn-link, li a.btn-link, .btn-link { text-decoration: none !important; }
   .sidebar .toc-box { display: none; }
 }
 @media print { .toc-mobile { display: none !important; } }
+
+/* Practice-test tools: topic selector */
+.mock-tools { margin: 0 0 18px; font-size: .92rem; }
+.mock-tools select { margin-left: 6px; padding: 6px 10px; border: 1px solid var(--line); border-radius: 8px; background: var(--card); color: var(--ink); font: inherit; max-width: 100%; }
