@@ -335,25 +335,56 @@ importInput.onchange = function(e) {
     if (!file) return;
     const reader = new FileReader();
     reader.onload = function(evt) {
-        try {
-            const data = JSON.parse(evt.target.result);
-            let importedCount = 0;
-            for (let key in data) {
-                if (key.startsWith("skillprep:")) {
-                    localStorage.setItem(key, data[key]);
-                    importedCount++;
-                }
+        var input = e.target;
+        function done() { input.value = ""; }
+        // Accept only the key formats SkillPrep itself writes, with strictly validated values.
+        function validEntry(key, val) {
+            if (typeof key !== "string" || typeof val !== "string" || key.length > 200 || val.length > 100) return false;
+            if (key === "skillprep:theme") return val === "light" || val === "dark";
+            if (key === "skillprep:cookie_consent") return val === "accepted" || val === "declined";
+            if (key.indexOf("skillprep:best:") === 0) { var n = Number(val); return val !== "" && isFinite(n) && n >= 0 && n <= 100; }
+            if (key.indexOf("skillprep:progress:") === 0) {
+                var m = /^(\d{1,5}),(\d{1,5}),(\d{1,5})$/.exec(val);
+                return !!m && +m[2] <= +m[1] && +m[1] <= +m[3];
             }
-            if (importedCount > 0) {
-                alert("Successfully imported progress!");
-                window.location.reload();
-            } else {
-                alert("No valid SkillPrep progress found in this file.");
-            }
-        } catch (err) {
-            alert("Invalid JSON file.");
+            return false;
         }
-        e.target.value = "";
+        try {
+            var data = JSON.parse(evt.target.result);
+            if (!data || typeof data !== "object" || Array.isArray(data)) {
+                alert("This file is not a SkillPrep progress export. Nothing was imported.");
+                return done();
+            }
+            var valid = [], skipped = 0;
+            Object.keys(data).forEach(function (key) {
+                if (key.indexOf("skillprep:") !== 0) return;
+                if (validEntry(key, data[key])) valid.push(key); else skipped++;
+            });
+            if (valid.length === 0) {
+                alert("No valid SkillPrep progress found in this file. Nothing was imported.");
+                return done();
+            }
+            var conflicts = valid.filter(function (k) {
+                var cur = null; try { cur = localStorage.getItem(k); } catch (x) {}
+                return cur !== null && cur !== data[k];
+            });
+            var overwrite = true;
+            if (conflicts.length > 0) {
+                overwrite = confirm(conflicts.length + " saved item(s) on this device differ from the file.\n\nOK = replace them with the imported values.\nCancel = keep your current progress and import only new items.");
+            }
+            var imported = 0;
+            valid.forEach(function (k) {
+                var cur = null; try { cur = localStorage.getItem(k); } catch (x) {}
+                if (cur !== null && cur !== data[k] && !overwrite) return;
+                try { localStorage.setItem(k, data[k]); imported++; } catch (x) {}
+            });
+            alert("Imported " + imported + " item(s)." + (skipped ? " Skipped " + skipped + " invalid item(s)." : ""));
+            done();
+            if (imported > 0) window.location.reload();
+        } catch (err) {
+            alert("This file could not be read as JSON. Nothing was imported.");
+            done();
+        }
     };
     reader.readAsText(file);
 };

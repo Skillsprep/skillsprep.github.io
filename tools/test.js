@@ -53,6 +53,36 @@ guides.forEach(g => {
     }
 });
 
+// 4. Check inline quizzes in the built guide pages (run `node tools/build.js` first)
+const fs = require('fs');
+const path = require('path');
+const guidesDir = path.join(__dirname, '..', 'guides');
+let inlineTotal = 0;
+if (fs.existsSync(guidesDir)) {
+    fs.readdirSync(guidesDir).forEach(slug => {
+        const file = path.join(guidesDir, slug, 'index.html');
+        if (!fs.existsSync(file)) return;
+        const html = fs.readFileSync(file, 'utf8');
+        const blocks = html.split('<div class="quiz" data-quiz>').slice(1);
+        const seen = new Set();
+        blocks.forEach((b, i) => {
+            inlineTotal++;
+            const label = `${slug} inline question ${i + 1}`;
+            // keep only this quiz's own markup (up to the next quiz marker, already split)
+            const text = (/<p class="q-text"[^>]*>([\s\S]*?)<\/p>/.exec(b) || [])[1];
+            const opts = (b.match(/<label class="opt"/g) || []).length;
+            const correct = (b.match(/<label class="opt" data-correct/g) || []).length;
+            if (!text || !text.trim()) { console.error(`[Error] ${label}: missing question text.`); errors++; }
+            else if (seen.has(text)) { console.error(`[Error] ${label}: duplicate question text.`); errors++; }
+            else seen.add(text);
+            if (opts < 2) { console.error(`[Error] ${label}: fewer than 2 options.`); errors++; }
+            if (correct !== 1) { console.error(`[Error] ${label}: expected exactly 1 correct option, found ${correct}.`); errors++; }
+            if (!/class="q-explain"/.test(b)) { console.error(`[Error] ${label}: missing explanation.`); errors++; }
+        });
+    });
+    console.log(`Checked ${inlineTotal} inline quiz questions in built guides.`);
+}
+
 if (errors > 0) {
     console.error(`\nTests failed with ${errors} error(s).`);
     process.exit(1);
