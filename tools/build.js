@@ -86,6 +86,21 @@ function renderBank(bankKey, prefix) {
   return html + "\n</div>";
 }
 
+// Remove inline quiz blocks (balanced <div> scan) so reading time counts prose only.
+function stripQuizzes(html) {
+  const marker = '<div class="quiz" data-quiz>';
+  let out = "", i = 0;
+  for (;;) {
+    const at = html.indexOf(marker, i);
+    if (at === -1) { out += html.slice(i); break; }
+    out += html.slice(i, at);
+    let depth = 0, j = at; const re = /<div\b|<\/div>/g; re.lastIndex = at;
+    let m;
+    while ((m = re.exec(html))) { depth += m[0] === "</div>" ? -1 : 1; j = re.lastIndex; if (depth === 0) break; }
+    i = j;
+  }
+  return out;
+}
 function prepareBody(post, body) {
   // Bank placeholders -> static test markup
   body = body.replace(/<div id="([\w-]+)" data-bank="(\w+)"><\/div>/g, (_, id, key) => renderBank(key, id));
@@ -120,8 +135,8 @@ const posts = POSTS.map(withExtras).map((p, idx) => {
   const sections = p.sections.map((s) => ({ h: s.h, id: slugify(s.h), body: prepareBody(p, s.body) }));
   const ids = new Set();
   sections.forEach((s) => { let b = s.id, n = 2; while (ids.has(s.id)) s.id = b + "-" + n++; ids.add(s.id); });
-  const words = stripTags(p.intro + " " + p.sections.map((s) => s.body.replace(/<div id="[\w-]+" data-bank="\w+"><\/div>/, "")).join(" ")).split(" ").length;
-  const bankN = /genai/i.test(p.slug) ? BANKS.GENAI_QUESTIONS.length : /lean/i.test(p.slug) ? BANKS.LEAN_QUESTIONS.length : 0;
+  const words = stripTags(p.intro + " " + p.sections.map((s) => stripQuizzes(s.body.replace(/<div id="[\w-]+" data-bank="\w+"><\/div>/, ""))).join(" ")).split(" ").length;
+  const bankN = /genai|generative-ai/i.test(p.slug) ? BANKS.GENAI_QUESTIONS.length : /lean/i.test(p.slug) ? BANKS.LEAN_QUESTIONS.length : 0;
   const readTime = bankN ? "About " + Math.max(5, Math.round(bankN * 0.75)) + " min test" : Math.max(2, Math.round(words / 200)) + " min read";
   return { ...p, idx, sections, published: isoDate(p.date), reviewed: cfg.lastReviewed, readTime, url: `guides/${p.slug}/`, sources: cfg.sources[p.slug] || [] };
 });
@@ -233,7 +248,7 @@ ${scripts ? `<script src="${link("js/site.js")}" defer></script>` : ""}
 /* ---------------- pages ---------------- */
 function getQuestionCount(p) {
   const inline = (p.sections.map(s => s.body).join("").match(/data-quiz/g) || []).length;
-  if (/genai/i.test(p.slug)) return BANKS.GENAI_QUESTIONS.length;
+  if (/genai|generative-ai/i.test(p.slug)) return BANKS.GENAI_QUESTIONS.length;
   if (/lean/i.test(p.slug)) return BANKS.LEAN_QUESTIONS.length;
   return inline;
 }
