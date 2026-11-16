@@ -113,6 +113,25 @@
     var finishBtn = $(".mock-finish", box), actions = $(".mock-actions", box), finished = false;
     var active = qs, mode = "all", modeLabel = "";   // "all" = full test; otherwise a practice subset (never saved)
     var best = store(key);
+    var bmKey = "skillprep:bm:" + box.getAttribute("data-key"), bmSel = null;
+    function bmList() { var v = store(bmKey); return v ? v.split(",").filter(Boolean) : []; }
+    function bmSave(list) { try { if (list.length) localStorage.setItem(bmKey, list.join(",")); else localStorage.removeItem(bmKey); } catch (e) {} }
+    function bmRefreshOption() {
+      if (!bmSel) return;
+      var o = bmSel.querySelector('option[value="__bm"]'); if (!o) return;
+      var n = bmList().length; o.textContent = "Bookmarked questions (" + n + ")"; o.disabled = n === 0;
+    }
+    qs.forEach(function (q) {
+      var b = $(".bm-btn", q); if (!b) return; b.hidden = false;
+      var id = q.getAttribute("data-qid");
+      function paint() { var on = bmList().indexOf(id) !== -1; b.setAttribute("aria-pressed", on ? "true" : "false"); b.textContent = on ? "★ Bookmarked" : "☆ Bookmark"; }
+      paint();
+      b.addEventListener("click", function () {
+        var l = bmList(), i = l.indexOf(id);
+        if (i === -1) l.push(id); else l.splice(i, 1);
+        bmSave(l); paint(); bmRefreshOption();
+      });
+    });
     if (best !== null && best !== "") $(".mock-hint", box).textContent = "Untimed · scored at the end · your best: " + best + "%";
 
     function answered() { return $$("input:checked", box).length; }
@@ -166,12 +185,17 @@
       var sel = document.createElement("select"); sel.className = "mock-topic";
       var all = document.createElement("option"); all.value = ""; all.textContent = "All topics (full test)"; sel.appendChild(all);
       topics.forEach(function (t) { var o = document.createElement("option"); o.value = t; o.textContent = t; sel.appendChild(o); });
+      var bmo = document.createElement("option"); bmo.value = "__bm"; sel.appendChild(bmo); bmSel = sel; bmRefreshOption();
       lbl.appendChild(sel); tools.appendChild(lbl);
       result.parentNode.insertBefore(tools, result);
       sel.addEventListener("change", function () {
-        if (!finished && answered() > 0 && !confirm("Switching topic clears your current answers. Continue?")) { sel.value = mode === "set" && topics.indexOf(modeLabel) !== -1 ? modeLabel : ""; return; }
+        if (!finished && answered() > 0 && !confirm("Switching topic clears your current answers. Continue?")) { sel.value = mode === "set" ? (modeLabel === "bookmarked questions" ? "__bm" : (topics.indexOf(modeLabel) !== -1 ? modeLabel : "")) : ""; return; }
         if (sel.value === "") startSet(qs, "all");
-        else startSet(qs.filter(function (q) { return q.getAttribute("data-part") === sel.value; }), sel.value);
+        else if (sel.value === "__bm") {
+          var ids = bmList(), picked = qs.filter(function (q) { return ids.indexOf(q.getAttribute("data-qid")) !== -1; });
+          if (!picked.length) { sel.value = ""; return; }
+          startSet(picked, "bookmarked questions");
+        } else startSet(qs.filter(function (q) { return q.getAttribute("data-part") === sel.value; }), sel.value);
       });
     }
 
@@ -384,6 +408,7 @@ importInput.onchange = function(e) {
             if (key === "skillprep:theme") return val === "light" || val === "dark";
             if (key === "skillprep:cookie_consent") return val === "accepted" || val === "declined";
             if (key.indexOf("skillprep:best:") === 0) { var n = Number(val); return val !== "" && isFinite(n) && n >= 0 && n <= 100; }
+            if (key.indexOf("skillprep:bm:") === 0) return /^[0-9a-f]{8}(,[0-9a-f]{8}){0,499}$/.test(val);
             if (key.indexOf("skillprep:progress:") === 0) {
                 var m = /^(\d{1,5}),(\d{1,5}),(\d{1,5})$/.exec(val);
                 return !!m && +m[2] <= +m[1] && +m[1] <= +m[3];
