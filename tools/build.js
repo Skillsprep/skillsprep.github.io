@@ -8,7 +8,14 @@ const fs = require("fs");
 const path = require("path");
 const cfg = require("./config");
 const POSTS = require("./content/guides");
-const BANKS = { GENAI_QUESTIONS: require("./content/genai"), LEAN_QUESTIONS: require("./content/lean").concat(require("./content/lean_more")) };
+// Group questions by topic (topics in first-appearance order, original order kept within each topic)
+// so each topic heading appears once in a test.
+function groupByTopic(list) {
+  const order = [];
+  list.forEach((q) => { if (!order.includes(q.p)) order.push(q.p); });
+  return order.flatMap((t) => list.filter((q) => q.p === t));
+}
+const BANKS = { GENAI_QUESTIONS: require("./content/genai"), LEAN_QUESTIONS: groupByTopic(require("./content/lean").concat(require("./content/lean_more"))) };
 
 const ROOT = path.resolve(__dirname, "..");
 const SITE = cfg.siteUrl.replace(/\/+$/, "") + "/";
