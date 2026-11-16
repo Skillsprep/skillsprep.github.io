@@ -15,6 +15,7 @@ function groupByTopic(list) {
   list.forEach((q) => { if (!order.includes(q.p)) order.push(q.p); });
   return order.flatMap((t) => list.filter((q) => q.p === t));
 }
+const qid = (text) => require("crypto").createHash("sha1").update(text).digest("hex").slice(0, 8);
 const BANKS = { GENAI_QUESTIONS: require("./content/genai"), LEAN_QUESTIONS: groupByTopic(require("./content/lean").concat(require("./content/lean_more"))) };
 
 const ROOT = path.resolve(__dirname, "..");
@@ -81,8 +82,8 @@ function renderBank(bankKey, prefix) {
     }
     const id = `${prefix}-q${i + 1}`;
     html += `
-  <div class="quiz" data-q data-part="${esc(it.p)}" data-answer="${it.a}" id="${id}">
-    <div class="q-head"><span>Question ${i + 1} of ${total}</span><span>${esc(it.p)}</span></div>
+  <div class="quiz" data-q data-qid="${qid(it.q)}" data-part="${esc(it.p)}" data-answer="${it.a}" id="${id}">
+    <div class="q-head"><span>Question ${i + 1} of ${total}</span><span>${esc(it.p)}</span><button type="button" class="bm-btn" aria-pressed="false" hidden>☆ Bookmark</button></div>
     <div class="q-body" role="radiogroup" aria-labelledby="${id}-t">
       <p class="q-text" id="${id}-t">${esc(it.q)}</p>
       ${it.o.map((o, j) => `<label class="opt"><input type="radio" name="${id}" value="${j}"> ${esc(o)}</label>`).join("\n      ")}

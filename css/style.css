@@ -553,3 +553,9 @@ p a.btn-link, li a.btn-link, .btn-link { text-decoration: none !important; }
 /* Practice-test tools: topic selector */
 .mock-tools { margin: 0 0 18px; font-size: .92rem; }
 .mock-tools select { margin-left: 6px; padding: 6px 10px; border: 1px solid var(--line); border-radius: 8px; background: var(--card); color: var(--ink); font: inherit; max-width: 100%; }
+
+/* Bookmark toggle on practice-test questions */
+.quiz .q-head { flex-wrap: wrap; gap: 6px 12px; }
+.bm-btn { margin-left: auto; background: transparent; border: 1px solid var(--line); border-radius: 8px; padding: 4px 10px; font: inherit; font-size: .82rem; color: var(--ink); cursor: pointer; }
+.bm-btn[aria-pressed="true"] { border-color: var(--teal); color: var(--teal); font-weight: 600; }
+.bm-btn:focus-visible { outline: 2px solid var(--teal); outline-offset: 2px; }
