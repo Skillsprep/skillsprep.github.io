@@ -229,6 +229,8 @@
           startSet(picked, "bookmarked questions");
         } else startSet(qs.filter(function (q) { return q.getAttribute("data-part") === sel.value; }), sel.value);
       });
+      // Arriving from the dashboard ("#bookmarks") opens the bookmarked-only practice set.
+      if (window.location.hash === "#bookmarks" && bmList().length) { sel.value = "__bm"; sel.dispatchEvent(new Event("change")); }
     }
 
     finishBtn.addEventListener("click", function () {
@@ -577,6 +579,25 @@ document.querySelectorAll(".mock-hint").forEach(hint => {
       dashGrid.appendChild(cardClone);
     }
   });
+
+  // Bookmarked questions: one row per practice test that has bookmarks, linking straight to a bookmarked-only set.
+  const bmBox = document.getElementById("dashBookmarks"), bmList = document.getElementById("dashBmList");
+  if (bmBox && bmList) {
+    cards.forEach(card => {
+      const bk = card.getAttribute("data-bmkey");
+      if (!bk) return;
+      let v = null; try { v = localStorage.getItem("skillprep:bm:" + bk); } catch (e) {}
+      const n = v ? v.split(",").filter(Boolean).length : 0;
+      if (!n) return;
+      hasData = true;
+      const li = document.createElement("li");
+      const a = document.createElement("a");
+      a.href = card.getAttribute("href") + "#bookmarks";
+      const titleEl = card.querySelector("h3");
+      a.textContent = (titleEl ? titleEl.textContent.trim() : "Practice test") + " — practise " + n + " bookmarked question" + (n === 1 ? "" : "s");
+      li.appendChild(a); bmList.appendChild(li); bmBox.hidden = false;
+    });
+  }
 
   if (hasData) {
     dash.style.display = "block";
