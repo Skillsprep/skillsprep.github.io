@@ -111,6 +111,7 @@
     var total = Number(box.getAttribute("data-total")), key = "skillprep:best:" + box.getAttribute("data-key");
     var qs = $$("[data-q]", box), countEl = $(".mock-count", box), result = $(".mock-result", box);
     var finishBtn = $(".mock-finish", box), actions = $(".mock-actions", box), finished = false;
+    var timedOn = false, deadline = 0, tick = null, expired = false, timerEl = null;
     var active = qs, mode = "all", modeLabel = "";   // "all" = full test; otherwise a practice subset (never saved)
     var best = store(key);
     var bmKey = "skillprep:bm:" + box.getAttribute("data-key"), bmSel = null;
@@ -147,7 +148,29 @@
     }
     box.addEventListener("change", updateProgress);
 
+    function secsFor(n) { return n * 45; }   // 45 s per question, same basis as the "About N min test" label
+    function fmt(ms) { var t = Math.max(0, Math.ceil(ms / 1000)), h = Math.floor(t / 3600), m = Math.floor((t % 3600) / 60), x = t % 60;
+      return (h ? h + ":" + (m < 10 ? "0" : "") : "") + m + ":" + (x < 10 ? "0" : "") + x; }
+    function stopTimer() { if (tick) { clearInterval(tick); tick = null; } }
+    function timerTick() {
+      var left = deadline - Date.now();
+      if (timerEl) timerEl.textContent = "Time left: " + fmt(left);
+      if (left <= 0 && !finished) { stopTimer(); expired = true; finishBtn.click(); }
+    }
+    function startTimer() {
+      stopTimer(); expired = false;
+      if (!timedOn || finished || !timerEl) return;
+      deadline = Date.now() + secsFor(active.length) * 1000;
+      timerEl.hidden = false; timerTick(); tick = setInterval(timerTick, 500);
+    }
+    function setHint() {
+      var hint = $(".mock-hint", box), t = timedOn ? "Timed · " + Math.ceil(secsFor(active.length) / 60) + " min" : "Untimed";
+      if (mode === "all") hint.textContent = t + " · scored at the end" + (best !== null && best !== "" ? " · your best: " + best + "%" : "");
+      else hint.textContent = "Practice set: " + modeLabel + " · " + t.toLowerCase() + " · not saved to your best score or progress";
+    }
+
     function reset() {
+      stopTimer();
       finished = false;
       qs.forEach(function (q) {
         $$(".opt", q).forEach(function (o) { o.classList.remove("correct", "wrong"); });
@@ -158,6 +181,8 @@
       finishBtn.disabled = false; finishBtn.textContent = "Finish & score";
       var rb = $(".mock-retake", actions); if (rb) rb.remove();
       var rm0 = $(".mock-retry-missed", actions); if (rm0) rm0.remove();
+      if (timerEl && !timedOn) timerEl.hidden = true;
+      startTimer();
       box.scrollIntoView({ behavior: "smooth", block: "start" });
     }
 
@@ -173,9 +198,7 @@
         h.style.display = any ? "" : "none";
       });
       reset();
-      var hint = $(".mock-hint", box);
-      if (mode === "all") { hint.textContent = "Untimed · scored at the end" + (best !== null && best !== "" ? " · your best: " + best + "%" : ""); }
-      else { hint.textContent = "Practice set: " + label + " · untimed · not saved to your best score or progress"; }
+      setHint();
     }
     // Topic practice: pick one topic to drill without touching saved progress.
     var topics = []; qs.forEach(function (q) { var t = q.getAttribute("data-part"); if (topics.indexOf(t) === -1) topics.push(t); });
@@ -187,7 +210,16 @@
       topics.forEach(function (t) { var o = document.createElement("option"); o.value = t; o.textContent = t; sel.appendChild(o); });
       var bmo = document.createElement("option"); bmo.value = "__bm"; sel.appendChild(bmo); bmSel = sel; bmRefreshOption();
       lbl.appendChild(sel); tools.appendChild(lbl);
+      var tl = document.createElement("label"); tl.className = "mock-timed";
+      var tcb = document.createElement("input"); tcb.type = "checkbox"; tl.appendChild(tcb);
+      tl.appendChild(document.createTextNode(" Timed mode (45 s per question)")); tools.appendChild(tl);
+      timerEl = document.createElement("div"); timerEl.className = "mock-timer"; timerEl.setAttribute("role", "timer"); timerEl.hidden = true;
       result.parentNode.insertBefore(tools, result);
+      result.parentNode.insertBefore(timerEl, result);
+      tcb.addEventListener("change", function () {
+        timedOn = tcb.checked; setHint();
+        if (!timedOn) { stopTimer(); timerEl.hidden = true; } else startTimer();
+      });
       sel.addEventListener("change", function () {
         if (!finished && answered() > 0 && !confirm("Switching topic clears your current answers. Continue?")) { sel.value = mode === "set" ? (modeLabel === "bookmarked questions" ? "__bm" : (topics.indexOf(modeLabel) !== -1 ? modeLabel : "")) : ""; return; }
         if (sel.value === "") startSet(qs, "all");
@@ -201,7 +233,8 @@
 
     finishBtn.addEventListener("click", function () {
       if (finished) return;
-      finished = true;
+      finished = true; stopTimer();
+      var timeNote = expired ? " · time expired" : "";
       var score = 0, done = 0, parts = {}, order = [], missed = [], total = active.length;
       active.forEach(function (q, n) {
         var ans = Number(q.getAttribute("data-answer")), part = q.getAttribute("data-part");
@@ -239,7 +272,7 @@
       result.innerHTML =
         '<div class="score ' + tone + '"><div class="big">' + score + " / " + total + " (" + pct + "%)</div>" +
         '<div class="verdict">' + verdict + "</div>" +
-        '<div class="sub">Answered ' + done + " of " + total + (mode !== "all" ? " · practice set (" + modeLabel + ") — not saved" : isBest ? " · new personal best" : " · your best: " + prevBest + "%") + "</div>" +
+        '<div class="sub">Answered ' + done + " of " + total + (mode !== "all" ? " · practice set (" + modeLabel + ") — not saved" : isBest ? " · new personal best" : " · your best: " + prevBest + "%") + timeNote + "</div>" +
         '<table class="breakdown"><thead><tr><th scope="col">Topic</th><th scope="col">Score</th><th scope="col">Result</th></tr></thead><tbody>' + rows + "</tbody></table>" +
         review + "</div>";
       countEl.textContent = "Scored " + score + " / " + total;
