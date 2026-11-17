@@ -140,13 +140,16 @@ function withExtras(p) {
   return { ...p, sections };
 }
 const posts = POSTS.map(withExtras).map((p, idx) => {
+  // id of the full practice-test bank on this page (also the localStorage bookmark key), read before placeholders are rendered
+  const bankMatch = p.sections.map((s) => /<div id="([\w-]+)" data-bank="\w+"><\/div>/.exec(s.body)).find(Boolean);
+  const bankId = bankMatch ? bankMatch[1] : "";
   const sections = p.sections.map((s) => ({ h: s.h, id: slugify(s.h), body: prepareBody(p, s.body) }));
   const ids = new Set();
   sections.forEach((s) => { let b = s.id, n = 2; while (ids.has(s.id)) s.id = b + "-" + n++; ids.add(s.id); });
   const words = stripTags(p.intro + " " + p.sections.map((s) => stripQuizzes(s.body.replace(/<div id="[\w-]+" data-bank="\w+"><\/div>/, ""))).join(" ")).split(" ").length;
   const bankN = /genai|generative-ai/i.test(p.slug) ? BANKS.GENAI_QUESTIONS.length : /lean/i.test(p.slug) ? BANKS.LEAN_QUESTIONS.length : 0;
   const readTime = bankN ? "About " + Math.max(5, Math.round(bankN * 0.75)) + " min test" : Math.max(2, Math.round(words / 200)) + " min read";
-  return { ...p, idx, sections, published: isoDate(p.date), reviewed: cfg.lastReviewed, readTime, url: `guides/${p.slug}/`, sources: cfg.sources[p.slug] || [] };
+  return { ...p, idx, bankId, sections, published: isoDate(p.date), reviewed: cfg.lastReviewed, readTime, url: `guides/${p.slug}/`, sources: cfg.sources[p.slug] || [] };
 });
 const CATS = [...new Set(posts.map((p) => p.category))].filter(c => c !== "Getting started" && c !== "Getting Started");
 const inlineQs = posts.reduce((n, p) => n + (p.sections.map((s) => s.body).join("").match(/data-quiz/g) || []).length, 0);
@@ -269,7 +272,9 @@ function card(p, prefix) {
   const actionText = isTest ? "Start Practice Test" : p.category === "Getting Started" ? "Read Guide" : "Start Learning";
   const timeLabel = p.readTime;
   
-  return `<a class="post-card" href="${prefix}${p.url}" data-cat="${esc(p.category)}" data-search="${esc((p.title + " " + p.excerpt + " " + p.category).toLowerCase())}">
+  // Full practice tests carry a bookmark storage key (the bank id) so the dashboard can list their bookmarks.
+  const bmAttr = p.bankId ? ` data-bmkey="${p.bankId}"` : "";
+  return `<a class="post-card" href="${prefix}${p.url}"${bmAttr} data-cat="${esc(p.category)}" data-search="${esc((p.title + " " + p.excerpt + " " + p.category).toLowerCase())}">
         <div class="thumb" style="background:${p.gradient}" aria-hidden="true">${p.icon}</div>
         <div class="body">
           <div class="cat">${esc(p.category)}</div>
@@ -332,6 +337,11 @@ function homePage() {
     
     <div class="post-grid" id="dashGrid">
       <!-- Populated by JS -->
+    </div>
+
+    <div id="dashBookmarks" hidden style="margin-top: 32px;">
+      <h3 class="section-title" style="font-size: 1.15rem;">Bookmarked questions</h3>
+      <ul class="dash-bm-list" id="dashBmList"></ul>
     </div>
   </div>
 </section>
