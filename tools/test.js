@@ -4,6 +4,7 @@
 const guides = require('./content/guides.js');
 const genai = require('./content/genai.js');
 const lean = require('./content/lean.js').concat(require('./content/lean_more.js'));
+const powerbi = require('./content/powerbi_test.js');
 
 let errors = 0;
 
@@ -43,6 +44,12 @@ checkQuestions('GenAI', genai);
 // 2. Check Lean Six Sigma test
 console.log(`Checking ${lean.length} Lean questions...`);
 checkQuestions('Lean', lean);
+
+console.log(`Checking ${powerbi.length} Power BI questions...`);
+checkQuestions('Power BI', powerbi);
+if (powerbi.some(q => !q.p)) { console.error('[Error] Power BI: a question is missing its topic (p).'); errors++; }
+const pbiPositions = [0, 1, 2, 3].map(k => powerbi.filter(q => q.a === k).length);
+if (Math.max(...pbiPositions) - Math.min(...pbiPositions) > 4) { console.error(`[Error] Power BI: correct answers are unevenly placed (${pbiPositions.join('/')}).`); errors++; }
 
 // 3. Check guides structure
 console.log(`Checking ${guides.length} guides...`);
