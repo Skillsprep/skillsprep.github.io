@@ -296,4 +296,37 @@ ${quiz()}` },
           <li>Open Microsoft's current PL-300 study guide to confirm the skills measured before you sit the exam</li>
         </ul>` },
   ],
+},
+{
+  slug: "power-bi-practice-test",
+  title: "Power BI Practice Test: 40 Unofficial Questions",
+  category: "Power BI",
+  icon: "PB",
+  gradient: "linear-gradient(135deg,#744210,#b7791f)",
+  date: "Nov 18, 2026",
+  reviewed: "2026-11-18",
+  readTime: "40 questions",
+  excerpt: "40 unofficial practice questions across the four PL-300 skill areas — prepare, model, visualize and secure — with topic practice, bookmarks, an optional timer and an explanation for every answer.",
+  intro: "This unofficial 40-question practice test covers the Power BI skills that interviews and Microsoft's PL-300 exam keep returning to: Power Query, data modelling and DAX, reports, and publishing and security. Every question has an explanation, and the questions are original rather than copied from any exam. It is not affiliated with Microsoft.",
+  sections: [
+    { h: "About this practice test", body: `
+        <ul>
+          <li><b>Format:</b> 40 multiple-choice questions, one best answer each</li>
+          <li><b>Topics:</b> Prepare the data (10), Model and DAX (12), Visualize and analyze (10), Manage and secure Power BI (8), following the four skill areas in Microsoft's PL-300 study guide</li>
+          <li><b>Practice tools:</b> practise one topic, retry only the questions you missed, bookmark hard ones, or turn on an optional timer (45 seconds per question)</li>
+          <li><b>Not an exam simulator:</b> real exams use other question types, and Microsoft updates the skills measured, so check the current study guide before you sit it</li>
+        </ul>
+        <div class="callout"><b>Unofficial</b> These are independent study aids, not official Microsoft exam content. New to a topic? Read the <a href="../power-bi-study-guide/">Power BI study guide</a> first.</div>` },
+    { h: "Practice test (40 questions)", body: `
+        <p>Answer all 40 questions, then press <b>Finish Assessment</b>. Use <b>Practise one topic</b> to drill a skill area, or <b>Retry missed</b> after scoring to focus on what you got wrong.</p>
+        <div id="mocktest-powerbi" data-bank="POWERBI_QUESTIONS"></div>` },
+    { h: "After the test: a study checklist", body: `
+        <ul>
+          <li>For each missed question, reread its explanation and find the matching section in the study guide</li>
+          <li>Be able to explain Import vs DirectQuery, and why a step that cannot fold is a problem in DirectQuery</li>
+          <li>Practise writing <code>CALCULATE</code>, <code>DIVIDE</code> and time-intelligence measures from memory</li>
+          <li>Know which workspace roles bypass row-level security, and where roles are defined and assigned</li>
+          <li>Open Microsoft's current PL-300 study guide to confirm the skills measured before you sit the exam</li>
+        </ul>` },
+  ],
 }];

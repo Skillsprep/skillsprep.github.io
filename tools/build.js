@@ -21,7 +21,11 @@ function groupByTopic(list) {
   return order.flatMap((t) => list.filter((q) => q.p === t));
 }
 const qid = (text) => require("crypto").createHash("sha1").update(text).digest("hex").slice(0, 8);
-const BANKS = { GENAI_QUESTIONS: require("./content/genai"), LEAN_QUESTIONS: groupByTopic(require("./content/lean").concat(require("./content/lean_more"))) };
+const BANKS = {
+  GENAI_QUESTIONS: require("./content/genai"),
+  LEAN_QUESTIONS: groupByTopic(require("./content/lean").concat(require("./content/lean_more"))),
+  POWERBI_QUESTIONS: groupByTopic(require("./content/powerbi_test")),
+};
 
 const ROOT = path.resolve(__dirname, "..");
 const SITE = cfg.siteUrl.replace(/\/+$/, "") + "/";
@@ -146,19 +150,20 @@ function withExtras(p) {
 }
 const posts = POSTS.map(withExtras).map((p, idx) => {
   // id of the full practice-test bank on this page (also the localStorage bookmark key), read before placeholders are rendered
-  const bankMatch = p.sections.map((s) => /<div id="([\w-]+)" data-bank="\w+"><\/div>/.exec(s.body)).find(Boolean);
+  const bankMatch = p.sections.map((s) => /<div id="([\w-]+)" data-bank="(\w+)"><\/div>/.exec(s.body)).find(Boolean);
   const bankId = bankMatch ? bankMatch[1] : "";
+  const bankKey = bankMatch ? bankMatch[2] : "";
   const sections = p.sections.map((s) => ({ h: s.h, id: slugify(s.h), body: prepareBody(p, s.body) }));
   const ids = new Set();
   sections.forEach((s) => { let b = s.id, n = 2; while (ids.has(s.id)) s.id = b + "-" + n++; ids.add(s.id); });
   const words = stripTags(p.intro + " " + p.sections.map((s) => stripQuizzes(s.body.replace(/<div id="[\w-]+" data-bank="\w+"><\/div>/, ""))).join(" ")).split(" ").length;
-  const bankN = /genai|generative-ai/i.test(p.slug) ? BANKS.GENAI_QUESTIONS.length : /lean/i.test(p.slug) ? BANKS.LEAN_QUESTIONS.length : 0;
+  const bankN = bankKey ? BANKS[bankKey].length : 0;
   const readTime = bankN ? "About " + Math.max(5, Math.round(bankN * 0.75)) + " min test" : Math.max(2, Math.round(words / 200)) + " min read";
-  return { ...p, idx, bankId, sections, published: isoDate(p.date), reviewed: p.reviewed || cfg.lastReviewed, readTime, url: `guides/${p.slug}/`, sources: cfg.sources[p.slug] || [] };
+  return { ...p, idx, bankId, bankKey, sections, published: isoDate(p.date), reviewed: p.reviewed || cfg.lastReviewed, readTime, url: `guides/${p.slug}/`, sources: cfg.sources[p.slug] || [] };
 });
 const CATS = [...new Set(posts.map((p) => p.category))].filter(c => c !== "Getting started" && c !== "Getting Started");
 const inlineQs = posts.reduce((n, p) => n + (p.sections.map((s) => s.body).join("").match(/data-quiz/g) || []).length, 0);
-const TOTAL_QS = inlineQs + BANKS.GENAI_QUESTIONS.length + BANKS.LEAN_QUESTIONS.length;
+const TOTAL_QS = inlineQs + Object.values(BANKS).reduce((n, b) => n + b.length, 0);
 // sanity: slugs unique, every legacy mapping lands on a real page
 const slugSet = new Set(posts.map((p) => p.slug));
 if (slugSet.size !== posts.length) throw new Error("Duplicate slugs");
@@ -265,8 +270,7 @@ ${scripts ? `<script src="${link("js/site.js")}" defer></script>` : ""}
 /* ---------------- pages ---------------- */
 function getQuestionCount(p) {
   const inline = (p.sections.map(s => s.body).join("").match(/data-quiz/g) || []).length;
-  if (/genai|generative-ai/i.test(p.slug)) return BANKS.GENAI_QUESTIONS.length;
-  if (/lean/i.test(p.slug)) return BANKS.LEAN_QUESTIONS.length;
+  if (p.bankKey) return BANKS[p.bankKey].length;
   return inline;
 }
 
