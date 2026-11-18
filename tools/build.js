@@ -7,7 +7,12 @@
 const fs = require("fs");
 const path = require("path");
 const cfg = require("./config");
-const POSTS = require("./content/guides");
+// Power BI guide lives in its own file; place it right after the SQL guide in the site order.
+const POSTS = (() => {
+  const base = require("./content/guides"), extra = require("./content/powerbi");
+  const at = base.findIndex((x) => x.slug === "sql-study-guide") + 1;
+  return [...base.slice(0, at), ...extra, ...base.slice(at)];
+})();
 // Group questions by topic (topics in first-appearance order, original order kept within each topic)
 // so each topic heading appears once in a test.
 function groupByTopic(list) {
@@ -149,7 +154,7 @@ const posts = POSTS.map(withExtras).map((p, idx) => {
   const words = stripTags(p.intro + " " + p.sections.map((s) => stripQuizzes(s.body.replace(/<div id="[\w-]+" data-bank="\w+"><\/div>/, ""))).join(" ")).split(" ").length;
   const bankN = /genai|generative-ai/i.test(p.slug) ? BANKS.GENAI_QUESTIONS.length : /lean/i.test(p.slug) ? BANKS.LEAN_QUESTIONS.length : 0;
   const readTime = bankN ? "About " + Math.max(5, Math.round(bankN * 0.75)) + " min test" : Math.max(2, Math.round(words / 200)) + " min read";
-  return { ...p, idx, bankId, sections, published: isoDate(p.date), reviewed: cfg.lastReviewed, readTime, url: `guides/${p.slug}/`, sources: cfg.sources[p.slug] || [] };
+  return { ...p, idx, bankId, sections, published: isoDate(p.date), reviewed: p.reviewed || cfg.lastReviewed, readTime, url: `guides/${p.slug}/`, sources: cfg.sources[p.slug] || [] };
 });
 const CATS = [...new Set(posts.map((p) => p.category))].filter(c => c !== "Getting started" && c !== "Getting Started");
 const inlineQs = posts.reduce((n, p) => n + (p.sections.map((s) => s.body).join("").match(/data-quiz/g) || []).length, 0);
@@ -305,7 +310,7 @@ function homePage() {
     </div>
     <form class="search-bar" id="searchForm" role="search" action="./" method="get" style="margin-top: 30px;">
       <label for="searchInput" class="visually-hidden">Search guides</label>
-      <input type="search" id="searchInput" name="q" placeholder="Search Excel, Python, SQL, Generative AI..." autocomplete="off">
+      <input type="search" id="searchInput" name="q" placeholder="Search Excel, Python, SQL, Power BI, Generative AI..." autocomplete="off">
       <button type="submit">Search</button>
     </form>
     <div class="stats">

@@ -1,0 +1,572 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Power BI Study Guide: Model, DAX and Reports | SkillPrep</title>
+<meta name="description" content="Power Query, star-schema modelling, DAX measures, reports and security: the Power BI essentials behind interviews and the PL-300 skill areas, with exercises…">
+<link rel="canonical" href="https://skillsprep.github.io/guides/power-bi-study-guide/">
+<meta name="google-site-verification" content="rOGMro0A_ltGwtwagVfnPJFPmn59apiGYOa0LKMT4n8">
+<meta name="robots" content="index,follow">
+<meta name="theme-color" content="#0D1B2A">
+<meta property="og:site_name" content="SkillPrep">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Power BI Study Guide: Model, DAX and Reports | SkillPrep">
+<meta property="og:description" content="Power Query, star-schema modelling, DAX measures, reports and security: the Power BI essentials behind interviews and the PL-300 skill areas, with exercises…">
+<meta property="og:url" content="https://skillsprep.github.io/guides/power-bi-study-guide/">
+<meta property="og:image" content="https://skillsprep.github.io/assets/og-image.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Power BI Study Guide: Model, DAX and Reports | SkillPrep">
+<meta name="twitter:description" content="Power Query, star-schema modelling, DAX measures, reports and security: the Power BI essentials behind interviews and the PL-300 skill areas, with exercises…">
+<meta name="twitter:image" content="https://skillsprep.github.io/assets/og-image.png">
+<link rel="icon" href="../../assets/favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../../css/style.css">
+<script>(function(){try{if(localStorage.getItem("skillprep:theme")==="dark"){document.documentElement.setAttribute("data-theme","dark");}}catch(e){}})();</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"Power BI Study Guide: Model, DAX and Reports","description":"Power Query, star-schema modelling, DAX measures, reports and security: the Power BI essentials behind interviews and the PL-300 skill areas, with exercises and a 20-question quiz.","datePublished":"2026-11-17","dateModified":"2026-11-17","author":{"@type":"Organization","name":"SkillPrep editorial team"},"publisher":{"@type":"Organization","name":"SkillPrep","logo":{"@type":"ImageObject","url":"https://skillsprep.github.io/assets/favicon.svg"}},"mainEntityOfPage":"https://skillsprep.github.io/guides/power-bi-study-guide/","image":"https://skillsprep.github.io/assets/og-image.png","articleSection":"Power BI","inLanguage":"en"}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://skillsprep.github.io/"},{"@type":"ListItem","position":2,"name":"Power BI","item":"https://skillsprep.github.io/#guides"},{"@type":"ListItem","position":3,"name":"Power BI Study Guide: Model, DAX and Reports","item":"https://skillsprep.github.io/guides/power-bi-study-guide/"}]}</script>
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9455217122501464" crossorigin="anonymous"></script>
+</head>
+<body>
+<a class="skip-link" href="#main">Skip to content</a>
+<header class="site-header">
+  <div class="container header-inner">
+    <a href="../../" class="logo"><span class="mark" aria-hidden="true">S</span> SkillPrep</a>
+    <button class="burger" id="burger" type="button" aria-label="Menu" aria-expanded="false" aria-controls="mainNav">☰</button>
+    <nav class="main-nav" id="mainNav" aria-label="Main">
+      <a href="../../">Home</a>
+      <a href="../../about/">About</a>
+      <a href="../../contact/">Contact</a>
+    </nav>
+    <button class="theme-toggle" id="themeToggle" type="button" aria-label="Toggle dark mode">◐</button>
+  </div>
+</header>
+<main id="main">
+
+<div id="progress" aria-hidden="true"></div>
+<section class="article-hero">
+  <div class="container">
+    <nav class="crumbs" aria-label="Breadcrumb"><a href="../../">Home</a> <span aria-hidden="true" class="sep">›</span> <a href="../../#guides">Guides</a> <span aria-hidden="true" class="sep">›</span> <span aria-current="page">Power BI</span></nav>
+    <div class="cat">Power BI</div>
+    <h1>Power BI Study Guide: Model, DAX and Reports</h1>
+    <div class="meta">
+      <span><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg> 12 min read</span>
+      <span><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg> 20 Questions</span>
+      <span>Published <time datetime="2026-11-17">Nov 17, 2026</time></span>
+      <span>Reviewed <time datetime="2026-11-17">Nov 17, 2026</time></span>
+    </div>
+  </div>
+</section>
+<div class="container article-wrap">
+  <article class="article-body">
+    <p class="note"><b>Unofficial study resource.</b> Written independently of any exam provider, employer or software vendor.</p>
+    <details class="toc-mobile">
+      <summary>On this page</summary>
+      <div class="toc">
+        <a href="#what-you-will-learn">What you will learn</a>
+        <a href="#how-the-pieces-fit-together">How the pieces fit together</a>
+        <a href="#prepare-data-with-power-query">Prepare data with Power Query</a>
+        <a href="#model-the-data-star-schema-and-relationships">Model the data: star schema and relationships</a>
+        <a href="#dax-essentials">DAX essentials</a>
+        <a href="#build-reports-that-communicate">Build reports that communicate</a>
+        <a href="#publish-refresh-and-secure">Publish, refresh and secure</a>
+        <a href="#common-mistakes">Common mistakes</a>
+        <a href="#practical-learning-exercises">Practical learning exercises</a>
+        <a href="#interview-questions">Interview questions</a>
+        <a href="#practice-questions">Practice questions</a>
+        <a href="#preparation-checklist">Preparation checklist</a>
+        
+      </div>
+    </details>
+    <p class="lead">Power BI interviews, and Microsoft's PL-300 exam, keep returning to the same four things: preparing data in Power Query, modelling it as a star schema, writing DAX measures, and publishing it securely. This guide walks through each one with examples you can reproduce in Power BI Desktop. It is an unofficial study aid and is not affiliated with Microsoft. Its structure follows the skill areas in Microsoft's PL-300 study guide (skills measured as of April 20, 2026).</p>
+    <h2 id="what-you-will-learn">What you will learn</h2>
+        <p>By the end you should be able to:</p>
+        <ul>
+          <li>Explain how Desktop, the service, semantic models, reports and dashboards fit together</li>
+          <li>Choose between Import and DirectQuery and clean data with Power Query</li>
+          <li>Design a star schema with correct relationships and a date table</li>
+          <li>Write measures with <code>CALCULATE</code>, <code>DIVIDE</code> and time intelligence</li>
+          <li>Build clear, accessible reports and explain how refresh and row-level security work</li>
+        </ul>
+        <table>
+          <tr><th>PL-300 skill area</th><th>Microsoft's weight</th><th>Where it is covered here</th></tr>
+          <tr><td>Prepare the data</td><td>25–30%</td><td>Prepare data with Power Query</td></tr>
+          <tr><td>Model the data</td><td>25–30%</td><td>Model the data, DAX essentials</td></tr>
+          <tr><td>Visualize and analyze the data</td><td>25–30%</td><td>Build reports that communicate</td></tr>
+          <tr><td>Manage and secure Power BI</td><td>15–20%</td><td>Publish, refresh and secure</td></tr>
+        </table>
+        <div class="callout"><b>Unofficial</b> The weights come from Microsoft's study guide and can change. Microsoft says the listed skills are illustrative, so check the current page before an exam.</div>
+    <h2 id="how-the-pieces-fit-together">How the pieces fit together</h2>
+        <ul>
+          <li><b>Power BI Desktop</b> is the free Windows application where you connect to data, transform it, build the model and design reports.</li>
+          <li><b>The Power BI service</b> is the online side: workspaces, sharing, scheduled refresh, dashboards and security.</li>
+          <li><b>A semantic model</b> is the published model: its tables, relationships and measures. Microsoft renamed what used to be called a dataset to semantic model in 2023; it is a rename only.</li>
+          <li><b>A report</b> is one or more pages of visuals built on a semantic model. <b>A dashboard</b> exists only in the service: a single canvas of pinned tiles, possibly from several reports.</li>
+        </ul>
+        <p>A typical flow is: get data, transform it in Power Query, model it, build the report, publish, then schedule refresh and secure access.</p>
+    <h2 id="prepare-data-with-power-query">Prepare data with Power Query</h2>
+        <p>First choose how the data is stored. Both modes are common interview topics:</p>
+        <table>
+          <tr><th></th><th>Import</th><th>DirectQuery</th></tr>
+          <tr><td>Freshness</td><td>As of the last refresh</td><td>Queries the source as users interact</td></tr>
+          <tr><td>Speed</td><td>Fast: queries run on in-memory data</td><td>Depends on the source's speed</td></tr>
+          <tr><td>Data size</td><td>Must fit in memory and refresh windows</td><td>Data stays at the source</td></tr>
+          <tr><td>Power Query and DAX</td><td>Full feature set</td><td>Steps must fold; some DAX is restricted</td></tr>
+        </table>
+        <p>In DirectQuery, a query or intermediate result of more than one million rows fails unless capacity settings raise the limit. The exam also lists DirectLake, a Microsoft Fabric option; learn it from Microsoft's documentation once you work with Fabric.</p>
+        <p>Core Power Query skills:</p>
+        <ul>
+          <li><b>Data types.</b> Set them early; a number stored as text breaks sums and sorting.</li>
+          <li><b>Nulls, errors and inconsistencies.</b> Replace placeholder values such as "N/A" with null, then remove or fix them.</li>
+          <li><b>Group by, pivot and unpivot.</b> Unpivot turns columns such as Jan, Feb, Mar into Month and Sales rows, the long layout that models and visuals prefer.</li>
+          <li><b>Merge vs append.</b> Append stacks rows from tables with the same columns. Merge joins tables on a key, like a SQL join.</li>
+          <li><b>Reference vs duplicate.</b> Duplicate copies a query's steps into an independent query. Reference starts a new query from the original's output, so upstream changes flow through.</li>
+          <li><b>Query folding.</b> When steps fold, the source runs them as a native query, so less data is moved. Right-click a step and check View Native Query to see whether folding still works.</li>
+        </ul>
+        <div class="callout"><b>Load only what you need</b> Remove unused columns and rows in Power Query. It is one of the cheapest performance fixes available.</div>
+    <h2 id="model-the-data-star-schema-and-relationships">Model the data: star schema and relationships</h2>
+        <p>Microsoft recommends a star schema. <b>Dimension tables</b> describe things such as products, customers and dates, and filter and group the data. <b>Fact tables</b> store events such as sales and are summarised. Power BI infers the role from the relationship: the 'one' side is a dimension, the 'many' side is a fact table.</p>
+        <table>
+          <tr><th>Relationship setting</th><th>What to know</th></tr>
+          <tr><td>Cardinality</td><td>One-to-many, many-to-one, one-to-one and many-to-many. The 'one' side must hold unique values, or the refresh fails.</td></tr>
+          <tr><td>Cross-filter direction</td><td>Single or Both. Prefer Single; bi-directional filtering can make results harder to reason about.</td></tr>
+          <tr><td>Active vs inactive</td><td>Only one active path can exist between two tables. An inactive relationship is used only by <code>USERELATIONSHIP</code> inside a calculation.</td></tr>
+        </table>
+        <p><b>Role-playing dimensions.</b> One date table often has to filter sales by order date and by ship date. If you need both at once, Microsoft recommends a separate date table for each role. If not, keep one date table with an inactive relationship and use <code>USERELATIONSHIP</code> in measures.</p>
+        <p><b>Date table.</b> Time intelligence needs a date table with unique, contiguous dates and no blanks. Create one with <code>CALENDAR</code> or <code>CALENDARAUTO</code>, or load an existing date dimension, and mark it as a date table.</p>
+        <pre><code>Date = CALENDARAUTO()</code></pre>
+        <p><b>Performance.</b> Remove unnecessary rows and columns, reduce granularity where you can, and use Performance Analyzer and DAX query view to find slow visuals, measures and relationships.</p>
+    <h2 id="dax-essentials">DAX essentials</h2>
+        <table>
+          <tr><th></th><th>Measure</th><th>Calculated column</th></tr>
+          <tr><td>Evaluated</td><td>At query time, in the current filter context</td><td>Row by row, when data refreshes</td></tr>
+          <tr><td>Stored in the model</td><td>Only the formula</td><td>The values, which add to model size</td></tr>
+          <tr><td>Use for</td><td>Totals, ratios, year-to-date, anything that responds to slicers</td><td>Row-level attributes you need to slice, filter or relate on</td></tr>
+        </table>
+        <pre><code>Total Sales = SUM ( Sales[Amount] )
+
+Blue Sales =
+CALCULATE ( [Total Sales], 'Product'[Color] = "Blue" )
+
+Margin % = DIVIDE ( [Total Profit], [Total Sales] )
+
+Sales LY =
+CALCULATE ( [Total Sales], SAMEPERIODLASTYEAR ( 'Date'[Date] ) )
+
+Sales YTD = TOTALYTD ( [Total Sales], 'Date'[Date] )</code></pre>
+        <ul>
+          <li><b>Filter context</b> is the set of filters that apply to a calculation: slicers, rows and columns of a visual, and filters from relationships.</li>
+          <li><b>CALCULATE</b> evaluates an expression in a modified filter context. A filter on a column that is already filtered overwrites that filter, unless you wrap it in <code>KEEPFILTERS</code>. Its Boolean filters can reference columns from only one table and cannot reference measures.</li>
+          <li><b>Context transition.</b> Inside a row context, <code>CALCULATE</code> converts the current row into filters.</li>
+          <li><b>Iterators</b> such as <code>SUMX</code> evaluate an expression row by row, then aggregate: <code>SUMX ( Sales, Sales[Quantity] * Sales[Price] )</code>.</li>
+          <li><b>DIVIDE</b> returns BLANK, or an alternate result you choose, when the denominator is zero.</li>
+        </ul>
+        <div class="callout"><b>The classic trap</b> With a slicer on Color = Red, <code>CALCULATE ( [Total Sales], 'Product'[Color] = "Blue" )</code> still returns Blue sales. The measure's filter overwrites the slicer's filter on the same column.</div>
+    <h2 id="build-reports-that-communicate">Build reports that communicate</h2>
+        <table>
+          <tr><th>You want to show</th><th>Usually use</th></tr>
+          <tr><td>Change over time</td><td>Line chart</td></tr>
+          <tr><td>Compare categories</td><td>Bar or column chart</td></tr>
+          <tr><td>One headline number</td><td>Card</td></tr>
+          <tr><td>Relationship between two measures</td><td>Scatter chart</td></tr>
+          <tr><td>Exact values or detail</td><td>Table or matrix</td></tr>
+        </table>
+        <ul>
+          <li><b>Navigation and exploration:</b> slicers and filters, sync slicers across pages, bookmarks, drillthrough pages, custom tooltips and the Selection pane for layering.</li>
+          <li><b>Formatting:</b> themes keep a consistent look; conditional formatting highlights values that matter.</li>
+          <li><b>Analysis tools:</b> reference lines, forecasting, binning and grouping, and AI visuals such as Key influencers. Copilot features appear on the exam's skill list; whether you can use them depends on your licence and capacity.</li>
+          <li><b>Accessibility:</b> write alt text for visuals, set a sensible tab order, keep contrast high, and never rely on colour alone to carry meaning.</li>
+        </ul>
+    <h2 id="publish-refresh-and-secure">Publish, refresh and secure</h2>
+        <p>You publish from Desktop to a <b>workspace</b>. Workspace roles are Admin, Member, Contributor and Viewer. You can share content through an <b>app</b>, and you can promote or certify content to show which semantic models people should trust.</p>
+        <p><b>Refresh.</b> An Import model is refreshed on a schedule. Microsoft's limits are 8 scheduled refreshes a day on shared capacity (Pro) and 48 on Premium per user or Premium and Fabric capacity. Sources that sit on a private network, such as an on-premises database, need a gateway. Power BI turns the schedule off after four consecutive failures, and pauses it after two months with no views of the model's reports or dashboards.</p>
+        <p><b>Row-level security (RLS).</b></p>
+        <ul>
+          <li>You define roles in Desktop (Modeling, Manage roles) with DAX filters, publish, then add users or groups to each role in the service.</li>
+          <li>RLS applies to workspace <b>Viewers</b>. Admin, Member and Contributor bypass it because they can edit the model.</li>
+          <li>A person in several roles sees the union of the rows. A person with no matching role sees no rows.</li>
+          <li>RLS filters rows, not columns.</li>
+        </ul>
+        <pre><code>-- static role
+[Region] = "West"
+
+-- dynamic role: each user sees rows mapped to their sign-in
+[ManagerEmail] = USERPRINCIPALNAME ()</code></pre>
+        <p>Use Test as role in the service to check what a role sees before you rely on it.</p>
+    <h2 id="common-mistakes">Common mistakes</h2>
+        <table>
+          <tr><th>Mistake</th><th>Better approach</th></tr>
+          <tr><td>Loading every column and row</td><td>Remove unused ones in Power Query</td></tr>
+          <tr><td>One wide flat table</td><td>Split into dimensions and a fact table (star schema)</td></tr>
+          <tr><td>Calculated columns for totals and ratios</td><td>Use measures</td></tr>
+          <tr><td>Bi-directional or many-to-many relationships by default</td><td>Start with one-to-many and Single direction</td></tr>
+          <tr><td>No proper date table</td><td>Create one, mark it, and relate it to your facts</td></tr>
+          <tr><td>Using / for ratios</td><td>Use <code>DIVIDE</code> to handle zero denominators</td></tr>
+          <tr><td>Testing RLS as a workspace Contributor or Member</td><td>Use Test as role, or test as a Viewer</td></tr>
+          <tr><td>Confusing Reference with Duplicate</td><td>Reference stays linked to the original; Duplicate does not</td></tr>
+          <tr><td>Publishing without credentials or a gateway</td><td>Configure data source credentials, and a gateway for private-network sources, before scheduling refresh</td></tr>
+        </table>
+    <h2 id="practical-learning-exercises">Practical learning exercises</h2>
+        <ul>
+          <li><b>Exercise 1 (Power Query).</b> A table has columns OrderID, Region, Jan, Feb and Mar. Some sales cells contain the text "N/A". Set data types, replace "N/A" with null, unpivot Jan to Mar into Month and Sales, and remove null rows. <i>Check:</i> you end with one numeric Sales value per order and month.</li>
+          <li><b>Exercise 2 (Model).</b> Tables: Sales (OrderID, OrderDate, ShipDate, ProductID, Quantity, Amount), Product (ProductID, Name, Category) and Date (Date, Year, Month). Build a star schema so a visual can show sales by order date and by ship date side by side. <i>Check:</i> Product and Date each filter Sales in a one-to-many relationship, and a second date table (for example Ship Date) has its own active relationship to ShipDate.</li>
+          <li><b>Exercise 3 (DAX).</b> Write measures for total sales, sales for the same period last year, and year-over-year percentage change. <i>Solution:</i>
+<pre><code>Total Sales = SUM ( Sales[Amount] )
+Sales LY = CALCULATE ( [Total Sales], SAMEPERIODLASTYEAR ( 'Date'[Date] ) )
+YoY % = DIVIDE ( [Total Sales] - [Sales LY], [Sales LY] )</code></pre></li>
+          <li><b>Exercise 4 (Security).</b> Add a SalesRegion table (Region, ManagerEmail) that filters Sales. Create a role whose filter on SalesRegion is <code>[ManagerEmail] = USERPRINCIPALNAME ()</code>, then use Test as role to confirm a manager sees only their region.</li>
+          <li><b>Exercise 5 (Report).</b> Build a one-page report with a card, a line chart over time, a bar chart by category and a slicer. Add alt text to every visual and check the tab order with the keyboard.</li>
+        </ul>
+    <h2 id="interview-questions">Interview questions</h2>
+        <p>Try answering aloud before you open each one.</p>
+        <details class="faq"><summary>What is the difference between Power BI Desktop and the Power BI service?</summary><p>Desktop is the free Windows application where you connect to data, transform it in Power Query, build the model and design reports. The service is the online environment where you publish, share, schedule refresh, build dashboards and manage security.</p></details>
+        <details class="faq"><summary>Import or DirectQuery: how do you choose?</summary><p>Import is the default choice: fast, with the full Power Query and DAX feature set, but only as fresh as the last refresh. DirectQuery suits data that is too large to import or must always be current, but performance depends on the source, steps must fold, and queries returning more than one million rows fail unless capacity settings allow it.</p></details>
+        <details class="faq"><summary>What is the difference between a measure and a calculated column?</summary><p>A measure is evaluated at query time in the current filter context and stores only its formula. A calculated column is computed row by row at refresh and its values are stored in the model. Use measures for totals and ratios, and columns for row-level attributes you need to slice or relate on.</p></details>
+        <details class="faq"><summary>What does CALCULATE do?</summary><p>It evaluates an expression in a modified filter context. A filter argument on a column that is already filtered overwrites that filter unless you use KEEPFILTERS. With no filter arguments it performs context transition, turning row context into filter context.</p></details>
+        <details class="faq"><summary>Why is a star schema recommended?</summary><p>Each visual sends a query that filters and groups by dimension columns and summarises fact columns. Dimension tables for filtering and fact tables for summarising match that pattern, which keeps models simpler, smaller and faster than one wide table or deep snowflaked chains.</p></details>
+        <details class="faq"><summary>What is a role-playing dimension and how do you handle it?</summary><p>One dimension that filters facts in different ways, such as a date table used for order date and ship date. Only one relationship between two tables can be active. Microsoft recommends a separate table per role when you need both at once, or an inactive relationship with USERELATIONSHIP when you do not.</p></details>
+        <details class="faq"><summary>Why do you need a date table?</summary><p>Time intelligence functions such as TOTALYTD and SAMEPERIODLASTYEAR need a proper date table: unique, contiguous dates with no blanks. Create it with CALENDAR or CALENDARAUTO, or bring in an existing date dimension, and mark it as a date table.</p></details>
+        <details class="faq"><summary>What is the difference between merge and append in Power Query?</summary><p>Append stacks rows from tables that share columns. Merge joins tables side by side on key columns, with join kinds such as left outer or inner, like a SQL join.</p></details>
+        <details class="faq"><summary>What is the difference between Reference and Duplicate?</summary><p>Duplicate copies the query and its steps into an independent query. Reference creates a new query that starts from the output of the original, so changes to the original flow into it.</p></details>
+        <details class="faq"><summary>How does row-level security work, and who does it apply to?</summary><p>You define roles with DAX filter expressions in Desktop (Modeling, Manage roles), publish, then add users or groups to the roles in the service. It applies to workspace Viewers; Admin, Member and Contributor bypass it. A user in several roles gets the union of the rows. It restricts rows, not columns.</p></details>
+        <details class="faq"><summary>What is the difference between a report and a dashboard?</summary><p>A report is one or more pages of visuals built on a semantic model. A dashboard exists only in the service: a single canvas of pinned tiles, which can come from several reports and models.</p></details>
+        <details class="faq"><summary>A report is slow. How would you investigate?</summary><p>Use Performance Analyzer to find which visuals are slow and DAX query view to inspect the queries. Then remove unused rows and columns, reduce granularity where possible, move toward a star schema, and review expensive measures and relationships.</p></details>
+    <h2 id="practice-questions">Practice questions</h2>
+        <div class="quiz" data-quiz>
+          <div class="q-head"><span>Question 1 of 20</span><span>Basics</span></div>
+          <div class="q-body" role="radiogroup" aria-labelledby="power-bi-study-guide-iq1-t">
+            <p class="q-text" id="power-bi-study-guide-iq1-t">In the Power BI service, what is the current Microsoft name for what used to be called a dataset?</p>
+            <label class="opt"><input type="radio" name="power-bi-study-guide-q1"> Data mart</label>
+            <label class="opt"><input type="radio" name="power-bi-study-guide-q1"> Dataflow</label>
+            <label class="opt" data-correct><input type="radio" name="power-bi-study-guide-q1"> Semantic model</label>
+            <label class="opt"><input type="radio" name="power-bi-study-guide-q1"> Workbook</label>
+            <button type="button" class="check-btn">Check answer</button><span class="q-result" role="status" aria-live="polite"></span>
+          </div>
+          <div class="q-explain"><b>Why:</b> Microsoft renamed the dataset content type to semantic model in 2023. It is a rename only; nothing about how models behave changed.</div>
+        </div>
+        <div class="quiz" data-quiz>
+          <div class="q-head"><span>Question 2 of 20</span><span>Storage modes</span></div>
+          <div class="q-body" role="radiogroup" aria-labelledby="power-bi-study-guide-iq2-t">
+            <p class="q-text" id="power-bi-study-guide-iq2-t">Which storage mode keeps a copy of the data in memory, so visuals only show new source data after a refresh?</p>
+            <label class="opt" data-correct><input type="radio" name="power-bi-study-guide-q2"> Import</label>
+            <label class="opt"><input type="radio" name="power-bi-study-guide-q2"> DirectQuery</label>
+            <label class="opt"><input type="radio" name="power-bi-study-guide-q2"> Both of them equally</label>
+            <label class="opt"><input type="radio" name="power-bi-study-guide-q2"> Neither</label>
+            <button type="button" class="check-btn">Check answer</button><span class="q-result" role="status" aria-live="polite"></span>
+          </div>
+          <div class="q-explain"><b>Why:</b> Import caches data in the model, which is fast and fully featured but only as fresh as the last refresh. DirectQuery sends queries to the source each time.</div>
+        </div>
+        <div class="quiz" data-quiz>
+          <div class="q-head"><span>Question 3 of 20</span><span>Power Query</span></div>
+          <div class="q-body" role="radiogroup" aria-labelledby="power-bi-study-guide-iq3-t">
+            <p class="q-text" id="power-bi-study-guide-iq3-t">You have twelve monthly sales tables with identical columns and want a single long table. Which operation do you use?</p>
+            <label class="opt"><input type="radio" name="power-bi-study-guide-q3"> Pivot columns</label>
+            <label class="opt"><input type="radio" name="power-bi-study-guide-q3"> Group by</label>
+            <label class="opt"><input type="radio" name="power-bi-study-guide-q3"> Merge queries</label>
+            <label class="opt" data-correct><input type="radio" name="power-bi-study-guide-q3"> Append queries</label>
+            <button type="button" class="check-btn">Check answer</button><span class="q-result" role="status" aria-live="polite"></span>
+          </div>
+          <div class="q-explain"><b>Why:</b> Append stacks rows from tables with matching columns. Merge joins tables side by side on a key, like a SQL join.</div>
+        </div>
+        <div class="quiz" data-quiz>
+          <div class="q-head"><span>Question 4 of 20</span><span>Power Query</span></div>
+          <div class="q-body" role="radiogroup" aria-labelledby="power-bi-study-guide-iq4-t">
+            <p class="q-text" id="power-bi-study-guide-iq4-t">You create a Reference of query A, then change a step in query A. What happens to the referenced query?</p>
+            <label class="opt"><input type="radio" name="power-bi-study-guide-q4"> Nothing; it is an independent copy</label>
+            <label class="opt" data-correct><input type="radio" name="power-bi-study-guide-q4"> It picks up the change, because it starts from A's output</label>
+            <label class="opt"><input type="radio" name="power-bi-study-guide-q4"> It is deleted</label>
+            <label class="opt"><input type="radio" name="power-bi-study-guide-q4"> It switches to DirectQuery</label>
+            <button type="button" class="check-btn">Check answer</button><span class="q-result" role="status" aria-live="polite"></span>
+          </div>
+          <div class="q-explain"><b>Why:</b> A referenced query starts from the output of the original, so upstream changes flow through. A Duplicate copies the steps and is independent.</div>
+        </div>
+        <div class="quiz" data-quiz>
+          <div class="q-head"><span>Question 5 of 20</span><span>Power Query</span></div>
+          <div class="q-body" role="radiogroup" aria-labelledby="power-bi-study-guide-iq5-t">
+            <p class="q-text" id="power-bi-study-guide-iq5-t">A table has columns Jan, Feb and Mar, each holding sales. You want columns Month and Sales instead. Which transformation fits?</p>
+            <label class="opt"><input type="radio" name="power-bi-study-guide-q5"> Pivot columns</label>
+            <label class="opt"><input type="radio" name="power-bi-study-guide-q5"> Transpose, then rename</label>
+            <label class="opt" data-correct><input type="radio" name="power-bi-study-guide-q5"> Unpivot columns</label>
+            <label class="opt"><input type="radio" name="power-bi-study-guide-q5"> Append queries</label>
+            <button type="button" class="check-btn">Check answer</button><span class="q-result" role="status" aria-live="polite"></span>
+          </div>
+          <div class="q-explain"><b>Why:</b> Unpivot turns column headers into attribute values, giving one row per month. This long layout is what relationships, slicers and measures work best with.</div>
+        </div>
+        <div class="quiz" data-quiz>
+          <div class="q-head"><span>Question 6 of 20</span><span>Power Query</span></div>
+          <div class="q-body" role="radiogroup" aria-labelledby="power-bi-study-guide-iq6-t">
+            <p class="q-text" id="power-bi-study-guide-iq6-t">Why do you want transformation steps to support query folding when the source is a database?</p>
+            <label class="opt"><input type="radio" name="power-bi-study-guide-q6"> It removes the need for relationships</label>
+            <label class="opt"><input type="radio" name="power-bi-study-guide-q6"> It lets you skip data types</label>
+            <label class="opt"><input type="radio" name="power-bi-study-guide-q6"> Folding makes columns smaller</label>
+            <label class="opt" data-correct><input type="radio" name="power-bi-study-guide-q6"> The work is pushed to the source as a native query, so less data is moved and processed in Power Query</label>
+            <button type="button" class="check-btn">Check answer</button><span class="q-result" role="status" aria-live="polite"></span>
+          </div>
+          <div class="q-explain"><b>Why:</b> When steps fold, the source does the filtering and shaping. In DirectQuery, steps that cannot fold cause errors or force you to simplify.</div>
+        </div>
+        <div class="quiz" data-quiz>
+          <div class="q-head"><span>Question 7 of 20</span><span>Modelling</span></div>
+          <div class="q-body" role="radiogroup" aria-labelledby="power-bi-study-guide-iq7-t">
+            <p class="q-text" id="power-bi-study-guide-iq7-t">A refresh loads duplicate values into the 'one' side column of a one-to-many relationship. What happens?</p>
+            <label class="opt" data-correct><input type="radio" name="power-bi-study-guide-q7"> The refresh fails</label>
+            <label class="opt"><input type="radio" name="power-bi-study-guide-q7"> The relationship becomes many-to-many automatically</label>
+            <label class="opt"><input type="radio" name="power-bi-study-guide-q7"> Power BI keeps the first value</label>
+            <label class="opt"><input type="radio" name="power-bi-study-guide-q7"> Duplicates are merged silently</label>
+            <button type="button" class="check-btn">Check answer</button><span class="q-result" role="status" aria-live="polite"></span>
+          </div>
+          <div class="q-explain"><b>Why:</b> The 'one' side must contain unique values. Duplicates there make the whole refresh fail, so clean or de-duplicate the key first.</div>
+        </div>
+        <div class="quiz" data-quiz>
+          <div class="q-head"><span>Question 8 of 20</span><span>Modelling</span></div>
+          <div class="q-body" role="radiogroup" aria-labelledby="power-bi-study-guide-iq8-t">
+            <p class="q-text" id="power-bi-study-guide-iq8-t">In a one-to-many relationship, which side is the dimension table?</p>
+            <label class="opt"><input type="radio" name="power-bi-study-guide-q8"> The 'many' side</label>
+            <label class="opt" data-correct><input type="radio" name="power-bi-study-guide-q8"> The 'one' side</label>
+            <label class="opt"><input type="radio" name="power-bi-study-guide-q8"> The side with more columns</label>
+            <label class="opt"><input type="radio" name="power-bi-study-guide-q8"> Neither; Power BI has no table types</label>
+            <button type="button" class="check-btn">Check answer</button><span class="q-result" role="status" aria-live="polite"></span>
+          </div>
+          <div class="q-explain"><b>Why:</b> Power BI infers table roles from relationships: the 'one' side is a dimension (filters and groups) and the 'many' side is a fact table (events to summarise).</div>
+        </div>
+        <div class="quiz" data-quiz>
+          <div class="q-head"><span>Question 9 of 20</span><span>Modelling</span></div>
+          <div class="q-body" role="radiogroup" aria-labelledby="power-bi-study-guide-iq9-t">
+            <p class="q-text" id="power-bi-study-guide-iq9-t">Sales has both OrderDate and ShipDate related to one Date table. How many of those relationships can be active?</p>
+            <label class="opt"><input type="radio" name="power-bi-study-guide-q9"> None</label>
+            <label class="opt"><input type="radio" name="power-bi-study-guide-q9"> As many as you like if cross-filter is Both</label>
+            <label class="opt"><input type="radio" name="power-bi-study-guide-q9"> Both</label>
+            <label class="opt" data-correct><input type="radio" name="power-bi-study-guide-q9"> Only one; the other must be inactive and used with USERELATIONSHIP</label>
+            <button type="button" class="check-btn">Check answer</button><span class="q-result" role="status" aria-live="polite"></span>
+          </div>
+          <div class="q-explain"><b>Why:</b> Only one active filter path can exist between two tables. For simultaneous filtering by both dates, Microsoft recommends a separate date table per role.</div>
+        </div>
+        <div class="quiz" data-quiz>
+          <div class="q-head"><span>Question 10 of 20</span><span>Modelling</span></div>
+          <div class="q-body" role="radiogroup" aria-labelledby="power-bi-study-guide-iq10-t">
+            <p class="q-text" id="power-bi-study-guide-iq10-t">Which is a requirement for a date table used for time intelligence?</p>
+            <label class="opt"><input type="radio" name="power-bi-study-guide-q10"> It must be the fact table</label>
+            <label class="opt"><input type="radio" name="power-bi-study-guide-q10"> One row per transaction</label>
+            <label class="opt" data-correct><input type="radio" name="power-bi-study-guide-q10"> Unique, contiguous dates with no blanks</label>
+            <label class="opt"><input type="radio" name="power-bi-study-guide-q10"> Dates stored as text</label>
+            <button type="button" class="check-btn">Check answer</button><span class="q-result" role="status" aria-live="polite"></span>
+          </div>
+          <div class="q-explain"><b>Why:</b> A date table has one row per date, no gaps, no blanks, and unique values. Mark it as a date table for classic time intelligence.</div>
+        </div>
+        <div class="quiz" data-quiz>
+          <div class="q-head"><span>Question 11 of 20</span><span>DAX</span></div>
+          <div class="q-body" role="radiogroup" aria-labelledby="power-bi-study-guide-iq11-t">
+            <p class="q-text" id="power-bi-study-guide-iq11-t">Which of these is calculated at query time in the current filter context and is not stored row by row in the model?</p>
+            <label class="opt" data-correct><input type="radio" name="power-bi-study-guide-q11"> A measure</label>
+            <label class="opt"><input type="radio" name="power-bi-study-guide-q11"> A calculated table</label>
+            <label class="opt"><input type="radio" name="power-bi-study-guide-q11"> A Power Query step</label>
+            <label class="opt"><input type="radio" name="power-bi-study-guide-q11"> A calculated column</label>
+            <button type="button" class="check-btn">Check answer</button><span class="q-result" role="status" aria-live="polite"></span>
+          </div>
+          <div class="q-explain"><b>Why:</b> Measures are evaluated when a visual needs them, in the filter context of that visual. Calculated columns are computed at refresh and stored.</div>
+        </div>
+        <div class="quiz" data-quiz>
+          <div class="q-head"><span>Question 12 of 20</span><span>DAX</span></div>
+          <div class="q-body" role="radiogroup" aria-labelledby="power-bi-study-guide-iq12-t">
+            <p class="q-text" id="power-bi-study-guide-iq12-t">A slicer selects Color = Red. A measure is CALCULATE([Total Sales], 'Product'[Color] = "Blue"). What does the measure return?</p>
+            <label class="opt"><input type="radio" name="power-bi-study-guide-q12"> Zero</label>
+            <label class="opt"><input type="radio" name="power-bi-study-guide-q12"> Red and blue sales together</label>
+            <label class="opt"><input type="radio" name="power-bi-study-guide-q12"> Red sales</label>
+            <label class="opt" data-correct><input type="radio" name="power-bi-study-guide-q12"> Blue sales</label>
+            <button type="button" class="check-btn">Check answer</button><span class="q-result" role="status" aria-live="polite"></span>
+          </div>
+          <div class="q-explain"><b>Why:</b> A CALCULATE filter on a column overwrites any existing filter on the same column, so the slicer's Red is replaced by Blue.</div>
+        </div>
+        <div class="quiz" data-quiz>
+          <div class="q-head"><span>Question 13 of 20</span><span>DAX</span></div>
+          <div class="q-body" role="radiogroup" aria-labelledby="power-bi-study-guide-iq13-t">
+            <p class="q-text" id="power-bi-study-guide-iq13-t">Which function do you wrap around a CALCULATE filter so that it adds to, rather than overwrites, existing filters on the same column?</p>
+            <label class="opt"><input type="radio" name="power-bi-study-guide-q13"> VALUES</label>
+            <label class="opt" data-correct><input type="radio" name="power-bi-study-guide-q13"> KEEPFILTERS</label>
+            <label class="opt"><input type="radio" name="power-bi-study-guide-q13"> USERELATIONSHIP</label>
+            <label class="opt"><input type="radio" name="power-bi-study-guide-q13"> ALL</label>
+            <button type="button" class="check-btn">Check answer</button><span class="q-result" role="status" aria-live="polite"></span>
+          </div>
+          <div class="q-explain"><b>Why:</b> KEEPFILTERS keeps the existing filters and intersects them with the new one.</div>
+        </div>
+        <div class="quiz" data-quiz>
+          <div class="q-head"><span>Question 14 of 20</span><span>DAX</span></div>
+          <div class="q-body" role="radiogroup" aria-labelledby="power-bi-study-guide-iq14-t">
+            <p class="q-text" id="power-bi-study-guide-iq14-t">Why prefer DIVIDE([Profit], [Sales]) over [Profit] / [Sales]?</p>
+            <label class="opt" data-correct><input type="radio" name="power-bi-study-guide-q14"> DIVIDE handles a zero denominator, returning BLANK or an alternate result you choose</label>
+            <label class="opt"><input type="radio" name="power-bi-study-guide-q14"> The / operator is not allowed in measures</label>
+            <label class="opt"><input type="radio" name="power-bi-study-guide-q14"> DIVIDE ignores filters</label>
+            <label class="opt"><input type="radio" name="power-bi-study-guide-q14"> DIVIDE is always faster to type</label>
+            <button type="button" class="check-btn">Check answer</button><span class="q-result" role="status" aria-live="polite"></span>
+          </div>
+          <div class="q-explain"><b>Why:</b> DIVIDE takes an optional alternate result for division by zero and returns BLANK by default, so visuals do not show errors or infinity.</div>
+        </div>
+        <div class="quiz" data-quiz>
+          <div class="q-head"><span>Question 15 of 20</span><span>DAX</span></div>
+          <div class="q-body" role="radiogroup" aria-labelledby="power-bi-study-guide-iq15-t">
+            <p class="q-text" id="power-bi-study-guide-iq15-t">Which function returns the same period in the previous year, for a prior-year comparison?</p>
+            <label class="opt"><input type="radio" name="power-bi-study-guide-q15"> DATESYTD</label>
+            <label class="opt"><input type="radio" name="power-bi-study-guide-q15"> FIRSTDATE</label>
+            <label class="opt" data-correct><input type="radio" name="power-bi-study-guide-q15"> SAMEPERIODLASTYEAR</label>
+            <label class="opt"><input type="radio" name="power-bi-study-guide-q15"> EOMONTH</label>
+            <button type="button" class="check-btn">Check answer</button><span class="q-result" role="status" aria-live="polite"></span>
+          </div>
+          <div class="q-explain"><b>Why:</b> SAMEPERIODLASTYEAR shifts the current dates back one year. DATESYTD returns the year-to-date dates of the current year.</div>
+        </div>
+        <div class="quiz" data-quiz>
+          <div class="q-head"><span>Question 16 of 20</span><span>DAX</span></div>
+          <div class="q-body" role="radiogroup" aria-labelledby="power-bi-study-guide-iq16-t">
+            <p class="q-text" id="power-bi-study-guide-iq16-t">Revenue is Quantity times Unit Price on each row. Which measure adds this up correctly?</p>
+            <label class="opt"><input type="radio" name="power-bi-study-guide-q16"> SUM(Sales[Quantity] * Sales[Price])</label>
+            <label class="opt" data-correct><input type="radio" name="power-bi-study-guide-q16"> SUMX(Sales, Sales[Quantity] * Sales[Price])</label>
+            <label class="opt"><input type="radio" name="power-bi-study-guide-q16"> SUM(Sales[Quantity]) + SUM(Sales[Price])</label>
+            <label class="opt"><input type="radio" name="power-bi-study-guide-q16"> COUNTROWS(Sales)</label>
+            <button type="button" class="check-btn">Check answer</button><span class="q-result" role="status" aria-live="polite"></span>
+          </div>
+          <div class="q-explain"><b>Why:</b> SUM takes a single column. SUMX is an iterator: it evaluates the expression for every row, then adds the results.</div>
+        </div>
+        <div class="quiz" data-quiz>
+          <div class="q-head"><span>Question 17 of 20</span><span>Reports</span></div>
+          <div class="q-body" role="radiogroup" aria-labelledby="power-bi-study-guide-iq17-t">
+            <p class="q-text" id="power-bi-study-guide-iq17-t">Which visual is the usual choice for showing a trend over time?</p>
+            <label class="opt"><input type="radio" name="power-bi-study-guide-q17"> Treemap</label>
+            <label class="opt"><input type="radio" name="power-bi-study-guide-q17"> Card</label>
+            <label class="opt"><input type="radio" name="power-bi-study-guide-q17"> Pie chart</label>
+            <label class="opt" data-correct><input type="radio" name="power-bi-study-guide-q17"> Line chart</label>
+            <button type="button" class="check-btn">Check answer</button><span class="q-result" role="status" aria-live="polite"></span>
+          </div>
+          <div class="q-explain"><b>Why:</b> A line chart shows change across an ordered axis such as dates. Pie charts and treemaps show part-to-whole, and a card shows one number.</div>
+        </div>
+        <div class="quiz" data-quiz>
+          <div class="q-head"><span>Question 18 of 20</span><span>Reports</span></div>
+          <div class="q-body" role="radiogroup" aria-labelledby="power-bi-study-guide-iq18-t">
+            <p class="q-text" id="power-bi-study-guide-iq18-t">Which feature lets a user right-click a data point and jump to a detail page already filtered to that item?</p>
+            <label class="opt" data-correct><input type="radio" name="power-bi-study-guide-q18"> Drillthrough</label>
+            <label class="opt"><input type="radio" name="power-bi-study-guide-q18"> Sync slicers</label>
+            <label class="opt"><input type="radio" name="power-bi-study-guide-q18"> Conditional formatting</label>
+            <label class="opt"><input type="radio" name="power-bi-study-guide-q18"> A theme</label>
+            <button type="button" class="check-btn">Check answer</button><span class="q-result" role="status" aria-live="polite"></span>
+          </div>
+          <div class="q-explain"><b>Why:</b> Drillthrough passes the selected item's filter context to a target page. Sync slicers keep slicer selections consistent across pages.</div>
+        </div>
+        <div class="quiz" data-quiz>
+          <div class="q-head"><span>Question 19 of 20</span><span>Security</span></div>
+          <div class="q-body" role="radiogroup" aria-labelledby="power-bi-study-guide-iq19-t">
+            <p class="q-text" id="power-bi-study-guide-iq19-t">A user with the Contributor role in the workspace opens a report on a semantic model that has RLS roles. What do they see?</p>
+            <label class="opt"><input type="radio" name="power-bi-study-guide-q19"> Only the rows allowed by their role</label>
+            <label class="opt"><input type="radio" name="power-bi-study-guide-q19"> No rows at all</label>
+            <label class="opt" data-correct><input type="radio" name="power-bi-study-guide-q19"> All the data, because RLS does not apply to Admin, Member and Contributor</label>
+            <label class="opt"><input type="radio" name="power-bi-study-guide-q19"> An error</label>
+            <button type="button" class="check-btn">Check answer</button><span class="q-result" role="status" aria-live="polite"></span>
+          </div>
+          <div class="q-explain"><b>Why:</b> RLS applies to workspace Viewers. Admin, Member and Contributor can edit the model, so they bypass row-level security.</div>
+        </div>
+        <div class="quiz" data-quiz>
+          <div class="q-head"><span>Question 20 of 20</span><span>Refresh</span></div>
+          <div class="q-body" role="radiogroup" aria-labelledby="power-bi-study-guide-iq20-t">
+            <p class="q-text" id="power-bi-study-guide-iq20-t">A scheduled refresh fails four times in a row. What does Power BI do?</p>
+            <label class="opt"><input type="radio" name="power-bi-study-guide-q20"> Retries forever</label>
+            <label class="opt" data-correct><input type="radio" name="power-bi-study-guide-q20"> Deactivates the refresh schedule until you fix it and turn it back on</label>
+            <label class="opt"><input type="radio" name="power-bi-study-guide-q20"> Deletes the semantic model</label>
+            <label class="opt"><input type="radio" name="power-bi-study-guide-q20"> Switches the model to DirectQuery</label>
+            <button type="button" class="check-btn">Check answer</button><span class="q-result" role="status" aria-live="polite"></span>
+          </div>
+          <div class="q-explain"><b>Why:</b> Power BI disables the schedule after four consecutive failures (or an unrecoverable error such as expired credentials). Fix the cause, then re-enable it.</div>
+        </div>
+    <h2 id="preparation-checklist">Preparation checklist</h2>
+        <ul>
+          <li>Explain Import vs DirectQuery and when you would choose each</li>
+          <li>Draw a star schema and say which table is the dimension in each relationship</li>
+          <li>Describe active vs inactive relationships and how role-playing dimensions are handled</li>
+          <li>Write measures using <code>CALCULATE</code>, <code>DIVIDE</code>, <code>SUMX</code> and a time-intelligence function, and explain why a CALCULATE filter overwrites a slicer</li>
+          <li>Describe how RLS is defined, assigned and tested, and which workspace roles bypass it</li>
+          <li>Open Microsoft's current PL-300 study guide to confirm the skills measured before you sit the exam</li>
+        </ul>
+    
+    <hr class="sep">
+    <nav class="prevnext" aria-label="More guides">
+      <a class="prev" href="../../guides/sql-study-guide/"><small>← Previous</small>SQL Study Guide: Queries You Should Master</a>
+      <a class="next" href="../../guides/digital-marketing-study-guide/"><small>Next →</small>Digital Marketing Study Guide: SEO, Funnels &amp; Metrics</a>
+    </nav>
+    <a href="../../#guides" class="btn btn-link">← Back to all guides</a>
+  </article>
+  <aside class="sidebar">
+    <div class="box toc-box">
+      <h2 class="box-h">On this page</h2>
+      <div class="toc">
+        <a href="#what-you-will-learn" data-toc="what-you-will-learn">What you will learn</a>
+        <a href="#how-the-pieces-fit-together" data-toc="how-the-pieces-fit-together">How the pieces fit together</a>
+        <a href="#prepare-data-with-power-query" data-toc="prepare-data-with-power-query">Prepare data with Power Query</a>
+        <a href="#model-the-data-star-schema-and-relationships" data-toc="model-the-data-star-schema-and-relationships">Model the data: star schema and relationships</a>
+        <a href="#dax-essentials" data-toc="dax-essentials">DAX essentials</a>
+        <a href="#build-reports-that-communicate" data-toc="build-reports-that-communicate">Build reports that communicate</a>
+        <a href="#publish-refresh-and-secure" data-toc="publish-refresh-and-secure">Publish, refresh and secure</a>
+        <a href="#common-mistakes" data-toc="common-mistakes">Common mistakes</a>
+        <a href="#practical-learning-exercises" data-toc="practical-learning-exercises">Practical learning exercises</a>
+        <a href="#interview-questions" data-toc="interview-questions">Interview questions</a>
+        <a href="#practice-questions" data-toc="practice-questions">Practice questions</a>
+        <a href="#preparation-checklist" data-toc="preparation-checklist">Preparation checklist</a>
+        
+      </div>
+    </div>
+    <div class="box rel">
+      <h2 class="box-h">Related guides</h2>
+      <a href="../../guides/excel-study-guide/">Excel Study Guide: Lookups, Pivot Tables &amp; Core Functions</a>
+      <a href="../../guides/sql-study-guide/">SQL Study Guide: Queries You Should Master</a>
+      <a href="../../guides/python-study-guide/">Python Fundamentals: Study Guide + Practice Quiz</a>
+    </div>
+    <div class="box">
+      <h2 class="box-h">Share this guide</h2>
+      <button type="button" class="btn btn-share" id="shareBtn" data-url="https://skillsprep.github.io/guides/power-bi-study-guide/" data-title="Power BI Study Guide: Model, DAX and Reports">Copy Link</button>
+    </div>
+    <div class="box">
+      <h2 class="box-h">Spotted a mistake?</h2>
+      <p class="box-p">We correct errors quickly. Tell us what's wrong and we'll fix it.</p>
+      <a class="btn btn-link" href="../../contact/">Report a correction</a>
+    </div>
+  </aside>
+</div>
+</main>
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div>
+        <h2 class="foot-h">SkillPrep</h2>
+        <p class="foot-about">Concept-first study guides and practice tests for everyday work skills. Learn the "why" behind every answer.</p>
+      </div>
+      <div>
+        <h2 class="foot-h">Explore</h2>
+        <a href="../../">All guides</a>
+        <a href="../../about/">About</a>
+        <a href="../../contact/">Contact</a>
+        <a href="../../privacy/">Privacy</a>
+        <a href="../../terms/">Terms</a>
+      </div>
+      <div>
+        <h2 class="foot-h">Popular guides</h2>
+        <a href="../../guides/excel-study-guide/">Excel Study Guide</a>
+        <a href="../../guides/python-study-guide/">Python Fundamentals</a>
+        <a href="../../guides/javascript-study-guide/">JavaScript Fundamentals</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2026 SkillPrep. All rights reserved.</span>
+      <span>Independent educational site. Not affiliated with LinkedIn, Microsoft or any other vendor; product names are trademarks of their owners.</span>
+    </div>
+  </div>
+</footer>
+<button class="back-top" id="backTop" type="button" aria-label="Back to top">↑</button>
+<div id="cookieConsent" class="cookie-consent" hidden>
+  <div class="cookie-inner">
+    <p>SkillPrep saves your quiz progress in your browser's local storage. Ads are shown through Google AdSense, which may use cookies. See our <a href="../../privacy/">Privacy Policy</a> for details and opt-out options.</p>
+    <div class="cookie-actions">
+      <button id="cookieAccept" class="btn">OK</button>
+    </div>
+  </div>
+</div>
+<script src="../../js/site.js" defer></script>
+</body>
+</html>

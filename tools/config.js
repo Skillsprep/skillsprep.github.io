@@ -29,11 +29,23 @@ module.exports = {
   // Hand-picked "Related guides" shown in each guide's sidebar (slug -> up to 3 slugs). Edit freely;
   // the build fails if a slug doesn't exist. Guides not listed fall back to the first other guides.
   related: {
-    "excel-study-guide": ["sql-study-guide", "powerpoint-study-guide", "python-study-guide"],
+    "excel-study-guide": ["sql-study-guide", "power-bi-study-guide", "powerpoint-study-guide"],
     "python-study-guide": ["sql-study-guide", "excel-study-guide", "javascript-study-guide"],
     "javascript-study-guide": ["git-study-guide", "python-study-guide", "sql-study-guide"],
     "project-management-study-guide": ["lean-six-sigma-practice-test", "excel-study-guide", "powerpoint-study-guide"],
-    "sql-study-guide": ["excel-study-guide", "python-study-guide", "javascript-study-guide"],
+    "power-bi-study-guide": [
+      ["Study guide for Exam PL-300: Microsoft Power BI Data Analyst — Microsoft Learn", "https://learn.microsoft.com/en-us/certifications/resources/study-guides/PL-300"],
+      ["New name for Power BI datasets (semantic models) — Microsoft Learn", "https://learn.microsoft.com/power-bi/connect-data/service-datasets-rename"],
+      ["Understand star schema and the importance for Power BI — Microsoft Learn", "https://learn.microsoft.com/en-us/power-bi/guidance/star-schema"],
+      ["Model relationships in Power BI Desktop — Microsoft Learn", "https://learn.microsoft.com/en-us/power-bi/transform-model/desktop-relationships-understand"],
+      ["Set and use date tables in Power BI Desktop — Microsoft Learn", "https://learn.microsoft.com/en-us/power-bi/guidance/model-date-tables"],
+      ["CALCULATE function (DAX) — Microsoft Learn", "https://learn.microsoft.com/en-us/dax/calculate-function-dax"],
+      ["DirectQuery in Power BI — Microsoft Learn", "https://learn.microsoft.com/en-us/power-bi/connect-data/desktop-directquery-about"],
+      ["Configure scheduled refresh — Microsoft Learn", "https://learn.microsoft.com/en-us/power-bi/connect-data/refresh-scheduled-refresh"],
+      ["Row-level security (RLS) with Power BI — Microsoft Learn", "https://learn.microsoft.com/en-us/fabric/security/service-admin-row-level-security"]
+    ],
+    "sql-study-guide": ["excel-study-guide", "power-bi-study-guide", "python-study-guide"],
+    "power-bi-study-guide": ["excel-study-guide", "sql-study-guide", "python-study-guide"],
     "digital-marketing-study-guide": ["excel-study-guide", "powerpoint-study-guide", "generative-ai-career-essentials-practice-test"],
     "git-study-guide": ["javascript-study-guide", "python-study-guide", "project-management-study-guide"],
     "powerpoint-study-guide": ["excel-study-guide", "digital-marketing-study-guide", "generative-ai-career-essentials-practice-test"],
