@@ -29,7 +29,7 @@ module.exports = {
   // Hand-picked "Related guides" shown in each guide's sidebar (slug -> up to 3 slugs). Edit freely;
   // the build fails if a slug doesn't exist. Guides not listed fall back to the first other guides.
   related: {
-    "excel-study-guide": ["sql-study-guide", "power-bi-study-guide", "powerpoint-study-guide"],
+    "excel-study-guide": ["google-sheets-study-guide", "sql-study-guide", "power-bi-study-guide"],
     "python-study-guide": ["sql-study-guide", "excel-study-guide", "javascript-study-guide"],
     "javascript-study-guide": ["git-study-guide", "python-study-guide", "sql-study-guide"],
     "project-management-study-guide": ["lean-six-sigma-practice-test", "excel-study-guide", "powerpoint-study-guide"],
@@ -62,6 +62,7 @@ module.exports = {
       ["Configure scheduled refresh — Microsoft Learn", "https://learn.microsoft.com/en-us/power-bi/connect-data/refresh-scheduled-refresh"],
       ["Row-level security (RLS) with Power BI — Microsoft Learn", "https://learn.microsoft.com/en-us/fabric/security/service-admin-row-level-security"]
     ],
+    "google-sheets-study-guide": ["excel-study-guide", "sql-study-guide", "power-bi-study-guide"],
     "sql-study-guide": ["excel-study-guide", "power-bi-study-guide", "python-study-guide"],
     "power-bi-study-guide": ["power-bi-practice-test", "excel-study-guide", "sql-study-guide"],
     "power-bi-practice-test": ["power-bi-study-guide", "excel-study-guide", "sql-study-guide"],
@@ -74,6 +75,23 @@ module.exports = {
   },
   // Authoritative references shown under each guide ("Sources & further reading").
   sources: {
+    "google-sheets-study-guide": [
+      ["QUERY — Google Docs Editors Help", "https://support.google.com/docs/answer/3093343"],
+      ["FILTER — Google Docs Editors Help", "https://support.google.com/docs/answer/3093197"],
+      ["XLOOKUP — Google Docs Editors Help", "https://support.google.com/docs/answer/12405947"],
+      ["ARRAYFORMULA — Google Docs Editors Help", "https://support.google.com/docs/answer/3093275"],
+      ["LET — Google Docs Editors Help", "https://support.google.com/docs/answer/13190535"],
+      ["LAMBDA — Google Docs Editors Help", "https://support.google.com/docs/answer/12508718"],
+      ["Named functions — Google Docs Editors Help", "https://support.google.com/docs/answer/12504534"],
+      ["IMPORTRANGE — Google Docs Editors Help", "https://support.google.com/docs/answer/3093340"],
+      ["Pivot tables — Google Docs Editors Help", "https://support.google.com/docs/answer/1272900"],
+      ["Share files from Google Drive — Google Docs Editors Help", "https://support.google.com/docs/answer/2494822"],
+      ["Protect, hide and edit sheets — Google Docs Editors Help", "https://support.google.com/docs/answer/1218656"],
+      ["Data validation — Google Docs Editors Help", "https://support.google.com/docs/answer/186103"],
+      ["Macros in Google Sheets — Google Docs Editors Help", "https://support.google.com/docs/answer/7665004"],
+      ["Simple triggers — Apps Script, Google for Developers", "https://developers.google.com/apps-script/guides/triggers"],
+      ["Installable triggers — Apps Script, Google for Developers", "https://developers.google.com/apps-script/guides/triggers/installable"]
+    ],
     "excel-study-guide": [
       ["XLOOKUP function — Microsoft Support", "https://support.microsoft.com/en-us/office/xlookup-function-b7fd680e-6d10-43e6-84f9-88eae8bf5929"],
       ["Create a PivotTable to analyze worksheet data — Microsoft Support", "https://support.microsoft.com/office/18fb0032-b01a-4c99-9a5f-7ab09edde05a"]

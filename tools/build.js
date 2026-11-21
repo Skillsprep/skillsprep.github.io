@@ -7,11 +7,11 @@
 const fs = require("fs");
 const path = require("path");
 const cfg = require("./config");
-// Power BI guide lives in its own file; place it right after the SQL guide in the site order.
+// Power BI and Google Sheets guides live in their own files; place it right after the SQL guide in the site order.
 const POSTS = (() => {
-  const base = require("./content/guides"), extra = require("./content/powerbi");
+  const base = require("./content/guides"), extra = require("./content/powerbi"), sheets = require("./content/sheets");
   const at = base.findIndex((x) => x.slug === "sql-study-guide") + 1;
-  return [...base.slice(0, at), ...extra, ...base.slice(at)];
+  return [...base.slice(0, at), ...extra, ...sheets, ...base.slice(at)];
 })();
 // Group questions by topic (topics in first-appearance order, original order kept within each topic)
 // so each topic heading appears once in a test.
