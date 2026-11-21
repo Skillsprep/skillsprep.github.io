@@ -30,7 +30,8 @@ module.exports = {
   // the build fails if a slug doesn't exist. Guides not listed fall back to the first other guides.
   related: {
     "excel-study-guide": ["google-sheets-study-guide", "sql-study-guide", "power-bi-study-guide"],
-    "python-study-guide": ["sql-study-guide", "excel-study-guide", "javascript-study-guide"],
+    "python-study-guide": ["advanced-python-study-guide", "sql-study-guide", "javascript-study-guide"],
+    "advanced-python-study-guide": ["python-study-guide", "javascript-study-guide", "git-study-guide"],
     "javascript-study-guide": ["git-study-guide", "python-study-guide", "sql-study-guide"],
     "project-management-study-guide": ["lean-six-sigma-practice-test", "excel-study-guide", "powerpoint-study-guide"],
     "power-bi-practice-test": [
@@ -75,6 +76,15 @@ module.exports = {
   },
   // Authoritative references shown under each guide ("Sources & further reading").
   sources: {
+    "advanced-python-study-guide": [
+      ["Yield expressions — The Python Language Reference", "https://docs.python.org/3/reference/expressions.html#yield-expressions"],
+      ["functools — The Python Standard Library", "https://docs.python.org/3/library/functools.html"],
+      ["dataclasses — The Python Standard Library", "https://docs.python.org/3/library/dataclasses.html"],
+      ["Coroutines and tasks — asyncio", "https://docs.python.org/3/library/asyncio-task.html"],
+      ["Glossary: global interpreter lock", "https://docs.python.org/3/glossary.html#term-global-interpreter-lock"],
+      ["contextlib — The Python Standard Library", "https://docs.python.org/3/library/contextlib.html"],
+      ["Errors and exceptions — The Python Tutorial", "https://docs.python.org/3/tutorial/errors.html"]
+    ],
     "google-sheets-study-guide": [
       ["QUERY — Google Docs Editors Help", "https://support.google.com/docs/answer/3093343"],
       ["FILTER — Google Docs Editors Help", "https://support.google.com/docs/answer/3093197"],
