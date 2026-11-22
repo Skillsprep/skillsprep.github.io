@@ -15,6 +15,9 @@ const POSTS = (() => {
   // Advanced Python guide goes right after the Python guide.
   const py = out.findIndex((x) => x.slug === "python-study-guide") + 1;
   out.splice(py, 0, ...require("./content/advpython"));
+  // Practical AI guide goes right before the Generative AI practice test.
+  const ai = out.findIndex((x) => x.slug === "generative-ai-career-essentials-practice-test");
+  out.splice(ai < 0 ? out.length : ai, 0, ...require("./content/practicalai"));
   return out;
 })();
 // Group questions by topic (topics in first-appearance order, original order kept within each topic)

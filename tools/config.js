@@ -71,11 +71,18 @@ module.exports = {
     "git-study-guide": ["javascript-study-guide", "python-study-guide", "project-management-study-guide"],
     "powerpoint-study-guide": ["excel-study-guide", "digital-marketing-study-guide", "generative-ai-career-essentials-practice-test"],
     "linkedin-skill-assessments-retired": ["generative-ai-career-essentials-practice-test", "excel-study-guide", "python-study-guide"],
-    "generative-ai-career-essentials-practice-test": ["powerpoint-study-guide", "digital-marketing-study-guide", "excel-study-guide"],
+    "generative-ai-career-essentials-practice-test": ["practical-ai-study-guide", "powerpoint-study-guide", "digital-marketing-study-guide"],
+    "practical-ai-study-guide": ["generative-ai-career-essentials-practice-test", "google-sheets-study-guide", "excel-study-guide"],
     "lean-six-sigma-practice-test": ["project-management-study-guide", "excel-study-guide", "powerpoint-study-guide"]
   },
   // Authoritative references shown under each guide ("Sources & further reading").
   sources: {
+    "practical-ai-study-guide": [
+      ["Prompt design strategies — Google AI for Developers", "https://ai.google.dev/gemini-api/docs/prompting-strategies"],
+      ["Prompt engineering overview — Claude Docs", "https://platform.claude.com/docs/en/build-with-claude/prompt-engineering/overview"],
+      ["AI Risk Management Framework — NIST", "https://www.nist.gov/itl/ai-risk-management-framework"],
+      ["The EU Artificial Intelligence Act", "https://artificialintelligenceact.eu/"]
+    ],
     "advanced-python-study-guide": [
       ["Yield expressions — The Python Language Reference", "https://docs.python.org/3/reference/expressions.html#yield-expressions"],
       ["functools — The Python Standard Library", "https://docs.python.org/3/library/functools.html"],

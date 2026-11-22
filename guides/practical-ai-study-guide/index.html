@@ -1,0 +1,539 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Practical AI at Work: Prompting, Checking and Using It Safely | SkillPrep</title>
+<meta name="description" content="How to write clear prompts, iterate, check AI output, protect private data and understand the NIST and EU frameworks, with exercises, interview questions…">
+<link rel="canonical" href="https://skillsprep.github.io/guides/practical-ai-study-guide/">
+<meta name="google-site-verification" content="rOGMro0A_ltGwtwagVfnPJFPmn59apiGYOa0LKMT4n8">
+<meta name="robots" content="index,follow">
+<meta name="theme-color" content="#0D1B2A">
+<meta property="og:site_name" content="SkillPrep">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Practical AI at Work: Prompting, Checking and Using It Safely | SkillPrep">
+<meta property="og:description" content="How to write clear prompts, iterate, check AI output, protect private data and understand the NIST and EU frameworks, with exercises, interview questions…">
+<meta property="og:url" content="https://skillsprep.github.io/guides/practical-ai-study-guide/">
+<meta property="og:image" content="https://skillsprep.github.io/assets/og-image.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Practical AI at Work: Prompting, Checking and Using It Safely | SkillPrep">
+<meta name="twitter:description" content="How to write clear prompts, iterate, check AI output, protect private data and understand the NIST and EU frameworks, with exercises, interview questions…">
+<meta name="twitter:image" content="https://skillsprep.github.io/assets/og-image.png">
+<link rel="icon" href="../../assets/favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../../css/style.css">
+<script>(function(){try{if(localStorage.getItem("skillprep:theme")==="dark"){document.documentElement.setAttribute("data-theme","dark");}}catch(e){}})();</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"Practical AI at Work: Prompting, Checking and Using It Safely","description":"How to write clear prompts, iterate, check AI output, protect private data and understand the NIST and EU frameworks, with exercises, interview questions and a 20-question quiz.","datePublished":"2026-11-22","dateModified":"2026-11-22","author":{"@type":"Organization","name":"SkillPrep editorial team"},"publisher":{"@type":"Organization","name":"SkillPrep","logo":{"@type":"ImageObject","url":"https://skillsprep.github.io/assets/favicon.svg"}},"mainEntityOfPage":"https://skillsprep.github.io/guides/practical-ai-study-guide/","image":"https://skillsprep.github.io/assets/og-image.png","articleSection":"AI","inLanguage":"en"}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://skillsprep.github.io/"},{"@type":"ListItem","position":2,"name":"AI","item":"https://skillsprep.github.io/#guides"},{"@type":"ListItem","position":3,"name":"Practical AI at Work: Prompting, Checking and Using It Safely","item":"https://skillsprep.github.io/guides/practical-ai-study-guide/"}]}</script>
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9455217122501464" crossorigin="anonymous"></script>
+</head>
+<body>
+<a class="skip-link" href="#main">Skip to content</a>
+<header class="site-header">
+  <div class="container header-inner">
+    <a href="../../" class="logo"><span class="mark" aria-hidden="true">S</span> SkillPrep</a>
+    <button class="burger" id="burger" type="button" aria-label="Menu" aria-expanded="false" aria-controls="mainNav">☰</button>
+    <nav class="main-nav" id="mainNav" aria-label="Main">
+      <a href="../../">Home</a>
+      <a href="../../about/">About</a>
+      <a href="../../contact/">Contact</a>
+    </nav>
+    <button class="theme-toggle" id="themeToggle" type="button" aria-label="Toggle dark mode">◐</button>
+  </div>
+</header>
+<main id="main">
+
+<div id="progress" aria-hidden="true"></div>
+<section class="article-hero">
+  <div class="container">
+    <nav class="crumbs" aria-label="Breadcrumb"><a href="../../">Home</a> <span aria-hidden="true" class="sep">›</span> <a href="../../#guides">Guides</a> <span aria-hidden="true" class="sep">›</span> <span aria-current="page">AI</span></nav>
+    <div class="cat">AI</div>
+    <h1>Practical AI at Work: Prompting, Checking and Using It Safely</h1>
+    <div class="meta">
+      <span><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg> 9 min read</span>
+      <span><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg> 20 Questions</span>
+      <span>Published <time datetime="2026-11-22">Nov 22, 2026</time></span>
+      <span>Reviewed <time datetime="2026-11-22">Nov 22, 2026</time></span>
+    </div>
+  </div>
+</section>
+<div class="container article-wrap">
+  <article class="article-body">
+    <p class="note"><b>Unofficial study resource.</b> Written independently of any exam provider, employer or software vendor.</p>
+    <details class="toc-mobile">
+      <summary>On this page</summary>
+      <div class="toc">
+        <a href="#what-you-will-learn">What you will learn</a>
+        <a href="#how-assistants-behave-in-practice">How assistants behave, in practice</a>
+        <a href="#writing-prompts-that-work">Writing prompts that work</a>
+        <a href="#iterating-on-the-answer">Iterating on the answer</a>
+        <a href="#checking-the-output">Checking the output</a>
+        <a href="#everyday-work-uses">Everyday work uses</a>
+        <a href="#privacy-and-responsible-use">Privacy and responsible use</a>
+        <a href="#risk-frameworks-at-a-glance">Risk frameworks at a glance</a>
+        <a href="#common-mistakes">Common mistakes</a>
+        <a href="#practical-learning-exercises">Practical learning exercises</a>
+        <a href="#interview-questions">Interview questions</a>
+        <a href="#practice-questions">Practice questions</a>
+        <a href="#preparation-checklist">Preparation checklist</a>
+        <a href="#sources">Sources &amp; further reading</a>
+      </div>
+    </details>
+    <p class="lead">Employers increasingly expect people to use AI assistants well: get a useful draft quickly, spot what is wrong with it, and avoid sharing what should stay private. This guide covers those habits in a tool-neutral way, so it does not depend on any one product. It is an unofficial study aid. For exam-style questions on generative AI concepts, try the <a href="../generative-ai-career-essentials-practice-test/">Generative AI practice test</a>.</p>
+    <h2 id="what-you-will-learn">What you will learn</h2>
+        <p>By the end you should be able to:</p>
+        <ul>
+          <li>Write prompts with a clear task, context, format and constraints</li>
+          <li>Iterate on a weak answer instead of accepting or abandoning it</li>
+          <li>Check facts, figures, references and summaries before you rely on them</li>
+          <li>Decide what you should and should not paste into an AI tool</li>
+          <li>Explain, at overview level, the NIST AI Risk Management Framework and the EU AI Act</li>
+        </ul>
+        <div class="callout"><b>Tool-neutral by design</b> This guide names no products, prices, limits or rankings, because they change quickly. Prompts shown are examples to adapt, and results will vary between assistants.</div>
+    <h2 id="how-assistants-behave-in-practice">How assistants behave, in practice</h2>
+        <p>An AI assistant generates text in response to your prompt and whatever context you provide. Three practical consequences follow.</p>
+        <table>
+          <tr><th>Behaviour</th><th>What it means for you</th></tr>
+          <tr><td>It produces fluent text whether or not it is right</td><td>Errors and invented details, often called hallucinations, can sound confident. Check what matters.</td></tr>
+          <tr><td>It only knows what the prompt and its tools give it</td><td>Provide the context it needs, such as the audience, the source text or the policy.</td></tr>
+          <tr><td>Results vary between tries and between tools</td><td>Review every output. A prompt that worked last time may not give the same answer.</td></tr>
+        </table>
+    <h2 id="writing-prompts-that-work">Writing prompts that work</h2>
+        <p>Google's prompting guide recommends clear and specific instructions, context, a stated response format, and examples. Anthropic's overview lists clarity, examples, structure, role prompting, thinking and prompt chaining as the main techniques. A practical checklist:</p>
+        <table>
+          <tr><th>Element</th><th>Ask yourself</th></tr>
+          <tr><td>Task</td><td>What exactly should it produce?</td></tr>
+          <tr><td>Context</td><td>What does it need to know: the source text, the situation, the constraints?</td></tr>
+          <tr><td>Audience and tone</td><td>Who will read it, and how should it sound?</td></tr>
+          <tr><td>Format and length</td><td>List, table, email, three paragraphs, under 100 words?</td></tr>
+          <tr><td>Example</td><td>Is there a sample of the style you want? Keep example formats consistent.</td></tr>
+        </table>
+        <p><b>Before and after (example prompts).</b></p>
+        <table>
+          <tr><th>Weak</th><th>Stronger</th></tr>
+          <tr><td>Write an email about the delay.</td><td>Write a 120-word email to a client explaining that their order will ship two days late because of a supplier delay. Apologise once, give the new date (Friday), and offer a tracking link. Tone: calm and professional.</td></tr>
+          <tr><td>Summarise this.</td><td>Summarise the text below in five bullet points for a manager who has two minutes. Put any deadlines and costs first. Text: [paste text]</td></tr>
+          <tr><td>Fix my spreadsheet.</td><td>I have sales in column D and regions in column B. Suggest a formula that totals sales for the North region only, and explain each part.</td></tr>
+        </table>
+    <h2 id="iterating-on-the-answer">Iterating on the answer</h2>
+        <p>The first answer is a draft. Google's guide notes that prompt design can need a few iterations, and suggests rephrasing, reordering content and adding detail. Anthropic's guide adds that, before tuning a prompt, you should know what success looks like and have a way to test it.</p>
+        <ul>
+          <li><b>Name what is wrong.</b> "Too formal, and it ignores the deadline" works better than "try again".</li>
+          <li><b>Add what was missing.</b> Context, constraints, or an example of the style you want.</li>
+          <li><b>Split big tasks.</b> Prompt chaining means one output feeds the next, such as outline, then draft, then edit. Each stage is easier to check.</li>
+          <li><b>Save prompts that work</b>, and re-check their output each time.</li>
+        </ul>
+    <h2 id="checking-the-output">Checking the output</h2>
+        <p>You remain responsible for what you use. A confident tone is not evidence.</p>
+        <table>
+          <tr><th>Output type</th><th>How to check it</th></tr>
+          <tr><td>Facts and claims</td><td>Confirm against a reliable primary source</td></tr>
+          <tr><td>Numbers and totals</td><td>Recompute with a spreadsheet or calculator</td></tr>
+          <tr><td>References and links</td><td>Open them: do they exist, and do they say what is claimed?</td></tr>
+          <tr><td>Quotes</td><td>Find the original; do not rely on the assistant's wording</td></tr>
+          <tr><td>Summaries</td><td>Compare with the source for anything omitted or distorted</td></tr>
+          <tr><td>Formulas and code</td><td>Test on sample data, including awkward cases</td></tr>
+        </table>
+        <div class="callout"><b>Not independent</b> Asking the same assistant "are you sure?" is not verification. Use a source or a tool outside the assistant.</div>
+    <h2 id="everyday-work-uses">Everyday work uses</h2>
+        <table>
+          <tr><th>Task</th><th>Good practice</th></tr>
+          <tr><td>Summarise a document</td><td>State the audience and length; check the result against the source</td></tr>
+          <tr><td>Draft an email or report</td><td>Provide facts yourself; edit the tone; verify every claim</td></tr>
+          <tr><td>Rewrite for clarity</td><td>Say what to keep unchanged, such as names, figures and dates</td></tr>
+          <tr><td>Brainstorm</td><td>Ask for many options, then choose and refine</td></tr>
+          <tr><td>Explain a concept or code</td><td>Say your level; test claims you will act on</td></tr>
+          <tr><td>Spreadsheet formulas</td><td>Describe your columns; test on sample rows. See the <a href="../google-sheets-study-guide/">Google Sheets guide</a> and <a href="../excel-study-guide/">Excel guide</a>.</td></tr>
+        </table>
+    <h2 id="privacy-and-responsible-use">Privacy and responsible use</h2>
+        <ul>
+          <li><b>Check policy first.</b> Your employer or client may restrict which tools you can use and what you can share. Rules differ, so ask if unsure.</li>
+          <li><b>Share the minimum.</b> Remove names, account numbers and other identifying details where you can.</li>
+          <li><b>Keep secrets out.</b> Do not paste passwords, access keys or confidential material into tools that are not approved for it.</li>
+          <li><b>Own the result.</b> You are accountable for the work you send. Check rules on AI use and disclosure for the context you work in.</li>
+          <li><b>Be careful with copyright and legal questions.</b> This guide is not legal advice; check current law and your organisation's guidance.</li>
+        </ul>
+    <h2 id="risk-frameworks-at-a-glance">Risk frameworks at a glance</h2>
+        <table>
+          <tr><th>Framework</th><th>What to know</th></tr>
+          <tr><td>NIST AI Risk Management Framework</td><td>Voluntary framework to help manage AI risks to individuals, organisations and society. Version 1.0 was released on 26 January 2023. Core functions: Govern, Map, Measure, Manage. NIST also published a Generative AI Profile (NIST-AI-600-1) in July 2024.</td></tr>
+          <tr><td>EU AI Act</td><td>Risk-based law. Unacceptable-risk practices, such as government-run social scoring, are banned. High-risk uses, such as a CV-scanning tool that ranks applicants, face specific legal requirements. Most other applications are largely unregulated.</td></tr>
+        </table>
+        <div class="callout"><b>These change</b> NIST has said the AI RMF is being revised, and EU application dates are staged. Check the official pages linked below for current details.</div>
+    <h2 id="common-mistakes">Common mistakes</h2>
+        <table>
+          <tr><th>Mistake</th><th>Better approach</th></tr>
+          <tr><td>Vague prompts ("make it better")</td><td>State task, context, audience, format and constraints</td></tr>
+          <tr><td>Trusting a confident answer</td><td>Verify facts, numbers and references independently</td></tr>
+          <tr><td>Accepting or abandoning the first answer</td><td>Refine the prompt and iterate</td></tr>
+          <tr><td>Pasting confidential or personal data into any tool</td><td>Use approved tools only; share the minimum</td></tr>
+          <tr><td>Asking the assistant to check itself</td><td>Use an outside source or tool</td></tr>
+          <tr><td>One giant prompt for a complex task</td><td>Split into stages and review each</td></tr>
+          <tr><td>Not reading cited sources</td><td>Open every link and confirm the claim</td></tr>
+          <tr><td>Assuming a saved prompt gives the same result every time</td><td>Review each output</td></tr>
+        </table>
+    <h2 id="practical-learning-exercises">Practical learning exercises</h2>
+        <p>Outputs vary between assistants, so each exercise has a check you can apply to your own result.</p>
+        <ul>
+          <li><b>Exercise 1 (prompt rewrite).</b> Rewrite "Write a post about our sale" so it states the task, audience, tone, length and format. <i>Check:</i> a stranger could tell exactly what to produce from your prompt.</li>
+          <li><b>Exercise 2 (iterate).</b> Get a first draft, then write one follow-up that names what is wrong and adds what was missing. <i>Check:</i> the second draft fixes the named problem without losing what was good.</li>
+          <li><b>Exercise 3 (fact check).</b> Ask for three facts about a subject you know well, then verify each against a reliable source. <i>Check:</i> record which were right, which were wrong, and which you could not confirm.</li>
+          <li><b>Exercise 4 (numbers).</b> Give the assistant six numbers and ask for the total and the average. Recompute them in a spreadsheet. <i>Check:</i> do they match?</li>
+          <li><b>Exercise 5 (privacy).</b> Take a real work paragraph with names and figures and rewrite it so it could be shared safely, keeping the meaning. <i>Check:</i> no identifying details remain, and the question is still answerable.</li>
+        </ul>
+    <h2 id="interview-questions">Interview questions</h2>
+        <p>Try answering aloud before you open each one.</p>
+        <details class="faq"><summary>How do you write a good prompt?</summary><p>State the task, give the context the assistant needs, say who the output is for, and specify the format and constraints such as length and tone. Add an example when you want a particular style. Google's prompting guide recommends clear, specific instructions, context, a response format and examples.</p></details>
+        <details class="faq"><summary>What should you do when the first answer is not good enough?</summary><p>Treat it as a draft and refine the prompt: add missing context, tighten the constraints, reorder or rephrase the request, or show an example. Prompt design often needs a few iterations.</p></details>
+        <details class="faq"><summary>Why can an AI assistant be confidently wrong?</summary><p>Assistants generate fluent text, and fluent text can contain errors or invented details, often called hallucinations. A confident tone says nothing about accuracy, so important facts, figures, quotes and references need checking against reliable sources.</p></details>
+        <details class="faq"><summary>How do you check AI output?</summary><p>Verify facts and figures against primary sources, open any cited link and confirm it says what is claimed, recompute numbers with a tool you trust, and compare summaries with the original. Check anything that would be costly if wrong.</p></details>
+        <details class="faq"><summary>What is prompt chaining and why use it?</summary><p>Splitting a large task into steps, where one output feeds the next. Each step is simpler to specify and to check, and you can correct course early.</p></details>
+        <details class="faq"><summary>What data should you not put into an AI assistant?</summary><p>Personal data, client or company confidential information, credentials and anything your organisation has not approved for the tool. Follow your employer's policy, share the minimum needed, and remove identifying details where you can.</p></details>
+        <details class="faq"><summary>Who is responsible for AI-assisted work?</summary><p>The person who uses and sends it. You are accountable for what it says, so check it, and follow your organisation's or client's rules on AI use and disclosure.</p></details>
+        <details class="faq"><summary>How would you decide whether a task suits AI?</summary><p>It suits tasks where a draft helps and you can verify the result: summarising, rewriting, brainstorming, explaining, formatting. It suits tasks less when an unnoticed error is costly and you cannot easily check it.</p></details>
+        <details class="faq"><summary>How do you measure whether a prompt is working?</summary><p>Define success criteria first, for example accuracy, format and tone, then test the prompt on several realistic inputs and compare results against those criteria. Anthropic's guide assumes success criteria and a way to test them before prompt tuning.</p></details>
+        <details class="faq"><summary>What is the NIST AI Risk Management Framework?</summary><p>A voluntary framework from NIST, released as version 1.0 on 26 January 2023, to help organisations manage AI risks. Its core functions are Govern, Map, Measure and Manage. NIST also published a Generative AI Profile (NIST-AI-600-1) in July 2024.</p></details>
+        <details class="faq"><summary>What is the EU AI Act in one sentence?</summary><p>A risk-based law: some AI practices are banned, high-risk uses such as CV-scanning tools face specific legal requirements, and most other applications are largely unregulated. Application dates are staged and being updated, so check current information.</p></details>
+        <details class="faq"><summary>Why might the same prompt give different answers on different tries?</summary><p>Assistants generate text with some variation, and different tools and versions behave differently. Save prompts that work, but always review each output rather than assuming it will match last time.</p></details>
+    <h2 id="practice-questions">Practice questions</h2>
+        <div class="quiz" data-quiz>
+          <div class="q-head"><span>Question 1 of 20</span><span>Prompting</span></div>
+          <div class="q-body" role="radiogroup" aria-labelledby="practical-ai-study-guide-iq1-t">
+            <p class="q-text" id="practical-ai-study-guide-iq1-t">Which of these prompts is most likely to get a useful first draft?</p>
+            <label class="opt"><input type="radio" name="practical-ai-study-guide-q1"> Product announcement.</label>
+            <label class="opt"><input type="radio" name="practical-ai-study-guide-q1"> Write something about our product.</label>
+            <label class="opt" data-correct><input type="radio" name="practical-ai-study-guide-q1"> Write a 100-word product announcement for existing customers about the new invoice export feature, in a friendly tone, as three short paragraphs.</label>
+            <label class="opt"><input type="radio" name="practical-ai-study-guide-q1"> Make it good.</label>
+            <button type="button" class="check-btn">Check answer</button><span class="q-result" role="status" aria-live="polite"></span>
+          </div>
+          <div class="q-explain"><b>Why:</b> It states the task, audience, length, tone and format. Google's prompting guide recommends clear, specific instructions, including constraints such as length.</div>
+        </div>
+        <div class="quiz" data-quiz>
+          <div class="q-head"><span>Question 2 of 20</span><span>Prompting</span></div>
+          <div class="q-body" role="radiogroup" aria-labelledby="practical-ai-study-guide-iq2-t">
+            <p class="q-text" id="practical-ai-study-guide-iq2-t">Google's prompting guide recommends including examples in a prompt. What should you keep consistent in them?</p>
+            <label class="opt" data-correct><input type="radio" name="practical-ai-study-guide-q2"> The format of the examples, because the model tends to copy their structure</label>
+            <label class="opt"><input type="radio" name="practical-ai-study-guide-q2"> The length in words only</label>
+            <label class="opt"><input type="radio" name="practical-ai-study-guide-q2"> Nothing; examples are ignored</label>
+            <label class="opt"><input type="radio" name="practical-ai-study-guide-q2"> The topic of every example</label>
+            <button type="button" class="check-btn">Check answer</button><span class="q-result" role="status" aria-live="polite"></span>
+          </div>
+          <div class="q-explain"><b>Why:</b> Few-shot examples show the pattern you want. If the formats differ from each other, the output format can drift too.</div>
+        </div>
+        <div class="quiz" data-quiz>
+          <div class="q-head"><span>Question 3 of 20</span><span>Prompting</span></div>
+          <div class="q-body" role="radiogroup" aria-labelledby="practical-ai-study-guide-iq3-t">
+            <p class="q-text" id="practical-ai-study-guide-iq3-t">Why supply reference material, such as a policy or a customer email, in your prompt?</p>
+            <label class="opt"><input type="radio" name="practical-ai-study-guide-q3"> It replaces the need to check the answer</label>
+            <label class="opt"><input type="radio" name="practical-ai-study-guide-q3"> It hides the prompt from the provider</label>
+            <label class="opt"><input type="radio" name="practical-ai-study-guide-q3"> It makes the answer longer</label>
+            <label class="opt" data-correct><input type="radio" name="practical-ai-study-guide-q3"> It gives the assistant the context and constraints, so the answer is not generic</label>
+            <button type="button" class="check-btn">Check answer</button><span class="q-result" role="status" aria-live="polite"></span>
+          </div>
+          <div class="q-explain"><b>Why:</b> Context helps the assistant understand the details of what you are asking. It does not remove your duty to check the result.</div>
+        </div>
+        <div class="quiz" data-quiz>
+          <div class="q-head"><span>Question 4 of 20</span><span>Iterating</span></div>
+          <div class="q-body" role="radiogroup" aria-labelledby="practical-ai-study-guide-iq4-t">
+            <p class="q-text" id="practical-ai-study-guide-iq4-t">The first answer misses the point. What is the best next step?</p>
+            <label class="opt"><input type="radio" name="practical-ai-study-guide-q4"> Accept it and edit it by hand</label>
+            <label class="opt" data-correct><input type="radio" name="practical-ai-study-guide-q4"> Refine the prompt: add the missing context, constraints or an example, and try again</label>
+            <label class="opt"><input type="radio" name="practical-ai-study-guide-q4"> Repeat the identical prompt until it works</label>
+            <label class="opt"><input type="radio" name="practical-ai-study-guide-q4"> Assume the assistant cannot do this task</label>
+            <button type="button" class="check-btn">Check answer</button><span class="q-result" role="status" aria-live="polite"></span>
+          </div>
+          <div class="q-explain"><b>Why:</b> Prompt design often needs a few iterations. Google's guide suggests rephrasing, reordering content and adding detail, then checking the results.</div>
+        </div>
+        <div class="quiz" data-quiz>
+          <div class="q-head"><span>Question 5 of 20</span><span>Iterating</span></div>
+          <div class="q-body" role="radiogroup" aria-labelledby="practical-ai-study-guide-iq5-t">
+            <p class="q-text" id="practical-ai-study-guide-iq5-t">Anthropic's guide assumes you have three things before you tune a prompt. Which is one of them?</p>
+            <label class="opt"><input type="radio" name="practical-ai-study-guide-q5"> A legal review</label>
+            <label class="opt"><input type="radio" name="practical-ai-study-guide-q5"> A paid subscription</label>
+            <label class="opt" data-correct><input type="radio" name="practical-ai-study-guide-q5"> A clear definition of success criteria for the use case</label>
+            <label class="opt"><input type="radio" name="practical-ai-study-guide-q5"> A fine-tuned model</label>
+            <button type="button" class="check-btn">Check answer</button><span class="q-result" role="status" aria-live="polite"></span>
+          </div>
+          <div class="q-explain"><b>Why:</b> The three are: success criteria, a way to test against them, and a first draft prompt. Without a definition of good, you cannot tell whether a prompt change helped.</div>
+        </div>
+        <div class="quiz" data-quiz>
+          <div class="q-head"><span>Question 6 of 20</span><span>Iterating</span></div>
+          <div class="q-body" role="radiogroup" aria-labelledby="practical-ai-study-guide-iq6-t">
+            <p class="q-text" id="practical-ai-study-guide-iq6-t">What is prompt chaining?</p>
+            <label class="opt"><input type="radio" name="practical-ai-study-guide-q6"> Putting several unrelated questions in one message</label>
+            <label class="opt"><input type="radio" name="practical-ai-study-guide-q6"> Sharing a prompt with a team</label>
+            <label class="opt"><input type="radio" name="practical-ai-study-guide-q6"> Repeating the same prompt many times</label>
+            <label class="opt" data-correct><input type="radio" name="practical-ai-study-guide-q6"> Breaking a task into steps, with the output of one prompt feeding the next</label>
+            <button type="button" class="check-btn">Check answer</button><span class="q-result" role="status" aria-live="polite"></span>
+          </div>
+          <div class="q-explain"><b>Why:</b> Splitting a large task into stages also makes each stage easier to check.</div>
+        </div>
+        <div class="quiz" data-quiz>
+          <div class="q-head"><span>Question 7 of 20</span><span>Checking</span></div>
+          <div class="q-body" role="radiogroup" aria-labelledby="practical-ai-study-guide-iq7-t">
+            <p class="q-text" id="practical-ai-study-guide-iq7-t">An assistant states a statistic confidently and cites no source. What should you do before using it?</p>
+            <label class="opt" data-correct><input type="radio" name="practical-ai-study-guide-q7"> Verify it against a reliable primary source, or leave it out</label>
+            <label class="opt"><input type="radio" name="practical-ai-study-guide-q7"> Ask the same assistant to confirm it and trust that</label>
+            <label class="opt"><input type="radio" name="practical-ai-study-guide-q7"> Round it up</label>
+            <label class="opt"><input type="radio" name="practical-ai-study-guide-q7"> Use it, because the tone is confident</label>
+            <button type="button" class="check-btn">Check answer</button><span class="q-result" role="status" aria-live="polite"></span>
+          </div>
+          <div class="q-explain"><b>Why:</b> Fluent, confident wording is not evidence. Asking the assistant to confirm its own answer is not independent verification.</div>
+        </div>
+        <div class="quiz" data-quiz>
+          <div class="q-head"><span>Question 8 of 20</span><span>Checking</span></div>
+          <div class="q-body" role="radiogroup" aria-labelledby="practical-ai-study-guide-iq8-t">
+            <p class="q-text" id="practical-ai-study-guide-iq8-t">What is a hallucination in this context?</p>
+            <label class="opt"><input type="radio" name="practical-ai-study-guide-q8"> A deliberately funny answer</label>
+            <label class="opt" data-correct><input type="radio" name="practical-ai-study-guide-q8"> Fluent, plausible-looking output that is wrong or made up</label>
+            <label class="opt"><input type="radio" name="practical-ai-study-guide-q8"> An answer that is too short</label>
+            <label class="opt"><input type="radio" name="practical-ai-study-guide-q8"> A refusal to answer</label>
+            <button type="button" class="check-btn">Check answer</button><span class="q-result" role="status" aria-live="polite"></span>
+          </div>
+          <div class="q-explain"><b>Why:</b> Assistants can produce confident text that is inaccurate, including invented facts, quotes or references. That is why output needs checking.</div>
+        </div>
+        <div class="quiz" data-quiz>
+          <div class="q-head"><span>Question 9 of 20</span><span>Checking</span></div>
+          <div class="q-body" role="radiogroup" aria-labelledby="practical-ai-study-guide-iq9-t">
+            <p class="q-text" id="practical-ai-study-guide-iq9-t">An assistant gives you a reference with a link. What is the safest check?</p>
+            <label class="opt"><input type="radio" name="practical-ai-study-guide-q9"> Check only the author's name</label>
+            <label class="opt"><input type="radio" name="practical-ai-study-guide-q9"> Paste the link into the assistant again</label>
+            <label class="opt"><input type="radio" name="practical-ai-study-guide-q9"> Trust it if the title sounds right</label>
+            <label class="opt" data-correct><input type="radio" name="practical-ai-study-guide-q9"> Open the source yourself and confirm it exists and actually says what is claimed</label>
+            <button type="button" class="check-btn">Check answer</button><span class="q-result" role="status" aria-live="polite"></span>
+          </div>
+          <div class="q-explain"><b>Why:</b> Invented or misdescribed references are a known failure. Always read the source.</div>
+        </div>
+        <div class="quiz" data-quiz>
+          <div class="q-head"><span>Question 10 of 20</span><span>Checking</span></div>
+          <div class="q-body" role="radiogroup" aria-labelledby="practical-ai-study-guide-iq10-t">
+            <p class="q-text" id="practical-ai-study-guide-iq10-t">An assistant totals a column of figures for a report. What should you do?</p>
+            <label class="opt"><input type="radio" name="practical-ai-study-guide-q10"> Ask for a longer explanation</label>
+            <label class="opt"><input type="radio" name="practical-ai-study-guide-q10"> Use it as is</label>
+            <label class="opt" data-correct><input type="radio" name="practical-ai-study-guide-q10"> Recalculate it yourself, for example with a spreadsheet formula, before publishing</label>
+            <label class="opt"><input type="radio" name="practical-ai-study-guide-q10"> Ask for it in a different format</label>
+            <button type="button" class="check-btn">Check answer</button><span class="q-result" role="status" aria-live="polite"></span>
+          </div>
+          <div class="q-explain"><b>Why:</b> Treat numbers as unverified until you recompute them with a tool you trust.</div>
+        </div>
+        <div class="quiz" data-quiz>
+          <div class="q-head"><span>Question 11 of 20</span><span>Checking</span></div>
+          <div class="q-body" role="radiogroup" aria-labelledby="practical-ai-study-guide-iq11-t">
+            <p class="q-text" id="practical-ai-study-guide-iq11-t">You ask an assistant to summarise a long report. What should you check in the summary?</p>
+            <label class="opt" data-correct><input type="radio" name="practical-ai-study-guide-q11"> That it is faithful to the source and has not dropped or distorted anything important</label>
+            <label class="opt"><input type="radio" name="practical-ai-study-guide-q11"> That it is exactly one page</label>
+            <label class="opt"><input type="radio" name="practical-ai-study-guide-q11"> That it uses the report's title</label>
+            <label class="opt"><input type="radio" name="practical-ai-study-guide-q11"> Only the grammar</label>
+            <button type="button" class="check-btn">Check answer</button><span class="q-result" role="status" aria-live="polite"></span>
+          </div>
+          <div class="q-explain"><b>Why:</b> A summary can read well and still omit key caveats or change a meaning. Compare it with the original for anything that matters.</div>
+        </div>
+        <div class="quiz" data-quiz>
+          <div class="q-head"><span>Question 12 of 20</span><span>Privacy</span></div>
+          <div class="q-body" role="radiogroup" aria-labelledby="practical-ai-study-guide-iq12-t">
+            <p class="q-text" id="practical-ai-study-guide-iq12-t">You want to paste a customer list with names and emails into a public AI assistant to tidy it. What should you do first?</p>
+            <label class="opt"><input type="radio" name="practical-ai-study-guide-q12"> Rename the file</label>
+            <label class="opt"><input type="radio" name="practical-ai-study-guide-q12"> Paste half the list</label>
+            <label class="opt"><input type="radio" name="practical-ai-study-guide-q12"> Paste it; it is faster</label>
+            <label class="opt" data-correct><input type="radio" name="practical-ai-study-guide-q12"> Check your employer's policy and the tool's data terms, and remove or avoid personal data unless it is approved</label>
+            <button type="button" class="check-btn">Check answer</button><span class="q-result" role="status" aria-live="polite"></span>
+          </div>
+          <div class="q-explain"><b>Why:</b> Personal and confidential data should only go into tools your organisation has approved for that purpose. Policies differ, so check yours.</div>
+        </div>
+        <div class="quiz" data-quiz>
+          <div class="q-head"><span>Question 13 of 20</span><span>Privacy</span></div>
+          <div class="q-body" role="radiogroup" aria-labelledby="practical-ai-study-guide-iq13-t">
+            <p class="q-text" id="practical-ai-study-guide-iq13-t">Which is the best practice when a task involves confidential company information?</p>
+            <label class="opt"><input type="radio" name="practical-ai-study-guide-q13"> Use whichever assistant is fastest</label>
+            <label class="opt" data-correct><input type="radio" name="practical-ai-study-guide-q13"> Use only approved tools, and share the minimum needed, removing identifying details where possible</label>
+            <label class="opt"><input type="radio" name="practical-ai-study-guide-q13"> Share everything for better answers</label>
+            <label class="opt"><input type="radio" name="practical-ai-study-guide-q13"> Ask the assistant whether it is safe</label>
+            <button type="button" class="check-btn">Check answer</button><span class="q-result" role="status" aria-live="polite"></span>
+          </div>
+          <div class="q-explain"><b>Why:</b> Data minimisation reduces exposure. The assistant cannot reliably tell you what your employer allows.</div>
+        </div>
+        <div class="quiz" data-quiz>
+          <div class="q-head"><span>Question 14 of 20</span><span>Responsible use</span></div>
+          <div class="q-body" role="radiogroup" aria-labelledby="practical-ai-study-guide-iq14-t">
+            <p class="q-text" id="practical-ai-study-guide-iq14-t">You use AI to help draft a client deliverable. What should you check before sending it?</p>
+            <label class="opt" data-correct><input type="radio" name="practical-ai-study-guide-q14"> Your organisation's or client's rules on AI use and disclosure, and that you have verified the content, since you remain accountable for it</label>
+            <label class="opt"><input type="radio" name="practical-ai-study-guide-q14"> Only the spelling</label>
+            <label class="opt"><input type="radio" name="practical-ai-study-guide-q14"> The word count</label>
+            <label class="opt"><input type="radio" name="practical-ai-study-guide-q14"> Nothing; the assistant is responsible for the content</label>
+            <button type="button" class="check-btn">Check answer</button><span class="q-result" role="status" aria-live="polite"></span>
+          </div>
+          <div class="q-explain"><b>Why:</b> Rules about AI use and disclosure differ between organisations and contracts. The person who sends the work is accountable for what it says.</div>
+        </div>
+        <div class="quiz" data-quiz>
+          <div class="q-head"><span>Question 15 of 20</span><span>NIST</span></div>
+          <div class="q-body" role="radiogroup" aria-labelledby="practical-ai-study-guide-iq15-t">
+            <p class="q-text" id="practical-ai-study-guide-iq15-t">How does NIST describe the AI Risk Management Framework's use?</p>
+            <label class="opt"><input type="radio" name="practical-ai-study-guide-q15"> Only for AI developers outside the US</label>
+            <label class="opt"><input type="radio" name="practical-ai-study-guide-q15"> Mandatory for all companies</label>
+            <label class="opt" data-correct><input type="radio" name="practical-ai-study-guide-q15"> Voluntary</label>
+            <label class="opt"><input type="radio" name="practical-ai-study-guide-q15"> Only for government agencies</label>
+            <button type="button" class="check-btn">Check answer</button><span class="q-result" role="status" aria-live="polite"></span>
+          </div>
+          <div class="q-explain"><b>Why:</b> NIST says the AI RMF is intended for voluntary use, to help manage AI risks to individuals, organisations and society.</div>
+        </div>
+        <div class="quiz" data-quiz>
+          <div class="q-head"><span>Question 16 of 20</span><span>NIST</span></div>
+          <div class="q-body" role="radiogroup" aria-labelledby="practical-ai-study-guide-iq16-t">
+            <p class="q-text" id="practical-ai-study-guide-iq16-t">Which list gives the four core functions of the NIST AI RMF?</p>
+            <label class="opt"><input type="radio" name="practical-ai-study-guide-q16"> Plan, Do, Check, Act</label>
+            <label class="opt" data-correct><input type="radio" name="practical-ai-study-guide-q16"> Govern, Map, Measure, Manage</label>
+            <label class="opt"><input type="radio" name="practical-ai-study-guide-q16"> Define, Measure, Analyze, Improve</label>
+            <label class="opt"><input type="radio" name="practical-ai-study-guide-q16"> Detect, Respond, Recover, Report</label>
+            <button type="button" class="check-btn">Check answer</button><span class="q-result" role="status" aria-live="polite"></span>
+          </div>
+          <div class="q-explain"><b>Why:</b> The AI RMF's core functions are Govern, Map, Measure and Manage.</div>
+        </div>
+        <div class="quiz" data-quiz>
+          <div class="q-head"><span>Question 17 of 20</span><span>NIST</span></div>
+          <div class="q-body" role="radiogroup" aria-labelledby="practical-ai-study-guide-iq17-t">
+            <p class="q-text" id="practical-ai-study-guide-iq17-t">What is NIST-AI-600-1?</p>
+            <label class="opt"><input type="radio" name="practical-ai-study-guide-q17"> A model benchmark</label>
+            <label class="opt"><input type="radio" name="practical-ai-study-guide-q17"> A privacy law</label>
+            <label class="opt"><input type="radio" name="practical-ai-study-guide-q17"> A prompt template library</label>
+            <label class="opt" data-correct><input type="radio" name="practical-ai-study-guide-q17"> NIST's Generative AI Profile for the AI RMF, released in July 2024</label>
+            <button type="button" class="check-btn">Check answer</button><span class="q-result" role="status" aria-live="polite"></span>
+          </div>
+          <div class="q-explain"><b>Why:</b> It is the Artificial Intelligence Risk Management Framework: Generative Artificial Intelligence Profile, which helps organisations identify risks that are unique to generative AI.</div>
+        </div>
+        <div class="quiz" data-quiz>
+          <div class="q-head"><span>Question 18 of 20</span><span>EU AI Act</span></div>
+          <div class="q-body" role="radiogroup" aria-labelledby="practical-ai-study-guide-iq18-t">
+            <p class="q-text" id="practical-ai-study-guide-iq18-t">What is the EU AI Act's general approach?</p>
+            <label class="opt" data-correct><input type="radio" name="practical-ai-study-guide-q18"> Risk-based: higher-risk uses face stricter rules, and some practices are banned</label>
+            <label class="opt"><input type="radio" name="practical-ai-study-guide-q18"> No rules for AI</label>
+            <label class="opt"><input type="radio" name="practical-ai-study-guide-q18"> Rules for image generators only</label>
+            <label class="opt"><input type="radio" name="practical-ai-study-guide-q18"> Every AI system is banned</label>
+            <button type="button" class="check-btn">Check answer</button><span class="q-result" role="status" aria-live="polite"></span>
+          </div>
+          <div class="q-explain"><b>Why:</b> The Act sorts AI uses by risk. Unacceptable-risk applications are banned, high-risk ones face specific legal requirements, and the rest are largely left unregulated.</div>
+        </div>
+        <div class="quiz" data-quiz>
+          <div class="q-head"><span>Question 19 of 20</span><span>EU AI Act</span></div>
+          <div class="q-body" role="radiogroup" aria-labelledby="practical-ai-study-guide-iq19-t">
+            <p class="q-text" id="practical-ai-study-guide-iq19-t">Which example does the AI Act information site give of a high-risk application?</p>
+            <label class="opt"><input type="radio" name="practical-ai-study-guide-q19"> A spell checker</label>
+            <label class="opt"><input type="radio" name="practical-ai-study-guide-q19"> A spam filter</label>
+            <label class="opt" data-correct><input type="radio" name="practical-ai-study-guide-q19"> A CV-scanning tool that ranks job applicants</label>
+            <label class="opt"><input type="radio" name="practical-ai-study-guide-q19"> A video game</label>
+            <button type="button" class="check-btn">Check answer</button><span class="q-result" role="status" aria-live="polite"></span>
+          </div>
+          <div class="q-explain"><b>Why:</b> Hiring tools affect people's opportunities, so they are an example of a high-risk use with specific legal requirements. Check current dates and rules, because they are being updated.</div>
+        </div>
+        <div class="quiz" data-quiz>
+          <div class="q-head"><span>Question 20 of 20</span><span>Workflow</span></div>
+          <div class="q-body" role="radiogroup" aria-labelledby="practical-ai-study-guide-iq20-t">
+            <p class="q-text" id="practical-ai-study-guide-iq20-t">You need an assistant's help on a long, multi-part report. Which approach is generally better?</p>
+            <label class="opt"><input type="radio" name="practical-ai-study-guide-q20"> One giant prompt with every requirement and no review</label>
+            <label class="opt" data-correct><input type="radio" name="practical-ai-study-guide-q20"> Split it into stages, review each output, and give feedback before the next stage</label>
+            <label class="opt"><input type="radio" name="practical-ai-study-guide-q20"> Ask it to write the whole report and publish it</label>
+            <label class="opt"><input type="radio" name="practical-ai-study-guide-q20"> Avoid AI entirely</label>
+            <button type="button" class="check-btn">Check answer</button><span class="q-result" role="status" aria-live="polite"></span>
+          </div>
+          <div class="q-explain"><b>Why:</b> Stages are easier to steer and check. You can correct direction early instead of rewriting a finished draft.</div>
+        </div>
+    <h2 id="preparation-checklist">Preparation checklist</h2>
+        <ul>
+          <li>Rewrite a vague prompt so it has task, context, audience, format and constraints</li>
+          <li>Describe how you would iterate on a weak first answer</li>
+          <li>Explain why a confident tone is not evidence, and list four ways to check output</li>
+          <li>Explain prompt chaining and when to use it</li>
+          <li>State what you would not paste into an AI tool, and where you would check policy</li>
+          <li>Describe the NIST AI RMF (voluntary; Govern, Map, Measure, Manage) and the EU AI Act's risk-based approach</li>
+          <li>Check the linked official pages for current details before quoting dates or rules</li>
+        </ul>
+    <h2 id="sources">Sources &amp; further reading</h2>
+    <ul class="sources"><li><a href="https://ai.google.dev/gemini-api/docs/prompting-strategies" rel="noopener noreferrer" target="_blank">Prompt design strategies — Google AI for Developers</a></li><li><a href="https://platform.claude.com/docs/en/build-with-claude/prompt-engineering/overview" rel="noopener noreferrer" target="_blank">Prompt engineering overview — Claude Docs</a></li><li><a href="https://www.nist.gov/itl/ai-risk-management-framework" rel="noopener noreferrer" target="_blank">AI Risk Management Framework — NIST</a></li><li><a href="https://artificialintelligenceact.eu/" rel="noopener noreferrer" target="_blank">The EU Artificial Intelligence Act</a></li></ul>
+    <hr class="sep">
+    <nav class="prevnext" aria-label="More guides">
+      <a class="prev" href="../../guides/linkedin-skill-assessments-retired/"><small>← Previous</small>LinkedIn Skill Assessments Are Retired: What to Do Instead</a>
+      <a class="next" href="../../guides/generative-ai-career-essentials-practice-test/"><small>Next →</small>Career Essentials in Generative AI: 164-Question Practice Test</a>
+    </nav>
+    <a href="../../#guides" class="btn btn-link">← Back to all guides</a>
+  </article>
+  <aside class="sidebar">
+    <div class="box toc-box">
+      <h2 class="box-h">On this page</h2>
+      <div class="toc">
+        <a href="#what-you-will-learn" data-toc="what-you-will-learn">What you will learn</a>
+        <a href="#how-assistants-behave-in-practice" data-toc="how-assistants-behave-in-practice">How assistants behave, in practice</a>
+        <a href="#writing-prompts-that-work" data-toc="writing-prompts-that-work">Writing prompts that work</a>
+        <a href="#iterating-on-the-answer" data-toc="iterating-on-the-answer">Iterating on the answer</a>
+        <a href="#checking-the-output" data-toc="checking-the-output">Checking the output</a>
+        <a href="#everyday-work-uses" data-toc="everyday-work-uses">Everyday work uses</a>
+        <a href="#privacy-and-responsible-use" data-toc="privacy-and-responsible-use">Privacy and responsible use</a>
+        <a href="#risk-frameworks-at-a-glance" data-toc="risk-frameworks-at-a-glance">Risk frameworks at a glance</a>
+        <a href="#common-mistakes" data-toc="common-mistakes">Common mistakes</a>
+        <a href="#practical-learning-exercises" data-toc="practical-learning-exercises">Practical learning exercises</a>
+        <a href="#interview-questions" data-toc="interview-questions">Interview questions</a>
+        <a href="#practice-questions" data-toc="practice-questions">Practice questions</a>
+        <a href="#preparation-checklist" data-toc="preparation-checklist">Preparation checklist</a>
+        <a href="#sources" data-toc="sources">Sources &amp; further reading</a>
+      </div>
+    </div>
+    <div class="box rel">
+      <h2 class="box-h">Related guides</h2>
+      <a href="../../guides/generative-ai-career-essentials-practice-test/">Career Essentials in Generative AI: 164-Question Practice Test</a>
+      <a href="../../guides/google-sheets-study-guide/">Google Sheets Study Guide: Formulas, QUERY and Automation</a>
+      <a href="../../guides/excel-study-guide/">Excel Study Guide: Lookups, Pivot Tables &amp; Core Functions</a>
+    </div>
+    <div class="box">
+      <h2 class="box-h">Share this guide</h2>
+      <button type="button" class="btn btn-share" id="shareBtn" data-url="https://skillsprep.github.io/guides/practical-ai-study-guide/" data-title="Practical AI at Work: Prompting, Checking and Using It Safely">Copy Link</button>
+    </div>
+    <div class="box">
+      <h2 class="box-h">Spotted a mistake?</h2>
+      <p class="box-p">We correct errors quickly. Tell us what's wrong and we'll fix it.</p>
+      <a class="btn btn-link" href="../../contact/">Report a correction</a>
+    </div>
+  </aside>
+</div>
+</main>
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div>
+        <h2 class="foot-h">SkillPrep</h2>
+        <p class="foot-about">Concept-first study guides and practice tests for everyday work skills. Learn the "why" behind every answer.</p>
+      </div>
+      <div>
+        <h2 class="foot-h">Explore</h2>
+        <a href="../../">All guides</a>
+        <a href="../../about/">About</a>
+        <a href="../../contact/">Contact</a>
+        <a href="../../privacy/">Privacy</a>
+        <a href="../../terms/">Terms</a>
+      </div>
+      <div>
+        <h2 class="foot-h">Popular guides</h2>
+        <a href="../../guides/excel-study-guide/">Excel Study Guide</a>
+        <a href="../../guides/python-study-guide/">Python Fundamentals</a>
+        <a href="../../guides/advanced-python-study-guide/">Advanced Python Study Guide</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2026 SkillPrep. All rights reserved.</span>
+      <span>Independent educational site. Not affiliated with LinkedIn, Microsoft or any other vendor; product names are trademarks of their owners.</span>
+    </div>
+  </div>
+</footer>
+<button class="back-top" id="backTop" type="button" aria-label="Back to top">↑</button>
+<div id="cookieConsent" class="cookie-consent" hidden>
+  <div class="cookie-inner">
+    <p>SkillPrep saves your quiz progress in your browser's local storage. Ads are shown through Google AdSense, which may use cookies. See our <a href="../../privacy/">Privacy Policy</a> for details and opt-out options.</p>
+    <div class="cookie-actions">
+      <button id="cookieAccept" class="btn">OK</button>
+    </div>
+  </div>
+</div>
+<script src="../../js/site.js" defer></script>
+</body>
+</html>
