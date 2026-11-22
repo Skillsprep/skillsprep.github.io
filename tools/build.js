@@ -15,6 +15,9 @@ const POSTS = (() => {
   // Advanced Python guide goes right after the Python guide.
   const py = out.findIndex((x) => x.slug === "python-study-guide") + 1;
   out.splice(py, 0, ...require("./content/advpython"));
+  // Developer fundamentals guide goes right after the Git guide.
+  const dv = out.findIndex((x) => x.slug === "git-study-guide") + 1;
+  out.splice(dv, 0, ...require("./content/devskills"));
   // Practical AI guide goes right before the Generative AI practice test.
   const ai = out.findIndex((x) => x.slug === "generative-ai-career-essentials-practice-test");
   out.splice(ai < 0 ? out.length : ai, 0, ...require("./content/practicalai"));

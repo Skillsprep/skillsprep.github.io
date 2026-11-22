@@ -68,7 +68,8 @@ module.exports = {
     "power-bi-study-guide": ["power-bi-practice-test", "excel-study-guide", "sql-study-guide"],
     "power-bi-practice-test": ["power-bi-study-guide", "excel-study-guide", "sql-study-guide"],
     "digital-marketing-study-guide": ["excel-study-guide", "powerpoint-study-guide", "generative-ai-career-essentials-practice-test"],
-    "git-study-guide": ["javascript-study-guide", "python-study-guide", "project-management-study-guide"],
+    "git-study-guide": ["developer-skills-study-guide", "javascript-study-guide", "python-study-guide"],
+    "developer-skills-study-guide": ["git-study-guide", "javascript-study-guide", "python-study-guide"],
     "powerpoint-study-guide": ["excel-study-guide", "digital-marketing-study-guide", "generative-ai-career-essentials-practice-test"],
     "linkedin-skill-assessments-retired": ["generative-ai-career-essentials-practice-test", "excel-study-guide", "python-study-guide"],
     "generative-ai-career-essentials-practice-test": ["practical-ai-study-guide", "powerpoint-study-guide", "digital-marketing-study-guide"],
@@ -77,6 +78,16 @@ module.exports = {
   },
   // Authoritative references shown under each guide ("Sources & further reading").
   sources: {
+    "developer-skills-study-guide": [
+      ["HTTP request methods — MDN Web Docs", "https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Methods"],
+      ["HTTP response status codes — MDN Web Docs", "https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Status"],
+      ["JSON — MDN Web Docs", "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/JSON"],
+      ["unittest — The Python Standard Library", "https://docs.python.org/3/library/unittest.html"],
+      ["OWASP Top Ten", "https://owasp.org/www-project-top-ten/"],
+      ["SQL Injection Prevention Cheat Sheet — OWASP", "https://cheatsheetseries.owasp.org/cheatsheets/SQL_Injection_Prevention_Cheat_Sheet.html"],
+      ["Input Validation Cheat Sheet — OWASP", "https://cheatsheetseries.owasp.org/cheatsheets/Input_Validation_Cheat_Sheet.html"],
+      ["Secrets Management Cheat Sheet — OWASP", "https://cheatsheetseries.owasp.org/cheatsheets/Secrets_Management_Cheat_Sheet.html"]
+    ],
     "practical-ai-study-guide": [
       ["Prompt design strategies — Google AI for Developers", "https://ai.google.dev/gemini-api/docs/prompting-strategies"],
       ["Prompt engineering overview — Claude Docs", "https://platform.claude.com/docs/en/build-with-claude/prompt-engineering/overview"],
