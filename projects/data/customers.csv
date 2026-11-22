@@ -1,0 +1,81 @@
+CustomerID,Region,Segment
+C001,South,Small Business
+C002,West,Small Business
+C003,North,Consumer
+C004,West,Consumer
+C005,South,Corporate
+C006,West,Small Business
+C007,West,Consumer
+C008,East,Corporate
+C009,West,Small Business
+C010,East,Small Business
+C011,West,Corporate
+C012,East,Consumer
+C013,West,Small Business
+C014,East,Small Business
+C015,West,Small Business
+C016,South,Small Business
+C017,East,Small Business
+C018,South,Corporate
+C019,South,Small Business
+C020,West,Corporate
+C021,North,Consumer
+C022,West,Corporate
+C023,West,Consumer
+C024,South,Small Business
+C025,East,Small Business
+C026,West,Corporate
+C027,South,Small Business
+C028,South,Small Business
+C029,West,Small Business
+C030,South,Corporate
+C031,North,Small Business
+C032,East,Corporate
+C033,West,Consumer
+C034,West,Small Business
+C035,East,Small Business
+C036,East,Corporate
+C037,North,Corporate
+C038,South,Corporate
+C039,South,Consumer
+C040,East,Corporate
+C041,North,Corporate
+C042,North,Corporate
+C043,South,Corporate
+C044,East,Consumer
+C045,West,Small Business
+C046,South,Consumer
+C047,West,Consumer
+C048,South,Consumer
+C049,West,Small Business
+C050,East,Consumer
+C051,North,Small Business
+C052,West,Corporate
+C053,North,Consumer
+C054,East,Consumer
+C055,North,Corporate
+C056,South,Consumer
+C057,West,Consumer
+C058,East,Small Business
+C059,South,Small Business
+C060,West,Small Business
+C061,North,Consumer
+C062,West,Corporate
+C063,North,Small Business
+C064,West,Small Business
+C065,West,Small Business
+C066,East,Consumer
+C067,West,Consumer
+C068,East,Consumer
+C069,West,Consumer
+C070,South,Small Business
+C071,West,Consumer
+C072,West,Small Business
+C073,North,Corporate
+C074,South,Small Business
+C075,North,Consumer
+C076,East,Consumer
+C077,North,Corporate
+C078,North,Consumer
+C079,South,Corporate
+C080,North,Corporate

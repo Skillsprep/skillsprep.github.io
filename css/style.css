@@ -575,3 +575,12 @@ p a.btn-link, li a.btn-link, .btn-link { text-decoration: none !important; }
 .faq summary { cursor: pointer; font-weight: 600; color: var(--navy); }
 .faq summary:focus-visible { outline: 2px solid var(--teal); outline-offset: 2px; }
 .faq p { margin: 10px 0 2px; }
+
+/* Let the article column shrink below its content width so wide code blocks and tables scroll
+   inside themselves instead of stretching the whole page (fixes sideways page scroll on phones). */
+.article-wrap > .article-body, .article-wrap > .sidebar { min-width: 0; }
+@media (max-width: 860px) {
+  .article-body table { display: block; max-width: 100%; overflow-x: auto; }
+}
+/* practice-test header (inline-styled flex row): wrap on narrow screens so the Finish button stays on screen */
+.assessment-header { flex-wrap: wrap; gap: 12px; }
