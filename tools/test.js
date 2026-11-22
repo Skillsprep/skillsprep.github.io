@@ -90,6 +90,13 @@ if (fs.existsSync(guidesDir)) {
     console.log(`Checked ${inlineTotal} inline quiz questions in built guides.`);
 }
 
+// Practice projects: independent recomputation of the datasets, SQL answers and built pages
+{
+    const r = require("child_process").spawnSync(process.execPath, [path.join(__dirname, "test_projects.js")], { encoding: "utf8" });
+    process.stdout.write(r.stdout || "");
+    if (r.status !== 0) { process.stderr.write(r.stderr || ""); errors++; }
+}
+
 if (errors > 0) {
     console.error(`\nTests failed with ${errors} error(s).`);
     process.exit(1);
