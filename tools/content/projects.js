@@ -18,6 +18,7 @@ module.exports = function projects(A) {
   /* ---------- Project 1: Excel or Google Sheets ---------- */
   const proj1 = {
     slug: "sales-cleanup-excel-sheets",
+    description: "Download a messy synthetic sales CSV, clean it, then calculate totals, a regional breakdown, a monthly pivot and a chart, with an answer key.",
     title: "Project 1: Clean and Analyse a Messy Sales File",
     tool: "Excel or Google Sheets", level: "Beginner to intermediate", time: "About 1 to 2 hours (estimate)",
     files: ["sales_raw.csv"],
@@ -81,6 +82,7 @@ module.exports = function projects(A) {
   }).join("\n        ");
   const proj2 = {
     slug: "shop-sql-queries",
+    description: "Load a synthetic shop database into SQLite and write eight queries: joins, aggregation, anti-joins, HAVING and window functions, with tested solutions.",
     title: "Project 2: Answer Business Questions with SQL",
     tool: "SQL (SQLite)", level: "Intermediate", time: "About 1 to 2 hours (estimate)",
     files: ["shop.sql"],
@@ -116,6 +118,8 @@ module.exports = function projects(A) {
   /* ---------- Project 3: Power BI ---------- */
   const proj3 = {
     slug: "power-bi-sales-model",
+    description: "Load four synthetic tables into Power BI, build a star schema with a date table, write three DAX measures and a report page, with expected values.",
+    seoTitle: "Power BI Practice Project: Star Schema and DAX",
     title: "Project 3: Build a Star Schema and DAX Measures in Power BI",
     tool: "Power BI Desktop", level: "Intermediate", time: "About 2 hours (estimate)",
     files: ["orders.csv", "products.csv", "customers.csv", "dim_date.csv"],

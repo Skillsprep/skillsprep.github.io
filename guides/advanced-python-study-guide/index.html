@@ -3,23 +3,23 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Advanced Python Study Guide: Generators, Decorators and Async | SkillPrep</title>
-<meta name="description" content="Generators, closures, decorators, dataclasses, MRO, context managers, exceptions and concurrency in Python 3, with runnable examples, exercises with…">
+<title>Advanced Python Study Guide: Generators &amp; Async | SkillPrep</title>
+<meta name="description" content="Advanced Python for interviews: generators, decorators, dataclasses, context managers and async, with runnable examples and a 20-question quiz.">
 <link rel="canonical" href="https://skillsprep.github.io/guides/advanced-python-study-guide/">
 <meta name="google-site-verification" content="rOGMro0A_ltGwtwagVfnPJFPmn59apiGYOa0LKMT4n8">
 <meta name="robots" content="index,follow">
 <meta name="theme-color" content="#0D1B2A">
 <meta property="og:site_name" content="SkillPrep">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Advanced Python Study Guide: Generators, Decorators and Async | SkillPrep">
-<meta property="og:description" content="Generators, closures, decorators, dataclasses, MRO, context managers, exceptions and concurrency in Python 3, with runnable examples, exercises with…">
+<meta property="og:title" content="Advanced Python Study Guide: Generators &amp; Async | SkillPrep">
+<meta property="og:description" content="Advanced Python for interviews: generators, decorators, dataclasses, context managers and async, with runnable examples and a 20-question quiz.">
 <meta property="og:url" content="https://skillsprep.github.io/guides/advanced-python-study-guide/">
 <meta property="og:image" content="https://skillsprep.github.io/assets/og-image.png">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="Advanced Python Study Guide: Generators, Decorators and Async | SkillPrep">
-<meta name="twitter:description" content="Generators, closures, decorators, dataclasses, MRO, context managers, exceptions and concurrency in Python 3, with runnable examples, exercises with…">
+<meta name="twitter:title" content="Advanced Python Study Guide: Generators &amp; Async | SkillPrep">
+<meta name="twitter:description" content="Advanced Python for interviews: generators, decorators, dataclasses, context managers and async, with runnable examples and a 20-question quiz.">
 <meta name="twitter:image" content="https://skillsprep.github.io/assets/og-image.png">
 <link rel="icon" href="../../assets/favicon.svg" type="image/svg+xml">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -28,7 +28,7 @@
 <link rel="stylesheet" href="../../css/style.css">
 <script>(function(){try{if(localStorage.getItem("skillprep:theme")==="dark"){document.documentElement.setAttribute("data-theme","dark");}}catch(e){}})();</script>
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"Advanced Python Study Guide: Generators, Decorators and Async","description":"Generators, closures, decorators, dataclasses, MRO, context managers, exceptions and concurrency in Python 3, with runnable examples, exercises with solutions and a 20-question quiz.","datePublished":"2026-11-21","dateModified":"2026-11-21","author":{"@type":"Organization","name":"SkillPrep editorial team"},"publisher":{"@type":"Organization","name":"SkillPrep","logo":{"@type":"ImageObject","url":"https://skillsprep.github.io/assets/favicon.svg"}},"mainEntityOfPage":"https://skillsprep.github.io/guides/advanced-python-study-guide/","image":"https://skillsprep.github.io/assets/og-image.png","articleSection":"Python","inLanguage":"en"}</script>
-<script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://skillsprep.github.io/"},{"@type":"ListItem","position":2,"name":"Python","item":"https://skillsprep.github.io/#guides"},{"@type":"ListItem","position":3,"name":"Advanced Python Study Guide: Generators, Decorators and Async","item":"https://skillsprep.github.io/guides/advanced-python-study-guide/"}]}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://skillsprep.github.io/"},{"@type":"ListItem","position":2,"name":"Guides","item":"https://skillsprep.github.io/guides/"},{"@type":"ListItem","position":3,"name":"Advanced Python Study Guide: Generators, Decorators and Async","item":"https://skillsprep.github.io/guides/advanced-python-study-guide/"}]}</script>
 <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9455217122501464" crossorigin="anonymous"></script>
 </head>
 <body>
@@ -39,6 +39,7 @@
     <button class="burger" id="burger" type="button" aria-label="Menu" aria-expanded="false" aria-controls="mainNav">☰</button>
     <nav class="main-nav" id="mainNav" aria-label="Main">
       <a href="../../">Home</a>
+      <a href="../../guides/">Guides</a>
       <a href="../../projects/">Projects</a>
       <a href="../../about/">About</a>
       <a href="../../contact/">Contact</a>
@@ -51,7 +52,7 @@
 <div id="progress" aria-hidden="true"></div>
 <section class="article-hero">
   <div class="container">
-    <nav class="crumbs" aria-label="Breadcrumb"><a href="../../">Home</a> <span aria-hidden="true" class="sep">›</span> <a href="../../#guides">Guides</a> <span aria-hidden="true" class="sep">›</span> <span aria-current="page">Python</span></nav>
+    <nav class="crumbs" aria-label="Breadcrumb"><a href="../../">Home</a> <span aria-hidden="true" class="sep">›</span> <a href="../../guides/">Guides</a> <span aria-hidden="true" class="sep">›</span> <span aria-current="page">Python</span></nav>
     <div class="cat">Python</div>
     <h1>Advanced Python Study Guide: Generators, Decorators and Async</h1>
     <div class="meta">
@@ -643,7 +644,7 @@ print(list(evens(9)))   # [0, 2, 4, 6, 8]</code></pre></li>
       <a class="prev" href="../../guides/python-study-guide/"><small>← Previous</small>Python Fundamentals: Study Guide + Practice Quiz</a>
       <a class="next" href="../../guides/javascript-study-guide/"><small>Next →</small>JavaScript Fundamentals: Key Concepts Explained</a>
     </nav>
-    <a href="../../#guides" class="btn btn-link">← Back to all guides</a>
+    <a href="../../guides/" class="btn btn-link">← Back to all guides</a>
   </article>
   <aside class="sidebar">
     <div class="box toc-box">
@@ -694,6 +695,7 @@ print(list(evens(9)))   # [0, 2, 4, 6, 8]</code></pre></li>
       <div>
         <h2 class="foot-h">Explore</h2>
         <a href="../../">All guides</a>
+        <a href="../../guides/">Guides</a>
         <a href="../../projects/">Projects</a>
         <a href="../../about/">About</a>
         <a href="../../contact/">Contact</a>
