@@ -26,6 +26,28 @@ module.exports = {
     "generative-ai-microsoft-linkedin-guide": "generative-ai-career-essentials-practice-test",
     "lean-six-sigma-sustainability-mock-test": "lean-six-sigma-practice-test"
   },
+  // Meta descriptions for guides whose excerpt is longer than 158 characters (the build fails otherwise, so a
+  // description is never cut off mid-sentence). Write complete sentences; Google shows what fits the screen.
+  descriptions: {
+    "excel-study-guide": "Core Excel skills for work and interviews: lookup formulas, text and logical functions, pivot tables, and 20 practice questions with explanations.",
+    "python-study-guide": "Python fundamentals for interviews and skills tests: data structures, comprehensions, exceptions and functions, with explained practice questions.",
+    "lean-six-sigma-practice-test": "30 practice questions on the 5-Whys, PDCA, the DOWNTIME wastes, stakeholder engagement and sustainability, with instant scoring and explanations.",
+    "power-bi-study-guide": "Power BI essentials for interviews and the PL-300 skill areas: Power Query, star schemas, DAX measures, reports and security, with a 20-question quiz.",
+    "power-bi-practice-test": "40 unofficial practice questions across the four PL-300 skill areas, with topic practice, bookmarks, an optional timer and an explanation for every answer.",
+    "generative-ai-career-essentials-practice-test": "An unofficial 164-question practice test on generative AI: Copilot in Microsoft 365, LLMs, prompt engineering and AI ethics, with scoring and explanations."
+  },
+  // Shorter page titles (shown in search results and browser tabs) where "<title> | SkillPrep" would exceed 60
+  // characters. The on-page H1 keeps the full title.
+  seoTitles: {
+    "excel-study-guide": "Excel Study Guide: Lookups, Pivots & Functions",
+    "project-management-study-guide": "Project Management Study Guide: Key Concepts",
+    "digital-marketing-study-guide": "Digital Marketing Study Guide: SEO & Metrics",
+    "linkedin-skill-assessments-retired": "LinkedIn Skill Assessments Retired: Alternatives",
+    "generative-ai-career-essentials-practice-test": "Career Essentials in Generative AI Practice Test",
+    "lean-six-sigma-practice-test": "Lean Six Sigma Practice Test: 30 Questions"
+  },
+  // Real last-change dates for sitemap lastmod, for pages that are not guides (guides use their own "reviewed" date).
+  pageUpdated: { "contact/": "2026-11-14" },
   // Hand-picked "Related guides" shown in each guide's sidebar (slug -> up to 3 slugs). Edit freely;
   // the build fails if a slug doesn't exist. Guides not listed fall back to the first other guides.
   related: {

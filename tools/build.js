@@ -52,6 +52,21 @@ function trimDesc(s, max = 158) {
   const cut = s.slice(0, max - 1);
   return cut.slice(0, cut.lastIndexOf(" ")).replace(/[,;:\s—-]+$/, "") + "…";
 }
+// Meta description / title guards. Google sets no hard limit but truncates to the device width, so descriptions
+// must be complete sentences that fit, and titles concise. Long ones need an explicit entry in tools/config.js.
+const DESC_MAX = 158, TITLE_MAX = 60;
+function guideDesc(p) {
+  const d = (cfg.descriptions || {})[p.slug] || stripTags(p.excerpt);
+  if (d.length > DESC_MAX) throw new Error(`${p.slug}: meta description is ${d.length} characters (max ${DESC_MAX}). Add a complete one to cfg.descriptions.`);
+  if (/…|\.\.\.$/.test(d)) throw new Error(`${p.slug}: meta description must not be truncated with an ellipsis`);
+  return d;
+}
+function guideTitle(p) {
+  const t = (cfg.seoTitles || {})[p.slug] || p.title;
+  const full = `${t} | ${cfg.siteName}`;
+  if (full.length > TITLE_MAX) throw new Error(`${p.slug}: page title is ${full.length} characters (max ${TITLE_MAX}). Add a shorter one to cfg.seoTitles.`);
+  return t;
+}
 const jsonLd = (obj) => `<script type="application/ld+json">${JSON.stringify(obj).replace(/</g, "\\u003c")}</script>`;
 function write(rel, content) {
   const f = path.join(ROOT, rel);
@@ -217,6 +232,7 @@ ${extraHead}${ld.map(jsonLd).join("\n")}
     <button class="burger" id="burger" type="button" aria-label="Menu" aria-expanded="false" aria-controls="mainNav">☰</button>
     <nav class="main-nav" id="mainNav" aria-label="Main">
       ${navItem("home", "Home", home)}
+      ${navItem("guides", "Guides", link("guides/"))}
       ${navItem("about", "About", link("about/"))}
       ${navItem("contact", "Contact", link("contact/"))}
     </nav>
@@ -236,6 +252,7 @@ ${body}
       <div>
         <h2 class="foot-h">Explore</h2>
         <a href="${home}">All guides</a>
+        <a href="${link("guides/")}">Guides</a>
         <a href="${link("about/")}">About</a>
         <a href="${link("contact/")}">Contact</a>
         <a href="${link("privacy/")}">Privacy</a>
@@ -415,7 +432,7 @@ function guidePage(p) {
 <div id="progress" aria-hidden="true"></div>
 <section class="article-hero">
   <div class="container">
-    <nav class="crumbs" aria-label="Breadcrumb"><a href="${prefix}">Home</a> <span aria-hidden="true" class="sep">›</span> <a href="${prefix}#guides">Guides</a> <span aria-hidden="true" class="sep">›</span> <span aria-current="page">${esc(p.category)}</span></nav>
+    <nav class="crumbs" aria-label="Breadcrumb"><a href="${prefix}">Home</a> <span aria-hidden="true" class="sep">›</span> <a href="${prefix}guides/">Guides</a> <span aria-hidden="true" class="sep">›</span> <span aria-current="page">${esc(p.category)}</span></nav>
     <div class="cat">${esc(p.category)}</div>
     <h1>${esc(p.title)}</h1>
     <div class="meta">
@@ -445,7 +462,7 @@ function guidePage(p) {
       ${prev ? `<a class="prev" href="${prefix}${prev.url}"><small>← Previous</small>${esc(prev.title)}</a>` : "<span></span>"}
       ${next ? `<a class="next" href="${prefix}${next.url}"><small>Next →</small>${esc(next.title)}</a>` : "<span></span>"}
     </nav>
-    <a href="${prefix}#guides" class="btn btn-link">← Back to all guides</a>
+    <a href="${prefix}guides/" class="btn btn-link">← Back to all guides</a>
   </article>
   <aside class="sidebar">
     <div class="box toc-box">
@@ -472,8 +489,8 @@ function guidePage(p) {
 </div>`;
   const url = SITE + p.url;
   return layout({
-    title: `${p.title} | ${cfg.siteName}`,
-    desc: trimDesc(p.excerpt),
+    title: `${guideTitle(p)} | ${cfg.siteName}`,
+    desc: guideDesc(p),
     path: p.url, prefix, nav: "", body, type: "article",
     ld: [
       { "@context": "https://schema.org", "@type": "Article", headline: p.title, description: trimDesc(p.excerpt, 300), datePublished: p.published, dateModified: p.reviewed,
@@ -481,7 +498,7 @@ function guidePage(p) {
         mainEntityOfPage: url, image: OG_IMAGE, articleSection: p.category, inLanguage: "en" },
       { "@context": "https://schema.org", "@type": "BreadcrumbList", itemListElement: [
         { "@type": "ListItem", position: 1, name: "Home", item: SITE },
-        { "@type": "ListItem", position: 2, name: p.category, item: SITE + "#guides" },
+        { "@type": "ListItem", position: 2, name: "Guides", item: SITE + "guides/" },
         { "@type": "ListItem", position: 3, name: p.title, item: url } ] }
     ]
   });
@@ -489,6 +506,27 @@ function guidePage(p) {
 
 function pageHero(h1, sub) {
   return `<section class="page-hero"><div class="container"><h1>${h1}</h1><p>${sub}</p></div></section>`;
+}
+
+function guidesHub() {
+  const cats = [...new Set(posts.map((p) => p.category))];
+  const body = `${pageHero("All Study Guides", "Every SkillPrep guide and practice test, grouped by skill. Each one is unofficial, concept-first and reviewed on the date shown on the guide.")}
+<div class="container">
+  <div class="card prose">
+    ${cats.map((c) => `<h2>${esc(c)}</h2>
+    <ul>
+      ${posts.filter((p) => p.category === c).map((p) => `<li><a href="${p.slug}/">${esc(p.title)}</a> — ${esc(stripTags(p.excerpt))}</li>`).join("\n      ")}
+    </ul>`).join("\n    ")}
+  </div>
+</div>`;
+  return layout({
+    title: `All Study Guides and Practice Tests | ${cfg.siteName}`,
+    desc: `Browse all ${posts.length} SkillPrep study guides and practice tests: ${cats.slice(0, 4).join(", ")} and more, each with practice questions.`,
+    path: "guides/", prefix: "../", nav: "guides", body,
+    ld: [{ "@context": "https://schema.org", "@type": "BreadcrumbList", itemListElement: [
+      { "@type": "ListItem", position: 1, name: "Home", item: SITE },
+      { "@type": "ListItem", position: 2, name: "Guides", item: SITE + "guides/" } ] }]
+  });
 }
 
 function aboutPage() {
@@ -641,6 +679,7 @@ function notFoundPage() {
 for (const d of ["guides", "about", "contact", "privacy", "terms"]) fs.rmSync(path.join(ROOT, d), { recursive: true, force: true });
 
 write("index.html", homePage());
+write("guides/index.html", guidesHub());
 posts.forEach((p) => write(p.url + "index.html", guidePage(p)));
 write("about/index.html", aboutPage());
 write("contact/index.html", contactPage());
@@ -648,11 +687,15 @@ write("privacy/index.html", privacyPage());
 write("terms/index.html", termsPage());
 write("404.html", notFoundPage());
 
-const urls = [["", cfg.lastReviewed, "1.0"], ["about/", cfg.lastReviewed, "0.5"], ["contact/", cfg.lastReviewed, "0.4"], ["privacy/", cfg.lastReviewed, "0.2"], ["terms/", cfg.lastReviewed, "0.2"],
-  ...posts.map((p) => [p.url, p.reviewed, "0.8"])];
+// lastmod must be accurate (Google ignores it otherwise): each page uses the date it was really last changed.
+const latestGuide = posts.map((p) => p.reviewed).sort().pop();
+const pageDate = (key, fallback) => (cfg.pageUpdated || {})[key] || fallback;
+const urls = [["", latestGuide], ["guides/", latestGuide], ["about/", pageDate("about/", cfg.lastReviewed)], ["contact/", pageDate("contact/", cfg.lastReviewed)],
+  ["privacy/", cfg.privacyUpdated || cfg.lastReviewed], ["terms/", cfg.lastReviewed],
+  ...posts.map((p) => [p.url, p.reviewed])];
 write("sitemap.xml", `<?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-${urls.map(([u, d, pr]) => `  <url><loc>${SITE}${u}</loc><lastmod>${d}</lastmod><priority>${pr}</priority></url>`).join("\n")}
+${urls.map(([u, d]) => `  <url><loc>${SITE}${u}</loc><lastmod>${d}</lastmod></url>`).join("\n")}
 </urlset>
 `);
 write("ads.txt", "google.com, pub-9455217122501464, DIRECT, f08c47fec0942fa0\n");

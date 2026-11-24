@@ -90,6 +90,13 @@ if (fs.existsSync(guidesDir)) {
     console.log(`Checked ${inlineTotal} inline quiz questions in built guides.`);
 }
 
+// SEO guards over the built pages
+{
+    const r = require("child_process").spawnSync(process.execPath, [path.join(__dirname, "test_seo.js")], { encoding: "utf8" });
+    process.stdout.write(r.stdout || "");
+    if (r.status !== 0) { process.stderr.write(r.stderr || ""); errors++; }
+}
+
 if (errors > 0) {
     console.error(`\nTests failed with ${errors} error(s).`);
     process.exit(1);
