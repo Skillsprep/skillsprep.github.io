@@ -1,0 +1,375 @@
+{
+  "seed": 20261122,
+  "generated_with": "tools/make_data.py",
+  "sqlite_version": "3.53.1",
+  "project1": {
+    "raw_rows": 577,
+    "clean_rows": 561,
+    "duplicate_rows": 10,
+    "junk_rows": 6,
+    "messy_region_cells": 20,
+    "total_revenue": "32670.26",
+    "revenue_by_region": {
+      "North": "6503.23",
+      "South": "6861.81",
+      "East": "6065.35",
+      "West": "13239.86"
+    },
+    "revenue_by_category": {
+      "Electronics": "15423.48",
+      "Office": "11665.62",
+      "Stationery": "5581.17"
+    },
+    "top_product": {
+      "name": "Wireless Keyboard",
+      "revenue": "5111.19"
+    },
+    "revenue_by_month": {
+      "2025-01": "2253.91",
+      "2025-02": "2951.33",
+      "2025-03": "2672.10",
+      "2025-04": "2191.01",
+      "2025-05": "2784.31",
+      "2025-06": "3647.55",
+      "2025-07": "2442.71",
+      "2025-08": "2722.74",
+      "2025-09": "3369.38",
+      "2025-10": "2699.95",
+      "2025-11": "2056.44",
+      "2025-12": "2878.84"
+    },
+    "discounted_orders": 263
+  },
+  "project2": {
+    "tables": {
+      "customers": 80,
+      "products": 12,
+      "orders": 1000
+    },
+    "customers_without_orders": [
+      "C001",
+      "C027",
+      "C035",
+      "C061",
+      "C062"
+    ],
+    "queries": [
+      {
+        "title": "Orders per region",
+        "task": "Count the orders placed by customers in each region, largest first.",
+        "sql": "SELECT c.Region, COUNT(*) AS orders\nFROM orders o\nJOIN customers c ON c.CustomerID = o.CustomerID\nGROUP BY c.Region\nORDER BY orders DESC, c.Region;",
+        "columns": [
+          "Region",
+          "orders"
+        ],
+        "row_count": 4,
+        "rows": [
+          [
+            "West",
+            349
+          ],
+          [
+            "South",
+            233
+          ],
+          [
+            "East",
+            216
+          ],
+          [
+            "North",
+            202
+          ]
+        ]
+      },
+      {
+        "title": "Revenue by category",
+        "task": "Total revenue (quantity x unit price x (1 - discount)) per product category, rounded to 2 decimals.",
+        "sql": "SELECT p.Category, ROUND(SUM(o.Quantity * p.UnitPrice * (1 - o.Discount)), 2) AS revenue\nFROM orders o\nJOIN products p ON p.ProductID = o.ProductID\nGROUP BY p.Category\nORDER BY revenue DESC;",
+        "columns": [
+          "Category",
+          "revenue"
+        ],
+        "row_count": 3,
+        "rows": [
+          [
+            "Electronics",
+            "26923.34"
+          ],
+          [
+            "Office",
+            "21828.58"
+          ],
+          [
+            "Stationery",
+            "9966.25"
+          ]
+        ]
+      },
+      {
+        "title": "Top 5 customers",
+        "task": "The five customers with the highest total revenue.",
+        "sql": "SELECT o.CustomerID, ROUND(SUM(o.Quantity * p.UnitPrice * (1 - o.Discount)), 2) AS revenue\nFROM orders o\nJOIN products p ON p.ProductID = o.ProductID\nGROUP BY o.CustomerID\nORDER BY revenue DESC, o.CustomerID\nLIMIT 5;",
+        "columns": [
+          "CustomerID",
+          "revenue"
+        ],
+        "row_count": 5,
+        "rows": [
+          [
+            "C073",
+            "1424.95"
+          ],
+          [
+            "C071",
+            "1390.36"
+          ],
+          [
+            "C077",
+            "1301.57"
+          ],
+          [
+            "C052",
+            "1261.91"
+          ],
+          [
+            "C017",
+            "1236.14"
+          ]
+        ]
+      },
+      {
+        "title": "Customers with no orders",
+        "task": "List customers who have never ordered.",
+        "sql": "SELECT c.CustomerID, c.Region, c.Segment\nFROM customers c\nLEFT JOIN orders o ON o.CustomerID = c.CustomerID\nWHERE o.OrderID IS NULL\nORDER BY c.CustomerID;",
+        "columns": [
+          "CustomerID",
+          "Region",
+          "Segment"
+        ],
+        "row_count": 5,
+        "rows": [
+          [
+            "C001",
+            "South",
+            "Small Business"
+          ],
+          [
+            "C027",
+            "South",
+            "Small Business"
+          ],
+          [
+            "C035",
+            "East",
+            "Small Business"
+          ],
+          [
+            "C061",
+            "North",
+            "Consumer"
+          ],
+          [
+            "C062",
+            "West",
+            "Corporate"
+          ]
+        ]
+      },
+      {
+        "title": "Monthly revenue, 2025",
+        "task": "Revenue for each month of 2025. strftime is SQLite's date function; other databases use their own.",
+        "sql": "SELECT strftime('%Y-%m', o.OrderDate) AS month, ROUND(SUM(o.Quantity * p.UnitPrice * (1 - o.Discount)), 2) AS revenue\nFROM orders o\nJOIN products p ON p.ProductID = o.ProductID\nWHERE o.OrderDate >= '2025-01-01' AND o.OrderDate < '2026-01-01'\nGROUP BY month\nORDER BY month;",
+        "columns": [
+          "month",
+          "revenue"
+        ],
+        "row_count": 12,
+        "rows": [
+          [
+            "2025-01",
+            "2253.91"
+          ],
+          [
+            "2025-02",
+            "2951.33"
+          ],
+          [
+            "2025-03",
+            "2672.10"
+          ],
+          [
+            "2025-04",
+            "2191.01"
+          ],
+          [
+            "2025-05",
+            "2784.31"
+          ],
+          [
+            "2025-06",
+            "3647.55"
+          ],
+          [
+            "2025-07",
+            "2442.70"
+          ],
+          [
+            "2025-08",
+            "2722.74"
+          ],
+          [
+            "2025-09",
+            "3369.38"
+          ],
+          [
+            "2025-10",
+            "2699.95"
+          ],
+          [
+            "2025-11",
+            "2056.44"
+          ],
+          [
+            "2025-12",
+            "2878.84"
+          ]
+        ]
+      },
+      {
+        "title": "Average order value by segment",
+        "task": "Average revenue per order for each customer segment, rounded to 2 decimals.",
+        "sql": "SELECT c.Segment, ROUND(SUM(o.Quantity * p.UnitPrice * (1 - o.Discount)) / COUNT(*), 2) AS avg_order_value\nFROM orders o\nJOIN customers c ON c.CustomerID = o.CustomerID\nJOIN products p ON p.ProductID = o.ProductID\nGROUP BY c.Segment\nORDER BY avg_order_value DESC;",
+        "columns": [
+          "Segment",
+          "avg_order_value"
+        ],
+        "row_count": 3,
+        "rows": [
+          [
+            "Small Business",
+            "58.98"
+          ],
+          [
+            "Corporate",
+            "58.61"
+          ],
+          [
+            "Consumer",
+            "58.50"
+          ]
+        ]
+      },
+      {
+        "title": "Running total by month, 2025",
+        "task": "Monthly revenue for 2025 with a cumulative running total (a window function; needs SQLite 3.25 or later).",
+        "sql": "WITH monthly AS (\n  SELECT strftime('%Y-%m', o.OrderDate) AS month, SUM(o.Quantity * p.UnitPrice * (1 - o.Discount)) AS revenue\n  FROM orders o\n  JOIN products p ON p.ProductID = o.ProductID\n  WHERE o.OrderDate >= '2025-01-01' AND o.OrderDate < '2026-01-01'\n  GROUP BY month\n)\nSELECT month, ROUND(revenue, 2) AS revenue, ROUND(SUM(revenue) OVER (ORDER BY month), 2) AS running_total\nFROM monthly\nORDER BY month;",
+        "columns": [
+          "month",
+          "revenue",
+          "running_total"
+        ],
+        "row_count": 12,
+        "rows": [
+          [
+            "2025-01",
+            "2253.91",
+            "2253.91"
+          ],
+          [
+            "2025-02",
+            "2951.33",
+            "5205.24"
+          ],
+          [
+            "2025-03",
+            "2672.10",
+            "7877.34"
+          ],
+          [
+            "2025-04",
+            "2191.01",
+            "10068.34"
+          ],
+          [
+            "2025-05",
+            "2784.31",
+            "12852.65"
+          ],
+          [
+            "2025-06",
+            "3647.55",
+            "16500.20"
+          ],
+          [
+            "2025-07",
+            "2442.70",
+            "18942.91"
+          ],
+          [
+            "2025-08",
+            "2722.74",
+            "21665.65"
+          ],
+          [
+            "2025-09",
+            "3369.38",
+            "25035.03"
+          ],
+          [
+            "2025-10",
+            "2699.95",
+            "27734.98"
+          ],
+          [
+            "2025-11",
+            "2056.44",
+            "29791.42"
+          ],
+          [
+            "2025-12",
+            "2878.84",
+            "32670.26"
+          ]
+        ]
+      },
+      {
+        "title": "Categories above a revenue threshold",
+        "task": "Categories whose total revenue is more than 21,000.",
+        "sql": "SELECT p.Category, ROUND(SUM(o.Quantity * p.UnitPrice * (1 - o.Discount)), 2) AS revenue\nFROM orders o\nJOIN products p ON p.ProductID = o.ProductID\nGROUP BY p.Category\nHAVING SUM(o.Quantity * p.UnitPrice * (1 - o.Discount)) > 21000\nORDER BY revenue DESC;",
+        "columns": [
+          "Category",
+          "revenue"
+        ],
+        "row_count": 2,
+        "rows": [
+          [
+            "Electronics",
+            "26923.34"
+          ],
+          [
+            "Office",
+            "21828.58"
+          ]
+        ]
+      }
+    ]
+  },
+  "project3": {
+    "fact_rows": 1000,
+    "date_rows": 731,
+    "product_rows": 12,
+    "customer_rows": 80,
+    "total_sales_all": "58718.18",
+    "sales_2024": "26047.92",
+    "sales_2025": "32670.26",
+    "yoy_percent_2025": "25.4",
+    "sales_electronics_2025": "15423.48",
+    "sales_by_quarter_2025": {
+      "Q1": "7877.34",
+      "Q2": "8622.87",
+      "Q3": "8534.83",
+      "Q4": "7635.23"
+    }
+  }
+}
