@@ -584,3 +584,5 @@ p a.btn-link, li a.btn-link, .btn-link { text-decoration: none !important; }
 }
 /* practice-test header (inline-styled flex row): wrap on narrow screens so the Finish button stays on screen */
 .assessment-header { flex-wrap: wrap; gap: 12px; }
+/* long inline code (for example a chained method call) may wrap instead of widening the page */
+.article-body :not(pre) > code { overflow-wrap: anywhere; }
