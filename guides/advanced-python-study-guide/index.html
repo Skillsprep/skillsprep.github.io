@@ -1,0 +1,724 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Advanced Python Study Guide: Generators, Decorators and Async | SkillPrep</title>
+<meta name="description" content="Generators, closures, decorators, dataclasses, MRO, context managers, exceptions and concurrency in Python 3, with runnable examples, exercises with…">
+<link rel="canonical" href="https://skillsprep.github.io/guides/advanced-python-study-guide/">
+<meta name="google-site-verification" content="rOGMro0A_ltGwtwagVfnPJFPmn59apiGYOa0LKMT4n8">
+<meta name="robots" content="index,follow">
+<meta name="theme-color" content="#0D1B2A">
+<meta property="og:site_name" content="SkillPrep">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Advanced Python Study Guide: Generators, Decorators and Async | SkillPrep">
+<meta property="og:description" content="Generators, closures, decorators, dataclasses, MRO, context managers, exceptions and concurrency in Python 3, with runnable examples, exercises with…">
+<meta property="og:url" content="https://skillsprep.github.io/guides/advanced-python-study-guide/">
+<meta property="og:image" content="https://skillsprep.github.io/assets/og-image.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Advanced Python Study Guide: Generators, Decorators and Async | SkillPrep">
+<meta name="twitter:description" content="Generators, closures, decorators, dataclasses, MRO, context managers, exceptions and concurrency in Python 3, with runnable examples, exercises with…">
+<meta name="twitter:image" content="https://skillsprep.github.io/assets/og-image.png">
+<link rel="icon" href="../../assets/favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../../css/style.css">
+<script>(function(){try{if(localStorage.getItem("skillprep:theme")==="dark"){document.documentElement.setAttribute("data-theme","dark");}}catch(e){}})();</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"Advanced Python Study Guide: Generators, Decorators and Async","description":"Generators, closures, decorators, dataclasses, MRO, context managers, exceptions and concurrency in Python 3, with runnable examples, exercises with solutions and a 20-question quiz.","datePublished":"2026-11-21","dateModified":"2026-11-21","author":{"@type":"Organization","name":"SkillPrep editorial team"},"publisher":{"@type":"Organization","name":"SkillPrep","logo":{"@type":"ImageObject","url":"https://skillsprep.github.io/assets/favicon.svg"}},"mainEntityOfPage":"https://skillsprep.github.io/guides/advanced-python-study-guide/","image":"https://skillsprep.github.io/assets/og-image.png","articleSection":"Python","inLanguage":"en"}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://skillsprep.github.io/"},{"@type":"ListItem","position":2,"name":"Python","item":"https://skillsprep.github.io/#guides"},{"@type":"ListItem","position":3,"name":"Advanced Python Study Guide: Generators, Decorators and Async","item":"https://skillsprep.github.io/guides/advanced-python-study-guide/"}]}</script>
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9455217122501464" crossorigin="anonymous"></script>
+</head>
+<body>
+<a class="skip-link" href="#main">Skip to content</a>
+<header class="site-header">
+  <div class="container header-inner">
+    <a href="../../" class="logo"><span class="mark" aria-hidden="true">S</span> SkillPrep</a>
+    <button class="burger" id="burger" type="button" aria-label="Menu" aria-expanded="false" aria-controls="mainNav">☰</button>
+    <nav class="main-nav" id="mainNav" aria-label="Main">
+      <a href="../../">Home</a>
+      <a href="../../about/">About</a>
+      <a href="../../contact/">Contact</a>
+    </nav>
+    <button class="theme-toggle" id="themeToggle" type="button" aria-label="Toggle dark mode">◐</button>
+  </div>
+</header>
+<main id="main">
+
+<div id="progress" aria-hidden="true"></div>
+<section class="article-hero">
+  <div class="container">
+    <nav class="crumbs" aria-label="Breadcrumb"><a href="../../">Home</a> <span aria-hidden="true" class="sep">›</span> <a href="../../#guides">Guides</a> <span aria-hidden="true" class="sep">›</span> <span aria-current="page">Python</span></nav>
+    <div class="cat">Python</div>
+    <h1>Advanced Python Study Guide: Generators, Decorators and Async</h1>
+    <div class="meta">
+      <span><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg> 12 min read</span>
+      <span><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg> 20 Questions</span>
+      <span>Published <time datetime="2026-11-21">Nov 21, 2026</time></span>
+      <span>Reviewed <time datetime="2026-11-21">Nov 21, 2026</time></span>
+    </div>
+  </div>
+</section>
+<div class="container article-wrap">
+  <article class="article-body">
+    <p class="note"><b>Unofficial study resource.</b> Written independently of any exam provider, employer or software vendor.</p>
+    <details class="toc-mobile">
+      <summary>On this page</summary>
+      <div class="toc">
+        <a href="#what-you-will-learn">What you will learn</a>
+        <a href="#generators-and-iterators">Generators and iterators</a>
+        <a href="#functions-closures-decorators-and-caching">Functions: closures, decorators and caching</a>
+        <a href="#classes-properties-dunder-methods-dataclasses-and-mro">Classes: properties, dunder methods, dataclasses and MRO</a>
+        <a href="#context-managers">Context managers</a>
+        <a href="#errors-and-exceptions">Errors and exceptions</a>
+        <a href="#concurrency-threads-processes-and-asyncio">Concurrency: threads, processes and asyncio</a>
+        <a href="#practical-standard-library-tools">Practical standard-library tools</a>
+        <a href="#common-mistakes">Common mistakes</a>
+        <a href="#practical-learning-exercises">Practical learning exercises</a>
+        <a href="#interview-questions">Interview questions</a>
+        <a href="#practice-questions">Practice questions</a>
+        <a href="#preparation-checklist">Preparation checklist</a>
+        <a href="#sources">Sources &amp; further reading</a>
+      </div>
+    </details>
+    <p class="lead">Once you are comfortable with the basics, interviews move to how Python actually behaves: lazy iteration, closures, decorators, the class machinery, cleanup with <code>with</code>, and which concurrency model to pick. This guide covers those topics with short examples. Every code block on this page is a complete script that was run on Python 3.13 before publishing. For variables, loops, functions and data structures, start with the <a href="../python-study-guide/">Python study guide</a>. This is an unofficial study aid; the Python documentation is the final word.</p>
+    <h2 id="what-you-will-learn">What you will learn</h2>
+        <p>By the end you should be able to:</p>
+        <ul>
+          <li>Write generators and explain why they are lazy and single-use</li>
+          <li>Explain closures and late binding, and write decorators that keep function metadata</li>
+          <li>Use <code>@property</code>, dunder methods and dataclasses, and read a method resolution order</li>
+          <li>Write context managers and chain exceptions correctly</li>
+          <li>Choose between threads, processes and <code>asyncio</code>, and explain the GIL</li>
+        </ul>
+        <div class="callout"><b>Version</b> Examples were run on Python 3.13. Details such as the free-threaded build vary by version, so check the docs for yours.</div>
+    <h2 id="generators-and-iterators">Generators and iterators</h2>
+        <p>A function with <code>yield</code> is a generator function. Calling it does not run the body: it returns a generator, and execution starts when you ask for the first value. At each <code>yield</code> the function is suspended with all of its local state retained.</p>
+<pre><code>def squares(n):
+    for i in range(n):
+        yield i * i
+
+g = squares(3)
+print(next(g))     # 0
+print(list(g))     # [1, 4]
+print(list(g))     # []  (a generator can only be consumed once)</code></pre>
+        <p>A generator expression, <code>(x * x for x in range(3))</code>, is lazy in the same way, while a list comprehension builds the whole list at once. Laziness lets you work with infinite or very large sequences:</p>
+<pre><code>from itertools import islice
+
+def naturals():
+    n = 0
+    while True:
+        yield n
+        n += 1
+
+print(list(islice(naturals(), 4)))   # [0, 1, 2, 3]</code></pre>
+    <h2 id="functions-closures-decorators-and-caching">Functions: closures, decorators and caching</h2>
+        <p><b>Closures capture variables, not values.</b> All three lambdas below see the final value of <code>i</code>; a default argument binds the value at definition time.</p>
+<pre><code>late = [lambda: i for i in range(3)]
+bound = [lambda i=i: i for i in range(3)]
+print([f() for f in late])    # [2, 2, 2]
+print([f() for f in bound])   # [0, 1, 2]</code></pre>
+        <p><b>Decorators</b> wrap a function. <code>@wraps</code> copies the original's name and docstring onto the wrapper and adds a <code>__wrapped__</code> attribute.</p>
+<pre><code>from functools import wraps
+
+def counted(fn):
+    @wraps(fn)
+    def wrapper(*args, **kwargs):
+        wrapper.calls += 1
+        return fn(*args, **kwargs)
+    wrapper.calls = 0
+    return wrapper
+
+@counted
+def add(a, b):
+    "Add two numbers."
+    return a + b
+
+add(1, 2)
+print(add.__name__, add.calls)   # add 1</code></pre>
+        <p><b>Mutable default arguments</b> are created once, when the function is defined, and shared by every call:</p>
+<pre><code>def bad(x, items=[]):
+    items.append(x)
+    return items
+
+def good(x, items=None):
+    if items is None:
+        items = []
+    items.append(x)
+    return items
+
+print(bad(1))     # [1]
+print(bad(2))     # [1, 2]  (the same list is reused)
+print(good(1))    # [1]
+print(good(2))    # [2]</code></pre>
+        <p><b>Caching.</b> <code>functools.lru_cache</code> keeps the most recent calls (128 by default) and needs hashable arguments. <code>functools.cache</code> is <code>lru_cache(maxsize=None)</code>, an unbounded cache.</p>
+<pre><code>from functools import lru_cache
+
+@lru_cache(maxsize=None)
+def fib(n):
+    return n if n &lt; 2 else fib(n - 1) + fib(n - 2)
+
+print(fib(30))               # 832040
+print(fib.cache_info().misses)   # 31</code></pre>
+    <h2 id="classes-properties-dunder-methods-dataclasses-and-mro">Classes: properties, dunder methods, dataclasses and MRO</h2>
+        <p><b>Properties</b> run code on attribute access while callers keep plain attribute syntax:</p>
+<pre><code>class Temp:
+    def __init__(self, c):
+        self._c = c
+
+    @property
+    def c(self):
+        return self._c
+
+    @c.setter
+    def c(self, v):
+        if v &lt; -273.15:
+            raise ValueError("below absolute zero")
+        self._c = v
+
+    @property
+    def f(self):
+        return self._c * 9 / 5 + 32
+
+t = Temp(100)
+print(t.f)    # 212.0
+t.c = 0
+print(t.f)    # 32.0</code></pre>
+        <p><b>Dunder methods</b> let your class work with operators and built-ins. If you define <code>__eq__</code> without <code>__hash__</code>, Python sets <code>__hash__</code> to <code>None</code>, so instances become unhashable.</p>
+<pre><code>class Vec:
+    def __init__(self, x, y):
+        self.x, self.y = x, y
+
+    def __repr__(self):
+        return f"Vec({self.x}, {self.y})"
+
+    def __eq__(self, other):
+        return isinstance(other, Vec) and (self.x, self.y) == (other.x, other.y)
+
+    def __add__(self, other):
+        return Vec(self.x + other.x, self.y + other.y)
+
+print(Vec(1, 2) + Vec(3, 4))        # Vec(4, 6)
+print(Vec(1, 2) == Vec(1, 2))       # True
+print(Vec.__hash__)                 # None</code></pre>
+        <p><b>Dataclasses.</b> By default <code>@dataclass</code> generates <code>__init__</code>, <code>__repr__</code> and <code>__eq__</code>. Ordering needs <code>order=True</code> (which requires <code>eq=True</code>). A mutable default such as <code>x: list = []</code> raises <code>ValueError</code>; use <code>default_factory</code>. With <code>frozen=True</code>, assigning to a field raises <code>FrozenInstanceError</code>, a subclass of <code>AttributeError</code>.</p>
+<pre><code>from dataclasses import dataclass, field, FrozenInstanceError
+
+@dataclass
+class Item:
+    name: str
+    qty: int = 0
+    tags: list = field(default_factory=list)
+
+print(Item("pen", 2))                      # Item(name='pen', qty=2, tags=[])
+print(Item("pen", 2) == Item("pen", 2))    # True
+
+@dataclass(frozen=True)
+class Point:
+    x: int
+
+p = Point(1)
+try:
+    p.x = 2
+except FrozenInstanceError:
+    print("frozen")</code></pre>
+        <p><b>Method resolution order.</b> <code>super()</code> follows the MRO of the instance's class. In the diamond below the chain is D, B, C, A, not D, B, A:</p>
+<pre><code>class A:
+    def who(self):
+        return "A"
+
+class B(A):
+    def who(self):
+        return "B&gt;" + super().who()
+
+class C(A):
+    def who(self):
+        return "C&gt;" + super().who()
+
+class D(B, C):
+    def who(self):
+        return "D&gt;" + super().who()
+
+print(D().who())                              # D&gt;B&gt;C&gt;A
+print([k.__name__ for k in D.__mro__])        # ['D', 'B', 'C', 'A', 'object']</code></pre>
+    <h2 id="context-managers">Context managers</h2>
+        <p>A <code>with</code> statement calls <code>__enter__</code> at the start and <code>__exit__</code> at the end, even when the body raises. The shortest way to write one is a generator with <code>@contextlib.contextmanager</code>; put the cleanup in a <code>finally</code> block so it runs on errors.</p>
+<pre><code>import contextlib
+
+@contextlib.contextmanager
+def tag(log, name):
+    log.append("open " + name)
+    try:
+        yield name
+    finally:
+        log.append("close " + name)
+
+log = []
+try:
+    with tag(log, "x"):
+        raise RuntimeError
+except RuntimeError:
+    pass
+print(log)    # ['open x', 'close x']</code></pre>
+        <p>Files are the everyday example: <code>with open(path, "w", encoding="utf-8") as f:</code> closes the file for you. <code>pathlib.Path</code> gives readable path handling:</p>
+<pre><code>import tempfile
+from pathlib import Path
+
+with tempfile.TemporaryDirectory() as d:
+    p = Path(d) / "notes.txt"
+    with open(p, "w", encoding="utf-8") as f:
+        f.write("a\nb\n")
+    print(p.read_text(encoding="utf-8").splitlines())   # ['a', 'b']
+    print(p.suffix, p.stem, p.exists())                 # .txt notes True</code></pre>
+    <h2 id="errors-and-exceptions">Errors and exceptions</h2>
+        <p>Create your own exception by subclassing <code>Exception</code>. Use <code>raise ... from ...</code> to keep the original as <code>__cause__</code>. A <code>finally</code> block runs even when the <code>try</code> block returns.</p>
+<pre><code>class ValidationError(Exception):
+    def __init__(self, field, msg):
+        super().__init__(f"{field}: {msg}")
+        self.field = field
+
+try:
+    raise ValidationError("age", "must be positive")
+except ValidationError as e:
+    print(e, e.field)          # age: must be positive age
+
+try:
+    try:
+        int("x")
+    except ValueError as e:
+        raise RuntimeError("bad config") from e
+except RuntimeError as e:
+    print(type(e.__cause__).__name__)   # ValueError
+
+def order():
+    out = []
+    try:
+        out.append("try")
+        return out
+    finally:
+        out.append("finally")
+
+print(order())    # ['try', 'finally']</code></pre>
+        <div class="callout"><b>Catch narrowly</b> <code>except Exception</code> does not catch <code>SystemExit</code> or <code>KeyboardInterrupt</code>, which derive from <code>BaseException</code>. A bare <code>except:</code> catches them too, so avoid it.</div>
+    <h2 id="concurrency-threads-processes-and-asyncio">Concurrency: threads, processes and asyncio</h2>
+        <table>
+          <tr><th>Workload</th><th>Usual choice</th><th>Why</th></tr>
+          <tr><td>Many network or disk waits</td><td><code>asyncio</code> or threads</td><td>The GIL is released during I/O, so waits overlap</td></tr>
+          <tr><td>Heavy pure-Python computation</td><td>Multiple processes</td><td>Only one thread runs Python bytecode at a time in a standard build</td></tr>
+          <tr><td>Blocking call inside async code</td><td><code>asyncio.to_thread()</code></td><td>A blocking call would stall the event loop</td></tr>
+        </table>
+        <p>The <b>GIL</b> is a CPython mechanism ensuring only one thread executes Python bytecode at a time. Some extension modules release it during heavy work such as compression or hashing. Python 3.13 adds an optional free-threaded build (<code>--disable-gil</code>), but the standard build still has the GIL.</p>
+        <p><b>asyncio.</b> Calling an <code>async def</code> function only creates a coroutine object; run it with <code>asyncio.run()</code>, <code>await</code> it, or schedule it as a task. <code>asyncio.gather()</code> runs awaitables concurrently and returns results in the order given. By default the first exception propagates and the others keep running; with <code>return_exceptions=True</code>, exceptions are returned in the result list.</p>
+<pre><code>import asyncio
+import time
+
+async def fetch(name, delay):
+    await asyncio.sleep(delay)
+    return name
+
+async def main():
+    start = time.perf_counter()
+    results = await asyncio.gather(fetch("a", 0.2), fetch("b", 0.2), fetch("c", 0.2))
+    print(results, round(time.perf_counter() - start, 1))   # ['a', 'b', 'c'] 0.2
+
+asyncio.run(main())</code></pre>
+        <p>Three 0.2-second waits finish in about 0.2 seconds, not 0.6, because they overlap. The exact timing depends on your machine.</p>
+    <h2 id="practical-standard-library-tools">Practical standard-library tools</h2>
+<pre><code>from collections import Counter, defaultdict
+from itertools import chain, groupby
+
+print(Counter("banana").most_common(1))        # [('a', 3)]
+
+groups = defaultdict(list)
+for key, value in [("x", 1), ("y", 2), ("x", 3)]:
+    groups[key].append(value)
+print(dict(groups))                            # {'x': [1, 3], 'y': [2]}
+
+print(list(chain([1], [2, 3])))                # [1, 2, 3]
+
+words = sorted(["ant", "bee", "ape"], key=lambda s: s[0])   # groupby needs sorted input
+print({k: list(v) for k, v in groupby(words, key=lambda s: s[0])})   # {'a': ['ant', 'ape'], 'b': ['bee']}</code></pre>
+        <p>Use a virtual environment per project (<code>python -m venv .venv</code>) so dependencies installed with <code>pip</code> stay separate between projects.</p>
+    <h2 id="common-mistakes">Common mistakes</h2>
+        <table>
+          <tr><th>Mistake</th><th>Better approach</th></tr>
+          <tr><td>Mutable default argument (<code>items=[]</code>)</td><td>Default to <code>None</code> and create the object inside</td></tr>
+          <tr><td>Lambdas in a loop all returning the last value</td><td>Bind with a default argument: <code>lambda i=i: i</code></td></tr>
+          <tr><td>Re-using an exhausted generator</td><td>Create a new generator, or store results in a list</td></tr>
+          <tr><td>Decorator without <code>@wraps</code></td><td>Use <code>functools.wraps</code> to keep name and docstring</td></tr>
+          <tr><td>Caching a function with list arguments</td><td>Arguments must be hashable; convert to a tuple</td></tr>
+          <tr><td>Dataclass field <code>x: list = []</code></td><td><code>field(default_factory=list)</code></td></tr>
+          <tr><td>Defining <code>__eq__</code> and expecting hashing to work</td><td>Define <code>__hash__</code> too, or use a frozen dataclass</td></tr>
+          <tr><td>Calling an async function without <code>await</code></td><td>Await it, or run it with <code>asyncio.run()</code></td></tr>
+          <tr><td>Blocking calls inside coroutines</td><td>Use <code>asyncio.to_thread()</code> for blocking I/O</td></tr>
+          <tr><td>Bare <code>except:</code></td><td>Catch specific exceptions</td></tr>
+        </table>
+    <h2 id="practical-learning-exercises">Practical learning exercises</h2>
+        <ul>
+          <li><b>Exercise 1 (generator).</b> Write a generator <code>evens(limit)</code> that yields the even numbers below <code>limit</code>. <i>Solution:</i>
+<pre><code>def evens(limit):
+    for n in range(0, limit, 2):
+        yield n
+
+print(list(evens(9)))   # [0, 2, 4, 6, 8]</code></pre></li>
+          <li><b>Exercise 2 (decorator).</b> Write a decorator <code>counted</code> that counts how many times a function is called and keeps the function's name. <i>Solution:</i> the <code>counted</code> decorator in the functions section above; check <code>add.calls</code> and <code>add.__name__</code>.</li>
+          <li><b>Exercise 3 (dataclass).</b> Define an <code>Item</code> with a name, an integer quantity defaulting to 0, and a list of tags that is not shared between instances. <i>Solution:</i> the <code>Item</code> dataclass above; confirm that <code>Item("a").tags is not Item("b").tags</code>.</li>
+          <li><b>Exercise 4 (context manager).</b> Write a context manager that records "open" and "close" even if the body raises. <i>Solution:</i> the <code>tag</code> context manager above.</li>
+          <li><b>Exercise 5 (asyncio).</b> Run three 0.2-second tasks so the total is about 0.2 seconds. <i>Solution:</i> the <code>asyncio.gather</code> example above.</li>
+        </ul>
+    <h2 id="interview-questions">Interview questions</h2>
+        <p>Try answering aloud before you open each one.</p>
+        <details class="faq"><summary>What is the difference between an iterable, an iterator and a generator?</summary><p>An iterable can produce an iterator (it has __iter__). An iterator produces values one at a time with __next__ and raises StopIteration when finished. A generator is an iterator created by a function containing yield, or by a generator expression, and it keeps its local state between values.</p></details>
+        <details class="faq"><summary>What is a closure?</summary><p>A function that remembers variables from the scope where it was defined. The variable is captured, not its value at that moment, which is why lambdas created in a loop all see the loop variable's final value unless you bind it with a default argument.</p></details>
+        <details class="faq"><summary>How does a decorator work?</summary><p>@decorator above a function is shorthand for func = decorator(func). The decorator returns a wrapper that runs extra code around the original. Use functools.wraps on the wrapper so the name, docstring and __wrapped__ attribute are preserved.</p></details>
+        <details class="faq"><summary>Why is a mutable default argument a bug?</summary><p>Default values are evaluated once, when the def statement runs, so one list or dict is shared by every call. Use None as the default and create the object inside the function.</p></details>
+        <details class="faq"><summary>When would you use a dataclass instead of a plain class?</summary><p>When the class mainly holds data. @dataclass generates __init__, __repr__ and __eq__ from annotated fields, and options such as frozen=True and order=True add immutability and ordering. Use field(default_factory=...) for mutable defaults.</p></details>
+        <details class="faq"><summary>What is the method resolution order (MRO)?</summary><p>The order Python searches classes for an attribute. It is available as Class.__mro__ and follows C3 linearisation. super() follows the MRO of the instance's class, not simply the parent of the current class.</p></details>
+        <details class="faq"><summary>How does a with statement work?</summary><p>The object's __enter__ runs at the start and its __exit__ runs at the end, even if the body raises. You can write one as a class, or as a generator with @contextlib.contextmanager where code after the yield (in a finally block) is the cleanup.</p></details>
+        <details class="faq"><summary>What does raise ... from ... do?</summary><p>It chains exceptions: the new exception's __cause__ is set to the original, so tracebacks show both. It is the usual way to translate a low-level error into a clearer one without losing the original.</p></details>
+        <details class="faq"><summary>Threads, processes or asyncio?</summary><p>Use asyncio or threads for I/O-bound work, because waiting overlaps. Use multiple processes for CPU-bound pure Python on multiple cores, because of the GIL. Python 3.13 also offers an optional free-threaded build, configured with --disable-gil, but the standard build still has the GIL.</p></details>
+        <details class="faq"><summary>What is the GIL?</summary><p>The global interpreter lock: a CPython mechanism that lets only one thread execute Python bytecode at a time. It is released during I/O, and some extension modules release it during heavy computation such as compression or hashing.</p></details>
+        <details class="faq"><summary>What does async def actually give you?</summary><p>Calling it returns a coroutine object that does nothing until awaited, passed to asyncio.run(), or scheduled as a task. Blocking calls inside a coroutine block the whole event loop, so use asyncio.to_thread() for blocking I/O.</p></details>
+        <details class="faq"><summary>How do lru_cache and cache differ?</summary><p>lru_cache(maxsize=128) keeps the 128 most recent calls by default, and arguments must be hashable. functools.cache is lru_cache(maxsize=None): an unbounded cache that never evicts, so it is smaller and faster but can grow without limit.</p></details>
+    <h2 id="practice-questions">Practice questions</h2>
+        <div class="quiz" data-quiz>
+          <div class="q-head"><span>Question 1 of 20</span><span>Generators</span></div>
+          <div class="q-body" role="radiogroup" aria-labelledby="advanced-python-study-guide-iq1-t">
+            <p class="q-text" id="advanced-python-study-guide-iq1-t">You call a generator function. When does its body start running?</p>
+            <label class="opt"><input type="radio" name="advanced-python-study-guide-q1"> Only when close() is called</label>
+            <label class="opt"><input type="radio" name="advanced-python-study-guide-q1"> Immediately, up to the first yield</label>
+            <label class="opt" data-correct><input type="radio" name="advanced-python-study-guide-q1"> When the first value is requested, for example with next()</label>
+            <label class="opt"><input type="radio" name="advanced-python-study-guide-q1"> When the function is defined</label>
+            <button type="button" class="check-btn">Check answer</button><span class="q-result" role="status" aria-live="polite"></span>
+          </div>
+          <div class="q-explain"><b>Why:</b> Calling a generator function only creates a generator object. Execution starts when one of its methods, such as next(), is called, and it runs to the first yield.</div>
+        </div>
+        <div class="quiz" data-quiz>
+          <div class="q-head"><span>Question 2 of 20</span><span>Generators</span></div>
+          <div class="q-body" role="radiogroup" aria-labelledby="advanced-python-study-guide-iq2-t">
+            <p class="q-text" id="advanced-python-study-guide-iq2-t">After a generator has been fully consumed with list(g), what does a second list(g) return?</p>
+            <label class="opt" data-correct><input type="radio" name="advanced-python-study-guide-q2"> An empty list</label>
+            <label class="opt"><input type="radio" name="advanced-python-study-guide-q2"> An error</label>
+            <label class="opt"><input type="radio" name="advanced-python-study-guide-q2"> The last value only</label>
+            <label class="opt"><input type="radio" name="advanced-python-study-guide-q2"> The same values again</label>
+            <button type="button" class="check-btn">Check answer</button><span class="q-result" role="status" aria-live="polite"></span>
+          </div>
+          <div class="q-explain"><b>Why:</b> A generator is its own iterator and can only be consumed once. After it is exhausted, further iteration yields nothing.</div>
+        </div>
+        <div class="quiz" data-quiz>
+          <div class="q-head"><span>Question 3 of 20</span><span>Generators</span></div>
+          <div class="q-body" role="radiogroup" aria-labelledby="advanced-python-study-guide-iq3-t">
+            <p class="q-text" id="advanced-python-study-guide-iq3-t">Why use a generator expression instead of a list comprehension when summing a very large range?</p>
+            <label class="opt"><input type="radio" name="advanced-python-study-guide-q3"> It sorts the values</label>
+            <label class="opt"><input type="radio" name="advanced-python-study-guide-q3"> It avoids the need for a loop variable</label>
+            <label class="opt"><input type="radio" name="advanced-python-study-guide-q3"> It is always faster</label>
+            <label class="opt" data-correct><input type="radio" name="advanced-python-study-guide-q3"> It produces values lazily, so the whole list is never held in memory</label>
+            <button type="button" class="check-btn">Check answer</button><span class="q-result" role="status" aria-live="polite"></span>
+          </div>
+          <div class="q-explain"><b>Why:</b> A list comprehension builds the whole list first. A generator expression yields one value at a time, which keeps memory use small.</div>
+        </div>
+        <div class="quiz" data-quiz>
+          <div class="q-head"><span>Question 4 of 20</span><span>Closures</span></div>
+          <div class="q-body" role="radiogroup" aria-labelledby="advanced-python-study-guide-iq4-t">
+            <p class="q-text" id="advanced-python-study-guide-iq4-t">What does [f() for f in [lambda: i for i in range(3)]] return?</p>
+            <label class="opt"><input type="radio" name="advanced-python-study-guide-q4"> [0, 1, 2]</label>
+            <label class="opt" data-correct><input type="radio" name="advanced-python-study-guide-q4"> [2, 2, 2]</label>
+            <label class="opt"><input type="radio" name="advanced-python-study-guide-q4"> [0, 0, 0]</label>
+            <label class="opt"><input type="radio" name="advanced-python-study-guide-q4"> An error</label>
+            <button type="button" class="check-btn">Check answer</button><span class="q-result" role="status" aria-live="polite"></span>
+          </div>
+          <div class="q-explain"><b>Why:</b> Closures capture the variable i, not its value at the time. By the time the lambdas are called, i is 2. Bind it with a default argument (lambda i=i: i) to get [0, 1, 2].</div>
+        </div>
+        <div class="quiz" data-quiz>
+          <div class="q-head"><span>Question 5 of 20</span><span>Decorators</span></div>
+          <div class="q-body" role="radiogroup" aria-labelledby="advanced-python-study-guide-iq5-t">
+            <p class="q-text" id="advanced-python-study-guide-iq5-t">What does functools.wraps do inside a decorator?</p>
+            <label class="opt"><input type="radio" name="advanced-python-study-guide-q5"> Prevents the function from being called twice</label>
+            <label class="opt"><input type="radio" name="advanced-python-study-guide-q5"> Makes the wrapper run faster</label>
+            <label class="opt" data-correct><input type="radio" name="advanced-python-study-guide-q5"> Copies the wrapped function's metadata, such as __name__ and __doc__, onto the wrapper</label>
+            <label class="opt"><input type="radio" name="advanced-python-study-guide-q5"> Caches the result</label>
+            <button type="button" class="check-btn">Check answer</button><span class="q-result" role="status" aria-live="polite"></span>
+          </div>
+          <div class="q-explain"><b>Why:</b> Without wraps, the decorated function reports the wrapper's name and loses its docstring. wraps also adds a __wrapped__ attribute pointing to the original.</div>
+        </div>
+        <div class="quiz" data-quiz>
+          <div class="q-head"><span>Question 6 of 20</span><span>Defaults</span></div>
+          <div class="q-body" role="radiogroup" aria-labelledby="advanced-python-study-guide-iq6-t">
+            <p class="q-text" id="advanced-python-study-guide-iq6-t">What is wrong with def add(x, items=[]): items.append(x); return items?</p>
+            <label class="opt"><input type="radio" name="advanced-python-study-guide-q6"> Lists cannot be default values</label>
+            <label class="opt"><input type="radio" name="advanced-python-study-guide-q6"> It raises SyntaxError</label>
+            <label class="opt"><input type="radio" name="advanced-python-study-guide-q6"> Nothing; each call gets a new list</label>
+            <label class="opt" data-correct><input type="radio" name="advanced-python-study-guide-q6"> The default list is created once and shared between calls</label>
+            <button type="button" class="check-btn">Check answer</button><span class="q-result" role="status" aria-live="polite"></span>
+          </div>
+          <div class="q-explain"><b>Why:</b> Default values are evaluated once when the function is defined. Use items=None and create the list inside the function.</div>
+        </div>
+        <div class="quiz" data-quiz>
+          <div class="q-head"><span>Question 7 of 20</span><span>functools</span></div>
+          <div class="q-body" role="radiogroup" aria-labelledby="advanced-python-study-guide-iq7-t">
+            <p class="q-text" id="advanced-python-study-guide-iq7-t">What is the default maxsize of functools.lru_cache?</p>
+            <label class="opt" data-correct><input type="radio" name="advanced-python-study-guide-q7"> 128</label>
+            <label class="opt"><input type="radio" name="advanced-python-study-guide-q7"> 1024</label>
+            <label class="opt"><input type="radio" name="advanced-python-study-guide-q7"> None (unbounded)</label>
+            <label class="opt"><input type="radio" name="advanced-python-study-guide-q7"> 32</label>
+            <button type="button" class="check-btn">Check answer</button><span class="q-result" role="status" aria-live="polite"></span>
+          </div>
+          <div class="q-explain"><b>Why:</b> lru_cache keeps up to 128 recent calls by default. maxsize=None disables eviction, which is what functools.cache does.</div>
+        </div>
+        <div class="quiz" data-quiz>
+          <div class="q-head"><span>Question 8 of 20</span><span>functools</span></div>
+          <div class="q-body" role="radiogroup" aria-labelledby="advanced-python-study-guide-iq8-t">
+            <p class="q-text" id="advanced-python-study-guide-iq8-t">What happens if you call an lru_cache-decorated function with a list argument?</p>
+            <label class="opt"><input type="radio" name="advanced-python-study-guide-q8"> The list is converted to a tuple</label>
+            <label class="opt" data-correct><input type="radio" name="advanced-python-study-guide-q8"> TypeError, because arguments must be hashable</label>
+            <label class="opt"><input type="radio" name="advanced-python-study-guide-q8"> The result is cached by list contents</label>
+            <label class="opt"><input type="radio" name="advanced-python-study-guide-q8"> Nothing special</label>
+            <button type="button" class="check-btn">Check answer</button><span class="q-result" role="status" aria-live="polite"></span>
+          </div>
+          <div class="q-explain"><b>Why:</b> The cache is a dictionary keyed by the arguments, so positional and keyword arguments must be hashable. Lists are not.</div>
+        </div>
+        <div class="quiz" data-quiz>
+          <div class="q-head"><span>Question 9 of 20</span><span>Dataclasses</span></div>
+          <div class="q-body" role="radiogroup" aria-labelledby="advanced-python-study-guide-iq9-t">
+            <p class="q-text" id="advanced-python-study-guide-iq9-t">Which methods does @dataclass generate by default?</p>
+            <label class="opt"><input type="radio" name="advanced-python-study-guide-q9"> __init__ and __lt__ only</label>
+            <label class="opt"><input type="radio" name="advanced-python-study-guide-q9"> __str__ and __hash__</label>
+            <label class="opt"><input type="radio" name="advanced-python-study-guide-q9"> All comparison methods</label>
+            <label class="opt" data-correct><input type="radio" name="advanced-python-study-guide-q9"> __init__, __repr__ and __eq__</label>
+            <button type="button" class="check-btn">Check answer</button><span class="q-result" role="status" aria-live="polite"></span>
+          </div>
+          <div class="q-explain"><b>Why:</b> The defaults are init=True, repr=True and eq=True. Ordering methods are generated only with order=True.</div>
+        </div>
+        <div class="quiz" data-quiz>
+          <div class="q-head"><span>Question 10 of 20</span><span>Dataclasses</span></div>
+          <div class="q-body" role="radiogroup" aria-labelledby="advanced-python-study-guide-iq10-t">
+            <p class="q-text" id="advanced-python-study-guide-iq10-t">What happens with a dataclass field written as x: list = [] ?</p>
+            <label class="opt"><input type="radio" name="advanced-python-study-guide-q10"> The field is ignored</label>
+            <label class="opt"><input type="radio" name="advanced-python-study-guide-q10"> Each instance gets its own list</label>
+            <label class="opt" data-correct><input type="radio" name="advanced-python-study-guide-q10"> ValueError, because mutable defaults are not allowed; use field(default_factory=list)</label>
+            <label class="opt"><input type="radio" name="advanced-python-study-guide-q10"> The list is shared silently</label>
+            <button type="button" class="check-btn">Check answer</button><span class="q-result" role="status" aria-live="polite"></span>
+          </div>
+          <div class="q-explain"><b>Why:</b> @dataclass raises ValueError for unhashable defaults such as a list. default_factory calls a zero-argument callable to build a fresh value for each instance.</div>
+        </div>
+        <div class="quiz" data-quiz>
+          <div class="q-head"><span>Question 11 of 20</span><span>Dataclasses</span></div>
+          <div class="q-body" role="radiogroup" aria-labelledby="advanced-python-study-guide-iq11-t">
+            <p class="q-text" id="advanced-python-study-guide-iq11-t">You assign to a field of a frozen dataclass instance. What is raised?</p>
+            <label class="opt" data-correct><input type="radio" name="advanced-python-study-guide-q11"> FrozenInstanceError, a subclass of AttributeError</label>
+            <label class="opt"><input type="radio" name="advanced-python-study-guide-q11"> ValueError</label>
+            <label class="opt"><input type="radio" name="advanced-python-study-guide-q11"> Nothing; the assignment works</label>
+            <label class="opt"><input type="radio" name="advanced-python-study-guide-q11"> TypeError</label>
+            <button type="button" class="check-btn">Check answer</button><span class="q-result" role="status" aria-live="polite"></span>
+          </div>
+          <div class="q-explain"><b>Why:</b> frozen=True makes assignment raise FrozenInstanceError, which subclasses AttributeError.</div>
+        </div>
+        <div class="quiz" data-quiz>
+          <div class="q-head"><span>Question 12 of 20</span><span>Dataclasses</span></div>
+          <div class="q-body" role="radiogroup" aria-labelledby="advanced-python-study-guide-iq12-t">
+            <p class="q-text" id="advanced-python-study-guide-iq12-t">What does @dataclass(order=True, eq=False) do?</p>
+            <label class="opt"><input type="radio" name="advanced-python-study-guide-q12"> Generates everything</label>
+            <label class="opt"><input type="radio" name="advanced-python-study-guide-q12"> Is ignored</label>
+            <label class="opt"><input type="radio" name="advanced-python-study-guide-q12"> Generates ordering but not equality</label>
+            <label class="opt" data-correct><input type="radio" name="advanced-python-study-guide-q12"> Raises ValueError, because order=True requires eq=True</label>
+            <button type="button" class="check-btn">Check answer</button><span class="q-result" role="status" aria-live="polite"></span>
+          </div>
+          <div class="q-explain"><b>Why:</b> The docs state that if order is true and eq is false, a ValueError is raised.</div>
+        </div>
+        <div class="quiz" data-quiz>
+          <div class="q-head"><span>Question 13 of 20</span><span>Data model</span></div>
+          <div class="q-body" role="radiogroup" aria-labelledby="advanced-python-study-guide-iq13-t">
+            <p class="q-text" id="advanced-python-study-guide-iq13-t">A class defines __eq__ but not __hash__. What happens to hashing of its instances?</p>
+            <label class="opt"><input type="radio" name="advanced-python-study-guide-q13"> Instances stay hashable by identity</label>
+            <label class="opt" data-correct><input type="radio" name="advanced-python-study-guide-q13"> __hash__ is set to None, so instances are unhashable</label>
+            <label class="opt"><input type="radio" name="advanced-python-study-guide-q13"> Python raises an error at class creation</label>
+            <label class="opt"><input type="radio" name="advanced-python-study-guide-q13"> Hash is computed from __eq__ automatically</label>
+            <button type="button" class="check-btn">Check answer</button><span class="q-result" role="status" aria-live="polite"></span>
+          </div>
+          <div class="q-explain"><b>Why:</b> Defining __eq__ without __hash__ sets __hash__ to None. Define both if instances must be used in sets or as dict keys.</div>
+        </div>
+        <div class="quiz" data-quiz>
+          <div class="q-head"><span>Question 14 of 20</span><span>Inheritance</span></div>
+          <div class="q-body" role="radiogroup" aria-labelledby="advanced-python-study-guide-iq14-t">
+            <p class="q-text" id="advanced-python-study-guide-iq14-t">Given class D(B, C), where B and C both inherit from A, what is D's method resolution order?</p>
+            <label class="opt" data-correct><input type="radio" name="advanced-python-study-guide-q14"> D, B, C, A, object</label>
+            <label class="opt"><input type="radio" name="advanced-python-study-guide-q14"> D, B, A, C, object</label>
+            <label class="opt"><input type="radio" name="advanced-python-study-guide-q14"> D, C, B, A, object</label>
+            <label class="opt"><input type="radio" name="advanced-python-study-guide-q14"> D, A, B, C, object</label>
+            <button type="button" class="check-btn">Check answer</button><span class="q-result" role="status" aria-live="polite"></span>
+          </div>
+          <div class="q-explain"><b>Why:</b> C3 linearisation keeps D first, then its bases in the order listed, and puts the shared base A after both B and C. That is why super() chains B, then C, then A.</div>
+        </div>
+        <div class="quiz" data-quiz>
+          <div class="q-head"><span>Question 15 of 20</span><span>Classes</span></div>
+          <div class="q-body" role="radiogroup" aria-labelledby="advanced-python-study-guide-iq15-t">
+            <p class="q-text" id="advanced-python-study-guide-iq15-t">What does the @property decorator let you do?</p>
+            <label class="opt"><input type="radio" name="advanced-python-study-guide-q15"> Create class-level constants</label>
+            <label class="opt"><input type="radio" name="advanced-python-study-guide-q15"> Make an attribute private and unreachable</label>
+            <label class="opt" data-correct><input type="radio" name="advanced-python-study-guide-q15"> Run code when an attribute is read, using normal attribute syntax</label>
+            <label class="opt"><input type="radio" name="advanced-python-study-guide-q15"> Speed up attribute access</label>
+            <button type="button" class="check-btn">Check answer</button><span class="q-result" role="status" aria-live="polite"></span>
+          </div>
+          <div class="q-explain"><b>Why:</b> A property exposes a method as an attribute. With a setter, you can validate on assignment while callers keep using obj.x = value.</div>
+        </div>
+        <div class="quiz" data-quiz>
+          <div class="q-head"><span>Question 16 of 20</span><span>Context managers</span></div>
+          <div class="q-body" role="radiogroup" aria-labelledby="advanced-python-study-guide-iq16-t">
+            <p class="q-text" id="advanced-python-study-guide-iq16-t">A function decorated with @contextlib.contextmanager yields inside try/finally, and the with-body raises an exception. What happens to the finally block?</p>
+            <label class="opt"><input type="radio" name="advanced-python-study-guide-q16"> It is skipped</label>
+            <label class="opt" data-correct><input type="radio" name="advanced-python-study-guide-q16"> It runs, and the exception then propagates</label>
+            <label class="opt"><input type="radio" name="advanced-python-study-guide-q16"> It runs only if the exception is caught</label>
+            <label class="opt"><input type="radio" name="advanced-python-study-guide-q16"> It runs twice</label>
+            <button type="button" class="check-btn">Check answer</button><span class="q-result" role="status" aria-live="polite"></span>
+          </div>
+          <div class="q-explain"><b>Why:</b> The exception is re-raised inside the generator at the yield, so the finally block runs for cleanup. The exception then propagates to the caller.</div>
+        </div>
+        <div class="quiz" data-quiz>
+          <div class="q-head"><span>Question 17 of 20</span><span>Concurrency</span></div>
+          <div class="q-body" role="radiogroup" aria-labelledby="advanced-python-study-guide-iq17-t">
+            <p class="q-text" id="advanced-python-study-guide-iq17-t">What does the CPython GIL guarantee?</p>
+            <label class="opt"><input type="radio" name="advanced-python-study-guide-q17"> All threads run in parallel on every core</label>
+            <label class="opt"><input type="radio" name="advanced-python-study-guide-q17"> Processes cannot run in parallel</label>
+            <label class="opt"><input type="radio" name="advanced-python-study-guide-q17"> Code is automatically asynchronous</label>
+            <label class="opt" data-correct><input type="radio" name="advanced-python-study-guide-q17"> Only one thread executes Python bytecode at a time</label>
+            <button type="button" class="check-btn">Check answer</button><span class="q-result" role="status" aria-live="polite"></span>
+          </div>
+          <div class="q-explain"><b>Why:</b> The Python glossary defines the GIL as the mechanism ensuring only one thread executes Python bytecode at a time, at the cost of much of the parallelism of multi-core machines.</div>
+        </div>
+        <div class="quiz" data-quiz>
+          <div class="q-head"><span>Question 18 of 20</span><span>Concurrency</span></div>
+          <div class="q-body" role="radiogroup" aria-labelledby="advanced-python-study-guide-iq18-t">
+            <p class="q-text" id="advanced-python-study-guide-iq18-t">Why can threads still speed up I/O-bound work despite the GIL?</p>
+            <label class="opt" data-correct><input type="radio" name="advanced-python-study-guide-q18"> The GIL is always released while doing I/O</label>
+            <label class="opt"><input type="radio" name="advanced-python-study-guide-q18"> The GIL does not exist for threads</label>
+            <label class="opt"><input type="radio" name="advanced-python-study-guide-q18"> I/O runs on the GPU</label>
+            <label class="opt"><input type="radio" name="advanced-python-study-guide-q18"> Threads share one core for free</label>
+            <button type="button" class="check-btn">Check answer</button><span class="q-result" role="status" aria-live="polite"></span>
+          </div>
+          <div class="q-explain"><b>Why:</b> The glossary says the GIL is always released when doing I/O. Threads waiting on the network or disk can overlap. For CPU-bound pure Python, the docs point to multiple processes.</div>
+        </div>
+        <div class="quiz" data-quiz>
+          <div class="q-head"><span>Question 19 of 20</span><span>asyncio</span></div>
+          <div class="q-body" role="radiogroup" aria-labelledby="advanced-python-study-guide-iq19-t">
+            <p class="q-text" id="advanced-python-study-guide-iq19-t">You call an async def function without await. What do you get?</p>
+            <label class="opt"><input type="radio" name="advanced-python-study-guide-q19"> A SyntaxError</label>
+            <label class="opt"><input type="radio" name="advanced-python-study-guide-q19"> The function runs and returns its value</label>
+            <label class="opt" data-correct><input type="radio" name="advanced-python-study-guide-q19"> A coroutine object, and the code does not run</label>
+            <label class="opt"><input type="radio" name="advanced-python-study-guide-q19"> A thread</label>
+            <button type="button" class="check-btn">Check answer</button><span class="q-result" role="status" aria-live="polite"></span>
+          </div>
+          <div class="q-explain"><b>Why:</b> Calling a coroutine function only creates a coroutine object. Run it with asyncio.run(), await it, or schedule it as a task. An unawaited coroutine triggers a RuntimeWarning.</div>
+        </div>
+        <div class="quiz" data-quiz>
+          <div class="q-head"><span>Question 20 of 20</span><span>asyncio</span></div>
+          <div class="q-body" role="radiogroup" aria-labelledby="advanced-python-study-guide-iq20-t">
+            <p class="q-text" id="advanced-python-study-guide-iq20-t">With asyncio.gather(a, b) and the default return_exceptions=False, task a raises. What happens?</p>
+            <label class="opt"><input type="radio" name="advanced-python-study-guide-q20"> Both are cancelled immediately</label>
+            <label class="opt" data-correct><input type="radio" name="advanced-python-study-guide-q20"> The first exception propagates to the awaiting task, and the other awaitables are not cancelled</label>
+            <label class="opt"><input type="radio" name="advanced-python-study-guide-q20"> The exception is ignored</label>
+            <label class="opt"><input type="radio" name="advanced-python-study-guide-q20"> gather returns None</label>
+            <button type="button" class="check-btn">Check answer</button><span class="q-result" role="status" aria-live="polite"></span>
+          </div>
+          <div class="q-explain"><b>Why:</b> By default the first raised exception propagates, and the other awaitables keep running. With return_exceptions=True, exceptions are collected in the result list. TaskGroup cancels the remaining tasks.</div>
+        </div>
+    <h2 id="preparation-checklist">Preparation checklist</h2>
+        <ul>
+          <li>Explain why a generator is lazy and single-use, and write one with <code>yield</code></li>
+          <li>Explain late binding in closures and how to fix it</li>
+          <li>Write a decorator with <code>@wraps</code> and explain what it preserves</li>
+          <li>Explain the mutable default argument bug and the <code>None</code> pattern</li>
+          <li>Say what <code>@dataclass</code> generates, and when <code>default_factory</code>, <code>frozen</code> and <code>order</code> matter</li>
+          <li>Work out the MRO of a diamond and explain what <code>super()</code> does</li>
+          <li>Write a context manager and explain what <code>finally</code> guarantees</li>
+          <li>Choose between threads, processes and <code>asyncio</code> for a given workload, and define the GIL</li>
+          <li>Check the Python documentation for the version you use</li>
+        </ul>
+    <h2 id="sources">Sources &amp; further reading</h2>
+    <ul class="sources"><li><a href="https://docs.python.org/3/reference/expressions.html#yield-expressions" rel="noopener noreferrer" target="_blank">Yield expressions — The Python Language Reference</a></li><li><a href="https://docs.python.org/3/library/functools.html" rel="noopener noreferrer" target="_blank">functools — The Python Standard Library</a></li><li><a href="https://docs.python.org/3/library/dataclasses.html" rel="noopener noreferrer" target="_blank">dataclasses — The Python Standard Library</a></li><li><a href="https://docs.python.org/3/library/asyncio-task.html" rel="noopener noreferrer" target="_blank">Coroutines and tasks — asyncio</a></li><li><a href="https://docs.python.org/3/glossary.html#term-global-interpreter-lock" rel="noopener noreferrer" target="_blank">Glossary: global interpreter lock</a></li><li><a href="https://docs.python.org/3/library/contextlib.html" rel="noopener noreferrer" target="_blank">contextlib — The Python Standard Library</a></li><li><a href="https://docs.python.org/3/tutorial/errors.html" rel="noopener noreferrer" target="_blank">Errors and exceptions — The Python Tutorial</a></li></ul>
+    <hr class="sep">
+    <nav class="prevnext" aria-label="More guides">
+      <a class="prev" href="../../guides/python-study-guide/"><small>← Previous</small>Python Fundamentals: Study Guide + Practice Quiz</a>
+      <a class="next" href="../../guides/javascript-study-guide/"><small>Next →</small>JavaScript Fundamentals: Key Concepts Explained</a>
+    </nav>
+    <a href="../../#guides" class="btn btn-link">← Back to all guides</a>
+  </article>
+  <aside class="sidebar">
+    <div class="box toc-box">
+      <h2 class="box-h">On this page</h2>
+      <div class="toc">
+        <a href="#what-you-will-learn" data-toc="what-you-will-learn">What you will learn</a>
+        <a href="#generators-and-iterators" data-toc="generators-and-iterators">Generators and iterators</a>
+        <a href="#functions-closures-decorators-and-caching" data-toc="functions-closures-decorators-and-caching">Functions: closures, decorators and caching</a>
+        <a href="#classes-properties-dunder-methods-dataclasses-and-mro" data-toc="classes-properties-dunder-methods-dataclasses-and-mro">Classes: properties, dunder methods, dataclasses and MRO</a>
+        <a href="#context-managers" data-toc="context-managers">Context managers</a>
+        <a href="#errors-and-exceptions" data-toc="errors-and-exceptions">Errors and exceptions</a>
+        <a href="#concurrency-threads-processes-and-asyncio" data-toc="concurrency-threads-processes-and-asyncio">Concurrency: threads, processes and asyncio</a>
+        <a href="#practical-standard-library-tools" data-toc="practical-standard-library-tools">Practical standard-library tools</a>
+        <a href="#common-mistakes" data-toc="common-mistakes">Common mistakes</a>
+        <a href="#practical-learning-exercises" data-toc="practical-learning-exercises">Practical learning exercises</a>
+        <a href="#interview-questions" data-toc="interview-questions">Interview questions</a>
+        <a href="#practice-questions" data-toc="practice-questions">Practice questions</a>
+        <a href="#preparation-checklist" data-toc="preparation-checklist">Preparation checklist</a>
+        <a href="#sources" data-toc="sources">Sources &amp; further reading</a>
+      </div>
+    </div>
+    <div class="box rel">
+      <h2 class="box-h">Related guides</h2>
+      <a href="../../guides/python-study-guide/">Python Fundamentals: Study Guide + Practice Quiz</a>
+      <a href="../../guides/javascript-study-guide/">JavaScript Fundamentals: Key Concepts Explained</a>
+      <a href="../../guides/git-study-guide/">Git Study Guide: Commands and Concepts</a>
+    </div>
+    <div class="box">
+      <h2 class="box-h">Share this guide</h2>
+      <button type="button" class="btn btn-share" id="shareBtn" data-url="https://skillsprep.github.io/guides/advanced-python-study-guide/" data-title="Advanced Python Study Guide: Generators, Decorators and Async">Copy Link</button>
+    </div>
+    <div class="box">
+      <h2 class="box-h">Spotted a mistake?</h2>
+      <p class="box-p">We correct errors quickly. Tell us what's wrong and we'll fix it.</p>
+      <a class="btn btn-link" href="../../contact/">Report a correction</a>
+    </div>
+  </aside>
+</div>
+</main>
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div>
+        <h2 class="foot-h">SkillPrep</h2>
+        <p class="foot-about">Concept-first study guides and practice tests for everyday work skills. Learn the "why" behind every answer.</p>
+      </div>
+      <div>
+        <h2 class="foot-h">Explore</h2>
+        <a href="../../">All guides</a>
+        <a href="../../about/">About</a>
+        <a href="../../contact/">Contact</a>
+        <a href="../../privacy/">Privacy</a>
+        <a href="../../terms/">Terms</a>
+      </div>
+      <div>
+        <h2 class="foot-h">Popular guides</h2>
+        <a href="../../guides/excel-study-guide/">Excel Study Guide</a>
+        <a href="../../guides/python-study-guide/">Python Fundamentals</a>
+        <a href="../../guides/advanced-python-study-guide/">Advanced Python Study Guide</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2026 SkillPrep. All rights reserved.</span>
+      <span>Independent educational site. Not affiliated with LinkedIn, Microsoft or any other vendor; product names are trademarks of their owners.</span>
+    </div>
+  </div>
+</footer>
+<button class="back-top" id="backTop" type="button" aria-label="Back to top">↑</button>
+<div id="cookieConsent" class="cookie-consent" hidden>
+  <div class="cookie-inner">
+    <p>SkillPrep saves your quiz progress in your browser's local storage. Ads are shown through Google AdSense, which may use cookies. See our <a href="../../privacy/">Privacy Policy</a> for details and opt-out options.</p>
+    <div class="cookie-actions">
+      <button id="cookieAccept" class="btn">OK</button>
+    </div>
+  </div>
+</div>
+<script src="../../js/site.js" defer></script>
+</body>
+</html>

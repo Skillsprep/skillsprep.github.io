@@ -29,8 +29,9 @@ module.exports = {
   // Hand-picked "Related guides" shown in each guide's sidebar (slug -> up to 3 slugs). Edit freely;
   // the build fails if a slug doesn't exist. Guides not listed fall back to the first other guides.
   related: {
-    "excel-study-guide": ["sql-study-guide", "power-bi-study-guide", "powerpoint-study-guide"],
-    "python-study-guide": ["sql-study-guide", "excel-study-guide", "javascript-study-guide"],
+    "excel-study-guide": ["google-sheets-study-guide", "sql-study-guide", "power-bi-study-guide"],
+    "python-study-guide": ["advanced-python-study-guide", "sql-study-guide", "javascript-study-guide"],
+    "advanced-python-study-guide": ["python-study-guide", "javascript-study-guide", "git-study-guide"],
     "javascript-study-guide": ["git-study-guide", "python-study-guide", "sql-study-guide"],
     "project-management-study-guide": ["lean-six-sigma-practice-test", "excel-study-guide", "powerpoint-study-guide"],
     "power-bi-practice-test": [
@@ -62,18 +63,63 @@ module.exports = {
       ["Configure scheduled refresh — Microsoft Learn", "https://learn.microsoft.com/en-us/power-bi/connect-data/refresh-scheduled-refresh"],
       ["Row-level security (RLS) with Power BI — Microsoft Learn", "https://learn.microsoft.com/en-us/fabric/security/service-admin-row-level-security"]
     ],
+    "google-sheets-study-guide": ["excel-study-guide", "sql-study-guide", "power-bi-study-guide"],
     "sql-study-guide": ["excel-study-guide", "power-bi-study-guide", "python-study-guide"],
     "power-bi-study-guide": ["power-bi-practice-test", "excel-study-guide", "sql-study-guide"],
     "power-bi-practice-test": ["power-bi-study-guide", "excel-study-guide", "sql-study-guide"],
     "digital-marketing-study-guide": ["excel-study-guide", "powerpoint-study-guide", "generative-ai-career-essentials-practice-test"],
-    "git-study-guide": ["javascript-study-guide", "python-study-guide", "project-management-study-guide"],
+    "git-study-guide": ["developer-skills-study-guide", "javascript-study-guide", "python-study-guide"],
+    "developer-skills-study-guide": ["git-study-guide", "javascript-study-guide", "python-study-guide"],
     "powerpoint-study-guide": ["excel-study-guide", "digital-marketing-study-guide", "generative-ai-career-essentials-practice-test"],
     "linkedin-skill-assessments-retired": ["generative-ai-career-essentials-practice-test", "excel-study-guide", "python-study-guide"],
-    "generative-ai-career-essentials-practice-test": ["powerpoint-study-guide", "digital-marketing-study-guide", "excel-study-guide"],
+    "generative-ai-career-essentials-practice-test": ["practical-ai-study-guide", "powerpoint-study-guide", "digital-marketing-study-guide"],
+    "practical-ai-study-guide": ["generative-ai-career-essentials-practice-test", "google-sheets-study-guide", "excel-study-guide"],
     "lean-six-sigma-practice-test": ["project-management-study-guide", "excel-study-guide", "powerpoint-study-guide"]
   },
   // Authoritative references shown under each guide ("Sources & further reading").
   sources: {
+    "developer-skills-study-guide": [
+      ["HTTP request methods — MDN Web Docs", "https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Methods"],
+      ["HTTP response status codes — MDN Web Docs", "https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Status"],
+      ["JSON — MDN Web Docs", "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/JSON"],
+      ["unittest — The Python Standard Library", "https://docs.python.org/3/library/unittest.html"],
+      ["OWASP Top Ten", "https://owasp.org/www-project-top-ten/"],
+      ["SQL Injection Prevention Cheat Sheet — OWASP", "https://cheatsheetseries.owasp.org/cheatsheets/SQL_Injection_Prevention_Cheat_Sheet.html"],
+      ["Input Validation Cheat Sheet — OWASP", "https://cheatsheetseries.owasp.org/cheatsheets/Input_Validation_Cheat_Sheet.html"],
+      ["Secrets Management Cheat Sheet — OWASP", "https://cheatsheetseries.owasp.org/cheatsheets/Secrets_Management_Cheat_Sheet.html"]
+    ],
+    "practical-ai-study-guide": [
+      ["Prompt design strategies — Google AI for Developers", "https://ai.google.dev/gemini-api/docs/prompting-strategies"],
+      ["Prompt engineering overview — Claude Docs", "https://platform.claude.com/docs/en/build-with-claude/prompt-engineering/overview"],
+      ["AI Risk Management Framework — NIST", "https://www.nist.gov/itl/ai-risk-management-framework"],
+      ["The EU Artificial Intelligence Act", "https://artificialintelligenceact.eu/"]
+    ],
+    "advanced-python-study-guide": [
+      ["Yield expressions — The Python Language Reference", "https://docs.python.org/3/reference/expressions.html#yield-expressions"],
+      ["functools — The Python Standard Library", "https://docs.python.org/3/library/functools.html"],
+      ["dataclasses — The Python Standard Library", "https://docs.python.org/3/library/dataclasses.html"],
+      ["Coroutines and tasks — asyncio", "https://docs.python.org/3/library/asyncio-task.html"],
+      ["Glossary: global interpreter lock", "https://docs.python.org/3/glossary.html#term-global-interpreter-lock"],
+      ["contextlib — The Python Standard Library", "https://docs.python.org/3/library/contextlib.html"],
+      ["Errors and exceptions — The Python Tutorial", "https://docs.python.org/3/tutorial/errors.html"]
+    ],
+    "google-sheets-study-guide": [
+      ["QUERY — Google Docs Editors Help", "https://support.google.com/docs/answer/3093343"],
+      ["FILTER — Google Docs Editors Help", "https://support.google.com/docs/answer/3093197"],
+      ["XLOOKUP — Google Docs Editors Help", "https://support.google.com/docs/answer/12405947"],
+      ["ARRAYFORMULA — Google Docs Editors Help", "https://support.google.com/docs/answer/3093275"],
+      ["LET — Google Docs Editors Help", "https://support.google.com/docs/answer/13190535"],
+      ["LAMBDA — Google Docs Editors Help", "https://support.google.com/docs/answer/12508718"],
+      ["Named functions — Google Docs Editors Help", "https://support.google.com/docs/answer/12504534"],
+      ["IMPORTRANGE — Google Docs Editors Help", "https://support.google.com/docs/answer/3093340"],
+      ["Pivot tables — Google Docs Editors Help", "https://support.google.com/docs/answer/1272900"],
+      ["Share files from Google Drive — Google Docs Editors Help", "https://support.google.com/docs/answer/2494822"],
+      ["Protect, hide and edit sheets — Google Docs Editors Help", "https://support.google.com/docs/answer/1218656"],
+      ["Data validation — Google Docs Editors Help", "https://support.google.com/docs/answer/186103"],
+      ["Macros in Google Sheets — Google Docs Editors Help", "https://support.google.com/docs/answer/7665004"],
+      ["Simple triggers — Apps Script, Google for Developers", "https://developers.google.com/apps-script/guides/triggers"],
+      ["Installable triggers — Apps Script, Google for Developers", "https://developers.google.com/apps-script/guides/triggers/installable"]
+    ],
     "excel-study-guide": [
       ["XLOOKUP function — Microsoft Support", "https://support.microsoft.com/en-us/office/xlookup-function-b7fd680e-6d10-43e6-84f9-88eae8bf5929"],
       ["Create a PivotTable to analyze worksheet data — Microsoft Support", "https://support.microsoft.com/office/18fb0032-b01a-4c99-9a5f-7ab09edde05a"]

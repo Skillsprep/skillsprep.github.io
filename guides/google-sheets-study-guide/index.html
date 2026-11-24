@@ -1,0 +1,547 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Google Sheets Study Guide: Formulas, QUERY and Automation | SkillPrep</title>
+<meta name="description" content="The Google Sheets skills interviews ask about: core and advanced formulas, QUERY, importing and cleaning data, pivot tables, sharing and protection, and a…">
+<link rel="canonical" href="https://skillsprep.github.io/guides/google-sheets-study-guide/">
+<meta name="google-site-verification" content="rOGMro0A_ltGwtwagVfnPJFPmn59apiGYOa0LKMT4n8">
+<meta name="robots" content="index,follow">
+<meta name="theme-color" content="#0D1B2A">
+<meta property="og:site_name" content="SkillPrep">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Google Sheets Study Guide: Formulas, QUERY and Automation | SkillPrep">
+<meta property="og:description" content="The Google Sheets skills interviews ask about: core and advanced formulas, QUERY, importing and cleaning data, pivot tables, sharing and protection, and a…">
+<meta property="og:url" content="https://skillsprep.github.io/guides/google-sheets-study-guide/">
+<meta property="og:image" content="https://skillsprep.github.io/assets/og-image.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Google Sheets Study Guide: Formulas, QUERY and Automation | SkillPrep">
+<meta name="twitter:description" content="The Google Sheets skills interviews ask about: core and advanced formulas, QUERY, importing and cleaning data, pivot tables, sharing and protection, and a…">
+<meta name="twitter:image" content="https://skillsprep.github.io/assets/og-image.png">
+<link rel="icon" href="../../assets/favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../../css/style.css">
+<script>(function(){try{if(localStorage.getItem("skillprep:theme")==="dark"){document.documentElement.setAttribute("data-theme","dark");}}catch(e){}})();</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"Google Sheets Study Guide: Formulas, QUERY and Automation","description":"The Google Sheets skills interviews ask about: core and advanced formulas, QUERY, importing and cleaning data, pivot tables, sharing and protection, and a tested Apps Script example, with exercises and a 20-question quiz.","datePublished":"2026-11-20","dateModified":"2026-11-20","author":{"@type":"Organization","name":"SkillPrep editorial team"},"publisher":{"@type":"Organization","name":"SkillPrep","logo":{"@type":"ImageObject","url":"https://skillsprep.github.io/assets/favicon.svg"}},"mainEntityOfPage":"https://skillsprep.github.io/guides/google-sheets-study-guide/","image":"https://skillsprep.github.io/assets/og-image.png","articleSection":"Google Sheets","inLanguage":"en"}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://skillsprep.github.io/"},{"@type":"ListItem","position":2,"name":"Google Sheets","item":"https://skillsprep.github.io/#guides"},{"@type":"ListItem","position":3,"name":"Google Sheets Study Guide: Formulas, QUERY and Automation","item":"https://skillsprep.github.io/guides/google-sheets-study-guide/"}]}</script>
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9455217122501464" crossorigin="anonymous"></script>
+</head>
+<body>
+<a class="skip-link" href="#main">Skip to content</a>
+<header class="site-header">
+  <div class="container header-inner">
+    <a href="../../" class="logo"><span class="mark" aria-hidden="true">S</span> SkillPrep</a>
+    <button class="burger" id="burger" type="button" aria-label="Menu" aria-expanded="false" aria-controls="mainNav">☰</button>
+    <nav class="main-nav" id="mainNav" aria-label="Main">
+      <a href="../../">Home</a>
+      <a href="../../about/">About</a>
+      <a href="../../contact/">Contact</a>
+    </nav>
+    <button class="theme-toggle" id="themeToggle" type="button" aria-label="Toggle dark mode">◐</button>
+  </div>
+</header>
+<main id="main">
+
+<div id="progress" aria-hidden="true"></div>
+<section class="article-hero">
+  <div class="container">
+    <nav class="crumbs" aria-label="Breadcrumb"><a href="../../">Home</a> <span aria-hidden="true" class="sep">›</span> <a href="../../#guides">Guides</a> <span aria-hidden="true" class="sep">›</span> <span aria-current="page">Google Sheets</span></nav>
+    <div class="cat">Google Sheets</div>
+    <h1>Google Sheets Study Guide: Formulas, QUERY and Automation</h1>
+    <div class="meta">
+      <span><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg> 12 min read</span>
+      <span><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg> 20 Questions</span>
+      <span>Published <time datetime="2026-11-20">Nov 20, 2026</time></span>
+      <span>Reviewed <time datetime="2026-11-20">Nov 20, 2026</time></span>
+    </div>
+  </div>
+</section>
+<div class="container article-wrap">
+  <article class="article-body">
+    <p class="note"><b>Unofficial study resource.</b> Written independently of any exam provider, employer or software vendor.</p>
+    <details class="toc-mobile">
+      <summary>On this page</summary>
+      <div class="toc">
+        <a href="#what-you-will-learn">What you will learn</a>
+        <a href="#essential-formulas">Essential formulas</a>
+        <a href="#advanced-formulas">Advanced formulas</a>
+        <a href="#query-sql-style-summaries-in-one-formula">QUERY: SQL-style summaries in one formula</a>
+        <a href="#clean-and-import-data">Clean and import data</a>
+        <a href="#pivot-tables-charts-and-dashboards">Pivot tables, charts and dashboards</a>
+        <a href="#share-and-protect-your-work">Share and protect your work</a>
+        <a href="#automate-with-macros-and-apps-script">Automate with macros and Apps Script</a>
+        <a href="#common-mistakes">Common mistakes</a>
+        <a href="#practical-learning-exercises">Practical learning exercises</a>
+        <a href="#interview-questions">Interview questions</a>
+        <a href="#practice-questions">Practice questions</a>
+        <a href="#preparation-checklist">Preparation checklist</a>
+        <a href="#sources">Sources &amp; further reading</a>
+      </div>
+    </details>
+    <p class="lead">If you already know Excel, you know most of Google Sheets. This guide focuses on what is different or especially useful in Sheets: array formulas, FILTER and QUERY, LET and LAMBDA, IMPORTRANGE, sharing and Apps Script. For lookups and pivot tables in general, see the <a href="../excel-study-guide/">Excel study guide</a>. This is an unofficial study aid and is not affiliated with or endorsed by Google. Function behaviour was checked against Google's help pages on 20 November 2026, and Google can change it.</p>
+    <h2 id="what-you-will-learn">What you will learn</h2>
+        <p>By the end you should be able to:</p>
+        <ul>
+          <li>Use SUMIFS, COUNTIFS, IF and XLOOKUP with absolute references and handle common errors</li>
+          <li>Write array formulas with ARRAYFORMULA, FILTER, SORT and UNIQUE, and simplify them with LET and LAMBDA</li>
+          <li>Summarise data with QUERY and with pivot tables</li>
+          <li>Clean data, validate input and import from other spreadsheets with IMPORTRANGE</li>
+          <li>Share safely, protect ranges and automate a task with a macro or Apps Script trigger</li>
+        </ul>
+        <table>
+          <tr><th>Topic</th><th>Sheets</th><th>Excel</th></tr>
+          <tr><td>Automation language</td><td>Apps Script</td><td>VBA</td></tr>
+          <tr><td>Working together</td><td>Several editors in one file, with sharing roles</td><td>Depends on where the file is stored</td></tr>
+          <tr><td>Whole-range formulas</td><td>ARRAYFORMULA, or many functions expand automatically</td><td>Dynamic arrays</td></tr>
+          <tr><td>Pull data from another file</td><td>IMPORTRANGE</td><td>External links or Power Query</td></tr>
+        </table>
+        <div class="callout"><b>Unofficial</b> Google's help pages are the final word. Check them for anything you depend on, and use the source links at the bottom of this guide.</div>
+    <h2 id="essential-formulas">Essential formulas</h2>
+        <p>These work as they do in Excel, so this is a quick refresher on what interviewers ask for most.</p>
+        <table>
+          <tr><th>Need</th><th>Formula</th></tr>
+          <tr><td>Total with conditions</td><td><code>=SUMIFS(D2:D, B2:B, "North", C2:C, "Paid")</code></td></tr>
+          <tr><td>Count with conditions</td><td><code>=COUNTIFS(B2:B, "North", C2:C, "Paid")</code></td></tr>
+          <tr><td>Decide between outcomes</td><td><code>=IF(D2&gt;=100, "High", "Low")</code></td></tr>
+          <tr><td>Look up a value</td><td><code>=XLOOKUP(A2, Products!A:A, Products!C:C, "Not found")</code></td></tr>
+          <tr><td>Handle an error</td><td><code>=IFERROR(XLOOKUP(...), "Check")</code></td></tr>
+        </table>
+        <p><b>XLOOKUP in Sheets.</b> The syntax is <code>XLOOKUP(search_key, lookup_range, result_range, missing_value, match_mode, search_mode)</code>. If nothing matches and you give no <code>missing_value</code>, the result is #N/A. <code>match_mode</code> is 0 for exact (the default), 1 for exact or next greater, -1 for exact or next lesser, and 2 for wildcard. Google's own example treats <code>XLOOKUP("Apple", A2:A, E2:E)</code> as equivalent to <code>VLOOKUP("Apple", A2:E, 5, FALSE)</code>.</p>
+        <p><b>Absolute references.</b> <code>$A$1</code> locks both column and row, <code>$A1</code> locks the column, and <code>A$1</code> locks the row.</p>
+    <h2 id="advanced-formulas">Advanced formulas</h2>
+        <p><b>ARRAYFORMULA</b> shows the results of an array formula across several rows or columns and lets non-array functions work on arrays. Google's examples include <code>ARRAYFORMULA(A1:C1+A2:C2)</code> and <code>ARRAYFORMULA(SUM(IF(A1:A10&gt;5, A1:A10, 0)))</code>. Many array formulas expand automatically, and Ctrl+Shift+Enter adds <code>ARRAYFORMULA(</code> for you. Google notes that array formulas cannot be exported.</p>
+        <p><b>FILTER</b> keeps the rows where every condition is TRUE:</p>
+<pre><code>=FILTER(A2:D, C2:C = "Paid", D2:D &gt; 100)</code></pre>
+        <p>The conditions must be the same length as the range. You cannot mix row conditions and column conditions in one FILTER, so nest one FILTER inside another. If no rows match, the result is #N/A.</p>
+        <p><b>SORT and UNIQUE</b> sort a range and remove duplicate rows, and combine well with FILTER: <code>=SORT(UNIQUE(FILTER(B2:B, C2:C = "Paid")))</code>.</p>
+        <p><b>LET</b> names values so each is calculated once. Names are not case-sensitive, cannot be cell references or contain spaces or start with a number, and must be declared before use. Google's example:</p>
+<pre><code>=LET(avg, AVERAGE(B2:D2), IF(avg&gt;=4, "Great", IF(avg&gt;=3, "Good", "Poor")))</code></pre>
+        <p><b>LAMBDA</b> defines a function from parameters and a formula. Calling it directly looks like <code>=LAMBDA(Salary, Salary*0.3)(1000)</code>, which returns 300. The helper functions MAP, REDUCE, BYROW, BYCOL, SCAN and MAKEARRAY take a LAMBDA, for example <code>=MAP(C5:C10, LAMBDA(salary, salary*0.3))</code>.</p>
+        <p><b>Named functions</b> save a formula as a reusable function. Use Data &gt; Named functions, or right-click a cell and choose Define named function. They need no code, which is the main difference from an Apps Script custom function. A name cannot match a built-in function or a cell reference, start with a number or contain spaces, and ranges in the definition become absolute.</p>
+    <h2 id="query-sql-style-summaries-in-one-formula">QUERY: SQL-style summaries in one formula</h2>
+        <p><code>QUERY(data, query, [headers])</code> runs a query written in the Google Visualization API Query Language. <code>headers</code> is the number of header rows; if you omit it or use -1, Sheets guesses. Google's help page documents the clauses select, where, group by, pivot and order by. Columns can be referred to by letter (A, B) in a range.</p>
+<pre><code>=QUERY(A1:D, "select B, sum(D) where C = 'Paid' group by B order by sum(D) desc", 1)</code></pre>
+        <div class="callout"><b>Keep one data type per column</b> QUERY reads each column using its majority data type. Values of the other type are treated as null, so a text entry in a column of numbers silently disappears from the result.</div>
+    <h2 id="clean-and-import-data">Clean and import data</h2>
+        <table>
+          <tr><th>Need</th><th>Tool</th></tr>
+          <tr><td>Remove extra spaces</td><td><code>=TRIM(A2)</code></td></tr>
+          <tr><td>Split text into columns</td><td><code>=SPLIT(A2, ",")</code></td></tr>
+          <tr><td>Pull out part of a text value</td><td><code>=REGEXEXTRACT(A2, "[0-9]+")</code></td></tr>
+          <tr><td>Stop bad input</td><td>Data &gt; Data validation, or Insert &gt; Dropdown</td></tr>
+          <tr><td>Bring in another spreadsheet</td><td><code>=IMPORTRANGE("spreadsheet_url", "Sheet1!A1:D100")</code></td></tr>
+        </table>
+        <p><b>Data validation.</b> Add a rule from Data &gt; Data validation, or use Insert &gt; Dropdown to build a list from a range or typed items. By default, input that breaks the rule is rejected; you can choose to show a warning instead.</p>
+        <p><b>IMPORTRANGE.</b> The first time you connect two spreadsheets, Sheets shows #REF! with an Allow access prompt. If you do not own the source file, you may need to request access. Google lists limits: 10 MB per request, a refresh about hourly while the file is open, no NOW, RAND or RANDBETWEEN in the imported range (TODAY is fine), and chains or cycles of imports should be avoided.</p>
+    <h2 id="pivot-tables-charts-and-dashboards">Pivot tables, charts and dashboards</h2>
+        <p>Select your data and use Insert &gt; Pivot table. In the editor, add Rows, Columns and Values, and use calculated fields (a SUM or a custom formula) when you need a derived measure. Double-clicking a value shows the source rows behind it, and the pivot table refreshes whenever its source data changes. Lookups and pivot concepts are the same as in Excel; see the <a href="../excel-study-guide/">Excel study guide</a>.</p>
+        <p>A dashboard in Sheets is simply a sheet that shows summary cells and charts built from pivot tables or QUERY results. Keep source data on its own sheet, build summaries on another, and show only the summary to viewers.</p>
+    <h2 id="share-and-protect-your-work">Share and protect your work</h2>
+        <table>
+          <tr><th>Role</th><th>What it allows</th></tr>
+          <tr><td>Viewer</td><td>Open the file (and download it, unless the owner turns that off)</td></tr>
+          <tr><td>Commenter</td><td>Open and comment</td></tr>
+          <tr><td>Editor</td><td>Open, comment and edit; can share by default unless the owner turns that off</td></tr>
+          <tr><td>Owner</td><td>Full control</td></tr>
+        </table>
+        <p>General access can be <b>Restricted</b> (only people you add), <b>Anyone with the link</b>, or <b>Public</b>, which can be found through Google Search.</p>
+        <p><b>Protected ranges.</b> Data &gt; Protect sheets and ranges lets you protect a sheet or range. You can show a warning (anyone with edit access can still edit after confirming) or restrict who can edit to only you, only your domain, or a custom list.</p>
+        <div class="callout"><b>Not a security measure</b> Google says protection should not be used as a security measure. People with access can still copy, print or export the data. Control access by choosing who the file is shared with.</div>
+    <h2 id="automate-with-macros-and-apps-script">Automate with macros and Apps Script</h2>
+        <p><b>Macros.</b> Choose Extensions &gt; Macros &gt; Record macro, do the steps (using absolute or relative references), then save. Sheets writes an Apps Script that you can open in the script editor, and you run the macro from Extensions &gt; Macros.</p>
+        <p><b>Simple triggers</b> are functions with reserved names: onOpen, onInstall, onEdit and onSelectionChange (plus doGet and doPost for web apps). They run automatically, but they cannot use services that need authorization, can only change the file they are bound to, do not run in view or comment mode, and must finish within 30 seconds. Changes made by a script or the API, such as <code>Range.setValue()</code>, do not fire them.</p>
+        <p><b>Installable triggers</b> can use authorized services and include time-driven triggers (from every minute to once a month), and they run as the person who created them. Create one from Triggers (the alarm clock icon) &gt; Add Trigger, or in code, for example <code>ScriptApp.newTrigger("myFunction").timeBased().everyHours(6).create();</code></p>
+        <p><b>A small example.</b> This <code>onEdit</code> stamps a completion date when the Status column on a sheet named Orders is changed to Done:</p>
+<pre><code>function onEdit(e) {
+  var range = e.range;
+  var sheet = range.getSheet();
+  if (sheet.getName() !== "Orders" || range.getColumn() !== 5) return;  // column E = Status
+  if (range.getValue() === "Done") {
+    sheet.getRange(range.getRow(), 6).setValue(new Date());               // column F = Completed on
+  }
+}</code></pre>
+        <p>To use it: open Extensions &gt; Apps Script, paste the function, save, then change a Status cell to Done. Because it is a simple trigger, it only works for edits typed or pasted by a person, not for edits made by another script. The logic of this example was tested against a mock spreadsheet object; it has not been run inside a live Google Sheet.</p>
+    <h2 id="common-mistakes">Common mistakes</h2>
+        <table>
+          <tr><th>Mistake</th><th>Better approach</th></tr>
+          <tr><td>Mixing text and numbers in a QUERY column</td><td>Keep one data type per column</td></tr>
+          <tr><td>Expecting FILTER to return blanks when nothing matches</td><td>It returns #N/A; wrap it in IFERROR</td></tr>
+          <tr><td>Mixing row and column conditions in one FILTER</td><td>Nest one FILTER inside another</td></tr>
+          <tr><td>Forgetting Allow access on a new IMPORTRANGE</td><td>Click Allow access on the #REF! prompt</td></tr>
+          <tr><td>Using NOW or RAND inside an IMPORTRANGE range</td><td>Not allowed; use TODAY or a fixed range</td></tr>
+          <tr><td>Relying on protected ranges for confidentiality</td><td>Control who the file is shared with</td></tr>
+          <tr><td>Expecting onEdit to fire when a script writes a cell</td><td>Script changes do not fire simple triggers; call the function directly</td></tr>
+          <tr><td>Using a simple trigger to send email</td><td>Use an installable trigger</td></tr>
+          <tr><td>Exporting array formulas to Excel and expecting them to work</td><td>Google notes array formulas cannot be exported; paste values first</td></tr>
+        </table>
+    <h2 id="practical-learning-exercises">Practical learning exercises</h2>
+        <ul>
+          <li><b>Exercise 1 (SUMIFS).</b> Orders are in A1:D with columns Date, Region, Status, Amount. Total the Amount for the North region where Status is Paid. <i>Solution:</i>
+<pre><code>=SUMIFS(D2:D, B2:B, "North", C2:C, "Paid")</code></pre></li>
+          <li><b>Exercise 2 (XLOOKUP).</b> Look up each ProductID in column A in a Products sheet and return the price in column C, showing "Not found" when there is no match. <i>Solution:</i>
+<pre><code>=XLOOKUP(A2, Products!A:A, Products!C:C, "Not found")</code></pre></li>
+          <li><b>Exercise 3 (ARRAYFORMULA).</b> Fill a Total column for every row at once: Quantity in B, Price in C, leaving blanks for empty rows. <i>Solution:</i>
+<pre><code>=ARRAYFORMULA(IF(A2:A="", "", B2:B*C2:C))</code></pre></li>
+          <li><b>Exercise 4 (QUERY).</b> From the orders table, show each Region with its total Amount for Paid orders, largest first. <i>Solution:</i>
+<pre><code>=QUERY(A1:D, "select B, sum(D) where C = 'Paid' group by B order by sum(D) desc", 1)</code></pre></li>
+          <li><b>Exercise 5 (LET).</b> Scores are in B2:D2. Show "Great" if the average is 4 or more, "Good" if 3 or more, otherwise "Poor", calculating the average once. <i>Solution:</i>
+<pre><code>=LET(avg, AVERAGE(B2:D2), IF(avg&gt;=4, "Great", IF(avg&gt;=3, "Good", "Poor")))</code></pre></li>
+        </ul>
+    <h2 id="interview-questions">Interview questions</h2>
+        <p>Try answering aloud before you open each one.</p>
+        <details class="faq"><summary>What is the biggest practical difference between Google Sheets and Excel?</summary><p>Sheets lives in the browser and is built for several people working in one file at once, with sharing roles instead of file copies. Its automation language is Apps Script, where Excel uses VBA. Many everyday formulas are the same, so most of your Excel knowledge carries over.</p></details>
+        <details class="faq"><summary>When would you use QUERY instead of a pivot table or FILTER?</summary><p>QUERY is useful when you want filtering, grouping, pivoting and sorting in one formula that is easy to read and copy. A pivot table is easier for exploring by drag and drop, and FILTER is simpler when you only need to keep matching rows.</p></details>
+        <details class="faq"><summary>What does ARRAYFORMULA do, and when do you need it?</summary><p>It makes one formula return results for a whole range and lets functions that normally take single values work on arrays. Many array formulas expand automatically, so you mainly need it to apply a non-array function across a column, such as multiplying two columns row by row.</p></details>
+        <details class="faq"><summary>How is XLOOKUP different from VLOOKUP?</summary><p>XLOOKUP takes a separate lookup range and result range, so the result column can be left of the key and you do not count column numbers. It defaults to an exact match, has a missing_value argument and can search from the last item.</p></details>
+        <details class="faq"><summary>What are LET and LAMBDA for?</summary><p>LET names a value or calculation so it is evaluated once and reused. LAMBDA defines a reusable function with parameters. Helpers such as MAP, REDUCE, BYROW, BYCOL, SCAN and MAKEARRAY take a LAMBDA to apply it across data.</p></details>
+        <details class="faq"><summary>What is a named function?</summary><p>A function you build from Sheets formulas through Data &gt; Named functions, then call by name like any built-in. It needs no code, unlike a custom function written in Apps Script.</p></details>
+        <details class="faq"><summary>How do you bring data from one spreadsheet into another?</summary><p>Use IMPORTRANGE with the other file's URL and a range string such as "Sheet1!A1:D100". The first time, you click Allow access. Google lists limits, including a 10 MB request size, refresh roughly hourly while the file is open, and avoiding chains and cycles of imports.</p></details>
+        <details class="faq"><summary>How do you stop bad data entering a sheet?</summary><p>Use Data &gt; Data validation (or Insert &gt; Dropdown) to add a rule. Input that breaks the rule is rejected by default, or you can choose to show a warning instead.</p></details>
+        <details class="faq"><summary>How do sharing roles work?</summary><p>Viewer can open the file, Commenter can also comment, and Editor can edit and, by default, share. The Owner has full control. General access can be Restricted, Anyone with the link, or Public.</p></details>
+        <details class="faq"><summary>Can you stop people editing part of a sheet?</summary><p>Yes: Data &gt; Protect sheets and ranges lets you show a warning or restrict editing to you, your domain or a custom list. Google says this is not a security measure, because people with access can still copy, print or export.</p></details>
+        <details class="faq"><summary>What is the difference between a simple and an installable trigger?</summary><p>Simple triggers such as onEdit run automatically but cannot use services that need authorization, can only change the file they are bound to, and must finish within 30 seconds. Installable triggers can use authorized services, include time-driven triggers, and run as the person who created them.</p></details>
+        <details class="faq"><summary>What is a macro?</summary><p>A recorded set of steps from Extensions &gt; Macros &gt; Record macro. Sheets turns it into an Apps Script you can view and edit, and you run it from Extensions &gt; Macros. You can record with absolute or relative references.</p></details>
+    <h2 id="practice-questions">Practice questions</h2>
+        <div class="quiz" data-quiz>
+          <div class="q-head"><span>Question 1 of 20</span><span>QUERY</span></div>
+          <div class="q-body" role="radiogroup" aria-labelledby="google-sheets-study-guide-iq1-t">
+            <p class="q-text" id="google-sheets-study-guide-iq1-t">Which language does the QUERY function use for its query string?</p>
+            <label class="opt"><input type="radio" name="google-sheets-study-guide-q1"> Regular expressions</label>
+            <label class="opt"><input type="radio" name="google-sheets-study-guide-q1"> SQL as used by MySQL</label>
+            <label class="opt" data-correct><input type="radio" name="google-sheets-study-guide-q1"> Google Visualization API Query Language</label>
+            <label class="opt"><input type="radio" name="google-sheets-study-guide-q1"> Apps Script</label>
+            <button type="button" class="check-btn">Check answer</button><span class="q-result" role="status" aria-live="polite"></span>
+          </div>
+          <div class="q-explain"><b>Why:</b> QUERY runs a Google Visualization API Query Language string against a range. It looks like SQL, but it is its own language with its own clauses.</div>
+        </div>
+        <div class="quiz" data-quiz>
+          <div class="q-head"><span>Question 2 of 20</span><span>QUERY</span></div>
+          <div class="q-body" role="radiogroup" aria-labelledby="google-sheets-study-guide-iq2-t">
+            <p class="q-text" id="google-sheets-study-guide-iq2-t">In QUERY(data, query, headers), what does the headers argument specify?</p>
+            <label class="opt" data-correct><input type="radio" name="google-sheets-study-guide-q2"> The number of header rows at the top of the data</label>
+            <label class="opt"><input type="radio" name="google-sheets-study-guide-q2"> The names of the output columns</label>
+            <label class="opt"><input type="radio" name="google-sheets-study-guide-q2"> Whether to sort the result</label>
+            <label class="opt"><input type="radio" name="google-sheets-study-guide-q2"> The sheet to read from</label>
+            <button type="button" class="check-btn">Check answer</button><span class="q-result" role="status" aria-live="polite"></span>
+          </div>
+          <div class="q-explain"><b>Why:</b> headers is the number of header rows in the data. If you leave it out or use -1, Sheets guesses.</div>
+        </div>
+        <div class="quiz" data-quiz>
+          <div class="q-head"><span>Question 3 of 20</span><span>QUERY</span></div>
+          <div class="q-body" role="radiogroup" aria-labelledby="google-sheets-study-guide-iq3-t">
+            <p class="q-text" id="google-sheets-study-guide-iq3-t">A column passed to QUERY contains mostly numbers and a few text values. What happens to the text values?</p>
+            <label class="opt"><input type="radio" name="google-sheets-study-guide-q3"> The whole query fails</label>
+            <label class="opt"><input type="radio" name="google-sheets-study-guide-q3"> They are moved to a new column</label>
+            <label class="opt"><input type="radio" name="google-sheets-study-guide-q3"> They are converted to 0</label>
+            <label class="opt" data-correct><input type="radio" name="google-sheets-study-guide-q3"> They are treated as null, because the majority data type is used</label>
+            <button type="button" class="check-btn">Check answer</button><span class="q-result" role="status" aria-live="polite"></span>
+          </div>
+          <div class="q-explain"><b>Why:</b> Each column should hold one data type. A mixed column is read using its majority type, and values of the minority type are treated as null.</div>
+        </div>
+        <div class="quiz" data-quiz>
+          <div class="q-head"><span>Question 4 of 20</span><span>FILTER</span></div>
+          <div class="q-body" role="radiogroup" aria-labelledby="google-sheets-study-guide-iq4-t">
+            <p class="q-text" id="google-sheets-study-guide-iq4-t">FILTER finds no rows that meet your conditions. What does it return?</p>
+            <label class="opt"><input type="radio" name="google-sheets-study-guide-q4"> 0</label>
+            <label class="opt" data-correct><input type="radio" name="google-sheets-study-guide-q4"> #N/A</label>
+            <label class="opt"><input type="radio" name="google-sheets-study-guide-q4"> The original range</label>
+            <label class="opt"><input type="radio" name="google-sheets-study-guide-q4"> An empty cell</label>
+            <button type="button" class="check-btn">Check answer</button><span class="q-result" role="status" aria-live="polite"></span>
+          </div>
+          <div class="q-explain"><b>Why:</b> When nothing matches, FILTER returns #N/A. Wrap it in IFERROR if you want a friendlier result.</div>
+        </div>
+        <div class="quiz" data-quiz>
+          <div class="q-head"><span>Question 5 of 20</span><span>FILTER</span></div>
+          <div class="q-body" role="radiogroup" aria-labelledby="google-sheets-study-guide-iq5-t">
+            <p class="q-text" id="google-sheets-study-guide-iq5-t">You need to keep only certain rows and certain columns with FILTER. What is the rule?</p>
+            <label class="opt"><input type="radio" name="google-sheets-study-guide-q5"> Use two ranges separated by a comma</label>
+            <label class="opt"><input type="radio" name="google-sheets-study-guide-q5"> Put row and column conditions in the same FILTER</label>
+            <label class="opt" data-correct><input type="radio" name="google-sheets-study-guide-q5"> You cannot mix row and column conditions in one FILTER, so nest one FILTER inside another</label>
+            <label class="opt"><input type="radio" name="google-sheets-study-guide-q5"> FILTER only works on rows</label>
+            <button type="button" class="check-btn">Check answer</button><span class="q-result" role="status" aria-live="polite"></span>
+          </div>
+          <div class="q-explain"><b>Why:</b> Conditions must all be the same length as the range in one direction. To filter both rows and columns, nest FILTER.</div>
+        </div>
+        <div class="quiz" data-quiz>
+          <div class="q-head"><span>Question 6 of 20</span><span>XLOOKUP</span></div>
+          <div class="q-body" role="radiogroup" aria-labelledby="google-sheets-study-guide-iq6-t">
+            <p class="q-text" id="google-sheets-study-guide-iq6-t">XLOOKUP finds no match and you did not supply the missing_value argument. What is returned?</p>
+            <label class="opt"><input type="radio" name="google-sheets-study-guide-q6"> An empty string</label>
+            <label class="opt"><input type="radio" name="google-sheets-study-guide-q6"> The closest value</label>
+            <label class="opt"><input type="radio" name="google-sheets-study-guide-q6"> #REF!</label>
+            <label class="opt" data-correct><input type="radio" name="google-sheets-study-guide-q6"> #N/A</label>
+            <button type="button" class="check-btn">Check answer</button><span class="q-result" role="status" aria-live="polite"></span>
+          </div>
+          <div class="q-explain"><b>Why:</b> missing_value defaults to #N/A. Give it a value such as "Not found" to return that instead.</div>
+        </div>
+        <div class="quiz" data-quiz>
+          <div class="q-head"><span>Question 7 of 20</span><span>XLOOKUP</span></div>
+          <div class="q-body" role="radiogroup" aria-labelledby="google-sheets-study-guide-iq7-t">
+            <p class="q-text" id="google-sheets-study-guide-iq7-t">Which match_mode value makes XLOOKUP treat * and ? in the search key as wildcards?</p>
+            <label class="opt" data-correct><input type="radio" name="google-sheets-study-guide-q7"> 2</label>
+            <label class="opt"><input type="radio" name="google-sheets-study-guide-q7"> 0</label>
+            <label class="opt"><input type="radio" name="google-sheets-study-guide-q7"> 1</label>
+            <label class="opt"><input type="radio" name="google-sheets-study-guide-q7"> -1</label>
+            <button type="button" class="check-btn">Check answer</button><span class="q-result" role="status" aria-live="polite"></span>
+          </div>
+          <div class="q-explain"><b>Why:</b> 0 is exact match (the default), 1 is exact or next greater, -1 is exact or next lesser, and 2 is wildcard match.</div>
+        </div>
+        <div class="quiz" data-quiz>
+          <div class="q-head"><span>Question 8 of 20</span><span>XLOOKUP</span></div>
+          <div class="q-body" role="radiogroup" aria-labelledby="google-sheets-study-guide-iq8-t">
+            <p class="q-text" id="google-sheets-study-guide-iq8-t">Which VLOOKUP is equivalent to XLOOKUP("Apple", A2:A, E2:E)?</p>
+            <label class="opt"><input type="radio" name="google-sheets-study-guide-q8"> VLOOKUP("Apple", A2:A, 5, FALSE)</label>
+            <label class="opt" data-correct><input type="radio" name="google-sheets-study-guide-q8"> VLOOKUP("Apple", A2:E, 5, FALSE)</label>
+            <label class="opt"><input type="radio" name="google-sheets-study-guide-q8"> VLOOKUP("Apple", A2:E, 5, TRUE)</label>
+            <label class="opt"><input type="radio" name="google-sheets-study-guide-q8"> VLOOKUP("Apple", E2:E, 1, FALSE)</label>
+            <button type="button" class="check-btn">Check answer</button><span class="q-result" role="status" aria-live="polite"></span>
+          </div>
+          <div class="q-explain"><b>Why:</b> E is the fifth column of A2:E, and FALSE asks for an exact match. Google's own help page uses this pairing as its example.</div>
+        </div>
+        <div class="quiz" data-quiz>
+          <div class="q-head"><span>Question 9 of 20</span><span>ARRAYFORMULA</span></div>
+          <div class="q-body" role="radiogroup" aria-labelledby="google-sheets-study-guide-iq9-t">
+            <p class="q-text" id="google-sheets-study-guide-iq9-t">What does ARRAYFORMULA let you do?</p>
+            <label class="opt"><input type="radio" name="google-sheets-study-guide-q9"> Import data from another file</label>
+            <label class="opt"><input type="radio" name="google-sheets-study-guide-q9"> Create a named function</label>
+            <label class="opt"><input type="radio" name="google-sheets-study-guide-q9"> Lock a formula so nobody can edit it</label>
+            <label class="opt" data-correct><input type="radio" name="google-sheets-study-guide-q9"> Display the results of an array formula across several cells, and use non-array functions on whole ranges</label>
+            <button type="button" class="check-btn">Check answer</button><span class="q-result" role="status" aria-live="polite"></span>
+          </div>
+          <div class="q-explain"><b>Why:</b> ARRAYFORMULA lets one formula return many rows or columns and lets functions that normally work on single values work on arrays.</div>
+        </div>
+        <div class="quiz" data-quiz>
+          <div class="q-head"><span>Question 10 of 20</span><span>ARRAYFORMULA</span></div>
+          <div class="q-body" role="radiogroup" aria-labelledby="google-sheets-study-guide-iq10-t">
+            <p class="q-text" id="google-sheets-study-guide-iq10-t">What does pressing Ctrl+Shift+Enter do when you finish typing a formula in Sheets?</p>
+            <label class="opt"><input type="radio" name="google-sheets-study-guide-q10"> It converts the formula to a value</label>
+            <label class="opt"><input type="radio" name="google-sheets-study-guide-q10"> It protects the cell</label>
+            <label class="opt" data-correct><input type="radio" name="google-sheets-study-guide-q10"> It adds ARRAYFORMULA( around the formula</label>
+            <label class="opt"><input type="radio" name="google-sheets-study-guide-q10"> It copies the formula down the column</label>
+            <button type="button" class="check-btn">Check answer</button><span class="q-result" role="status" aria-live="polite"></span>
+          </div>
+          <div class="q-explain"><b>Why:</b> Google's help page says Ctrl+Shift+Enter (Cmd+Shift+Enter on Mac) adds ARRAYFORMULA( to the start of the formula.</div>
+        </div>
+        <div class="quiz" data-quiz>
+          <div class="q-head"><span>Question 11 of 20</span><span>LET</span></div>
+          <div class="q-body" role="radiogroup" aria-labelledby="google-sheets-study-guide-iq11-t">
+            <p class="q-text" id="google-sheets-study-guide-iq11-t">What is the main benefit of LET?</p>
+            <label class="opt" data-correct><input type="radio" name="google-sheets-study-guide-q11"> It evaluates each named value once, so you can reuse it in the formula without repeating the expression</label>
+            <label class="opt"><input type="radio" name="google-sheets-study-guide-q11"> It makes formulas recalculate more often</label>
+            <label class="opt"><input type="radio" name="google-sheets-study-guide-q11"> It converts text to numbers</label>
+            <label class="opt"><input type="radio" name="google-sheets-study-guide-q11"> It lets formulas refer to other files</label>
+            <button type="button" class="check-btn">Check answer</button><span class="q-result" role="status" aria-live="polite"></span>
+          </div>
+          <div class="q-explain"><b>Why:</b> LET assigns names to values or calculations, evaluates each once, and lets the final expression reuse them, which also makes long formulas easier to read.</div>
+        </div>
+        <div class="quiz" data-quiz>
+          <div class="q-head"><span>Question 12 of 20</span><span>LET</span></div>
+          <div class="q-body" role="radiogroup" aria-labelledby="google-sheets-study-guide-iq12-t">
+            <p class="q-text" id="google-sheets-study-guide-iq12-t">Which of these is NOT allowed as a LET name?</p>
+            <label class="opt"><input type="radio" name="google-sheets-study-guide-q12"> Salary</label>
+            <label class="opt"><input type="radio" name="google-sheets-study-guide-q12"> avg</label>
+            <label class="opt"><input type="radio" name="google-sheets-study-guide-q12"> total_sales</label>
+            <label class="opt" data-correct><input type="radio" name="google-sheets-study-guide-q12"> A1 (a cell reference)</label>
+            <button type="button" class="check-btn">Check answer</button><span class="q-result" role="status" aria-live="polite"></span>
+          </div>
+          <div class="q-explain"><b>Why:</b> Names cannot be cell references, contain spaces or start with a number. They are not case-sensitive and must be declared before they are used.</div>
+        </div>
+        <div class="quiz" data-quiz>
+          <div class="q-head"><span>Question 13 of 20</span><span>LAMBDA</span></div>
+          <div class="q-body" role="radiogroup" aria-labelledby="google-sheets-study-guide-iq13-t">
+            <p class="q-text" id="google-sheets-study-guide-iq13-t">What does =LAMBDA(Salary, Salary*0.3)(1000) return?</p>
+            <label class="opt"><input type="radio" name="google-sheets-study-guide-q13"> 0.3</label>
+            <label class="opt" data-correct><input type="radio" name="google-sheets-study-guide-q13"> 300</label>
+            <label class="opt"><input type="radio" name="google-sheets-study-guide-q13"> An error, because LAMBDA cannot be called directly</label>
+            <label class="opt"><input type="radio" name="google-sheets-study-guide-q13"> 1000</label>
+            <button type="button" class="check-btn">Check answer</button><span class="q-result" role="status" aria-live="polite"></span>
+          </div>
+          <div class="q-explain"><b>Why:</b> Adding (1000) after the LAMBDA calls it with Salary = 1000, so the result is 1000 * 0.3 = 300.</div>
+        </div>
+        <div class="quiz" data-quiz>
+          <div class="q-head"><span>Question 14 of 20</span><span>Named functions</span></div>
+          <div class="q-body" role="radiogroup" aria-labelledby="google-sheets-study-guide-iq14-t">
+            <p class="q-text" id="google-sheets-study-guide-iq14-t">How does a named function differ from an Apps Script custom function?</p>
+            <label class="opt" data-correct><input type="radio" name="google-sheets-study-guide-q14"> Named functions are built from Sheets formulas and need no code</label>
+            <label class="opt"><input type="radio" name="google-sheets-study-guide-q14"> Named functions only work in one cell</label>
+            <label class="opt"><input type="radio" name="google-sheets-study-guide-q14"> There is no difference</label>
+            <label class="opt"><input type="radio" name="google-sheets-study-guide-q14"> Named functions need a trigger</label>
+            <button type="button" class="check-btn">Check answer</button><span class="q-result" role="status" aria-live="polite"></span>
+          </div>
+          <div class="q-explain"><b>Why:</b> You define a named function from Data &gt; Named functions using ordinary Sheets formulas. Custom functions are written in Apps Script.</div>
+        </div>
+        <div class="quiz" data-quiz>
+          <div class="q-head"><span>Question 15 of 20</span><span>IMPORTRANGE</span></div>
+          <div class="q-body" role="radiogroup" aria-labelledby="google-sheets-study-guide-iq15-t">
+            <p class="q-text" id="google-sheets-study-guide-iq15-t">You use IMPORTRANGE to pull data from another spreadsheet for the first time and see #REF!. What do you do?</p>
+            <label class="opt"><input type="radio" name="google-sheets-study-guide-q15"> Wait an hour</label>
+            <label class="opt"><input type="radio" name="google-sheets-study-guide-q15"> Re-type the URL</label>
+            <label class="opt" data-correct><input type="radio" name="google-sheets-study-guide-q15"> Click Allow access to connect the two spreadsheets</label>
+            <label class="opt"><input type="radio" name="google-sheets-study-guide-q15"> Convert the file to Excel</label>
+            <button type="button" class="check-btn">Check answer</button><span class="q-result" role="status" aria-live="polite"></span>
+          </div>
+          <div class="q-explain"><b>Why:</b> The first connection between two spreadsheets needs permission. The #REF! prompt offers Allow access. If you do not own the source, you may need to request access to it.</div>
+        </div>
+        <div class="quiz" data-quiz>
+          <div class="q-head"><span>Question 16 of 20</span><span>Pivot tables</span></div>
+          <div class="q-body" role="radiogroup" aria-labelledby="google-sheets-study-guide-iq16-t">
+            <p class="q-text" id="google-sheets-study-guide-iq16-t">You change a value in the source data of a pivot table. What happens to the pivot table?</p>
+            <label class="opt"><input type="radio" name="google-sheets-study-guide-q16"> Nothing until you rebuild it</label>
+            <label class="opt" data-correct><input type="radio" name="google-sheets-study-guide-q16"> It refreshes whenever the source data changes</label>
+            <label class="opt"><input type="radio" name="google-sheets-study-guide-q16"> It is deleted</label>
+            <label class="opt"><input type="radio" name="google-sheets-study-guide-q16"> It turns into a static table</label>
+            <button type="button" class="check-btn">Check answer</button><span class="q-result" role="status" aria-live="polite"></span>
+          </div>
+          <div class="q-explain"><b>Why:</b> Google's help page says a Sheets pivot table refreshes when its source data changes. Double-clicking a value shows the source rows behind it.</div>
+        </div>
+        <div class="quiz" data-quiz>
+          <div class="q-head"><span>Question 17 of 20</span><span>Protection</span></div>
+          <div class="q-body" role="radiogroup" aria-labelledby="google-sheets-study-guide-iq17-t">
+            <p class="q-text" id="google-sheets-study-guide-iq17-t">A protected range is set to Show a warning. Who can edit it?</p>
+            <label class="opt"><input type="radio" name="google-sheets-study-guide-q17"> Nobody</label>
+            <label class="opt"><input type="radio" name="google-sheets-study-guide-q17"> Only people in the same domain</label>
+            <label class="opt"><input type="radio" name="google-sheets-study-guide-q17"> Only the owner</label>
+            <label class="opt" data-correct><input type="radio" name="google-sheets-study-guide-q17"> Anyone who can edit the file, after confirming a warning</label>
+            <button type="button" class="check-btn">Check answer</button><span class="q-result" role="status" aria-live="polite"></span>
+          </div>
+          <div class="q-explain"><b>Why:</b> Show a warning does not block edits; it asks the editor to confirm. Use Restrict who can edit to limit it to you, your domain, or a custom list.</div>
+        </div>
+        <div class="quiz" data-quiz>
+          <div class="q-head"><span>Question 18 of 20</span><span>Protection</span></div>
+          <div class="q-body" role="radiogroup" aria-labelledby="google-sheets-study-guide-iq18-t">
+            <p class="q-text" id="google-sheets-study-guide-iq18-t">Does Google recommend protected ranges as a security measure?</p>
+            <label class="opt" data-correct><input type="radio" name="google-sheets-study-guide-q18"> No; people with access can still copy, print or export the data</label>
+            <label class="opt"><input type="radio" name="google-sheets-study-guide-q18"> Yes, for Restricted files only</label>
+            <label class="opt"><input type="radio" name="google-sheets-study-guide-q18"> Only for Viewer links</label>
+            <label class="opt"><input type="radio" name="google-sheets-study-guide-q18"> Yes, they stop copying and exporting</label>
+            <button type="button" class="check-btn">Check answer</button><span class="q-result" role="status" aria-live="polite"></span>
+          </div>
+          <div class="q-explain"><b>Why:</b> Google says protection should not be used as a security measure. To keep data private, control who the file is shared with.</div>
+        </div>
+        <div class="quiz" data-quiz>
+          <div class="q-head"><span>Question 19 of 20</span><span>Apps Script</span></div>
+          <div class="q-body" role="radiogroup" aria-labelledby="google-sheets-study-guide-iq19-t">
+            <p class="q-text" id="google-sheets-study-guide-iq19-t">A script sets a cell with Range.setValue(). Does that fire an onEdit simple trigger?</p>
+            <label class="opt"><input type="radio" name="google-sheets-study-guide-q19"> Only in view mode</label>
+            <label class="opt"><input type="radio" name="google-sheets-study-guide-q19"> Yes, always</label>
+            <label class="opt" data-correct><input type="radio" name="google-sheets-study-guide-q19"> No; changes made by scripts or the API do not fire simple triggers</label>
+            <label class="opt"><input type="radio" name="google-sheets-study-guide-q19"> Only on the first run</label>
+            <button type="button" class="check-btn">Check answer</button><span class="q-result" role="status" aria-live="polite"></span>
+          </div>
+          <div class="q-explain"><b>Why:</b> onEdit runs when a user changes a cell. Script and API changes, such as Range.setValue(), do not trigger it.</div>
+        </div>
+        <div class="quiz" data-quiz>
+          <div class="q-head"><span>Question 20 of 20</span><span>Apps Script</span></div>
+          <div class="q-body" role="radiogroup" aria-labelledby="google-sheets-study-guide-iq20-t">
+            <p class="q-text" id="google-sheets-study-guide-iq20-t">You want a script to send an email when a cell is edited. Why will a simple onEdit trigger not do this?</p>
+            <label class="opt"><input type="radio" name="google-sheets-study-guide-q20"> Simple triggers cannot read cells</label>
+            <label class="opt" data-correct><input type="radio" name="google-sheets-study-guide-q20"> Simple triggers cannot use services that need authorization, so you use an installable trigger</label>
+            <label class="opt"><input type="radio" name="google-sheets-study-guide-q20"> Simple triggers only run on weekends</label>
+            <label class="opt"><input type="radio" name="google-sheets-study-guide-q20"> Email is not available in Apps Script</label>
+            <button type="button" class="check-btn">Check answer</button><span class="q-result" role="status" aria-live="polite"></span>
+          </div>
+          <div class="q-explain"><b>Why:</b> Simple triggers run without asking for authorization, so they cannot use services such as Gmail. Installable triggers can, and run under the account of the person who created them.</div>
+        </div>
+    <h2 id="preparation-checklist">Preparation checklist</h2>
+        <ul>
+          <li>Write SUMIFS, COUNTIFS and an XLOOKUP with a missing_value from memory</li>
+          <li>Explain when you need ARRAYFORMULA and how to apply it across a column</li>
+          <li>Use FILTER, SORT and UNIQUE together, and say what FILTER returns when nothing matches</li>
+          <li>Write a QUERY with select, where, group by and order by, and explain the headers argument</li>
+          <li>Describe what happens the first time you use IMPORTRANGE</li>
+          <li>Explain the sharing roles and why protected ranges are not a security measure</li>
+          <li>Describe the difference between a simple and an installable trigger</li>
+          <li>Check Google's help pages for any function you rely on, because behaviour can change</li>
+        </ul>
+    <h2 id="sources">Sources &amp; further reading</h2>
+    <ul class="sources"><li><a href="https://support.google.com/docs/answer/3093343" rel="noopener noreferrer" target="_blank">QUERY — Google Docs Editors Help</a></li><li><a href="https://support.google.com/docs/answer/3093197" rel="noopener noreferrer" target="_blank">FILTER — Google Docs Editors Help</a></li><li><a href="https://support.google.com/docs/answer/12405947" rel="noopener noreferrer" target="_blank">XLOOKUP — Google Docs Editors Help</a></li><li><a href="https://support.google.com/docs/answer/3093275" rel="noopener noreferrer" target="_blank">ARRAYFORMULA — Google Docs Editors Help</a></li><li><a href="https://support.google.com/docs/answer/13190535" rel="noopener noreferrer" target="_blank">LET — Google Docs Editors Help</a></li><li><a href="https://support.google.com/docs/answer/12508718" rel="noopener noreferrer" target="_blank">LAMBDA — Google Docs Editors Help</a></li><li><a href="https://support.google.com/docs/answer/12504534" rel="noopener noreferrer" target="_blank">Named functions — Google Docs Editors Help</a></li><li><a href="https://support.google.com/docs/answer/3093340" rel="noopener noreferrer" target="_blank">IMPORTRANGE — Google Docs Editors Help</a></li><li><a href="https://support.google.com/docs/answer/1272900" rel="noopener noreferrer" target="_blank">Pivot tables — Google Docs Editors Help</a></li><li><a href="https://support.google.com/docs/answer/2494822" rel="noopener noreferrer" target="_blank">Share files from Google Drive — Google Docs Editors Help</a></li><li><a href="https://support.google.com/docs/answer/1218656" rel="noopener noreferrer" target="_blank">Protect, hide and edit sheets — Google Docs Editors Help</a></li><li><a href="https://support.google.com/docs/answer/186103" rel="noopener noreferrer" target="_blank">Data validation — Google Docs Editors Help</a></li><li><a href="https://support.google.com/docs/answer/7665004" rel="noopener noreferrer" target="_blank">Macros in Google Sheets — Google Docs Editors Help</a></li><li><a href="https://developers.google.com/apps-script/guides/triggers" rel="noopener noreferrer" target="_blank">Simple triggers — Apps Script, Google for Developers</a></li><li><a href="https://developers.google.com/apps-script/guides/triggers/installable" rel="noopener noreferrer" target="_blank">Installable triggers — Apps Script, Google for Developers</a></li></ul>
+    <hr class="sep">
+    <nav class="prevnext" aria-label="More guides">
+      <a class="prev" href="../../guides/power-bi-practice-test/"><small>← Previous</small>Power BI Practice Test: 40 Unofficial Questions</a>
+      <a class="next" href="../../guides/digital-marketing-study-guide/"><small>Next →</small>Digital Marketing Study Guide: SEO, Funnels &amp; Metrics</a>
+    </nav>
+    <a href="../../#guides" class="btn btn-link">← Back to all guides</a>
+  </article>
+  <aside class="sidebar">
+    <div class="box toc-box">
+      <h2 class="box-h">On this page</h2>
+      <div class="toc">
+        <a href="#what-you-will-learn" data-toc="what-you-will-learn">What you will learn</a>
+        <a href="#essential-formulas" data-toc="essential-formulas">Essential formulas</a>
+        <a href="#advanced-formulas" data-toc="advanced-formulas">Advanced formulas</a>
+        <a href="#query-sql-style-summaries-in-one-formula" data-toc="query-sql-style-summaries-in-one-formula">QUERY: SQL-style summaries in one formula</a>
+        <a href="#clean-and-import-data" data-toc="clean-and-import-data">Clean and import data</a>
+        <a href="#pivot-tables-charts-and-dashboards" data-toc="pivot-tables-charts-and-dashboards">Pivot tables, charts and dashboards</a>
+        <a href="#share-and-protect-your-work" data-toc="share-and-protect-your-work">Share and protect your work</a>
+        <a href="#automate-with-macros-and-apps-script" data-toc="automate-with-macros-and-apps-script">Automate with macros and Apps Script</a>
+        <a href="#common-mistakes" data-toc="common-mistakes">Common mistakes</a>
+        <a href="#practical-learning-exercises" data-toc="practical-learning-exercises">Practical learning exercises</a>
+        <a href="#interview-questions" data-toc="interview-questions">Interview questions</a>
+        <a href="#practice-questions" data-toc="practice-questions">Practice questions</a>
+        <a href="#preparation-checklist" data-toc="preparation-checklist">Preparation checklist</a>
+        <a href="#sources" data-toc="sources">Sources &amp; further reading</a>
+      </div>
+    </div>
+    <div class="box rel">
+      <h2 class="box-h">Related guides</h2>
+      <a href="../../guides/excel-study-guide/">Excel Study Guide: Lookups, Pivot Tables &amp; Core Functions</a>
+      <a href="../../guides/sql-study-guide/">SQL Study Guide: Queries You Should Master</a>
+      <a href="../../guides/power-bi-study-guide/">Power BI Study Guide: Model, DAX and Reports</a>
+    </div>
+    <div class="box">
+      <h2 class="box-h">Share this guide</h2>
+      <button type="button" class="btn btn-share" id="shareBtn" data-url="https://skillsprep.github.io/guides/google-sheets-study-guide/" data-title="Google Sheets Study Guide: Formulas, QUERY and Automation">Copy Link</button>
+    </div>
+    <div class="box">
+      <h2 class="box-h">Spotted a mistake?</h2>
+      <p class="box-p">We correct errors quickly. Tell us what's wrong and we'll fix it.</p>
+      <a class="btn btn-link" href="../../contact/">Report a correction</a>
+    </div>
+  </aside>
+</div>
+</main>
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div>
+        <h2 class="foot-h">SkillPrep</h2>
+        <p class="foot-about">Concept-first study guides and practice tests for everyday work skills. Learn the "why" behind every answer.</p>
+      </div>
+      <div>
+        <h2 class="foot-h">Explore</h2>
+        <a href="../../">All guides</a>
+        <a href="../../about/">About</a>
+        <a href="../../contact/">Contact</a>
+        <a href="../../privacy/">Privacy</a>
+        <a href="../../terms/">Terms</a>
+      </div>
+      <div>
+        <h2 class="foot-h">Popular guides</h2>
+        <a href="../../guides/excel-study-guide/">Excel Study Guide</a>
+        <a href="../../guides/python-study-guide/">Python Fundamentals</a>
+        <a href="../../guides/advanced-python-study-guide/">Advanced Python Study Guide</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2026 SkillPrep. All rights reserved.</span>
+      <span>Independent educational site. Not affiliated with LinkedIn, Microsoft or any other vendor; product names are trademarks of their owners.</span>
+    </div>
+  </div>
+</footer>
+<button class="back-top" id="backTop" type="button" aria-label="Back to top">↑</button>
+<div id="cookieConsent" class="cookie-consent" hidden>
+  <div class="cookie-inner">
+    <p>SkillPrep saves your quiz progress in your browser's local storage. Ads are shown through Google AdSense, which may use cookies. See our <a href="../../privacy/">Privacy Policy</a> for details and opt-out options.</p>
+    <div class="cookie-actions">
+      <button id="cookieAccept" class="btn">OK</button>
+    </div>
+  </div>
+</div>
+<script src="../../js/site.js" defer></script>
+</body>
+</html>

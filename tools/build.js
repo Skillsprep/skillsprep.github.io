@@ -7,11 +7,21 @@
 const fs = require("fs");
 const path = require("path");
 const cfg = require("./config");
-// Power BI guide lives in its own file; place it right after the SQL guide in the site order.
+// Power BI and Google Sheets guides live in their own files; place it right after the SQL guide in the site order.
 const POSTS = (() => {
-  const base = require("./content/guides"), extra = require("./content/powerbi");
+  const base = require("./content/guides"), extra = require("./content/powerbi"), sheets = require("./content/sheets");
   const at = base.findIndex((x) => x.slug === "sql-study-guide") + 1;
-  return [...base.slice(0, at), ...extra, ...base.slice(at)];
+  const out = [...base.slice(0, at), ...extra, ...sheets, ...base.slice(at)];
+  // Advanced Python guide goes right after the Python guide.
+  const py = out.findIndex((x) => x.slug === "python-study-guide") + 1;
+  out.splice(py, 0, ...require("./content/advpython"));
+  // Developer fundamentals guide goes right after the Git guide.
+  const dv = out.findIndex((x) => x.slug === "git-study-guide") + 1;
+  out.splice(dv, 0, ...require("./content/devskills"));
+  // Practical AI guide goes right before the Generative AI practice test.
+  const ai = out.findIndex((x) => x.slug === "generative-ai-career-essentials-practice-test");
+  out.splice(ai < 0 ? out.length : ai, 0, ...require("./content/practicalai"));
+  return out;
 })();
 // Group questions by topic (topics in first-appearance order, original order kept within each topic)
 // so each topic heading appears once in a test.

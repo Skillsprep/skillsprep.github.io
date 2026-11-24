@@ -1,0 +1,681 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Developer Fundamentals: HTTP, APIs, Debugging and Testing | SkillPrep</title>
+<meta name="description" content="The everyday skills around the code: the command line, HTTP and status codes, REST and JSON, debugging, testing and security basics, with runnable examples…">
+<link rel="canonical" href="https://skillsprep.github.io/guides/developer-skills-study-guide/">
+<meta name="google-site-verification" content="rOGMro0A_ltGwtwagVfnPJFPmn59apiGYOa0LKMT4n8">
+<meta name="robots" content="index,follow">
+<meta name="theme-color" content="#0D1B2A">
+<meta property="og:site_name" content="SkillPrep">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Developer Fundamentals: HTTP, APIs, Debugging and Testing | SkillPrep">
+<meta property="og:description" content="The everyday skills around the code: the command line, HTTP and status codes, REST and JSON, debugging, testing and security basics, with runnable examples…">
+<meta property="og:url" content="https://skillsprep.github.io/guides/developer-skills-study-guide/">
+<meta property="og:image" content="https://skillsprep.github.io/assets/og-image.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Developer Fundamentals: HTTP, APIs, Debugging and Testing | SkillPrep">
+<meta name="twitter:description" content="The everyday skills around the code: the command line, HTTP and status codes, REST and JSON, debugging, testing and security basics, with runnable examples…">
+<meta name="twitter:image" content="https://skillsprep.github.io/assets/og-image.png">
+<link rel="icon" href="../../assets/favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../../css/style.css">
+<script>(function(){try{if(localStorage.getItem("skillprep:theme")==="dark"){document.documentElement.setAttribute("data-theme","dark");}}catch(e){}})();</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"Developer Fundamentals: HTTP, APIs, Debugging and Testing","description":"The everyday skills around the code: the command line, HTTP and status codes, REST and JSON, debugging, testing and security basics, with runnable examples, exercises and a 20-question quiz.","datePublished":"2026-11-22","dateModified":"2026-11-22","author":{"@type":"Organization","name":"SkillPrep editorial team"},"publisher":{"@type":"Organization","name":"SkillPrep","logo":{"@type":"ImageObject","url":"https://skillsprep.github.io/assets/favicon.svg"}},"mainEntityOfPage":"https://skillsprep.github.io/guides/developer-skills-study-guide/","image":"https://skillsprep.github.io/assets/og-image.png","articleSection":"Developer Skills","inLanguage":"en"}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://skillsprep.github.io/"},{"@type":"ListItem","position":2,"name":"Developer Skills","item":"https://skillsprep.github.io/#guides"},{"@type":"ListItem","position":3,"name":"Developer Fundamentals: HTTP, APIs, Debugging and Testing","item":"https://skillsprep.github.io/guides/developer-skills-study-guide/"}]}</script>
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9455217122501464" crossorigin="anonymous"></script>
+</head>
+<body>
+<a class="skip-link" href="#main">Skip to content</a>
+<header class="site-header">
+  <div class="container header-inner">
+    <a href="../../" class="logo"><span class="mark" aria-hidden="true">S</span> SkillPrep</a>
+    <button class="burger" id="burger" type="button" aria-label="Menu" aria-expanded="false" aria-controls="mainNav">☰</button>
+    <nav class="main-nav" id="mainNav" aria-label="Main">
+      <a href="../../">Home</a>
+      <a href="../../about/">About</a>
+      <a href="../../contact/">Contact</a>
+    </nav>
+    <button class="theme-toggle" id="themeToggle" type="button" aria-label="Toggle dark mode">◐</button>
+  </div>
+</header>
+<main id="main">
+
+<div id="progress" aria-hidden="true"></div>
+<section class="article-hero">
+  <div class="container">
+    <nav class="crumbs" aria-label="Breadcrumb"><a href="../../">Home</a> <span aria-hidden="true" class="sep">›</span> <a href="../../#guides">Guides</a> <span aria-hidden="true" class="sep">›</span> <span aria-current="page">Developer Skills</span></nav>
+    <div class="cat">Developer Skills</div>
+    <h1>Developer Fundamentals: HTTP, APIs, Debugging and Testing</h1>
+    <div class="meta">
+      <span><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg> 13 min read</span>
+      <span><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg> 20 Questions</span>
+      <span>Published <time datetime="2026-11-22">Nov 22, 2026</time></span>
+      <span>Reviewed <time datetime="2026-11-22">Nov 22, 2026</time></span>
+    </div>
+  </div>
+</section>
+<div class="container article-wrap">
+  <article class="article-body">
+    <p class="note"><b>Unofficial study resource.</b> Written independently of any exam provider, employer or software vendor.</p>
+    <details class="toc-mobile">
+      <summary>On this page</summary>
+      <div class="toc">
+        <a href="#what-you-will-learn">What you will learn</a>
+        <a href="#the-command-line">The command line</a>
+        <a href="#http-methods-and-status-codes">HTTP: methods and status codes</a>
+        <a href="#rest-apis-and-json">REST APIs and JSON</a>
+        <a href="#debugging">Debugging</a>
+        <a href="#testing">Testing</a>
+        <a href="#code-review-and-reading-documentation">Code review and reading documentation</a>
+        <a href="#security-basics">Security basics</a>
+        <a href="#common-mistakes">Common mistakes</a>
+        <a href="#practical-learning-exercises">Practical learning exercises</a>
+        <a href="#interview-questions">Interview questions</a>
+        <a href="#practice-questions">Practice questions</a>
+        <a href="#preparation-checklist">Preparation checklist</a>
+        <a href="#sources">Sources &amp; further reading</a>
+      </div>
+    </details>
+    <p class="lead">Interviews for junior developers test more than a language: how you use the command line, what an API call actually sends, how you find a bug, how you test, and whether you protect secrets. This guide covers those skills with short, runnable examples. Every code block is a complete script that was run before publishing, and each is labelled by its first line. For language and tooling basics, see the <a href="../git-study-guide/">Git</a>, <a href="../javascript-study-guide/">JavaScript</a> and <a href="../python-study-guide/">Python</a> guides. This is an unofficial study aid.</p>
+    <h2 id="what-you-will-learn">What you will learn</h2>
+        <p>By the end you should be able to:</p>
+        <ul>
+          <li>Use pipes, redirects, exit codes and environment variables in a shell</li>
+          <li>Choose HTTP methods and status codes correctly, and say which methods are safe and idempotent</li>
+          <li>Read and write valid JSON, and handle malformed input</li>
+          <li>Reproduce, isolate and fix bugs with a repeatable process</li>
+          <li>Write unit tests that cover normal, edge and error cases</li>
+          <li>Apply basic security habits: parameterized queries, server-side validation and secret handling</li>
+        </ul>
+    <h2 id="the-command-line">The command line</h2>
+        <p>A shell lets you chain small programs. A pipe (<code>|</code>) sends one command's output into the next, <code>&gt;</code> redirects output to a file, every command ends with an exit code (0 means success, non-zero means failure), and environment variables pass settings to programs.</p>
+<pre><code># shell
+mkdir -p demo &amp;&amp; cd demo
+printf 'apple\nbanana\napple\n' &gt; fruit.txt
+sort fruit.txt | uniq -c        # counts each distinct line
+grep -c apple fruit.txt         # 2
+grep -q cherry fruit.txt; echo "exit code: $?"   # exit code: 1
+export GREETING=hello
+sh -c 'echo "$GREETING"'        # hello</code></pre>
+        <p>The <code>$?</code> variable holds the previous command's exit code, which is how scripts and CI systems decide whether a step succeeded.</p>
+    <h2 id="http-methods-and-status-codes">HTTP: methods and status codes</h2>
+        <p>A request has a method, a URL, headers and sometimes a body; a response has a status code, headers and usually a body. MDN lists these properties:</p>
+        <table>
+          <tr><th>Method</th><th>Purpose</th><th>Safe</th><th>Idempotent</th></tr>
+          <tr><td>GET</td><td>Retrieve a representation of a resource</td><td>Yes</td><td>Yes</td></tr>
+          <tr><td>HEAD</td><td>Same as GET without the response body</td><td>Yes</td><td>Yes</td></tr>
+          <tr><td>POST</td><td>Submit an entity, often causing a change or side effects</td><td>No</td><td>No</td></tr>
+          <tr><td>PUT</td><td>Replace the target resource with the request content</td><td>No</td><td>Yes</td></tr>
+          <tr><td>PATCH</td><td>Apply a partial modification</td><td>No</td><td>No</td></tr>
+          <tr><td>DELETE</td><td>Delete the resource</td><td>No</td><td>Yes</td></tr>
+        </table>
+        <table>
+          <tr><th>Class</th><th>Meaning</th><th>Common codes</th></tr>
+          <tr><td>2xx</td><td>Success</td><td>200 OK, 201 Created, 204 No Content</td></tr>
+          <tr><td>3xx</td><td>Redirection</td><td>301 Moved Permanently, 304 Not Modified</td></tr>
+          <tr><td>4xx</td><td>Client error</td><td>400 Bad Request, 401 Unauthorized, 403 Forbidden, 404 Not Found, 429 Too Many Requests</td></tr>
+          <tr><td>5xx</td><td>Server error</td><td>500 Internal Server Error, 502 Bad Gateway, 503 Service Unavailable</td></tr>
+        </table>
+        <div class="callout"><b>401 versus 403</b> Although the standard says "unauthorized", 401 semantically means unauthenticated: the client must authenticate. 403 means the server knows who the client is and still refuses. A server may return 404 instead of 403 to hide that a resource exists.</div>
+    <h2 id="rest-apis-and-json">REST APIs and JSON</h2>
+        <p>A REST-style API exposes resources at URLs and uses methods for the action: <code>GET /items</code> lists, <code>POST /items</code> creates. JSON is the usual body format. JSON requires double-quoted property names and strings, forbids trailing commas and comments, and has no <code>undefined</code>, <code>NaN</code> or <code>Infinity</code>.</p>
+<pre><code>// node
+try { JSON.parse("{'a': 1}"); } catch (e) { console.log(e.name); }            // SyntaxError
+console.log(JSON.parse('{"a": [1, 2, null]}').a.length);                      // 3
+console.log(JSON.stringify({ a: undefined, b: 1, c: function () {} }));       // {"b":1}</code></pre>
+        <p>The script below runs a tiny API on your own machine and calls it. It returns 201 for a created item, 400 for malformed JSON or a missing field, 200 for the list, and 404 for an unknown path.</p>
+<pre><code>// node
+const http = require("node:http");
+const items = [];
+const server = http.createServer((req, res) =&gt; {
+  const send = (code, body) =&gt; {
+    res.writeHead(code, { "Content-Type": "application/json" });
+    res.end(JSON.stringify(body));
+  };
+  if (req.method === "GET" &amp;&amp; req.url === "/items") return send(200, items);
+  if (req.method === "POST" &amp;&amp; req.url === "/items") {
+    let data = "";
+    req.on("data", (chunk) =&gt; (data += chunk));
+    req.on("end", () =&gt; {
+      let item;
+      try { item = JSON.parse(data); } catch (e) { return send(400, { error: "invalid JSON" }); }
+      if (typeof item.name !== "string" || item.name === "") return send(400, { error: "name is required" });
+      items.push(item);
+      send(201, item);
+    });
+    return;
+  }
+  send(404, { error: "not found" });
+});
+server.listen(0, async () =&gt; {
+  const base = "http://127.0.0.1:" + server.address().port;
+  const post = (body) =&gt; fetch(base + "/items", { method: "POST", headers: { "Content-Type": "application/json" }, body: body });
+  let r = await post(JSON.stringify({ name: "pen" }));
+  console.log(r.status);                                  // 201
+  r = await post("{bad json}");
+  console.log(r.status);                                  // 400
+  r = await post(JSON.stringify({}));
+  console.log(r.status);                                  // 400
+  r = await fetch(base + "/items");
+  console.log(r.status, JSON.stringify(await r.json()));  // 200 [{"name":"pen"}]
+  r = await fetch(base + "/nope");
+  console.log(r.status);                                  // 404
+  server.close();
+});</code></pre>
+        <p>Note the order of checks: parse the body (400 if malformed), then validate the fields (400 if wrong shape), then act. Valid JSON can still have the wrong shape.</p>
+    <h2 id="debugging">Debugging</h2>
+        <table>
+          <tr><th>Step</th><th>What to do</th></tr>
+          <tr><td>1. Reproduce</td><td>Make the bug happen on demand, then shrink the input to the smallest failing case</td></tr>
+          <tr><td>2. Read the error</td><td>In a Python traceback, read the last line first (the exception), then the frames above it to see where it came from</td></tr>
+          <tr><td>3. Hypothesise and test</td><td>Change one thing at a time and predict the result before you run it</td></tr>
+          <tr><td>4. Narrow by halving</td><td>Bisect versions, inputs or code until the first bad point is found</td></tr>
+          <tr><td>5. Fix and guard</td><td>Fix the cause, then add a test that fails without the fix</td></tr>
+        </table>
+        <p>Halving is fast. This function finds the first bad version among 100 with 7 checks, the same idea that <code>git bisect</code> uses (see the <a href="../git-study-guide/">Git guide</a>).</p>
+<pre><code># python
+def first_bad(versions, is_bad):
+    lo, hi = 0, len(versions) - 1
+    checks = 0
+    while lo &lt; hi:
+        mid = (lo + hi) // 2
+        checks += 1
+        if is_bad(versions[mid]):
+            hi = mid
+        else:
+            lo = mid + 1
+    return versions[lo], checks
+
+print(first_bad(list(range(1, 101)), lambda v: v &gt;= 37))   # (37, 7)</code></pre>
+        <p>Logging beats scattered print statements because it has levels and formatting, and you can change the verbosity without editing code. Do not log passwords, keys or personal data.</p>
+<pre><code># python
+import logging
+
+logging.basicConfig(level=logging.INFO, format="%(levelname)s %(message)s")
+log = logging.getLogger("orders")
+
+def total(prices):
+    log.info("summing %d prices", len(prices))
+    if not prices:
+        log.warning("empty order")
+    return sum(prices)
+
+print(total([]))    # logs INFO and WARNING lines, then prints 0</code></pre>
+    <h2 id="testing">Testing</h2>
+        <p>The Python docs describe a test case as the individual unit of testing: it checks for a specific response to a particular set of inputs. A good test checks one behaviour, has a clear name, and follows arrange, act, assert. Cover the normal case, edges such as empty input and boundaries, and error paths.</p>
+<pre><code># python
+import unittest
+
+def slugify(text):
+    return "-".join(text.lower().split())
+
+class SlugifyTests(unittest.TestCase):
+    def test_basic(self):
+        self.assertEqual(slugify("Hello World"), "hello-world")
+
+    def test_extra_spaces(self):
+        self.assertEqual(slugify("  a   b "), "a-b")
+
+    def test_empty(self):
+        self.assertEqual(slugify(""), "")
+
+    def test_none_is_rejected(self):
+        with self.assertRaises(AttributeError):
+            slugify(None)
+
+if __name__ == "__main__":
+    unittest.main()</code></pre>
+        <p>Run tests with <code>python -m unittest</code>. <code>assertRaises</code> passes only when the named exception is raised. <code>setUp</code> runs immediately before each test method, so tests do not share state.</p>
+        <p><b>Unit versus integration.</b> A unit test checks a small piece in isolation and runs quickly. An integration test checks that parts work together, such as your code and a database. Use a fake for anything slow or unpredictable, such as the network or the clock:</p>
+<pre><code># python
+class FakeClock:
+    def __init__(self, now):
+        self.now = now
+
+    def __call__(self):
+        return self.now
+
+def is_expired(expires_at, clock):
+    return clock() &gt;= expires_at
+
+assert is_expired(100, FakeClock(150))
+assert not is_expired(100, FakeClock(50))
+print("ok")</code></pre>
+    <h2 id="code-review-and-reading-documentation">Code review and reading documentation</h2>
+        <ul>
+          <li><b>Keep changes small.</b> A small pull request is easier to review, test and revert.</li>
+          <li><b>Review for behaviour first</b>: does it do what the description says, are edge and error cases handled, is there a test, and is anything secret or personal logged or committed? Style comes after.</li>
+          <li><b>Give specific, kind feedback</b> that explains why, and separate must-fix issues from suggestions.</li>
+          <li><b>Read the error message in full</b> before searching, then go to the official documentation for the exact behaviour. Docs change between versions, so check the version you use.</li>
+        </ul>
+    <h2 id="security-basics">Security basics</h2>
+        <p>OWASP, a widely used web security reference, describes its Top 10 as the reference standard for the most critical web application security risks. Three habits prevent a large share of beginner mistakes.</p>
+        <p><b>1. Use parameterized queries.</b> OWASP's preferred defence against SQL injection keeps the SQL structure separate from data values. Concatenating untrusted values into the query defeats this protection:</p>
+<pre><code># python
+import sqlite3
+
+con = sqlite3.connect(":memory:")
+con.execute("create table users (name text, secret text)")
+con.execute("insert into users values ('ann', 's1'), ('bob', 's2')")
+
+name = "x' OR '1'='1"      # hostile input
+unsafe = con.execute("select name from users where name = '" + name + "'").fetchall()
+safe = con.execute("select name from users where name = ?", (name,)).fetchall()
+print(unsafe)   # [('ann',), ('bob',)]   the input changed the query
+print(safe)     # []                     the input was treated as data</code></pre>
+        <p><b>2. Validate on the server.</b> OWASP says to validate on the server even when the browser checks the same fields: client-side validation can be bypassed, so use it for immediate feedback. Define what the application accepts and reject everything else, instead of trying to recognise every malicious string.</p>
+        <p><b>3. Handle secrets carefully.</b> Never hardcode API keys or passwords in source code or commit them. Read them from the environment (or a secrets manager), give each the minimum privileges it needs, and rotate any that may have been exposed, because removing a file in a later commit does not remove it from history.</p>
+<pre><code># python
+import os
+
+api_key = os.environ.get("API_KEY")
+if api_key is None:
+    print("API_KEY is not set")   # fail clearly instead of using a hardcoded default</code></pre>
+    <h2 id="common-mistakes">Common mistakes</h2>
+        <table>
+          <tr><th>Mistake</th><th>Better approach</th></tr>
+          <tr><td>Using POST for everything</td><td>Match the method to the action and its idempotency</td></tr>
+          <tr><td>Returning 200 with an error message</td><td>Return an appropriate 4xx or 5xx status</td></tr>
+          <tr><td>Confusing 401 and 403</td><td>401: not authenticated. 403: authenticated but not allowed</td></tr>
+          <tr><td>Not handling malformed JSON</td><td>try/catch the parse and return 400</td></tr>
+          <tr><td>Trusting input because the browser validated it</td><td>Validate on the server</td></tr>
+          <tr><td>Building SQL by string concatenation</td><td>Use parameterized queries</td></tr>
+          <tr><td>Committing API keys</td><td>Use environment variables, and rotate any exposed key</td></tr>
+          <tr><td>Guessing at fixes without reproducing the bug</td><td>Reproduce, isolate, change one thing at a time</td></tr>
+          <tr><td>Tests that depend on the network or the clock</td><td>Use a fake or a fixed value</td></tr>
+          <tr><td>Fixing a bug without adding a test</td><td>Add a test that fails without the fix</td></tr>
+        </table>
+    <h2 id="practical-learning-exercises">Practical learning exercises</h2>
+        <ul>
+          <li><b>Exercise 1 (shell).</b> Given a file of fruit names, find the most common one. <i>Solution:</i>
+<pre><code># shell
+printf 'apple\nbanana\napple\n' | sort | uniq -c | sort -rn | head -1    # 2 apple</code></pre></li>
+          <li><b>Exercise 2 (status codes).</b> Pick a code for each: a new item was created (201), the caller sent no credentials (401), a logged-in user lacks permission (403), the item does not exist (404), the caller is being rate limited (429), the service is down for maintenance (503).</li>
+          <li><b>Exercise 3 (JSON).</b> Fix <code>{'name': 'pen', 'tags': ['a', 'b',],}</code>. <i>Solution:</i> use double quotes and remove both trailing commas.
+<pre><code>// node
+try { JSON.parse("{'name': 'pen', 'tags': ['a', 'b',],}"); } catch (e) { console.log("original:", e.name); }
+console.log(JSON.parse('{"name": "pen", "tags": ["a", "b"]}').tags.length);   // 2</code></pre></li>
+          <li><b>Exercise 4 (tests).</b> Write tests for <code>clamp(n, lo, hi)</code> covering inside, below, above and the two boundaries. <i>Solution:</i>
+<pre><code># python
+import unittest
+
+def clamp(n, lo, hi):
+    return max(lo, min(n, hi))
+
+class ClampTests(unittest.TestCase):
+    def test_inside(self):
+        self.assertEqual(clamp(5, 0, 10), 5)
+
+    def test_below(self):
+        self.assertEqual(clamp(-3, 0, 10), 0)
+
+    def test_above(self):
+        self.assertEqual(clamp(42, 0, 10), 10)
+
+    def test_boundaries(self):
+        self.assertEqual(clamp(0, 0, 10), 0)
+        self.assertEqual(clamp(10, 0, 10), 10)
+
+unittest.main()</code></pre></li>
+          <li><b>Exercise 5 (security).</b> Rewrite <code>"select name from users where name = '" + name + "'"</code> safely. <i>Solution:</i> pass the value as a parameter, as in the <code>safe</code> query in the security section: <code>con.execute("select name from users where name = ?", (name,))</code>.</li>
+        </ul>
+    <h2 id="interview-questions">Interview questions</h2>
+        <p>Try answering aloud before you open each one.</p>
+        <details class="faq"><summary>What does it mean for an HTTP method to be safe or idempotent?</summary><p>A safe method is meant only to retrieve data, such as GET and HEAD. An idempotent method leaves the server in the same state however many times you repeat the request, such as GET, PUT and DELETE. POST and PATCH are neither, which is why retrying a POST can create duplicates.</p></details>
+        <details class="faq"><summary>What is the difference between PUT and POST?</summary><p>PUT replaces the target resource with the request content and is idempotent. POST submits an entity to a resource, often causing a state change or side effects, and is not idempotent.</p></details>
+        <details class="faq"><summary>Explain 401 versus 403.</summary><p>401 means unauthenticated: the client has not proved who it is. 403 means the server knows who the client is and refuses access anyway. A server may return 404 instead of 403 to hide that a resource exists.</p></details>
+        <details class="faq"><summary>What do the status code classes mean?</summary><p>1xx informational, 2xx success, 3xx redirection, 4xx client error and 5xx server error. For example 201 means created, 304 means not modified (use the cached copy), 429 means too many requests, and 503 means temporarily unavailable.</p></details>
+        <details class="faq"><summary>What makes a document valid JSON?</summary><p>Double-quoted property names and strings, no trailing commas, no comments, and only objects, arrays, numbers, strings, booleans and null as values. NaN, Infinity and undefined are unsupported, and numbers cannot have leading zeros.</p></details>
+        <details class="faq"><summary>How do you handle malformed JSON from a client?</summary><p>Wrap parsing in a try/catch, since JSON.parse throws a SyntaxError on bad input, and return 400 Bad Request with a clear message. Then validate the parsed fields, because valid JSON can still have the wrong shape.</p></details>
+        <details class="faq"><summary>How do you debug a problem you cannot yet explain?</summary><p>Reproduce it reliably, shrink the input to the smallest case that fails, and form a hypothesis you can test. Narrow the cause by halving the search space, such as bisecting versions or commenting out half the code, and add logging at the boundaries.</p></details>
+        <details class="faq"><summary>Logging or print statements?</summary><p>Prints are fine for a quick look, but logging gives levels such as INFO and WARNING, formatting, and the ability to change verbosity without editing code. Do not log secrets or personal data.</p></details>
+        <details class="faq"><summary>What makes a good unit test?</summary><p>It checks one behaviour, has a clear name, and follows arrange, act, assert. It covers normal inputs, edge cases such as empty values and boundaries, and error paths. It does not depend on the network, the clock or test order, so use a fake where needed.</p></details>
+        <details class="faq"><summary>Unit test versus integration test?</summary><p>A unit test checks a small piece in isolation, usually fast. An integration test checks that several parts work together, such as your code with a database or an API. You need both, with more of the fast ones.</p></details>
+        <details class="faq"><summary>What is SQL injection and how do you prevent it?</summary><p>Untrusted data becoming part of the SQL syntax and changing the query's logic. Prevent it with parameterized queries, which keep the SQL structure separate from the data values, rather than concatenating strings.</p></details>
+        <details class="faq"><summary>How should you handle API keys and passwords?</summary><p>Never hardcode them in source code or commit them. Supply them through environment variables or a secrets manager, give each the minimum privileges it needs, and rotate any that may have been exposed.</p></details>
+    <h2 id="practice-questions">Practice questions</h2>
+        <div class="quiz" data-quiz>
+          <div class="q-head"><span>Question 1 of 20</span><span>HTTP</span></div>
+          <div class="q-body" role="radiogroup" aria-labelledby="developer-skills-study-guide-iq1-t">
+            <p class="q-text" id="developer-skills-study-guide-iq1-t">Which statement about the GET method matches MDN?</p>
+            <label class="opt"><input type="radio" name="developer-skills-study-guide-q1"> GET is not cacheable</label>
+            <label class="opt"><input type="radio" name="developer-skills-study-guide-q1"> GET always contains a request body</label>
+            <label class="opt" data-correct><input type="radio" name="developer-skills-study-guide-q1"> GET should only retrieve data and is safe and idempotent</label>
+            <label class="opt"><input type="radio" name="developer-skills-study-guide-q1"> GET is used to create resources</label>
+            <button type="button" class="check-btn">Check answer</button><span class="q-result" role="status" aria-live="polite"></span>
+          </div>
+          <div class="q-explain"><b>Why:</b> MDN says GET requests a representation of a resource and should only retrieve data. GET, HEAD are safe, idempotent and cacheable.</div>
+        </div>
+        <div class="quiz" data-quiz>
+          <div class="q-head"><span>Question 2 of 20</span><span>HTTP</span></div>
+          <div class="q-body" role="radiogroup" aria-labelledby="developer-skills-study-guide-iq2-t">
+            <p class="q-text" id="developer-skills-study-guide-iq2-t">Which of these methods is NOT idempotent according to MDN?</p>
+            <label class="opt" data-correct><input type="radio" name="developer-skills-study-guide-q2"> POST</label>
+            <label class="opt"><input type="radio" name="developer-skills-study-guide-q2"> GET</label>
+            <label class="opt"><input type="radio" name="developer-skills-study-guide-q2"> PUT</label>
+            <label class="opt"><input type="radio" name="developer-skills-study-guide-q2"> DELETE</label>
+            <button type="button" class="check-btn">Check answer</button><span class="q-result" role="status" aria-live="polite"></span>
+          </div>
+          <div class="q-explain"><b>Why:</b> Repeating a PUT or DELETE leaves the server in the same state. POST often causes a change in state or side effects, so repeating it can create duplicates.</div>
+        </div>
+        <div class="quiz" data-quiz>
+          <div class="q-head"><span>Question 3 of 20</span><span>HTTP</span></div>
+          <div class="q-body" role="radiogroup" aria-labelledby="developer-skills-study-guide-iq3-t">
+            <p class="q-text" id="developer-skills-study-guide-iq3-t">What is the difference between PUT and PATCH?</p>
+            <label class="opt"><input type="radio" name="developer-skills-study-guide-q3"> They are identical</label>
+            <label class="opt"><input type="radio" name="developer-skills-study-guide-q3"> PUT is read-only</label>
+            <label class="opt"><input type="radio" name="developer-skills-study-guide-q3"> PATCH deletes the resource</label>
+            <label class="opt" data-correct><input type="radio" name="developer-skills-study-guide-q3"> PUT replaces the target resource's representation; PATCH applies a partial modification</label>
+            <button type="button" class="check-btn">Check answer</button><span class="q-result" role="status" aria-live="polite"></span>
+          </div>
+          <div class="q-explain"><b>Why:</b> MDN: PUT replaces all current representations of the target resource with the request content, while PATCH applies partial modifications.</div>
+        </div>
+        <div class="quiz" data-quiz>
+          <div class="q-head"><span>Question 4 of 20</span><span>Status codes</span></div>
+          <div class="q-body" role="radiogroup" aria-labelledby="developer-skills-study-guide-iq4-t">
+            <p class="q-text" id="developer-skills-study-guide-iq4-t">A POST successfully creates a new resource. Which status code is typically returned?</p>
+            <label class="opt"><input type="radio" name="developer-skills-study-guide-q4"> 200 OK only</label>
+            <label class="opt" data-correct><input type="radio" name="developer-skills-study-guide-q4"> 201 Created</label>
+            <label class="opt"><input type="radio" name="developer-skills-study-guide-q4"> 204 No Content</label>
+            <label class="opt"><input type="radio" name="developer-skills-study-guide-q4"> 301 Moved Permanently</label>
+            <button type="button" class="check-btn">Check answer</button><span class="q-result" role="status" aria-live="polite"></span>
+          </div>
+          <div class="q-explain"><b>Why:</b> 201 means the request succeeded and a new resource was created, typically after POST requests or some PUT requests.</div>
+        </div>
+        <div class="quiz" data-quiz>
+          <div class="q-head"><span>Question 5 of 20</span><span>Status codes</span></div>
+          <div class="q-body" role="radiogroup" aria-labelledby="developer-skills-study-guide-iq5-t">
+            <p class="q-text" id="developer-skills-study-guide-iq5-t">A request has no credentials. Semantically, which response fits best?</p>
+            <label class="opt"><input type="radio" name="developer-skills-study-guide-q5"> 500 Internal Server Error</label>
+            <label class="opt"><input type="radio" name="developer-skills-study-guide-q5"> 403 Forbidden</label>
+            <label class="opt" data-correct><input type="radio" name="developer-skills-study-guide-q5"> 401 Unauthorized, which really means unauthenticated</label>
+            <label class="opt"><input type="radio" name="developer-skills-study-guide-q5"> 404 Not Found</label>
+            <button type="button" class="check-btn">Check answer</button><span class="q-result" role="status" aria-live="polite"></span>
+          </div>
+          <div class="q-explain"><b>Why:</b> MDN: 401 semantically means unauthenticated, so the client must authenticate. 403 means the server knows who the client is and still refuses.</div>
+        </div>
+        <div class="quiz" data-quiz>
+          <div class="q-head"><span>Question 6 of 20</span><span>Status codes</span></div>
+          <div class="q-body" role="radiogroup" aria-labelledby="developer-skills-study-guide-iq6-t">
+            <p class="q-text" id="developer-skills-study-guide-iq6-t">A logged-in user requests an admin page they are not allowed to see. Which response is the usual fit?</p>
+            <label class="opt"><input type="radio" name="developer-skills-study-guide-q6"> 200 OK</label>
+            <label class="opt"><input type="radio" name="developer-skills-study-guide-q6"> 304 Not Modified</label>
+            <label class="opt"><input type="radio" name="developer-skills-study-guide-q6"> 401 Unauthorized</label>
+            <label class="opt" data-correct><input type="radio" name="developer-skills-study-guide-q6"> 403 Forbidden</label>
+            <button type="button" class="check-btn">Check answer</button><span class="q-result" role="status" aria-live="polite"></span>
+          </div>
+          <div class="q-explain"><b>Why:</b> 403: the client does not have access rights and, unlike 401, the client's identity is known to the server.</div>
+        </div>
+        <div class="quiz" data-quiz>
+          <div class="q-head"><span>Question 7 of 20</span><span>Status codes</span></div>
+          <div class="q-body" role="radiogroup" aria-labelledby="developer-skills-study-guide-iq7-t">
+            <p class="q-text" id="developer-skills-study-guide-iq7-t">Which status code signals rate limiting, meaning too many requests in a given time?</p>
+            <label class="opt" data-correct><input type="radio" name="developer-skills-study-guide-q7"> 429</label>
+            <label class="opt"><input type="radio" name="developer-skills-study-guide-q7"> 502</label>
+            <label class="opt"><input type="radio" name="developer-skills-study-guide-q7"> 301</label>
+            <label class="opt"><input type="radio" name="developer-skills-study-guide-q7"> 408</label>
+            <button type="button" class="check-btn">Check answer</button><span class="q-result" role="status" aria-live="polite"></span>
+          </div>
+          <div class="q-explain"><b>Why:</b> 429 Too Many Requests indicates the user has sent too many requests in a given amount of time.</div>
+        </div>
+        <div class="quiz" data-quiz>
+          <div class="q-head"><span>Question 8 of 20</span><span>Status codes</span></div>
+          <div class="q-body" role="radiogroup" aria-labelledby="developer-skills-study-guide-iq8-t">
+            <p class="q-text" id="developer-skills-study-guide-iq8-t">A server is down for maintenance and should tell clients to try again later. Which response fits?</p>
+            <label class="opt"><input type="radio" name="developer-skills-study-guide-q8"> 404 Not Found</label>
+            <label class="opt" data-correct><input type="radio" name="developer-skills-study-guide-q8"> 503 Service Unavailable, ideally with a Retry-After header</label>
+            <label class="opt"><input type="radio" name="developer-skills-study-guide-q8"> 201 Created</label>
+            <label class="opt"><input type="radio" name="developer-skills-study-guide-q8"> 400 Bad Request</label>
+            <button type="button" class="check-btn">Check answer</button><span class="q-result" role="status" aria-live="polite"></span>
+          </div>
+          <div class="q-explain"><b>Why:</b> 503 is for temporary conditions such as maintenance or overload, and the Retry-After header should, if possible, give the estimated time to recovery.</div>
+        </div>
+        <div class="quiz" data-quiz>
+          <div class="q-head"><span>Question 9 of 20</span><span>JSON</span></div>
+          <div class="q-body" role="radiogroup" aria-labelledby="developer-skills-study-guide-iq9-t">
+            <p class="q-text" id="developer-skills-study-guide-iq9-t">Which of these is valid JSON?</p>
+            <label class="opt"><input type="radio" name="developer-skills-study-guide-q9"> {"name": "pen",}</label>
+            <label class="opt"><input type="radio" name="developer-skills-study-guide-q9"> {name: "pen"}</label>
+            <label class="opt"><input type="radio" name="developer-skills-study-guide-q9"> {'name': 'pen'}</label>
+            <label class="opt" data-correct><input type="radio" name="developer-skills-study-guide-q9"> {"name": "pen"}</label>
+            <button type="button" class="check-btn">Check answer</button><span class="q-result" role="status" aria-live="polite"></span>
+          </div>
+          <div class="q-explain"><b>Why:</b> JSON requires double-quoted property names and strings, and trailing commas are forbidden. Comments and undefined are not supported.</div>
+        </div>
+        <div class="quiz" data-quiz>
+          <div class="q-head"><span>Question 10 of 20</span><span>JSON</span></div>
+          <div class="q-body" role="radiogroup" aria-labelledby="developer-skills-study-guide-iq10-t">
+            <p class="q-text" id="developer-skills-study-guide-iq10-t">What does JSON.parse throw when given malformed JSON?</p>
+            <label class="opt"><input type="radio" name="developer-skills-study-guide-q10"> Nothing; it returns null</label>
+            <label class="opt"><input type="radio" name="developer-skills-study-guide-q10"> TypeError</label>
+            <label class="opt" data-correct><input type="radio" name="developer-skills-study-guide-q10"> SyntaxError</label>
+            <label class="opt"><input type="radio" name="developer-skills-study-guide-q10"> RangeError</label>
+            <button type="button" class="check-btn">Check answer</button><span class="q-result" role="status" aria-live="polite"></span>
+          </div>
+          <div class="q-explain"><b>Why:</b> Running JSON.parse on invalid text such as {'a': 1} throws a SyntaxError, so wrap parsing of untrusted input in try/catch.</div>
+        </div>
+        <div class="quiz" data-quiz>
+          <div class="q-head"><span>Question 11 of 20</span><span>JSON</span></div>
+          <div class="q-body" role="radiogroup" aria-labelledby="developer-skills-study-guide-iq11-t">
+            <p class="q-text" id="developer-skills-study-guide-iq11-t">What does JSON.stringify({ a: undefined, b: 1 }) return?</p>
+            <label class="opt" data-correct><input type="radio" name="developer-skills-study-guide-q11"> {"b":1}</label>
+            <label class="opt"><input type="radio" name="developer-skills-study-guide-q11"> {"a":undefined,"b":1}</label>
+            <label class="opt"><input type="radio" name="developer-skills-study-guide-q11"> An error</label>
+            <label class="opt"><input type="radio" name="developer-skills-study-guide-q11"> {"a":null,"b":1}</label>
+            <button type="button" class="check-btn">Check answer</button><span class="q-result" role="status" aria-live="polite"></span>
+          </div>
+          <div class="q-explain"><b>Why:</b> JSON has no undefined, and stringify leaves undefined-valued properties out of objects. Check the MDN JSON.stringify page for arrays and other cases.</div>
+        </div>
+        <div class="quiz" data-quiz>
+          <div class="q-head"><span>Question 12 of 20</span><span>Command line</span></div>
+          <div class="q-body" role="radiogroup" aria-labelledby="developer-skills-study-guide-iq12-t">
+            <p class="q-text" id="developer-skills-study-guide-iq12-t">In a POSIX shell, what does an exit code of 0 conventionally mean?</p>
+            <label class="opt"><input type="radio" name="developer-skills-study-guide-q12"> The command is still running</label>
+            <label class="opt"><input type="radio" name="developer-skills-study-guide-q12"> The command was not found</label>
+            <label class="opt"><input type="radio" name="developer-skills-study-guide-q12"> The command failed</label>
+            <label class="opt" data-correct><input type="radio" name="developer-skills-study-guide-q12"> The command succeeded</label>
+            <button type="button" class="check-btn">Check answer</button><span class="q-result" role="status" aria-live="polite"></span>
+          </div>
+          <div class="q-explain"><b>Why:</b> Zero means success and a non-zero code means some kind of failure. Read the last exit code with $?, for example after grep -q.</div>
+        </div>
+        <div class="quiz" data-quiz>
+          <div class="q-head"><span>Question 13 of 20</span><span>Debugging</span></div>
+          <div class="q-body" role="radiogroup" aria-labelledby="developer-skills-study-guide-iq13-t">
+            <p class="q-text" id="developer-skills-study-guide-iq13-t">You are told a bug exists. What should you do first?</p>
+            <label class="opt"><input type="radio" name="developer-skills-study-guide-q13"> Rewrite the module</label>
+            <label class="opt" data-correct><input type="radio" name="developer-skills-study-guide-q13"> Reproduce it reliably and find the smallest input that triggers it</label>
+            <label class="opt"><input type="radio" name="developer-skills-study-guide-q13"> Add more features</label>
+            <label class="opt"><input type="radio" name="developer-skills-study-guide-q13"> Ask for a code review</label>
+            <button type="button" class="check-btn">Check answer</button><span class="q-result" role="status" aria-live="polite"></span>
+          </div>
+          <div class="q-explain"><b>Why:</b> A bug you can trigger on demand can be investigated, and a minimal case narrows the cause. Without reproduction you cannot tell whether a fix worked.</div>
+        </div>
+        <div class="quiz" data-quiz>
+          <div class="q-head"><span>Question 14 of 20</span><span>Debugging</span></div>
+          <div class="q-body" role="radiogroup" aria-labelledby="developer-skills-study-guide-iq14-t">
+            <p class="q-text" id="developer-skills-study-guide-iq14-t">Roughly how many checks does a binary search need to find the first bad version among 100 ordered versions?</p>
+            <label class="opt" data-correct><input type="radio" name="developer-skills-study-guide-q14"> About 7</label>
+            <label class="opt"><input type="radio" name="developer-skills-study-guide-q14"> About 50</label>
+            <label class="opt"><input type="radio" name="developer-skills-study-guide-q14"> 100</label>
+            <label class="opt"><input type="radio" name="developer-skills-study-guide-q14"> About 25</label>
+            <button type="button" class="check-btn">Check answer</button><span class="q-result" role="status" aria-live="polite"></span>
+          </div>
+          <div class="q-explain"><b>Why:</b> Each check halves the range, so 100 candidates need at most 7 checks. Tools such as git bisect use the same idea.</div>
+        </div>
+        <div class="quiz" data-quiz>
+          <div class="q-head"><span>Question 15 of 20</span><span>Testing</span></div>
+          <div class="q-body" role="radiogroup" aria-labelledby="developer-skills-study-guide-iq15-t">
+            <p class="q-text" id="developer-skills-study-guide-iq15-t">In Python's unittest, when does assertRaises(SomeError, ...) pass?</p>
+            <label class="opt"><input type="radio" name="developer-skills-study-guide-q15"> Never</label>
+            <label class="opt"><input type="radio" name="developer-skills-study-guide-q15"> When any exception occurs</label>
+            <label class="opt" data-correct><input type="radio" name="developer-skills-study-guide-q15"> When SomeError is raised; another exception is an error, and no exception fails the test</label>
+            <label class="opt"><input type="radio" name="developer-skills-study-guide-q15"> Only when nothing is raised</label>
+            <button type="button" class="check-btn">Check answer</button><span class="q-result" role="status" aria-live="polite"></span>
+          </div>
+          <div class="q-explain"><b>Why:</b> The unittest docs: the test passes if the exception is raised, is an error if another exception is raised, and fails if no exception is raised.</div>
+        </div>
+        <div class="quiz" data-quiz>
+          <div class="q-head"><span>Question 16 of 20</span><span>Testing</span></div>
+          <div class="q-body" role="radiogroup" aria-labelledby="developer-skills-study-guide-iq16-t">
+            <p class="q-text" id="developer-skills-study-guide-iq16-t">When does unittest's setUp method run?</p>
+            <label class="opt"><input type="radio" name="developer-skills-study-guide-q16"> Once before all tests</label>
+            <label class="opt" data-correct><input type="radio" name="developer-skills-study-guide-q16"> Immediately before each test method</label>
+            <label class="opt"><input type="radio" name="developer-skills-study-guide-q16"> After each test method</label>
+            <label class="opt"><input type="radio" name="developer-skills-study-guide-q16"> Only on failure</label>
+            <button type="button" class="check-btn">Check answer</button><span class="q-result" role="status" aria-live="polite"></span>
+          </div>
+          <div class="q-explain"><b>Why:</b> setUp prepares the test fixture and is called immediately before calling each test method.</div>
+        </div>
+        <div class="quiz" data-quiz>
+          <div class="q-head"><span>Question 17 of 20</span><span>Security</span></div>
+          <div class="q-body" role="radiogroup" aria-labelledby="developer-skills-study-guide-iq17-t">
+            <p class="q-text" id="developer-skills-study-guide-iq17-t">What is the preferred defence against SQL injection according to OWASP?</p>
+            <label class="opt"><input type="radio" name="developer-skills-study-guide-q17"> Concatenate values carefully</label>
+            <label class="opt"><input type="radio" name="developer-skills-study-guide-q17"> Hide the database</label>
+            <label class="opt"><input type="radio" name="developer-skills-study-guide-q17"> Remove suspicious characters from input</label>
+            <label class="opt" data-correct><input type="radio" name="developer-skills-study-guide-q17"> Parameterized queries, with SQL structure defined separately from data values</label>
+            <button type="button" class="check-btn">Check answer</button><span class="q-result" role="status" aria-live="polite"></span>
+          </div>
+          <div class="q-explain"><b>Why:</b> OWASP prefers parameterized queries. Concatenating untrusted values into a query before preparing it defeats this protection.</div>
+        </div>
+        <div class="quiz" data-quiz>
+          <div class="q-head"><span>Question 18 of 20</span><span>Security</span></div>
+          <div class="q-body" role="radiogroup" aria-labelledby="developer-skills-study-guide-iq18-t">
+            <p class="q-text" id="developer-skills-study-guide-iq18-t">A form checks every field in the browser. Do you still validate on the server?</p>
+            <label class="opt" data-correct><input type="radio" name="developer-skills-study-guide-q18"> Yes; client-side validation is bypassable and is for immediate feedback</label>
+            <label class="opt"><input type="radio" name="developer-skills-study-guide-q18"> Only for passwords</label>
+            <label class="opt"><input type="radio" name="developer-skills-study-guide-q18"> Only on mobile</label>
+            <label class="opt"><input type="radio" name="developer-skills-study-guide-q18"> No; the browser check is enough</label>
+            <button type="button" class="check-btn">Check answer</button><span class="q-result" role="status" aria-live="polite"></span>
+          </div>
+          <div class="q-explain"><b>Why:</b> OWASP: validate on the server even when the browser checks the same fields. Client-side checks can be bypassed.</div>
+        </div>
+        <div class="quiz" data-quiz>
+          <div class="q-head"><span>Question 19 of 20</span><span>Security</span></div>
+          <div class="q-body" role="radiogroup" aria-labelledby="developer-skills-study-guide-iq19-t">
+            <p class="q-text" id="developer-skills-study-guide-iq19-t">An API key was committed to a repository. What should you do?</p>
+            <label class="opt"><input type="radio" name="developer-skills-study-guide-q19"> Make the repository private only</label>
+            <label class="opt"><input type="radio" name="developer-skills-study-guide-q19"> Delete the file in a later commit and carry on</label>
+            <label class="opt" data-correct><input type="radio" name="developer-skills-study-guide-q19"> Treat it as exposed: revoke or rotate it, then remove it from the code and use a safer way to supply it</label>
+            <label class="opt"><input type="radio" name="developer-skills-study-guide-q19"> Rename the variable</label>
+            <button type="button" class="check-btn">Check answer</button><span class="q-result" role="status" aria-live="polite"></span>
+          </div>
+          <div class="q-explain"><b>Why:</b> OWASP advises rotating secrets regularly so stolen credentials only work for a short time. Once committed, history may still contain the key, so rotate it.</div>
+        </div>
+        <div class="quiz" data-quiz>
+          <div class="q-head"><span>Question 20 of 20</span><span>Security</span></div>
+          <div class="q-body" role="radiogroup" aria-labelledby="developer-skills-study-guide-iq20-t">
+            <p class="q-text" id="developer-skills-study-guide-iq20-t">What does least privilege mean for a secret or service account?</p>
+            <label class="opt"><input type="radio" name="developer-skills-study-guide-q20"> It is shared among all developers</label>
+            <label class="opt" data-correct><input type="radio" name="developer-skills-study-guide-q20"> It has the minimum privileges needed for its role</label>
+            <label class="opt"><input type="radio" name="developer-skills-study-guide-q20"> It has admin rights, for convenience</label>
+            <label class="opt"><input type="radio" name="developer-skills-study-guide-q20"> It never expires</label>
+            <button type="button" class="check-btn">Check answer</button><span class="q-result" role="status" aria-live="polite"></span>
+          </div>
+          <div class="q-explain"><b>Why:</b> OWASP: secrets must have the minimum privileges assigned to them to enable their required use or role.</div>
+        </div>
+    <h2 id="preparation-checklist">Preparation checklist</h2>
+        <ul>
+          <li>Use a pipe, a redirect, an exit code and an environment variable in a shell</li>
+          <li>Say which HTTP methods are safe and idempotent, and choose a method for each action</li>
+          <li>Pick the right status code, including 401 versus 403 and 201 versus 200</li>
+          <li>Write valid JSON and handle malformed JSON in an API</li>
+          <li>Describe a debugging process: reproduce, shrink, hypothesise, bisect, fix, add a test</li>
+          <li>Write a unit test with normal, edge and error cases, and explain when to use a fake</li>
+          <li>Explain parameterized queries, server-side validation, and how you handle and rotate secrets</li>
+          <li>Check the linked official references for the version you use</li>
+        </ul>
+    <h2 id="sources">Sources &amp; further reading</h2>
+    <ul class="sources"><li><a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Methods" rel="noopener noreferrer" target="_blank">HTTP request methods — MDN Web Docs</a></li><li><a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Status" rel="noopener noreferrer" target="_blank">HTTP response status codes — MDN Web Docs</a></li><li><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/JSON" rel="noopener noreferrer" target="_blank">JSON — MDN Web Docs</a></li><li><a href="https://docs.python.org/3/library/unittest.html" rel="noopener noreferrer" target="_blank">unittest — The Python Standard Library</a></li><li><a href="https://owasp.org/www-project-top-ten/" rel="noopener noreferrer" target="_blank">OWASP Top Ten</a></li><li><a href="https://cheatsheetseries.owasp.org/cheatsheets/SQL_Injection_Prevention_Cheat_Sheet.html" rel="noopener noreferrer" target="_blank">SQL Injection Prevention Cheat Sheet — OWASP</a></li><li><a href="https://cheatsheetseries.owasp.org/cheatsheets/Input_Validation_Cheat_Sheet.html" rel="noopener noreferrer" target="_blank">Input Validation Cheat Sheet — OWASP</a></li><li><a href="https://cheatsheetseries.owasp.org/cheatsheets/Secrets_Management_Cheat_Sheet.html" rel="noopener noreferrer" target="_blank">Secrets Management Cheat Sheet — OWASP</a></li></ul>
+    <hr class="sep">
+    <nav class="prevnext" aria-label="More guides">
+      <a class="prev" href="../../guides/git-study-guide/"><small>← Previous</small>Git Study Guide: Commands and Concepts</a>
+      <a class="next" href="../../guides/powerpoint-study-guide/"><small>Next →</small>PowerPoint Study Guide: Efficient Slide Skills</a>
+    </nav>
+    <a href="../../#guides" class="btn btn-link">← Back to all guides</a>
+  </article>
+  <aside class="sidebar">
+    <div class="box toc-box">
+      <h2 class="box-h">On this page</h2>
+      <div class="toc">
+        <a href="#what-you-will-learn" data-toc="what-you-will-learn">What you will learn</a>
+        <a href="#the-command-line" data-toc="the-command-line">The command line</a>
+        <a href="#http-methods-and-status-codes" data-toc="http-methods-and-status-codes">HTTP: methods and status codes</a>
+        <a href="#rest-apis-and-json" data-toc="rest-apis-and-json">REST APIs and JSON</a>
+        <a href="#debugging" data-toc="debugging">Debugging</a>
+        <a href="#testing" data-toc="testing">Testing</a>
+        <a href="#code-review-and-reading-documentation" data-toc="code-review-and-reading-documentation">Code review and reading documentation</a>
+        <a href="#security-basics" data-toc="security-basics">Security basics</a>
+        <a href="#common-mistakes" data-toc="common-mistakes">Common mistakes</a>
+        <a href="#practical-learning-exercises" data-toc="practical-learning-exercises">Practical learning exercises</a>
+        <a href="#interview-questions" data-toc="interview-questions">Interview questions</a>
+        <a href="#practice-questions" data-toc="practice-questions">Practice questions</a>
+        <a href="#preparation-checklist" data-toc="preparation-checklist">Preparation checklist</a>
+        <a href="#sources" data-toc="sources">Sources &amp; further reading</a>
+      </div>
+    </div>
+    <div class="box rel">
+      <h2 class="box-h">Related guides</h2>
+      <a href="../../guides/git-study-guide/">Git Study Guide: Commands and Concepts</a>
+      <a href="../../guides/javascript-study-guide/">JavaScript Fundamentals: Key Concepts Explained</a>
+      <a href="../../guides/python-study-guide/">Python Fundamentals: Study Guide + Practice Quiz</a>
+    </div>
+    <div class="box">
+      <h2 class="box-h">Share this guide</h2>
+      <button type="button" class="btn btn-share" id="shareBtn" data-url="https://skillsprep.github.io/guides/developer-skills-study-guide/" data-title="Developer Fundamentals: HTTP, APIs, Debugging and Testing">Copy Link</button>
+    </div>
+    <div class="box">
+      <h2 class="box-h">Spotted a mistake?</h2>
+      <p class="box-p">We correct errors quickly. Tell us what's wrong and we'll fix it.</p>
+      <a class="btn btn-link" href="../../contact/">Report a correction</a>
+    </div>
+  </aside>
+</div>
+</main>
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div>
+        <h2 class="foot-h">SkillPrep</h2>
+        <p class="foot-about">Concept-first study guides and practice tests for everyday work skills. Learn the "why" behind every answer.</p>
+      </div>
+      <div>
+        <h2 class="foot-h">Explore</h2>
+        <a href="../../">All guides</a>
+        <a href="../../about/">About</a>
+        <a href="../../contact/">Contact</a>
+        <a href="../../privacy/">Privacy</a>
+        <a href="../../terms/">Terms</a>
+      </div>
+      <div>
+        <h2 class="foot-h">Popular guides</h2>
+        <a href="../../guides/excel-study-guide/">Excel Study Guide</a>
+        <a href="../../guides/python-study-guide/">Python Fundamentals</a>
+        <a href="../../guides/advanced-python-study-guide/">Advanced Python Study Guide</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2026 SkillPrep. All rights reserved.</span>
+      <span>Independent educational site. Not affiliated with LinkedIn, Microsoft or any other vendor; product names are trademarks of their owners.</span>
+    </div>
+  </div>
+</footer>
+<button class="back-top" id="backTop" type="button" aria-label="Back to top">↑</button>
+<div id="cookieConsent" class="cookie-consent" hidden>
+  <div class="cookie-inner">
+    <p>SkillPrep saves your quiz progress in your browser's local storage. Ads are shown through Google AdSense, which may use cookies. See our <a href="../../privacy/">Privacy Policy</a> for details and opt-out options.</p>
+    <div class="cookie-actions">
+      <button id="cookieAccept" class="btn">OK</button>
+    </div>
+  </div>
+</div>
+<script src="../../js/site.js" defer></script>
+</body>
+</html>
