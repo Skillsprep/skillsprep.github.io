@@ -23,7 +23,7 @@ module.exports = function projects(A) {
     files: ["sales_raw.csv"],
     guide: ["excel-study-guide", "Excel study guide"],
     excerpt: "Download a deliberately messy synthetic sales CSV, clean it, then calculate totals, a regional breakdown, a monthly pivot and a chart. Includes an answer key.",
-    intro: `You have been handed a raw export of one year of orders (2025) from a small fictional retailer. It has real-world problems: duplicate rows, inconsistent spelling in the Region column, and placeholder rows with no quantity. Clean it, then answer questions about it. Work in Excel or Google Sheets. For formulas and pivots, see the <a href="../../guides/excel-study-guide/">Excel study guide</a>.`,
+    intro: `You have been handed a raw export of one year of orders (2025) from a small fictional retailer. It has real-world problems: duplicate rows, inconsistent spelling in the Region column, and placeholder rows with no quantity. Clean it, then answer questions about it. Work in Excel or Google Sheets. For formulas and pivots, see the <a href="../../guides/excel-study-guide/">Excel study guide</a> or the <a href="../../guides/google-sheets-study-guide/">Google Sheets study guide</a>.`,
     sections: [
       { h: "The data", body: `${SYN}
         <p>Download <a href="../data/sales_raw.csv" download>sales_raw.csv</a> (${num(p1.raw_rows)} data rows). Columns: OrderID, OrderDate, Region, Product, Category, Quantity, UnitPrice, Discount. Dates are written as YYYY-MM-DD. Discount is a fraction (0.10 means 10%).</p>
