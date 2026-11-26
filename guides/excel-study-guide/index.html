@@ -24,7 +24,8 @@
 <link rel="icon" href="../../assets/favicon.svg" type="image/svg+xml">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" onload="this.onload=null;this.rel='stylesheet'">
+<noscript><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet"></noscript>
 <link rel="stylesheet" href="../../css/style.css">
 <script>(function(){try{if(localStorage.getItem("skillprep:theme")==="dark"){document.documentElement.setAttribute("data-theme","dark");}}catch(e){}})();</script>
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"Excel Study Guide: Lookups, Pivot Tables & Core Functions","description":"Core Excel skills for work, interviews and skills tests: lookup formulas, text and logical functions, pivot tables, and 20 practice questions with full explanations.","datePublished":"2026-09-05","dateModified":"2026-10-18","author":{"@type":"Organization","name":"SkillPrep editorial team"},"publisher":{"@type":"Organization","name":"SkillPrep","logo":{"@type":"ImageObject","url":"https://skillsprep.github.io/assets/favicon.svg"}},"mainEntityOfPage":"https://skillsprep.github.io/guides/excel-study-guide/","image":"https://skillsprep.github.io/assets/og-image.png","articleSection":"Excel","inLanguage":"en"}</script>
@@ -96,7 +97,7 @@
         </ul>
     <h2 id="vlookup-vs-xlookup">VLOOKUP vs XLOOKUP</h2>
         <p>A classic interview and test question. <code>VLOOKUP</code> only searches the <b>first column</b> of a range and can only return columns to the <b>right</b>. <code>XLOOKUP</code> (Excel 365/2021) searches anywhere and returns from any column:</p>
-        <pre><code>=XLOOKUP(A2, Sheet2!B:B, Sheet2!C:C, "Not found")</code></pre>
+        <pre tabindex="0"><code>=XLOOKUP(A2, Sheet2!B:B, Sheet2!C:C, "Not found")</code></pre>
         <div class="callout"><b>Quick rule</b> If the lookup value may not exist and you want a friendly message instead of #N/A, reach for a function with a built-in <i>if not found</i> argument — that's <code>XLOOKUP</code> (or <code>IFERROR</code> wrapped around <code>VLOOKUP</code>).</div>
     <h2 id="pivot-table-essentials">Pivot table essentials</h2>
         <p>A typical scenario: "You have 10,000 rows of sales data and need the total per region per quarter." The right tool is a <b>pivot table</b>, with Region in Rows, Quarter in Columns, and Sum of Amount in Values.</p>
@@ -117,21 +118,21 @@
 <tr><td>65</td><td>B</td></tr>
 <tr><td>80</td><td>A</td></tr>
 </table>
-<pre><code>=VLOOKUP(B2, $E$2:$F$5, 2, TRUE)</code></pre>
+<pre tabindex="0"><code>=VLOOKUP(B2, $E$2:$F$5, 2, TRUE)</code></pre>
 <p>A score of 72 returns B, because 65 is the largest threshold not above 72. A score of 80 returns A, since an equal key counts. The table must stay sorted ascending, and it must start at 0 or every low score returns #N/A.</p>
 <p><code>XLOOKUP</code> (Excel 2021 and Microsoft 365) defaults to <i>exact</i>, which makes the safe choice the lazy choice. Its fifth argument, <code>match_mode</code>, takes 0 for exact, -1 for exact or the next smaller item, 1 for exact or the next larger item, and 2 for wildcard matching. The same grade lookup becomes:</p>
-<pre><code>=XLOOKUP(B2, E2:E5, F2:F5, , -1)</code></pre>
+<pre tabindex="0"><code>=XLOOKUP(B2, E2:E5, F2:F5, , -1)</code></pre>
 <p>The empty fourth argument skips the custom not-found message; the fifth is the match mode.</p>
 <div class="callout tip"><b>Interview reasoning</b> If asked why a lookup returned the wrong value rather than an error, check the match mode first, then check for numbers stored as text and stray spaces.</div>
     <h2 id="dynamic-array-functions-and-let-step-by-step">Dynamic array functions and LET, step by step</h2>
 <p>Before Excel 2021 a formula returned one value per cell. Dynamic array functions return a whole block that <b>spills</b> into neighbouring cells from the cell where you typed the formula. <code>FILTER</code>, <code>UNIQUE</code>, <code>SORT</code>, <code>SORTBY</code>, <code>SEQUENCE</code> and <code>LET</code> all need Excel 2021 or Microsoft 365, so do not build a shared workbook on them if colleagues use Excel 2019 or earlier.</p>
 <p>Suppose A2:C9 holds Region, Rep and Amount. To list orders over 5,000 for the East region:</p>
-<pre><code>=FILTER(A2:C9, (A2:A9="East")*(C2:C9&gt;5000), "None")</code></pre>
+<pre tabindex="0"><code>=FILTER(A2:C9, (A2:A9="East")*(C2:C9&gt;5000), "None")</code></pre>
 <p>Multiplying the two tests acts as AND, because a row survives only when both give 1. Adding them acts as OR. The third argument is shown when nothing matches; leave it out and you get #CALC!. To get a sorted list of distinct regions:</p>
-<pre><code>=SORT(UNIQUE(A2:A9))</code></pre>
+<pre tabindex="0"><code>=SORT(UNIQUE(A2:A9))</code></pre>
 <p>The result occupies as many cells as it needs. If something non-empty blocks that area you see #SPILL!, and clearing the obstruction fixes it. To refer to the entire spilled result from another formula, add a hash after the anchor cell, for example <code>E2#</code>.</p>
 <p><code>LET</code> assigns names to intermediate results inside one formula. It makes long formulas readable and avoids repeating an expensive calculation:</p>
-<pre><code>=LET(
+<pre tabindex="0"><code>=LET(
   sales, FILTER(C2:C9, A2:A9="East", 0),
   total, SUM(sales),
   total / ROWS(sales)

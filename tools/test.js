@@ -103,6 +103,12 @@ if (fs.existsSync(guidesDir)) {
     process.stdout.write(r.stdout || "");
     if (r.status !== 0) { process.stderr.write(r.stderr || ""); errors++; }
 }
+// Accessibility guards over tokens and built pages
+{
+    const r = require("child_process").spawnSync(process.execPath, [path.join(__dirname, "test_a11y.js")], { encoding: "utf8" });
+    process.stdout.write(r.stdout || "");
+    if (r.status !== 0) { process.stderr.write(r.stderr || ""); errors++; }
+}
 
 if (errors > 0) {
     console.error(`\nTests failed with ${errors} error(s).`);

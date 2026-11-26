@@ -24,7 +24,8 @@
 <link rel="icon" href="../../assets/favicon.svg" type="image/svg+xml">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" onload="this.onload=null;this.rel='stylesheet'">
+<noscript><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet"></noscript>
 <link rel="stylesheet" href="../../css/style.css">
 <script>(function(){try{if(localStorage.getItem("skillprep:theme")==="dark"){document.documentElement.setAttribute("data-theme","dark");}}catch(e){}})();</script>
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://skillsprep.github.io/"},{"@type":"ListItem","position":2,"name":"Projects","item":"https://skillsprep.github.io/projects/"},{"@type":"ListItem","position":3,"name":"Project 3: Build a Star Schema and DAX Measures in Power BI","item":"https://skillsprep.github.io/projects/power-bi-sales-model/"}]}</script>
@@ -79,7 +80,7 @@
           <li><b>Build one report page</b> with a card for Total Sales, a line chart of Total Sales by month, a bar chart by Category, and a slicer for Year. Add alt text to each visual.</li>
         </ol>
         <details class="faq"><summary>Show measure hints</summary>
-          <pre><code>Total Sales =
+          <pre tabindex="0"><code>Total Sales =
 SUMX (
     orders,
     orders[Quantity] * RELATED ( products[UnitPrice] ) * ( 1 - orders[Discount] )

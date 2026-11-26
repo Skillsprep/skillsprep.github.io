@@ -24,7 +24,8 @@
 <link rel="icon" href="../../assets/favicon.svg" type="image/svg+xml">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" onload="this.onload=null;this.rel='stylesheet'">
+<noscript><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet"></noscript>
 <link rel="stylesheet" href="../../css/style.css">
 <script>(function(){try{if(localStorage.getItem("skillprep:theme")==="dark"){document.documentElement.setAttribute("data-theme","dark");}}catch(e){}})();</script>
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"Developer Fundamentals: HTTP, APIs, Debugging and Testing","description":"The everyday skills around the code: the command line, HTTP and status codes, REST and JSON, debugging, testing and security basics, with runnable examples, exercises and a 20-question quiz.","datePublished":"2026-11-22","dateModified":"2026-11-22","author":{"@type":"Organization","name":"SkillPrep editorial team"},"publisher":{"@type":"Organization","name":"SkillPrep","logo":{"@type":"ImageObject","url":"https://skillsprep.github.io/assets/favicon.svg"}},"mainEntityOfPage":"https://skillsprep.github.io/guides/developer-skills-study-guide/","image":"https://skillsprep.github.io/assets/og-image.png","articleSection":"Developer Skills","inLanguage":"en"}</script>
@@ -98,7 +99,7 @@
         </ul>
     <h2 id="the-command-line">The command line</h2>
         <p>A shell lets you chain small programs. A pipe (<code>|</code>) sends one command's output into the next, <code>&gt;</code> redirects output to a file, every command ends with an exit code (0 means success, non-zero means failure), and environment variables pass settings to programs.</p>
-<pre><code># shell
+<pre tabindex="0"><code># shell
 mkdir -p demo &amp;&amp; cd demo
 printf 'apple\nbanana\napple\n' &gt; fruit.txt
 sort fruit.txt | uniq -c        # counts each distinct line
@@ -128,12 +129,12 @@ sh -c 'echo "$GREETING"'        # hello</code></pre>
         <div class="callout"><b>401 versus 403</b> Although the standard says "unauthorized", 401 semantically means unauthenticated: the client must authenticate. 403 means the server knows who the client is and still refuses. A server may return 404 instead of 403 to hide that a resource exists.</div>
     <h2 id="rest-apis-and-json">REST APIs and JSON</h2>
         <p>A REST-style API exposes resources at URLs and uses methods for the action: <code>GET /items</code> lists, <code>POST /items</code> creates. JSON is the usual body format. JSON requires double-quoted property names and strings, forbids trailing commas and comments, and has no <code>undefined</code>, <code>NaN</code> or <code>Infinity</code>.</p>
-<pre><code>// node
+<pre tabindex="0"><code>// node
 try { JSON.parse("{'a': 1}"); } catch (e) { console.log(e.name); }            // SyntaxError
 console.log(JSON.parse('{"a": [1, 2, null]}').a.length);                      // 3
 console.log(JSON.stringify({ a: undefined, b: 1, c: function () {} }));       // {"b":1}</code></pre>
         <p>The script below runs a tiny API on your own machine and calls it. It returns 201 for a created item, 400 for malformed JSON or a missing field, 200 for the list, and 404 for an unknown path.</p>
-<pre><code>// node
+<pre tabindex="0"><code>// node
 const http = require("node:http");
 const items = [];
 const server = http.createServer((req, res) =&gt; {
@@ -182,7 +183,7 @@ server.listen(0, async () =&gt; {
           <tr><td>5. Fix and guard</td><td>Fix the cause, then add a test that fails without the fix</td></tr>
         </table>
         <p>Halving is fast. This function finds the first bad version among 100 with 7 checks, the same idea that <code>git bisect</code> uses (see the <a href="../git-study-guide/">Git guide</a>).</p>
-<pre><code># python
+<pre tabindex="0"><code># python
 def first_bad(versions, is_bad):
     lo, hi = 0, len(versions) - 1
     checks = 0
@@ -197,7 +198,7 @@ def first_bad(versions, is_bad):
 
 print(first_bad(list(range(1, 101)), lambda v: v &gt;= 37))   # (37, 7)</code></pre>
         <p>Logging beats scattered print statements because it has levels and formatting, and you can change the verbosity without editing code. Do not log passwords, keys or personal data.</p>
-<pre><code># python
+<pre tabindex="0"><code># python
 import logging
 
 logging.basicConfig(level=logging.INFO, format="%(levelname)s %(message)s")
@@ -212,7 +213,7 @@ def total(prices):
 print(total([]))    # logs INFO and WARNING lines, then prints 0</code></pre>
     <h2 id="testing">Testing</h2>
         <p>The Python docs describe a test case as the individual unit of testing: it checks for a specific response to a particular set of inputs. A good test checks one behaviour, has a clear name, and follows arrange, act, assert. Cover the normal case, edges such as empty input and boundaries, and error paths.</p>
-<pre><code># python
+<pre tabindex="0"><code># python
 import unittest
 
 def slugify(text):
@@ -236,7 +237,7 @@ if __name__ == "__main__":
     unittest.main()</code></pre>
         <p>Run tests with <code>python -m unittest</code>. <code>assertRaises</code> passes only when the named exception is raised. <code>setUp</code> runs immediately before each test method, so tests do not share state.</p>
         <p><b>Unit versus integration.</b> A unit test checks a small piece in isolation and runs quickly. An integration test checks that parts work together, such as your code and a database. Use a fake for anything slow or unpredictable, such as the network or the clock:</p>
-<pre><code># python
+<pre tabindex="0"><code># python
 class FakeClock:
     def __init__(self, now):
         self.now = now
@@ -260,7 +261,7 @@ print("ok")</code></pre>
     <h2 id="security-basics">Security basics</h2>
         <p>OWASP, a widely used web security reference, describes its Top 10 as the reference standard for the most critical web application security risks. Three habits prevent a large share of beginner mistakes.</p>
         <p><b>1. Use parameterized queries.</b> OWASP's preferred defence against SQL injection keeps the SQL structure separate from data values. Concatenating untrusted values into the query defeats this protection:</p>
-<pre><code># python
+<pre tabindex="0"><code># python
 import sqlite3
 
 con = sqlite3.connect(":memory:")
@@ -274,7 +275,7 @@ print(unsafe)   # [('ann',), ('bob',)]   the input changed the query
 print(safe)     # []                     the input was treated as data</code></pre>
         <p><b>2. Validate on the server.</b> OWASP says to validate on the server even when the browser checks the same fields: client-side validation can be bypassed, so use it for immediate feedback. Define what the application accepts and reject everything else, instead of trying to recognise every malicious string.</p>
         <p><b>3. Handle secrets carefully.</b> Never hardcode API keys or passwords in source code or commit them. Read them from the environment (or a secrets manager), give each the minimum privileges it needs, and rotate any that may have been exposed, because removing a file in a later commit does not remove it from history.</p>
-<pre><code># python
+<pre tabindex="0"><code># python
 import os
 
 api_key = os.environ.get("API_KEY")
@@ -297,15 +298,15 @@ if api_key is None:
     <h2 id="practical-learning-exercises">Practical learning exercises</h2>
         <ul>
           <li><b>Exercise 1 (shell).</b> Given a file of fruit names, find the most common one. <i>Solution:</i>
-<pre><code># shell
+<pre tabindex="0"><code># shell
 printf 'apple\nbanana\napple\n' | sort | uniq -c | sort -rn | head -1    # 2 apple</code></pre></li>
           <li><b>Exercise 2 (status codes).</b> Pick a code for each: a new item was created (201), the caller sent no credentials (401), a logged-in user lacks permission (403), the item does not exist (404), the caller is being rate limited (429), the service is down for maintenance (503).</li>
           <li><b>Exercise 3 (JSON).</b> Fix <code>{'name': 'pen', 'tags': ['a', 'b',],}</code>. <i>Solution:</i> use double quotes and remove both trailing commas.
-<pre><code>// node
+<pre tabindex="0"><code>// node
 try { JSON.parse("{'name': 'pen', 'tags': ['a', 'b',],}"); } catch (e) { console.log("original:", e.name); }
 console.log(JSON.parse('{"name": "pen", "tags": ["a", "b"]}').tags.length);   // 2</code></pre></li>
           <li><b>Exercise 4 (tests).</b> Write tests for <code>clamp(n, lo, hi)</code> covering inside, below, above and the two boundaries. <i>Solution:</i>
-<pre><code># python
+<pre tabindex="0"><code># python
 import unittest
 
 def clamp(n, lo, hi):

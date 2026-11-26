@@ -24,7 +24,8 @@
 <link rel="icon" href="../../assets/favicon.svg" type="image/svg+xml">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" onload="this.onload=null;this.rel='stylesheet'">
+<noscript><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet"></noscript>
 <link rel="stylesheet" href="../../css/style.css">
 <script>(function(){try{if(localStorage.getItem("skillprep:theme")==="dark"){document.documentElement.setAttribute("data-theme","dark");}}catch(e){}})();</script>
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"SQL Study Guide: Queries You Should Master","description":"JOINs, GROUP BY, window functions, and subqueries — the SQL patterns behind most interview and skills-test questions, explained with examples.","datePublished":"2026-08-15","dateModified":"2026-10-18","author":{"@type":"Organization","name":"SkillPrep editorial team"},"publisher":{"@type":"Organization","name":"SkillPrep","logo":{"@type":"ImageObject","url":"https://skillsprep.github.io/assets/favicon.svg"}},"mainEntityOfPage":"https://skillsprep.github.io/guides/sql-study-guide/","image":"https://skillsprep.github.io/assets/og-image.png","articleSection":"SQL","inLanguage":"en"}</script>
@@ -94,7 +95,7 @@
           <li><b>Indexes</b> — what they speed up and their cost on writes</li>
         </ul>
     <h2 id="where-vs-having-the-classic-trap">WHERE vs HAVING — the classic trap</h2>
-        <pre><code>SELECT department, AVG(salary)
+        <pre tabindex="0"><code>SELECT department, AVG(salary)
 FROM employees
 WHERE status = 'active'      -- filters ROWS first
 GROUP BY department
@@ -124,7 +125,7 @@ HAVING AVG(salary) > 50000;  -- filters GROUPS after</code></pre>
 <tr><td><code>SELECT TOP 5 ...</code></td><td>SQL Server</td></tr>
 <tr><td><code>FETCH FIRST 5 ROWS ONLY</code></td><td>The SQL standard; Oracle (12c onwards), PostgreSQL, Db2</td></tr>
 </table>
-<pre><code>-- Three highest-paid employees, standard form
+<pre tabindex="0"><code>-- Three highest-paid employees, standard form
 SELECT name, salary
 FROM employees
 ORDER BY salary DESC
@@ -142,7 +143,7 @@ FETCH FIRST 3 ROWS ONLY;</code></pre>
 <tr><td><code>NOT UNKNOWN</code></td><td>UNKNOWN</td></tr>
 </table>
 <p>That last row is why <code>NOT IN</code> is dangerous. Suppose you want customers who have never ordered:</p>
-<pre><code>-- Looks right, but returns NOTHING if any orders.customer_id is NULL
+<pre tabindex="0"><code>-- Looks right, but returns NOTHING if any orders.customer_id is NULL
 SELECT name FROM customers
 WHERE id NOT IN (SELECT customer_id FROM orders);
 
@@ -169,7 +170,7 @@ WHERE NOT EXISTS (
 </table>
 <p>An <b>INNER JOIN</b> on <code>customers.id = orders.customer_id</code> yields three rows: Asha twice, Chen once. Ben vanishes because he has no match. A <b>LEFT JOIN</b> yields four rows: the same three plus Ben with NULL in every orders column. A customer with two orders appears twice, because a join produces one output row per matching pair.</p>
 <p><b>COUNT(*) versus COUNT(column).</b> Using the LEFT JOIN result, count orders per customer:</p>
-<pre><code>SELECT c.name, COUNT(*) AS wrong, COUNT(o.id) AS right
+<pre tabindex="0"><code>SELECT c.name, COUNT(*) AS wrong, COUNT(o.id) AS right
 FROM customers c
 LEFT JOIN orders o ON o.customer_id = c.id
 GROUP BY c.name;</code></pre>
@@ -193,7 +194,7 @@ GROUP BY c.name;</code></pre>
 </table>
 <p><code>ROW_NUMBER</code> never repeats (tied rows are ordered arbitrarily unless you add a tie-breaker), <code>RANK</code> repeats and then skips, and <code>DENSE_RANK</code> repeats without skipping. Pick based on whether "second highest" should mean the second row or the second distinct value.</p>
 <p>A running total uses an aggregate as a window function:</p>
-<pre><code>SELECT order_date, amount,
+<pre tabindex="0"><code>SELECT order_date, amount,
        SUM(amount) OVER (
          ORDER BY order_date
          ROWS BETWEEN UNBOUNDED PRECEDING AND CURRENT ROW
@@ -201,7 +202,7 @@ GROUP BY c.name;</code></pre>
 FROM orders;</code></pre>
 <p>Spelling out the <code>ROWS</code> frame matters. When a frame is omitted, the default usually treats rows with equal ORDER BY values as peers, so two orders on the same date would show the same running total.</p>
 <p>Window functions cannot be used directly in WHERE, because they are evaluated after it. The standard workaround is a <b>CTE</b> (common table expression), a named temporary result defined with <code>WITH</code>:</p>
-<pre><code>WITH ranked AS (
+<pre tabindex="0"><code>WITH ranked AS (
   SELECT name, department, salary,
          ROW_NUMBER() OVER (
            PARTITION BY department ORDER BY salary DESC
