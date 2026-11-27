@@ -190,6 +190,14 @@ const posts = POSTS.map(withExtras).map((p, idx) => {
 const CATS = [...new Set(posts.map((p) => p.category))].filter(c => c !== "Getting started" && c !== "Getting Started");
 const inlineQs = posts.reduce((n, p) => n + (p.sections.map((s) => s.body).join("").match(/data-quiz/g) || []).length, 0);
 const TOTAL_QS = inlineQs + Object.values(BANKS).reduce((n, b) => n + b.length, 0);
+// Single source of truth for every site-wide number shown on the homepage, About page and Practice Tests hub.
+// "Getting Started" pages are informational explainers, so they are not counted as study guides or assessments.
+const STATS = (() => {
+  const assessments = posts.filter((p) => p.bankKey);
+  const guides = posts.filter((p) => !p.bankKey && p.category.toLowerCase() !== "getting started");
+  return { guides: guides.length, assessments: assessments.length, resources: guides.length + assessments.length,
+    questions: TOTAL_QS, assessmentQuestions: assessments.reduce((n, p) => n + BANKS[p.bankKey].length, 0), categories: CATS.length };
+})();
 // sanity: slugs unique, every legacy mapping lands on a real page
 const slugSet = new Set(posts.map((p) => p.slug));
 if (slugSet.size !== posts.length) throw new Error("Duplicate slugs");
@@ -351,10 +359,10 @@ function homePage() {
       <button type="submit">Search</button>
     </form>
     <div class="stats">
-      <div class="stat"><b>${posts.length}</b><small>Study Guides</small></div>
-      <div class="stat"><b>${TOTAL_QS}</b><small>Practice Questions</small></div>
-      <div class="stat"><b>${CATS.length}</b><small>Skill Categories</small></div>
-      <div class="stat"><b>${tests.length}</b><small>Assessments</small></div>
+      <div class="stat"><b>${STATS.resources}</b><small>Learning Resources</small></div>
+      <div class="stat"><b>${STATS.questions}</b><small>Practice Questions</small></div>
+      <div class="stat"><b>${STATS.categories}</b><small>Skill Categories</small></div>
+      <div class="stat"><b>${STATS.assessments}</b><small>Full-Length Assessments</small></div>
     </div>
   </div>
 </section>
@@ -542,7 +550,7 @@ function guidesHub() {
 </div>`;
   return layout({
     title: `All Study Guides and Practice Tests | ${cfg.siteName}`,
-    desc: `Browse all ${posts.length} SkillPrep study guides and practice tests: ${cats.slice(0, 4).join(", ")} and more, each with practice questions.`,
+    desc: `Browse all ${STATS.resources} SkillPrep study guides and practice tests: ${cats.slice(0, 4).join(", ")} and more, each with practice questions.`,
     path: "guides/", prefix: "../", nav: "guides", body,
     ld: [{ "@context": "https://schema.org", "@type": "BreadcrumbList", itemListElement: [
       { "@type": "ListItem", position: 1, name: "Home", item: SITE },
@@ -553,7 +561,7 @@ function guidesHub() {
 function testsHub() {
   // Full-length assessments = guides that carry a question bank. Everything is derived from the existing data.
   const tests = posts.filter((p) => p.bankKey);
-  const total = tests.reduce((n, p) => n + BANKS[p.bankKey].length, 0);
+  const total = STATS.assessmentQuestions;
   const cardHtml = (p) => {
     const n = BANKS[p.bankKey].length;
     const topics = new Set(BANKS[p.bankKey].map((q) => q.p)).size;
@@ -579,7 +587,7 @@ function testsHub() {
   const body = `${pageHero("Practice Tests", "Full-length unofficial practice assessments. Choose one, answer at your own pace and get an explanation for every question.")}
 <div class="container" style="padding-top:32px;padding-bottom:32px">
   <p class="note"><b>Unofficial practice material.</b> These tests are independent study aids written by SkillPrep. They are not official exam content and are not affiliated with or endorsed by any exam provider, employer or software vendor. Scores here do not predict results on any real assessment.</p>
-  <h2 class="section-title" style="margin:24px 0 6px">${tests.length} full-length assessments · ${total} questions</h2>
+  <h2 class="section-title" style="margin:24px 0 6px">${STATS.assessments} full-length assessments · ${total} questions</h2>
   <p class="section-sub">Your answers and bookmarks are saved only in this browser. Want to revise first? Each assessment links to its study guide.</p>
   <div class="post-grid" style="margin-top:20px">
       ${tests.map(cardHtml).join("\n      ")}
@@ -588,7 +596,7 @@ function testsHub() {
 </div>`;
   return layout({
     title: `Practice Tests: Unofficial Full-Length Assessments | ${cfg.siteName}`,
-    desc: `Choose from ${tests.length} unofficial full-length practice tests (${total} questions) with explained answers, bookmarks and links to the matching study guides.`,
+    desc: `Choose from ${STATS.assessments} unofficial full-length practice tests (${total} questions) with explained answers, bookmarks and links to the matching study guides.`,
     path: "practice-tests/", prefix: "../", nav: "tests", body,
     ld: [{ "@context": "https://schema.org", "@type": "BreadcrumbList", itemListElement: [
       { "@type": "ListItem", position: 1, name: "Home", item: SITE },
@@ -610,21 +618,25 @@ function aboutPage() {
       <li>Full-length practice tests with instant scoring and a per-topic breakdown</li>
       <li>Links to official documentation so you can check and go deeper</li>
     </ul>
-    <h3>How we write and review</h3>
+    <h3>Who publishes SkillPrep</h3>
+    <p>SkillPrep is an independent educational resource. Content is published under the SkillPrep name, and we do not currently name individual authors or reviewers. We do not claim that guides or questions have been written or certified by named industry experts, exam providers or accredited institutions. Treat SkillPrep as a study aid and confirm anything important against the official sources linked from each guide.</p>
+    <h3>Our editorial approach</h3>
     <ul>
-      <li>Guides are written by identifiable experts such as our SkillPrep Editorial Team (comprising Expert Practitioners & Curriculum Designers) and checked against official documentation where it exists.</li>
-      <li>Every guide shows when it was published and when it was last reviewed.</li>
-      <li>We don't claim to know what appears on any specific exam, and we don't publish "leaked" questions.</li>
-      <li>Found an error? <a href="../contact/">Tell us via the contact form</a> and we'll fix it promptly.</li>
+      <li><b>Research.</b> Guides are based on publicly available official documentation, standards and reference material. Where a guide lists them, the sources appear under "Sources &amp; further reading" at the bottom of the guide.</li>
+      <li><b>Practice questions.</b> Questions are written as independent practice material to check understanding of concepts, and every question has an explanation of the correct answer. We don't copy or publish official or "leaked" exam questions, and we don't claim to know what appears on any specific exam.</li>
+      <li><b>References.</b> Links to official documentation are there so you can verify a point and go deeper. A link is a reference, not an endorsement of SkillPrep by the publisher of that page.</li>
+      <li><b>Review.</b> Every guide shows when it was published and when it was last reviewed. We review content from time to time rather than on a fixed schedule, so the date shown is the last time we checked it, and software and exam details can change after that.</li>
+      <li><b>Corrections.</b> Found an error or outdated detail? <a href="../contact/">Report it via the contact form</a> and we will check it and correct the page where needed.</li>
     </ul>
     <p class="muted"><i>Disclaimer: SkillPrep is an independent educational site and is not affiliated with, or endorsed by, LinkedIn Corporation, Microsoft or any other vendor. All product names are trademarks of their respective owners.</i></p>
   </div>
   <div>
     <div class="card" style="margin-bottom:22px">
       <h3 class="card-h">Site stats</h3>
-      <p><b>${posts.length}</b> study guides and tests</p>
-      <p><b>${TOTAL_QS}</b> explained practice questions</p>
-      <p><b>${CATS.length}</b> skill categories</p>
+      <p><b>${STATS.resources}</b> learning resources (${STATS.guides} study guides and ${STATS.assessments} full-length assessments)</p>
+      <p><b>${STATS.questions}</b> practice questions, each with an explanation</p>
+      <p><b>${STATS.categories}</b> skill categories</p>
+      <p><b>${STATS.assessments}</b> full-length practice assessments (<a href="../practice-tests/">see all</a>)</p>
     </div>
     <div class="card">
       <h3 class="card-h">Categories</h3>
@@ -862,5 +874,11 @@ ${urls.map(([u, d]) => `  <url><loc>${SITE}${u}</loc><lastmod>${d}</lastmod></ur
 write("ads.txt", "google.com, pub-9455217122501464, DIRECT, f08c47fec0942fa0\n");
 write("robots.txt", `User-agent: *\nAllow: /\n\nSitemap: ${SITE}sitemap.xml\n`);
 write(".nojekyll", "");
+// Stats self-check: the numbers rendered on the key pages must come from STATS.
+[["index.html", [STATS.resources, STATS.questions, STATS.categories, STATS.assessments]], ["about/index.html", [STATS.resources, STATS.questions, STATS.categories, STATS.assessments]],
+ ["practice-tests/index.html", [STATS.assessments, STATS.assessmentQuestions]]].forEach(([f, nums]) => {
+  const h = fs.readFileSync(path.join(ROOT, f), "utf8");
+  nums.forEach((n) => { if (!h.includes(`>${n}<`) && !h.includes(`${n} full-length`) && !h.includes(`${n} questions`)) throw new Error(`Stats mismatch: ${f} does not show ${n}`); });
+});
 
 console.log(`Built ${posts.length} guides + 6 pages + 404 + sitemap (${urls.length} URLs). Practice questions: ${TOTAL_QS}.`);
