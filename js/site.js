@@ -620,3 +620,14 @@ document.querySelectorAll(".mock-hint").forEach(hint => {
   }
 })();
 
+(function () {
+  // Accessibility: horizontally scrollable tables (phones) must be keyboard-reachable.
+  function markScrollableTables() {
+    document.querySelectorAll(".article-body table").forEach(function (t) {
+      if (t.scrollWidth > t.clientWidth + 1) { t.setAttribute("tabindex", "0"); }
+      else { t.removeAttribute("tabindex"); }
+    });
+  }
+  markScrollableTables();
+  window.addEventListener("resize", markScrollableTables);
+})();

@@ -24,7 +24,8 @@
 <link rel="icon" href="../../assets/favicon.svg" type="image/svg+xml">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" onload="this.onload=null;this.rel='stylesheet'">
+<noscript><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet"></noscript>
 <link rel="stylesheet" href="../../css/style.css">
 <script>(function(){try{if(localStorage.getItem("skillprep:theme")==="dark"){document.documentElement.setAttribute("data-theme","dark");}}catch(e){}})();</script>
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"Power BI Study Guide: Model, DAX and Reports","description":"Power Query, star-schema modelling, DAX measures, reports and security: the Power BI essentials behind interviews and the PL-300 skill areas, with exercises and a 20-question quiz.","datePublished":"2026-11-17","dateModified":"2026-11-17","author":{"@type":"Organization","name":"SkillPrep editorial team"},"publisher":{"@type":"Organization","name":"SkillPrep","logo":{"@type":"ImageObject","url":"https://skillsprep.github.io/assets/favicon.svg"}},"mainEntityOfPage":"https://skillsprep.github.io/guides/power-bi-study-guide/","image":"https://skillsprep.github.io/assets/og-image.png","articleSection":"Power BI","inLanguage":"en"}</script>
@@ -113,7 +114,7 @@
     <h2 id="prepare-data-with-power-query">Prepare data with Power Query</h2>
         <p>First choose how the data is stored. Both modes are common interview topics:</p>
         <table>
-          <tr><th></th><th>Import</th><th>DirectQuery</th></tr>
+          <tr><th scope="col"><span class="visually-hidden">Aspect</span></th><th>Import</th><th>DirectQuery</th></tr>
           <tr><td>Freshness</td><td>As of the last refresh</td><td>Queries the source as users interact</td></tr>
           <tr><td>Speed</td><td>Fast: queries run on in-memory data</td><td>Depends on the source's speed</td></tr>
           <tr><td>Data size</td><td>Must fit in memory and refresh windows</td><td>Data stays at the source</td></tr>
@@ -140,16 +141,16 @@
         </table>
         <p><b>Role-playing dimensions.</b> One date table often has to filter sales by order date and by ship date. If you need both at once, Microsoft recommends a separate date table for each role. If not, keep one date table with an inactive relationship and use <code>USERELATIONSHIP</code> in measures.</p>
         <p><b>Date table.</b> Time intelligence needs a date table with unique, contiguous dates and no blanks. Create one with <code>CALENDAR</code> or <code>CALENDARAUTO</code>, or load an existing date dimension, and mark it as a date table.</p>
-        <pre><code>Date = CALENDARAUTO()</code></pre>
+        <pre tabindex="0"><code>Date = CALENDARAUTO()</code></pre>
         <p><b>Performance.</b> Remove unnecessary rows and columns, reduce granularity where you can, and use Performance Analyzer and DAX query view to find slow visuals, measures and relationships.</p>
     <h2 id="dax-essentials">DAX essentials</h2>
         <table>
-          <tr><th></th><th>Measure</th><th>Calculated column</th></tr>
+          <tr><th scope="col"><span class="visually-hidden">Aspect</span></th><th>Measure</th><th>Calculated column</th></tr>
           <tr><td>Evaluated</td><td>At query time, in the current filter context</td><td>Row by row, when data refreshes</td></tr>
           <tr><td>Stored in the model</td><td>Only the formula</td><td>The values, which add to model size</td></tr>
           <tr><td>Use for</td><td>Totals, ratios, year-to-date, anything that responds to slicers</td><td>Row-level attributes you need to slice, filter or relate on</td></tr>
         </table>
-        <pre><code>Total Sales = SUM ( Sales[Amount] )
+        <pre tabindex="0"><code>Total Sales = SUM ( Sales[Amount] )
 
 Blue Sales =
 CALCULATE ( [Total Sales], 'Product'[Color] = "Blue" )
@@ -193,7 +194,7 @@ Sales YTD = TOTALYTD ( [Total Sales], 'Date'[Date] )</code></pre>
           <li>A person in several roles sees the union of the rows. A person with no matching role sees no rows.</li>
           <li>RLS filters rows, not columns.</li>
         </ul>
-        <pre><code>-- static role
+        <pre tabindex="0"><code>-- static role
 [Region] = "West"
 
 -- dynamic role: each user sees rows mapped to their sign-in
@@ -217,7 +218,7 @@ Sales YTD = TOTALYTD ( [Total Sales], 'Date'[Date] )</code></pre>
           <li><b>Exercise 1 (Power Query).</b> A table has columns OrderID, Region, Jan, Feb and Mar. Some sales cells contain the text "N/A". Set data types, replace "N/A" with null, unpivot Jan to Mar into Month and Sales, and remove null rows. <i>Check:</i> you end with one numeric Sales value per order and month.</li>
           <li><b>Exercise 2 (Model).</b> Tables: Sales (OrderID, OrderDate, ShipDate, ProductID, Quantity, Amount), Product (ProductID, Name, Category) and Date (Date, Year, Month). Build a star schema so a visual can show sales by order date and by ship date side by side. <i>Check:</i> Product and Date each filter Sales in a one-to-many relationship, and a second date table (for example Ship Date) has its own active relationship to ShipDate.</li>
           <li><b>Exercise 3 (DAX).</b> Write measures for total sales, sales for the same period last year, and year-over-year percentage change. <i>Solution:</i>
-<pre><code>Total Sales = SUM ( Sales[Amount] )
+<pre tabindex="0"><code>Total Sales = SUM ( Sales[Amount] )
 Sales LY = CALCULATE ( [Total Sales], SAMEPERIODLASTYEAR ( 'Date'[Date] ) )
 YoY % = DIVIDE ( [Total Sales] - [Sales LY], [Sales LY] )</code></pre></li>
           <li><b>Exercise 4 (Security).</b> Add a SalesRegion table (Region, ManagerEmail) that filters Sales. Create a role whose filter on SalesRegion is <code>[ManagerEmail] = USERPRINCIPALNAME ()</code>, then use Test as role to confirm a manager sees only their region.</li>

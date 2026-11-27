@@ -24,7 +24,8 @@
 <link rel="icon" href="../../assets/favicon.svg" type="image/svg+xml">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" onload="this.onload=null;this.rel='stylesheet'">
+<noscript><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet"></noscript>
 <link rel="stylesheet" href="../../css/style.css">
 <script>(function(){try{if(localStorage.getItem("skillprep:theme")==="dark"){document.documentElement.setAttribute("data-theme","dark");}}catch(e){}})();</script>
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"Python Fundamentals: Study Guide + Practice Quiz","description":"Data structures, comprehensions, exceptions, and functions — the Python fundamentals that interviews and skills tests keep returning to, with explained practice questions.","datePublished":"2026-09-03","dateModified":"2026-10-18","author":{"@type":"Organization","name":"SkillPrep editorial team"},"publisher":{"@type":"Organization","name":"SkillPrep","logo":{"@type":"ImageObject","url":"https://skillsprep.github.io/assets/favicon.svg"}},"mainEntityOfPage":"https://skillsprep.github.io/guides/python-study-guide/","image":"https://skillsprep.github.io/assets/og-image.png","articleSection":"Python","inLanguage":"en"}</script>
@@ -97,7 +98,7 @@
         </ul>
     <h2 id="the-classic-mutable-default-argument-trap">The classic mutable default argument trap</h2>
         <p>This pattern is a favourite in interviews and tests. What does this print?</p>
-        <pre><code>def add(item, basket=[]):
+        <pre tabindex="0"><code>def add(item, basket=[]):
     basket.append(item)
     return basket
 
@@ -107,13 +108,13 @@ print(add("banana"))</code></pre>
         <div class="callout tip"><b>Remember</b> Default argument values are evaluated once at function definition time — not on each call. This applies to any mutable default.</div>
     <h2 id="comprehension-patterns">Comprehension patterns</h2>
         <p>Learn to read comprehensions left-to-right: <code>[expression for item in iterable if condition]</code></p>
-        <pre><code># squares of even numbers 0-9
+        <pre tabindex="0"><code># squares of even numbers 0-9
 [x**2 for x in range(10) if x % 2 == 0]
 # swap keys/values
 {v: k for k, v in prices.items()}</code></pre>
     <h2 id="names-objects-and-mutability-what-assignment-really-does">Names, objects and mutability: what assignment really does</h2>
 <p>In Python a variable is a <b>name</b> that points to an object, not a box that holds a value. Writing <code>b = a</code> does not copy anything; it makes a second name for the same object. For immutable objects such as numbers, strings and tuples this never matters, because you cannot change the object in place. For mutable objects such as lists, dicts and sets it matters a lot, because a change made through one name is visible through every other name.</p>
-<pre><code>a = [1, 2, 3]
+<pre tabindex="0"><code>a = [1, 2, 3]
 b = a            # same object, two names
 b.append(4)
 print(a)         # [1, 2, 3, 4]
@@ -128,7 +129,7 @@ print(a)         # [1, 2, 3, 4]  (unchanged)</code></pre>
     <h2 id="scope-and-the-legb-rule">Scope and the LEGB rule</h2>
 <p>When Python meets a name it searches four scopes in order: <b>L</b>ocal (the current function), <b>E</b>nclosing (any outer functions), <b>G</b>lobal (the module) and <b>B</b>uilt-in (names like <code>len</code>). The first match wins. This is why a local variable called <code>list</code> or <code>max</code> hides the built-in, and why later calls such as <code>list("abc")</code> suddenly fail.</p>
 <p>The rule that surprises beginners: if a function assigns to a name anywhere in its body, that name is local for the <i>whole</i> function. So this fails:</p>
-<pre><code>count = 0
+<pre tabindex="0"><code>count = 0
 
 def bump():
     count += 1      # UnboundLocalError: count is local here
@@ -138,7 +139,7 @@ def bump_ok():
     count += 1</code></pre>
 <p>Reading a global needs no declaration; rebinding it does. Inside a nested function, use <code>nonlocal</code> to rebind a variable of the enclosing function. Prefer returning values or using a small class over reaching for <code>global</code>, because hidden shared state makes code hard to test.</p>
 <p>Closures capture <i>variables</i>, not values, and look the value up when the inner function runs. That produces the well-known late-binding surprise:</p>
-<pre><code>funcs = [lambda: i for i in range(3)]
+<pre tabindex="0"><code>funcs = [lambda: i for i in range(3)]
 print([f() for f in funcs])        # [2, 2, 2]
 
 funcs = [lambda i=i: i for i in range(3)]
@@ -149,7 +150,7 @@ print([f() for f in funcs])        # [0, 1, 2]</code></pre>
     <h2 id="iterators-and-generators">Iterators and generators</h2>
 <p>An <b>iterable</b> is anything you can loop over; it has an <code>__iter__</code> method that returns an <b>iterator</b>. An iterator has <code>__next__</code>, returns one item at a time, and raises <code>StopIteration</code> when it runs out. A <code>for</code> loop is just sugar: it calls <code>iter()</code> once, then calls <code>next()</code> repeatedly until <code>StopIteration</code>. A list is iterable but not itself an iterator.</p>
 <p>A <b>generator function</b> is the easy way to write an iterator. Any function containing <code>yield</code> returns a generator object when called, and its body does not run until you ask for the first value. Each <code>next()</code> runs the body up to the next <code>yield</code>, then pauses with all local state preserved.</p>
-<pre><code>def countdown(n):
+<pre tabindex="0"><code>def countdown(n):
     while n &gt; 0:
         yield n
         n -= 1
@@ -163,7 +164,7 @@ print(list(g))      # []  exhausted</code></pre>
 <div class="callout tip"><b>Debugging tip</b> If a generator-based result is unexpectedly empty, check whether something earlier already consumed it, for example a <code>list(g)</code> or a <code>for</code> loop over the same object.</div>
     <h2 id="exceptions-dataclasses-and-type-hints">Exceptions, dataclasses and type hints</h2>
 <p>Good exception handling is about being <b>specific</b>. Catch the narrowest exception you can actually handle, and keep the <code>try</code> block small so you know which line failed. A bare <code>except:</code> also catches <code>KeyboardInterrupt</code> and <code>SystemExit</code>, which is almost never what you want; <code>except Exception</code> is the broadest reasonable choice. The <code>else</code> block runs only when no exception occurred, and <code>finally</code> runs in every case, which makes it the right place for cleanup (though a <code>with</code> statement is usually neater).</p>
-<pre><code>def read_age(text):
+<pre tabindex="0"><code>def read_age(text):
     try:
         age = int(text)
     except ValueError as err:
@@ -172,7 +173,7 @@ print(list(g))      # []  exhausted</code></pre>
         return age</code></pre>
 <p>The <code>raise ... from err</code> form keeps the original error attached as the cause, which makes tracebacks far easier to debug. Inside an <code>except</code> block, a plain <code>raise</code> re-raises the current exception unchanged. Prefer "ask forgiveness" (try, then handle the error) when failure is rare, and a simple <code>if</code> check when the failure case is common and cheap to test.</p>
 <p>The <code>dataclasses</code> module removes the boilerplate from classes that mainly store data. Decorating a class with <code>@dataclass</code> generates <code>__init__</code>, <code>__repr__</code> and <code>__eq__</code> from the annotated fields. A mutable default such as a list is rejected with a <code>ValueError</code>, which neatly prevents the shared-default bug; use <code>field(default_factory=list)</code> instead.</p>
-<pre><code>from dataclasses import dataclass, field
+<pre tabindex="0"><code>from dataclasses import dataclass, field
 
 @dataclass
 class Order:
@@ -182,7 +183,7 @@ class Order:
 <p>Type hints (<code>list[str]</code>, and <code>str | None</code> on Python 3.10+) document intent and let tools like mypy or your editor catch mistakes. The interpreter itself does <b>not</b> enforce them at runtime: passing a string where <code>int</code> is annotated will still run.</p>
     <h2 id="virtual-environments-practice-plan-and-glossary">Virtual environments, practice plan and glossary</h2>
 <p>A <b>virtual environment</b> is an isolated folder holding its own Python interpreter link and installed packages, so one project's dependencies cannot break another's. The standard-library way to make one:</p>
-<pre><code>python -m venv .venv
+<pre tabindex="0"><code>python -m venv .venv
 source .venv/bin/activate        # Windows: .venv\Scripts\activate
 python -m pip install requests
 python -m pip freeze &gt; requirements.txt</code></pre>

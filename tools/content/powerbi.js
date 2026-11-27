@@ -162,7 +162,7 @@ module.exports = [{
     { h: "Prepare data with Power Query", body: `
         <p>First choose how the data is stored. Both modes are common interview topics:</p>
         <table>
-          <tr><th></th><th>Import</th><th>DirectQuery</th></tr>
+          <tr><th scope="col"><span class="visually-hidden">Aspect</span></th><th>Import</th><th>DirectQuery</th></tr>
           <tr><td>Freshness</td><td>As of the last refresh</td><td>Queries the source as users interact</td></tr>
           <tr><td>Speed</td><td>Fast: queries run on in-memory data</td><td>Depends on the source's speed</td></tr>
           <tr><td>Data size</td><td>Must fit in memory and refresh windows</td><td>Data stays at the source</td></tr>
@@ -195,7 +195,7 @@ module.exports = [{
 
     { h: "DAX essentials", body: `
         <table>
-          <tr><th></th><th>Measure</th><th>Calculated column</th></tr>
+          <tr><th scope="col"><span class="visually-hidden">Aspect</span></th><th>Measure</th><th>Calculated column</th></tr>
           <tr><td>Evaluated</td><td>At query time, in the current filter context</td><td>Row by row, when data refreshes</td></tr>
           <tr><td>Stored in the model</td><td>Only the formula</td><td>The values, which add to model size</td></tr>
           <tr><td>Use for</td><td>Totals, ratios, year-to-date, anything that responds to slicers</td><td>Row-level attributes you need to slice, filter or relate on</td></tr>

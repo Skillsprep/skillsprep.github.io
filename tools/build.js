@@ -81,6 +81,7 @@ const jsonLd = (obj) => `<script type="application/ld+json">${JSON.stringify(obj
 function write(rel, content) {
   const f = path.join(ROOT, rel);
   fs.mkdirSync(path.dirname(f), { recursive: true });
+  if (f.endsWith('.html')) content = content.replace(/<pre>/g, '<pre tabindex="0">'); // scrollable code must be keyboard-reachable
   fs.writeFileSync(f, content);
 }
 
@@ -96,7 +97,7 @@ function renderBank(bankKey, prefix) {
   
   <div class="assessment-header" style="background: var(--card); border: 1px solid var(--line); border-radius: var(--radius); padding: 16px 24px; margin-bottom: 24px; display: flex; justify-content: space-between; align-items: center; box-shadow: var(--shadow); position: sticky; top: 70px; z-index: 40;">
     <div>
-      <div style="font-size: 0.85rem; font-weight: 600; color: var(--teal); text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 4px;">Practice Assessment</div>
+      <div style="font-size: 0.85rem; font-weight: 600; color: var(--teal-text); text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 4px;">Practice Assessment</div>
       <div class="mock-count" role="status" aria-live="polite" style="font-weight: 700; color: var(--navy); font-size: 1.1rem;">Answered 0 / ${total}</div>
       <div class="mock-hint" style="font-size: 0.85rem; color: var(--muted); margin-top: 4px;">Untimed · scored at the end</div>
     </div>
@@ -228,7 +229,8 @@ function layout({ title, desc, path: pagePath, prefix, nav, body, ld = [], type 
 <link rel="icon" href="${link("assets/favicon.svg")}" type="image/svg+xml">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" onload="this.onload=null;this.rel='stylesheet'">
+<noscript><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet"></noscript>
 <link rel="stylesheet" href="${link("css/style.css")}">
 <script>(function(){try{if(localStorage.getItem("skillprep:theme")==="dark"){document.documentElement.setAttribute("data-theme","dark");}}catch(e){}})();</script>
 ${extraHead}${ld.map(jsonLd).join("\n")}

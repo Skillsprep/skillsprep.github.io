@@ -24,7 +24,8 @@
 <link rel="icon" href="../../assets/favicon.svg" type="image/svg+xml">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" onload="this.onload=null;this.rel='stylesheet'">
+<noscript><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet"></noscript>
 <link rel="stylesheet" href="../../css/style.css">
 <script>(function(){try{if(localStorage.getItem("skillprep:theme")==="dark"){document.documentElement.setAttribute("data-theme","dark");}}catch(e){}})();</script>
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"Git Study Guide: Commands and Concepts","description":"Branching, merging vs rebasing, staging, and undoing mistakes — the Git knowledge every developer needs, with quizzes.","datePublished":"2026-07-30","dateModified":"2026-10-18","author":{"@type":"Organization","name":"SkillPrep editorial team"},"publisher":{"@type":"Organization","name":"SkillPrep","logo":{"@type":"ImageObject","url":"https://skillsprep.github.io/assets/favicon.svg"}},"mainEntityOfPage":"https://skillsprep.github.io/guides/git-study-guide/","image":"https://skillsprep.github.io/assets/og-image.png","articleSection":"Git","inLanguage":"en"}</script>
@@ -85,7 +86,7 @@
     </details>
     <p class="lead">Interviews and skills tests focus on everyday version-control workflows. Questions often present a situation ("you committed to the wrong branch") and ask for the correct command sequence.</p>
     <h2 id="core-workflow-commands">Core workflow commands</h2>
-        <pre><code>git status              # what's changed / staged
+        <pre tabindex="0"><code>git status              # what's changed / staged
 git add file.txt        # stage a file
 git commit -m "msg"     # commit staged changes
 git log --oneline       # compact history
@@ -119,7 +120,7 @@ git diff --staged       # staged vs last commit</code></pre>
 <tr><td>Repository</td><td>Committed history</td><td><code>git commit</code></td></tr>
 </table>
 <p>A <b>branch</b> is just a movable label pointing at one commit. Creating a branch costs almost nothing because no files are copied; committing moves the current branch's label forward. <b>HEAD</b> is Git's "you are here": normally it points at a branch name, which points at a commit. If HEAD points straight at a commit, you are in a <i>detached HEAD</i> state; commits you make there are not on any branch, so create one (<code>git switch -c rescue</code>) before moving away.</p>
-<pre><code>git log --oneline --graph --all    # see labels and shape of history
+<pre tabindex="0"><code>git log --oneline --graph --all    # see labels and shape of history
 git branch                         # list branches, * marks the current one
 git switch -c fix-typo             # create and move to a new branch</code></pre>
 <div class="callout tip"><b>Tip</b> Because branches are labels, deleting a merged branch with <code>git branch -d</code> removes only the label, never the commits reachable from elsewhere.</div>
@@ -130,11 +131,11 @@ git switch -c fix-typo             # create and move to a new branch</code></pre
 <li><b>Merge commit:</b> if both branches gained commits, Git combines them and records a new commit with two parents. History keeps its real branching shape. You can force this even when a fast-forward is possible with <code>git merge --no-ff</code>.</li>
 </ul>
 <p><b>Rebase</b> takes your branch's commits and replays them, one by one, on top of another commit. The replayed commits are brand-new commits with new hashes; the old ones are abandoned. The payoff is a linear history with no merge commit.</p>
-<pre><code>git switch feature
+<pre tabindex="0"><code>git switch feature
 git rebase main        # replay feature's commits onto the tip of main</code></pre>
 <p>The rule that follows from this: <b>never rebase commits that other people already have</b>. If a teammate based work on the old commits, your rewritten ones look unrelated to their copy, and reconciling the two is painful. Rebasing your own unpublished branch is fine. If you do rewrite a branch only you use after pushing it, <code>git push --force-with-lease</code> is safer than a plain force push because it refuses to overwrite commits you have not seen.</p>
 <p><b>Resolving conflicts.</b> A conflict happens when both sides changed the same lines. Git stops and marks the file:</p>
-<pre><code>&lt;&lt;&lt;&lt;&lt;&lt;&lt; HEAD
+<pre tabindex="0"><code>&lt;&lt;&lt;&lt;&lt;&lt;&lt; HEAD
 timeout = 30
 =======
 timeout = 60
@@ -154,14 +155,14 @@ timeout = 60
 <div class="callout"><b>Before any --hard</b> Run <code>git status</code> and <code>git diff</code>. If anything uncommitted matters, commit or stash it first.</div>
     <h2 id="ignoring-stashing-and-tagging">Ignoring, stashing and tagging</h2>
 <p><b>.gitignore.</b> This file lists patterns for untracked files Git should not offer to add: build output, dependency folders, editor settings, secrets files.</p>
-<pre><code>node_modules/
+<pre tabindex="0"><code>node_modules/
 *.log
 .env
 !keep.log</code></pre>
 <p>A leading <code>!</code> re-includes a path, and a trailing slash matches directories only. The classic mistake: ignore rules do <i>not</i> apply to files that are already tracked. If you committed <code>.env</code> by accident, adding it to .gitignore is not enough. Run <code>git rm --cached .env</code> to stop tracking it while keeping the file on disk, and commit. Remember it remains in earlier history, so a real secret should also be rotated.</p>
 <p><b>Stash.</b> When you must switch tasks with a half-done working tree, <code>git stash</code> shelves tracked modifications and returns you to a clean state. <code>git stash list</code> shows entries, <code>git stash pop</code> reapplies the newest and removes it, and <code>git stash apply</code> reapplies but keeps it. By default untracked files are not stashed; add <code>-u</code> to include them. Stashes are easy to forget, so use them for minutes rather than weeks.</p>
 <p><b>Tags.</b> A tag is a fixed label on a commit, typically marking a release. Unlike a branch, it does not move when you commit.</p>
-<pre><code>git tag v1.2.0                       # lightweight: just a name
+<pre tabindex="0"><code>git tag v1.2.0                       # lightweight: just a name
 git tag -a v1.2.0 -m "Release 1.2.0" # annotated: stores author, date, message
 git push origin v1.2.0               # tags are not pushed automatically</code></pre>
 <p>Annotated tags are the usual choice for releases because they carry metadata. A plain <code>git push</code> does not send tags, which surprises many beginners.</p>

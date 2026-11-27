@@ -24,7 +24,8 @@
 <link rel="icon" href="../../assets/favicon.svg" type="image/svg+xml">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" onload="this.onload=null;this.rel='stylesheet'">
+<noscript><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet"></noscript>
 <link rel="stylesheet" href="../../css/style.css">
 <script>(function(){try{if(localStorage.getItem("skillprep:theme")==="dark"){document.documentElement.setAttribute("data-theme","dark");}}catch(e){}})();</script>
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"Advanced Python Study Guide: Generators, Decorators and Async","description":"Generators, closures, decorators, dataclasses, MRO, context managers, exceptions and concurrency in Python 3, with runnable examples, exercises with solutions and a 20-question quiz.","datePublished":"2026-11-21","dateModified":"2026-11-21","author":{"@type":"Organization","name":"SkillPrep editorial team"},"publisher":{"@type":"Organization","name":"SkillPrep","logo":{"@type":"ImageObject","url":"https://skillsprep.github.io/assets/favicon.svg"}},"mainEntityOfPage":"https://skillsprep.github.io/guides/advanced-python-study-guide/","image":"https://skillsprep.github.io/assets/og-image.png","articleSection":"Python","inLanguage":"en"}</script>
@@ -98,7 +99,7 @@
         <div class="callout"><b>Version</b> Examples were run on Python 3.13. Details such as the free-threaded build vary by version, so check the docs for yours.</div>
     <h2 id="generators-and-iterators">Generators and iterators</h2>
         <p>A function with <code>yield</code> is a generator function. Calling it does not run the body: it returns a generator, and execution starts when you ask for the first value. At each <code>yield</code> the function is suspended with all of its local state retained.</p>
-<pre><code>def squares(n):
+<pre tabindex="0"><code>def squares(n):
     for i in range(n):
         yield i * i
 
@@ -107,7 +108,7 @@ print(next(g))     # 0
 print(list(g))     # [1, 4]
 print(list(g))     # []  (a generator can only be consumed once)</code></pre>
         <p>A generator expression, <code>(x * x for x in range(3))</code>, is lazy in the same way, while a list comprehension builds the whole list at once. Laziness lets you work with infinite or very large sequences:</p>
-<pre><code>from itertools import islice
+<pre tabindex="0"><code>from itertools import islice
 
 def naturals():
     n = 0
@@ -118,12 +119,12 @@ def naturals():
 print(list(islice(naturals(), 4)))   # [0, 1, 2, 3]</code></pre>
     <h2 id="functions-closures-decorators-and-caching">Functions: closures, decorators and caching</h2>
         <p><b>Closures capture variables, not values.</b> All three lambdas below see the final value of <code>i</code>; a default argument binds the value at definition time.</p>
-<pre><code>late = [lambda: i for i in range(3)]
+<pre tabindex="0"><code>late = [lambda: i for i in range(3)]
 bound = [lambda i=i: i for i in range(3)]
 print([f() for f in late])    # [2, 2, 2]
 print([f() for f in bound])   # [0, 1, 2]</code></pre>
         <p><b>Decorators</b> wrap a function. <code>@wraps</code> copies the original's name and docstring onto the wrapper and adds a <code>__wrapped__</code> attribute.</p>
-<pre><code>from functools import wraps
+<pre tabindex="0"><code>from functools import wraps
 
 def counted(fn):
     @wraps(fn)
@@ -141,7 +142,7 @@ def add(a, b):
 add(1, 2)
 print(add.__name__, add.calls)   # add 1</code></pre>
         <p><b>Mutable default arguments</b> are created once, when the function is defined, and shared by every call:</p>
-<pre><code>def bad(x, items=[]):
+<pre tabindex="0"><code>def bad(x, items=[]):
     items.append(x)
     return items
 
@@ -156,7 +157,7 @@ print(bad(2))     # [1, 2]  (the same list is reused)
 print(good(1))    # [1]
 print(good(2))    # [2]</code></pre>
         <p><b>Caching.</b> <code>functools.lru_cache</code> keeps the most recent calls (128 by default) and needs hashable arguments. <code>functools.cache</code> is <code>lru_cache(maxsize=None)</code>, an unbounded cache.</p>
-<pre><code>from functools import lru_cache
+<pre tabindex="0"><code>from functools import lru_cache
 
 @lru_cache(maxsize=None)
 def fib(n):
@@ -166,7 +167,7 @@ print(fib(30))               # 832040
 print(fib.cache_info().misses)   # 31</code></pre>
     <h2 id="classes-properties-dunder-methods-dataclasses-and-mro">Classes: properties, dunder methods, dataclasses and MRO</h2>
         <p><b>Properties</b> run code on attribute access while callers keep plain attribute syntax:</p>
-<pre><code>class Temp:
+<pre tabindex="0"><code>class Temp:
     def __init__(self, c):
         self._c = c
 
@@ -189,7 +190,7 @@ print(t.f)    # 212.0
 t.c = 0
 print(t.f)    # 32.0</code></pre>
         <p><b>Dunder methods</b> let your class work with operators and built-ins. If you define <code>__eq__</code> without <code>__hash__</code>, Python sets <code>__hash__</code> to <code>None</code>, so instances become unhashable.</p>
-<pre><code>class Vec:
+<pre tabindex="0"><code>class Vec:
     def __init__(self, x, y):
         self.x, self.y = x, y
 
@@ -206,7 +207,7 @@ print(Vec(1, 2) + Vec(3, 4))        # Vec(4, 6)
 print(Vec(1, 2) == Vec(1, 2))       # True
 print(Vec.__hash__)                 # None</code></pre>
         <p><b>Dataclasses.</b> By default <code>@dataclass</code> generates <code>__init__</code>, <code>__repr__</code> and <code>__eq__</code>. Ordering needs <code>order=True</code> (which requires <code>eq=True</code>). A mutable default such as <code>x: list = []</code> raises <code>ValueError</code>; use <code>default_factory</code>. With <code>frozen=True</code>, assigning to a field raises <code>FrozenInstanceError</code>, a subclass of <code>AttributeError</code>.</p>
-<pre><code>from dataclasses import dataclass, field, FrozenInstanceError
+<pre tabindex="0"><code>from dataclasses import dataclass, field, FrozenInstanceError
 
 @dataclass
 class Item:
@@ -227,7 +228,7 @@ try:
 except FrozenInstanceError:
     print("frozen")</code></pre>
         <p><b>Method resolution order.</b> <code>super()</code> follows the MRO of the instance's class. In the diamond below the chain is D, B, C, A, not D, B, A:</p>
-<pre><code>class A:
+<pre tabindex="0"><code>class A:
     def who(self):
         return "A"
 
@@ -247,7 +248,7 @@ print(D().who())                              # D&gt;B&gt;C&gt;A
 print([k.__name__ for k in D.__mro__])        # ['D', 'B', 'C', 'A', 'object']</code></pre>
     <h2 id="context-managers">Context managers</h2>
         <p>A <code>with</code> statement calls <code>__enter__</code> at the start and <code>__exit__</code> at the end, even when the body raises. The shortest way to write one is a generator with <code>@contextlib.contextmanager</code>; put the cleanup in a <code>finally</code> block so it runs on errors.</p>
-<pre><code>import contextlib
+<pre tabindex="0"><code>import contextlib
 
 @contextlib.contextmanager
 def tag(log, name):
@@ -265,7 +266,7 @@ except RuntimeError:
     pass
 print(log)    # ['open x', 'close x']</code></pre>
         <p>Files are the everyday example: <code>with open(path, "w", encoding="utf-8") as f:</code> closes the file for you. <code>pathlib.Path</code> gives readable path handling:</p>
-<pre><code>import tempfile
+<pre tabindex="0"><code>import tempfile
 from pathlib import Path
 
 with tempfile.TemporaryDirectory() as d:
@@ -276,7 +277,7 @@ with tempfile.TemporaryDirectory() as d:
     print(p.suffix, p.stem, p.exists())                 # .txt notes True</code></pre>
     <h2 id="errors-and-exceptions">Errors and exceptions</h2>
         <p>Create your own exception by subclassing <code>Exception</code>. Use <code>raise ... from ...</code> to keep the original as <code>__cause__</code>. A <code>finally</code> block runs even when the <code>try</code> block returns.</p>
-<pre><code>class ValidationError(Exception):
+<pre tabindex="0"><code>class ValidationError(Exception):
     def __init__(self, field, msg):
         super().__init__(f"{field}: {msg}")
         self.field = field
@@ -313,7 +314,7 @@ print(order())    # ['try', 'finally']</code></pre>
         </table>
         <p>The <b>GIL</b> is a CPython mechanism ensuring only one thread executes Python bytecode at a time. Some extension modules release it during heavy work such as compression or hashing. Python 3.13 adds an optional free-threaded build (<code>--disable-gil</code>), but the standard build still has the GIL.</p>
         <p><b>asyncio.</b> Calling an <code>async def</code> function only creates a coroutine object; run it with <code>asyncio.run()</code>, <code>await</code> it, or schedule it as a task. <code>asyncio.gather()</code> runs awaitables concurrently and returns results in the order given. By default the first exception propagates and the others keep running; with <code>return_exceptions=True</code>, exceptions are returned in the result list.</p>
-<pre><code>import asyncio
+<pre tabindex="0"><code>import asyncio
 import time
 
 async def fetch(name, delay):
@@ -328,7 +329,7 @@ async def main():
 asyncio.run(main())</code></pre>
         <p>Three 0.2-second waits finish in about 0.2 seconds, not 0.6, because they overlap. The exact timing depends on your machine.</p>
     <h2 id="practical-standard-library-tools">Practical standard-library tools</h2>
-<pre><code>from collections import Counter, defaultdict
+<pre tabindex="0"><code>from collections import Counter, defaultdict
 from itertools import chain, groupby
 
 print(Counter("banana").most_common(1))        # [('a', 3)]
@@ -360,7 +361,7 @@ print({k: list(v) for k, v in groupby(words, key=lambda s: s[0])})   # {'a': ['a
     <h2 id="practical-learning-exercises">Practical learning exercises</h2>
         <ul>
           <li><b>Exercise 1 (generator).</b> Write a generator <code>evens(limit)</code> that yields the even numbers below <code>limit</code>. <i>Solution:</i>
-<pre><code>def evens(limit):
+<pre tabindex="0"><code>def evens(limit):
     for n in range(0, limit, 2):
         yield n
 

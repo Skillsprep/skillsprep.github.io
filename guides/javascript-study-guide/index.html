@@ -24,7 +24,8 @@
 <link rel="icon" href="../../assets/favicon.svg" type="image/svg+xml">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" onload="this.onload=null;this.rel='stylesheet'">
+<noscript><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet"></noscript>
 <link rel="stylesheet" href="../../css/style.css">
 <script>(function(){try{if(localStorage.getItem("skillprep:theme")==="dark"){document.documentElement.setAttribute("data-theme","dark");}}catch(e){}})();</script>
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"JavaScript Fundamentals: Key Concepts Explained","description":"Hoisting, closures, == vs ===, arrow functions, and promises — the JavaScript fundamentals behind most interview and skills-test questions.","datePublished":"2026-08-28","dateModified":"2026-10-18","author":{"@type":"Organization","name":"SkillPrep editorial team"},"publisher":{"@type":"Organization","name":"SkillPrep","logo":{"@type":"ImageObject","url":"https://skillsprep.github.io/assets/favicon.svg"}},"mainEntityOfPage":"https://skillsprep.github.io/guides/javascript-study-guide/","image":"https://skillsprep.github.io/assets/og-image.png","articleSection":"JavaScript","inLanguage":"en"}</script>
@@ -96,19 +97,19 @@
         </ul>
     <h2 id="truthy-and-falsy-values">Truthy and falsy values</h2>
         <p>Memorize the falsy values — everything else is truthy:</p>
-        <pre><code>false, 0, -0, 0n, "", null, undefined, NaN</code></pre>
+        <pre tabindex="0"><code>false, 0, -0, 0n, "", null, undefined, NaN</code></pre>
         <p>Tricky truthy values: <code>"0"</code>, <code>"false"</code> (non-empty strings), <code>[]</code> and <code>{}</code> (empty objects are truthy!).</p>
         <div class="callout"><b>Classic trap</b> <code>[] == false</code> is <b>true</b> (array coerces to empty string, which coerces to 0), but <code>[] ? "yes" : "no"</code> is <b>"yes"</b> because <code>[]</code> is truthy in a boolean context.</div>
     <h2 id="async-execution-order">Async execution order</h2>
         <p>Expect questions like "what order do these logs appear?" Remember: synchronous code first, then microtasks (promises), then macrotasks (<code>setTimeout</code>):</p>
-        <pre><code>console.log("1");
+        <pre tabindex="0"><code>console.log("1");
 setTimeout(() => console.log("2"));
 Promise.resolve().then(() => console.log("3"));
 console.log("4");
 // Output: 1, 4, 3, 2</code></pre>
     <h2 id="closures-and-the-value-of-this">Closures and the value of this</h2>
 <p>A <b>closure</b> is a function together with the variables from the place where it was created. The function keeps access to those variables even after the outer function has returned. Closures give you private state and are behind callbacks, event handlers and many module patterns.</p>
-<pre><code>function makeCounter() {
+<pre tabindex="0"><code>function makeCounter() {
   let n = 0;
   return () =&gt; ++n;
 }
@@ -117,7 +118,7 @@ a(); a();          // 1, then 2
 const b = makeCounter();
 b();               // 1  (separate n)</code></pre>
 <p>Each call to <code>makeCounter</code> creates a fresh <code>n</code>, so the two counters do not interfere. The classic loop question tests the same idea. With <code>var</code>, one variable is shared by the whole function, so callbacks created in the loop all see its final value. With <code>let</code>, each iteration gets its own binding.</p>
-<pre><code>for (var i = 0; i &lt; 3; i++) setTimeout(() =&gt; console.log(i));   // 3 3 3
+<pre tabindex="0"><code>for (var i = 0; i &lt; 3; i++) setTimeout(() =&gt; console.log(i));   // 3 3 3
 for (let j = 0; j &lt; 3; j++) setTimeout(() =&gt; console.log(j));   // 0 1 2</code></pre>
 <p><code>this</code> is decided by <i>how a function is called</i>, not where it is written, except for arrow functions. The rules, in practice:</p>
 <ul>
@@ -145,7 +146,7 @@ for (let j = 0; j &lt; 3; j++) setTimeout(() =&gt; console.log(j));   // 0 1 2</
     <h2 id="the-event-loop-how-await-fits-in">The event loop: how await fits in</h2>
 <p>JavaScript runs your code on a single thread. Waiting work (timers, network, events) is handled by the environment, and when it finishes, a callback is queued. After the current synchronous code ends, the engine first runs <b>all</b> queued microtasks (promise reactions and <code>queueMicrotask</code>), including any that those microtasks add, and only then takes the next macrotask such as a timer callback. This is why a long chain of promises can delay a <code>setTimeout(..., 0)</code>, and why an endless microtask loop freezes the page.</p>
 <p><code>await</code> is promise syntax in disguise. The code before the first <code>await</code> runs synchronously; the rest of the function becomes a microtask continuation that resumes once the awaited promise settles. Predict this output:</p>
-<pre><code>async function f() {
+<pre tabindex="0"><code>async function f() {
   console.log("a");
   await null;
   console.log("b");
@@ -159,7 +160,7 @@ console.log("2");
 <p>A typical interview follow-up is to explain why <code>await</code> inside a plain <code>for</code> loop runs requests one after another, whereas starting all promises first and passing them to <code>Promise.all</code> runs them concurrently. Be ready to say which you need: sequential when each step depends on the previous, concurrent when they are independent.</p>
     <h2 id="promise-and-async-error-handling">Promise and async error handling</h2>
 <p>Errors in promise code travel along the chain until something handles them. A <code>.catch()</code> at the end of a chain catches a rejection from any earlier step, and the same applies to a <code>try/catch</code> around <code>await</code>. A throw inside an async function becomes a rejected promise rather than a synchronous exception, so a <code>try/catch</code> around the <i>call</i> alone does not catch it unless you <code>await</code> it.</p>
-<pre><code>async function loadUser(id) {
+<pre tabindex="0"><code>async function loadUser(id) {
   try {
     const res = await fetch("/api/users/" + id);
     if (!res.ok) throw new Error("HTTP " + res.status);
@@ -181,7 +182,7 @@ console.log("2");
     <h2 id="array-methods-immutability-and-a-practice-plan">Array methods, immutability and a practice plan</h2>
 <p>Know what each array method <i>returns</i> and whether it <i>mutates</i>. <code>map</code>, <code>filter</code>, <code>slice</code> and <code>concat</code> return new arrays and leave the original alone. <code>push</code>, <code>pop</code>, <code>splice</code>, <code>reverse</code> and <code>sort</code> change the array in place. <code>sort</code> is the one that catches people twice: with no comparator it compares items as strings, so <code>[10, 9, 1].sort()</code> gives <code>[1, 10, 9]</code>. Pass a comparator such as <code>(a, b) =&gt; a - b</code> for numbers.</p>
 <p><code>reduce</code> folds an array into one value. Always supply the initial value: without it an empty array throws a TypeError, and the first element silently becomes the accumulator, which is wrong when you are building an object or a sum of mapped fields.</p>
-<pre><code>const totals = orders.reduce((acc, o) =&gt; {
+<pre tabindex="0"><code>const totals = orders.reduce((acc, o) =&gt; {
   acc[o.type] = (acc[o.type] || 0) + o.amount;
   return acc;
 }, {});</code></pre>

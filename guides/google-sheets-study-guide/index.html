@@ -24,7 +24,8 @@
 <link rel="icon" href="../../assets/favicon.svg" type="image/svg+xml">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" onload="this.onload=null;this.rel='stylesheet'">
+<noscript><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet"></noscript>
 <link rel="stylesheet" href="../../css/style.css">
 <script>(function(){try{if(localStorage.getItem("skillprep:theme")==="dark"){document.documentElement.setAttribute("data-theme","dark");}}catch(e){}})();</script>
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"Google Sheets Study Guide: Formulas, QUERY and Automation","description":"The Google Sheets skills interviews ask about: core and advanced formulas, QUERY, importing and cleaning data, pivot tables, sharing and protection, and a tested Apps Script example, with exercises and a 20-question quiz.","datePublished":"2026-11-20","dateModified":"2026-11-20","author":{"@type":"Organization","name":"SkillPrep editorial team"},"publisher":{"@type":"Organization","name":"SkillPrep","logo":{"@type":"ImageObject","url":"https://skillsprep.github.io/assets/favicon.svg"}},"mainEntityOfPage":"https://skillsprep.github.io/guides/google-sheets-study-guide/","image":"https://skillsprep.github.io/assets/og-image.png","articleSection":"Google Sheets","inLanguage":"en"}</script>
@@ -118,16 +119,16 @@
     <h2 id="advanced-formulas">Advanced formulas</h2>
         <p><b>ARRAYFORMULA</b> shows the results of an array formula across several rows or columns and lets non-array functions work on arrays. Google's examples include <code>ARRAYFORMULA(A1:C1+A2:C2)</code> and <code>ARRAYFORMULA(SUM(IF(A1:A10&gt;5, A1:A10, 0)))</code>. Many array formulas expand automatically, and Ctrl+Shift+Enter adds <code>ARRAYFORMULA(</code> for you. Google notes that array formulas cannot be exported.</p>
         <p><b>FILTER</b> keeps the rows where every condition is TRUE:</p>
-<pre><code>=FILTER(A2:D, C2:C = "Paid", D2:D &gt; 100)</code></pre>
+<pre tabindex="0"><code>=FILTER(A2:D, C2:C = "Paid", D2:D &gt; 100)</code></pre>
         <p>The conditions must be the same length as the range. You cannot mix row conditions and column conditions in one FILTER, so nest one FILTER inside another. If no rows match, the result is #N/A.</p>
         <p><b>SORT and UNIQUE</b> sort a range and remove duplicate rows, and combine well with FILTER: <code>=SORT(UNIQUE(FILTER(B2:B, C2:C = "Paid")))</code>.</p>
         <p><b>LET</b> names values so each is calculated once. Names are not case-sensitive, cannot be cell references or contain spaces or start with a number, and must be declared before use. Google's example:</p>
-<pre><code>=LET(avg, AVERAGE(B2:D2), IF(avg&gt;=4, "Great", IF(avg&gt;=3, "Good", "Poor")))</code></pre>
+<pre tabindex="0"><code>=LET(avg, AVERAGE(B2:D2), IF(avg&gt;=4, "Great", IF(avg&gt;=3, "Good", "Poor")))</code></pre>
         <p><b>LAMBDA</b> defines a function from parameters and a formula. Calling it directly looks like <code>=LAMBDA(Salary, Salary*0.3)(1000)</code>, which returns 300. The helper functions MAP, REDUCE, BYROW, BYCOL, SCAN and MAKEARRAY take a LAMBDA, for example <code>=MAP(C5:C10, LAMBDA(salary, salary*0.3))</code>.</p>
         <p><b>Named functions</b> save a formula as a reusable function. Use Data &gt; Named functions, or right-click a cell and choose Define named function. They need no code, which is the main difference from an Apps Script custom function. A name cannot match a built-in function or a cell reference, start with a number or contain spaces, and ranges in the definition become absolute.</p>
     <h2 id="query-sql-style-summaries-in-one-formula">QUERY: SQL-style summaries in one formula</h2>
         <p><code>QUERY(data, query, [headers])</code> runs a query written in the Google Visualization API Query Language. <code>headers</code> is the number of header rows; if you omit it or use -1, Sheets guesses. Google's help page documents the clauses select, where, group by, pivot and order by. Columns can be referred to by letter (A, B) in a range.</p>
-<pre><code>=QUERY(A1:D, "select B, sum(D) where C = 'Paid' group by B order by sum(D) desc", 1)</code></pre>
+<pre tabindex="0"><code>=QUERY(A1:D, "select B, sum(D) where C = 'Paid' group by B order by sum(D) desc", 1)</code></pre>
         <div class="callout"><b>Keep one data type per column</b> QUERY reads each column using its majority data type. Values of the other type are treated as null, so a text entry in a column of numbers silently disappears from the result.</div>
     <h2 id="clean-and-import-data">Clean and import data</h2>
         <table>
@@ -159,7 +160,7 @@
         <p><b>Simple triggers</b> are functions with reserved names: onOpen, onInstall, onEdit and onSelectionChange (plus doGet and doPost for web apps). They run automatically, but they cannot use services that need authorization, can only change the file they are bound to, do not run in view or comment mode, and must finish within 30 seconds. Changes made by a script or the API, such as <code>Range.setValue()</code>, do not fire them.</p>
         <p><b>Installable triggers</b> can use authorized services and include time-driven triggers (from every minute to once a month), and they run as the person who created them. Create one from Triggers (the alarm clock icon) &gt; Add Trigger, or in code, for example <code>ScriptApp.newTrigger("myFunction").timeBased().everyHours(6).create();</code></p>
         <p><b>A small example.</b> This <code>onEdit</code> stamps a completion date when the Status column on a sheet named Orders is changed to Done:</p>
-<pre><code>function onEdit(e) {
+<pre tabindex="0"><code>function onEdit(e) {
   var range = e.range;
   var sheet = range.getSheet();
   if (sheet.getName() !== "Orders" || range.getColumn() !== 5) return;  // column E = Status
@@ -184,15 +185,15 @@
     <h2 id="practical-learning-exercises">Practical learning exercises</h2>
         <ul>
           <li><b>Exercise 1 (SUMIFS).</b> Orders are in A1:D with columns Date, Region, Status, Amount. Total the Amount for the North region where Status is Paid. <i>Solution:</i>
-<pre><code>=SUMIFS(D2:D, B2:B, "North", C2:C, "Paid")</code></pre></li>
+<pre tabindex="0"><code>=SUMIFS(D2:D, B2:B, "North", C2:C, "Paid")</code></pre></li>
           <li><b>Exercise 2 (XLOOKUP).</b> Look up each ProductID in column A in a Products sheet and return the price in column C, showing "Not found" when there is no match. <i>Solution:</i>
-<pre><code>=XLOOKUP(A2, Products!A:A, Products!C:C, "Not found")</code></pre></li>
+<pre tabindex="0"><code>=XLOOKUP(A2, Products!A:A, Products!C:C, "Not found")</code></pre></li>
           <li><b>Exercise 3 (ARRAYFORMULA).</b> Fill a Total column for every row at once: Quantity in B, Price in C, leaving blanks for empty rows. <i>Solution:</i>
-<pre><code>=ARRAYFORMULA(IF(A2:A="", "", B2:B*C2:C))</code></pre></li>
+<pre tabindex="0"><code>=ARRAYFORMULA(IF(A2:A="", "", B2:B*C2:C))</code></pre></li>
           <li><b>Exercise 4 (QUERY).</b> From the orders table, show each Region with its total Amount for Paid orders, largest first. <i>Solution:</i>
-<pre><code>=QUERY(A1:D, "select B, sum(D) where C = 'Paid' group by B order by sum(D) desc", 1)</code></pre></li>
+<pre tabindex="0"><code>=QUERY(A1:D, "select B, sum(D) where C = 'Paid' group by B order by sum(D) desc", 1)</code></pre></li>
           <li><b>Exercise 5 (LET).</b> Scores are in B2:D2. Show "Great" if the average is 4 or more, "Good" if 3 or more, otherwise "Poor", calculating the average once. <i>Solution:</i>
-<pre><code>=LET(avg, AVERAGE(B2:D2), IF(avg&gt;=4, "Great", IF(avg&gt;=3, "Good", "Poor")))</code></pre></li>
+<pre tabindex="0"><code>=LET(avg, AVERAGE(B2:D2), IF(avg&gt;=4, "Great", IF(avg&gt;=3, "Good", "Poor")))</code></pre></li>
         </ul>
     <h2 id="interview-questions">Interview questions</h2>
         <p>Try answering aloud before you open each one.</p>
