@@ -245,6 +245,7 @@ ${extraHead}${ld.map(jsonLd).join("\n")}
     <nav class="main-nav" id="mainNav" aria-label="Main">
       ${navItem("home", "Home", home)}
       ${navItem("guides", "Guides", link("guides/"))}
+      ${navItem("tests", "Practice Tests", link("practice-tests/"))}
       ${navItem("projects", "Projects", link("projects/"))}
       ${navItem("about", "About", link("about/"))}
       ${navItem("contact", "Contact", link("contact/"))}
@@ -266,6 +267,7 @@ ${body}
         <h2 class="foot-h">Explore</h2>
         <a href="${home}">All guides</a>
         <a href="${link("guides/")}">Guides</a>
+        <a href="${link("practice-tests/")}">Practice Tests</a>
         <a href="${link("projects/")}">Projects</a>
         <a href="${link("about/")}">About</a>
         <a href="${link("contact/")}">Contact</a>
@@ -341,7 +343,7 @@ function homePage() {
     <p>Explore practical study guides, improve your technical knowledge and prepare for real-world skills assessments.</p>
     <div class="hero-actions">
       <a href="#guides" class="btn">Explore Study Guides</a>
-      <a href="guides/generative-ai-career-essentials-practice-test/" class="btn btn-outline" style="background:#fff">Start Practice Tests</a>
+      <a href="practice-tests/" class="btn btn-outline" style="background:#fff">Start Practice Tests</a>
     </div>
     <form class="search-bar" id="searchForm" role="search" action="./" method="get" style="margin-top: 30px;">
       <label for="searchInput" class="visually-hidden">Search guides</label>
@@ -545,6 +547,52 @@ function guidesHub() {
     ld: [{ "@context": "https://schema.org", "@type": "BreadcrumbList", itemListElement: [
       { "@type": "ListItem", position: 1, name: "Home", item: SITE },
       { "@type": "ListItem", position: 2, name: "Guides", item: SITE + "guides/" } ] }]
+  });
+}
+
+function testsHub() {
+  // Full-length assessments = guides that carry a question bank. Everything is derived from the existing data.
+  const tests = posts.filter((p) => p.bankKey);
+  const total = tests.reduce((n, p) => n + BANKS[p.bankKey].length, 0);
+  const cardHtml = (p) => {
+    const n = BANKS[p.bankKey].length;
+    const topics = new Set(BANKS[p.bankKey].map((q) => q.p)).size;
+    const mins = Math.max(5, Math.round(n * 0.75));
+    const guide = posts.find((g) => g.slug === ((cfg.related || {})[p.slug] || [])[0]);
+    return `<article class="post-card">
+        <div class="thumb" style="background:${p.gradient}" aria-hidden="true">${p.icon}</div>
+        <div class="body">
+          <div class="cat">${esc(p.category)}</div>
+          <h2 style="font-size:1.08rem;color:var(--navy);line-height:1.35">${esc(p.title.replace(/:.*/, ""))}</h2>
+          <p class="excerpt">${esc(p.excerpt)}</p>
+          <div class="card-details">
+            <span>${n} questions across ${topics} topics</span>
+            <span>Estimated time: about ${mins} min</span>
+          </div>
+          <div class="meta" style="flex-direction:column;align-items:stretch;gap:10px">
+            <a class="btn" href="../${p.url}" aria-label="Start assessment: ${esc(p.title.replace(/:.*/, ""))}">Start Assessment</a>
+            ${guide ? `<a class="btn btn-outline" href="../${guide.url}">Study guide: ${esc(guide.title.replace(/:.*/, ""))}</a>` : ""}
+          </div>
+        </div>
+      </article>`;
+  };
+  const body = `${pageHero("Practice Tests", "Full-length unofficial practice assessments. Choose one, answer at your own pace and get an explanation for every question.")}
+<div class="container" style="padding-top:32px;padding-bottom:32px">
+  <p class="note"><b>Unofficial practice material.</b> These tests are independent study aids written by SkillPrep. They are not official exam content and are not affiliated with or endorsed by any exam provider, employer or software vendor. Scores here do not predict results on any real assessment.</p>
+  <h2 class="section-title" style="margin:24px 0 6px">${tests.length} full-length assessments · ${total} questions</h2>
+  <p class="section-sub">Your answers and bookmarks are saved only in this browser. Want to revise first? Each assessment links to its study guide.</p>
+  <div class="post-grid" style="margin-top:20px">
+      ${tests.map(cardHtml).join("\n      ")}
+  </div>
+  <p style="margin-top:28px">Looking for shorter quizzes? Every <a href="../guides/">study guide</a> includes its own practice questions.</p>
+</div>`;
+  return layout({
+    title: `Practice Tests: Unofficial Full-Length Assessments | ${cfg.siteName}`,
+    desc: `Choose from ${tests.length} unofficial full-length practice tests (${total} questions) with explained answers, bookmarks and links to the matching study guides.`,
+    path: "practice-tests/", prefix: "../", nav: "tests", body,
+    ld: [{ "@context": "https://schema.org", "@type": "BreadcrumbList", itemListElement: [
+      { "@type": "ListItem", position: 1, name: "Home", item: SITE },
+      { "@type": "ListItem", position: 2, name: "Practice Tests", item: SITE + "practice-tests/" } ] }]
   });
 }
 
@@ -780,7 +828,7 @@ function projectPage(pr) {
 
 /* ---------------- write everything ---------------- */
 // remove stale generated output so renamed pages don't linger
-for (const d of ["guides", "about", "contact", "privacy", "terms"]) fs.rmSync(path.join(ROOT, d), { recursive: true, force: true });
+for (const d of ["guides", "practice-tests", "about", "contact", "privacy", "terms"]) fs.rmSync(path.join(ROOT, d), { recursive: true, force: true });
 // projects/data holds committed downloads, so only the generated pages are removed
 fs.rmSync(path.join(ROOT, "projects", "index.html"), { force: true });
 for (const e of fs.existsSync(path.join(ROOT, "projects")) ? fs.readdirSync(path.join(ROOT, "projects")) : []) {
@@ -789,6 +837,7 @@ for (const e of fs.existsSync(path.join(ROOT, "projects")) ? fs.readdirSync(path
 
 write("index.html", homePage());
 write("guides/index.html", guidesHub());
+write("practice-tests/index.html", testsHub());
 posts.forEach((p) => write(p.url + "index.html", guidePage(p)));
 write("projects/index.html", projectsHub());
 PROJECTS.forEach((pr) => write(`projects/${pr.slug}/index.html`, projectPage(pr)));
@@ -801,7 +850,7 @@ write("404.html", notFoundPage());
 // lastmod must be accurate (Google ignores it otherwise): each page uses the date it was really last changed.
 const latestGuide = posts.map((p) => p.reviewed).sort().pop();
 const pageDate = (key, fallback) => (cfg.pageUpdated || {})[key] || fallback;
-const urls = [["", latestGuide], ["guides/", latestGuide], ["about/", pageDate("about/", cfg.lastReviewed)], ["contact/", pageDate("contact/", cfg.lastReviewed)],
+const urls = [["", latestGuide], ["guides/", latestGuide], ["practice-tests/", pageDate("practice-tests/", latestGuide)], ["about/", pageDate("about/", cfg.lastReviewed)], ["contact/", pageDate("contact/", cfg.lastReviewed)],
   ["privacy/", cfg.privacyUpdated || cfg.lastReviewed], ["terms/", cfg.lastReviewed],
   ["projects/", pageDate("projects/", cfg.lastReviewed)], ...PROJECTS.map((pr) => [`projects/${pr.slug}/`, pageDate("projects/", cfg.lastReviewed)]),
   ...posts.map((p) => [p.url, p.reviewed])];
@@ -814,4 +863,4 @@ write("ads.txt", "google.com, pub-9455217122501464, DIRECT, f08c47fec0942fa0\n")
 write("robots.txt", `User-agent: *\nAllow: /\n\nSitemap: ${SITE}sitemap.xml\n`);
 write(".nojekyll", "");
 
-console.log(`Built ${posts.length} guides + 5 pages + 404 + sitemap (${urls.length} URLs). Practice questions: ${TOTAL_QS}.`);
+console.log(`Built ${posts.length} guides + 6 pages + 404 + sitemap (${urls.length} URLs). Practice questions: ${TOTAL_QS}.`);
