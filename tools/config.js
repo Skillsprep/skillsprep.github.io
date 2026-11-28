@@ -55,7 +55,7 @@ module.exports = {
     "developer-skills-study-guide": "Developer Fundamentals: HTTP, APIs, Debugging"
   },
   // Real last-change dates for sitemap lastmod, for pages that are not guides (guides use their own "reviewed" date).
-  pageUpdated: { "contact/": "2026-11-14", "projects/": "2026-11-22", "practice-tests/": "2026-11-27" },
+  pageUpdated: { "contact/": "2026-11-14", "projects/": "2026-11-22", "practice-tests/": "2026-11-27", "about/": "2026-11-27" },
   // Hand-picked "Related guides" shown in each guide's sidebar (slug -> up to 3 slugs). Edit freely;
   // the build fails if a slug doesn't exist. Guides not listed fall back to the first other guides.
   related: {
