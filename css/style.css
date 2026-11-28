@@ -609,3 +609,16 @@ p a.btn-link, li a.btn-link, .btn-link { text-decoration: none !important; }
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after { animation: none !important; transition: none !important; scroll-behavior: auto !important; }
 }
+
+/* Touch targets: at least 24px (WCAG 2.2 AA) for small controls and links */
+.theme-toggle { min-width: 40px; min-height: 40px; }
+.crumbs a { display: inline-block; padding: 4px 2px; }
+.sidebar .box a { display: inline-block; padding: 3px 0; }
+.mock-timed { display: inline-flex; align-items: center; gap: 6px; min-height: 32px; }
+.mock-timed input { width: 1.25rem; height: 1.25rem; margin: 0; }
+/* Keep the informational notice compact on phones so it doesn't cover content */
+@media (max-width: 600px) {
+  .cookie-consent { bottom: 10px; width: calc(100% - 20px); padding: 10px 14px; }
+  .cookie-inner { gap: 8px; }
+  .cookie-inner p { font-size: 0.8rem; line-height: 1.4; min-width: 0; }
+}

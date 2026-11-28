@@ -11,7 +11,7 @@ module.exports = {
   // Date shown as "Last reviewed" on every guide (ISO). Update when you re-check content.
   lastReviewed: "2026-10-18",
   // Date shown as "Last updated" on the Privacy page only (kept separate so it doesn't claim guides were re-reviewed).
-  privacyUpdated: "2026-11-14",
+  privacyUpdated: "2026-11-28",
   // Old hash-style links (#/post/<old-slug>) are redirected to the new pages.
   legacySlugs: {
     "excel-assessment-guide": "excel-study-guide",
