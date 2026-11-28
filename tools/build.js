@@ -296,7 +296,7 @@ ${body}
 <button class="back-top" id="backTop" type="button" aria-label="Back to top">↑</button>
 <div id="cookieConsent" class="cookie-consent" hidden>
   <div class="cookie-inner">
-    <p>SkillPrep saves your quiz progress in your browser's local storage. Ads are shown through Google AdSense, which may use cookies. See our <a href="${link("privacy/")}">Privacy Policy</a> for details and opt-out options.</p>
+    <p>SkillPrep stores your quiz progress, theme choice and this notice in your browser's local storage, and sets no cookies of its own. Ads are served by Google AdSense, which may use cookies; where the law requires it, Google shows its own consent choices. See our <a href="${link("privacy/")}">Privacy Policy</a>.</p>
     <div class="cookie-actions">
       <button id="cookieAccept" class="btn">OK</button>
     </div>
@@ -685,10 +685,10 @@ function privacyPage() {
     <h2>What we collect</h2>
     <p>SkillPrep has no accounts and no newsletter sign-up, and we do not run our own analytics. We do show advertising through Google AdSense and use a few third-party services, all described below.</p>
     <h2>What stays on your device</h2>
-    <p>Practice tests remember your scores and progress using your browser's local storage so you can see your progress. This data stays on your device, is not sent to us, and you can clear it in your browser settings. The progress export and import buttons work entirely in your browser.</p>
+    <p>SkillPrep itself sets no cookies. It uses your browser's local storage to remember your practice-test scores, progress and bookmarks, your light or dark theme choice, and whether you dismissed the notice at the bottom of the page. This data stays on your device, is not sent to us, and you can clear it in your browser settings. The progress export and import buttons work entirely in your browser.</p>
     <h2>Advertising (Google AdSense)</h2>
     <p>SkillPrep shows ads served by Google AdSense. Google and its advertising partners may use cookies and similar technologies, and may collect information such as your IP address, browser details and the pages you visit, to serve and measure ads. Ads may be personalised or non-personalised. We do not receive this data and do not control which ads are shown.</p>
-    <p>Visitors in the EEA, the UK and Switzerland: Google requires consent for personalised advertising there, and may show non-personalised ads where consent has not been given.</p>
+    <p>Visitors in the EEA, the UK and Switzerland: Google requires consent for personalised advertising there, collected through a consent management platform certified by Google. Where consent has not been given, only non-personalised or limited ads can be shown. Where Google's consent message is shown on this site, it lets you accept, reject or manage your choices, and the companies that may receive data are listed by Google in its <a href="https://support.google.com/adsense/answer/9012903" rel="noopener">ad technology partners</a> list. The notice at the bottom of our pages is informational only and is not a consent tool.</p>
     <p>You can manage or opt out of personalised advertising at <a href="https://adssettings.google.com" rel="noopener">Google Ads Settings</a> or <a href="https://www.aboutads.info" rel="noopener">aboutads.info</a>. To learn how Google uses information from sites that use its services, see <a href="https://policies.google.com/technologies/partner-sites" rel="noopener">How Google uses information</a>.</p>
     <h2>Contact form</h2>
     <p>When you use the contact form, your name, email address, chosen topic and message are sent to us through Formspree, a third-party form service, which processes them on our behalf (see the <a href="https://formspree.io/legal/privacy-policy/" rel="noopener">Formspree privacy policy</a>). We use this only to reply or to fix the issue you raised.</p>
