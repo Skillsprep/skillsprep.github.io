@@ -2381,7 +2381,8 @@ git diff --staged       # staged vs last commit</code></pre>
           <li><b>Format:</b> 164 multiple-choice questions, one best answer each</li>
           <li><b>Scoring:</b> instant, with a per-topic breakdown so you can see which area to revisit</li>
           <li><b>Study target:</b> 70% means you have the basics; aim for 85%+ before you move on</li>
-          <li><b>Untimed:</b> work at your own pace — about 90 minutes is a sensible session</li>
+          <li><b>Untimed:</b> work at your own pace. A typical pass takes about %%UNTIMED%% minutes (a rough estimate, not a limit)</li>
+          <li><b>Optional timer:</b> Timed mode allows 45 seconds per question, %%TIMED%% minutes in total</li>
         </ul>
         <div class="callout"><b>Study tip</b> Don't memorize answers. Scenario wording varies, so focus on the reasoning — every question here shows an explanation after you finish.</div>` },
       { h: "Topics covered", body: `
@@ -2419,6 +2420,7 @@ git diff --staged       # staged vs last commit</code></pre>
         <ul>
           <li><b>Format:</b> 30 multiple-choice questions, one best answer each</li>
           <li><b>Scoring:</b> instant, with a per-topic breakdown and explanations</li>
+          <li><b>Time:</b> untimed, a typical pass takes about %%UNTIMED%% minutes (a rough estimate). The optional timer allows 45 seconds per question, %%TIMED%% minutes in total</li>
           <li><b>Trap to watch:</b> several questions ask which option is <i>NOT</i> correct — read carefully</li>
           <li><b>Wording varies:</b> different courses and frameworks word some ideas differently (for example, the pillars of sustainability). Where that matters, the explanation says which framing we follow.</li>
         </ul>` },

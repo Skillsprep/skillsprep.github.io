@@ -174,6 +174,10 @@ function withExtras(p) {
   sections.splice(at < 0 ? sections.length : at, 0, ...extra);
   return { ...p, sections };
 }
+// Assessment timing. Untimed = a rough typical pace (not measured); timed = the optional timer's allowance, which must match secsFor() in js/site.js.
+const TIMING = { untimedSecPerQ: 30, timedSecPerQ: 45 };
+const untimedMin = (n) => Math.ceil((n * TIMING.untimedSecPerQ) / 60 / 5) * 5;
+const timedMin = (n) => Math.ceil((n * TIMING.timedSecPerQ) / 60);
 const posts = POSTS.map(withExtras).map((p, idx) => {
   // id of the full practice-test bank on this page (also the localStorage bookmark key), read before placeholders are rendered
   const bankMatch = p.sections.map((s) => /<div id="([\w-]+)" data-bank="(\w+)"><\/div>/.exec(s.body)).find(Boolean);
@@ -184,7 +188,8 @@ const posts = POSTS.map(withExtras).map((p, idx) => {
   sections.forEach((s) => { let b = s.id, n = 2; while (ids.has(s.id)) s.id = b + "-" + n++; ids.add(s.id); });
   const words = stripTags(p.intro + " " + p.sections.map((s) => stripQuizzes(s.body.replace(/<div id="[\w-]+" data-bank="\w+"><\/div>/, ""))).join(" ")).split(" ").length;
   const bankN = bankKey ? BANKS[bankKey].length : 0;
-  const readTime = bankN ? "About " + Math.max(5, Math.round(bankN * 0.75)) + " min test" : Math.max(2, Math.round(words / 200)) + " min read";
+  if (bankN) sections.forEach((s) => { s.body = s.body.replace(/%%UNTIMED%%/g, untimedMin(bankN)).replace(/%%TIMED%%/g, timedMin(bankN)); });
+  const readTime = bankN ? "About " + untimedMin(bankN) + " min (untimed)" : Math.max(2, Math.round(words / 200)) + " min read";
   return { ...p, idx, bankId, bankKey, sections, published: isoDate(p.date), reviewed: p.reviewed || cfg.lastReviewed, readTime, url: `guides/${p.slug}/`, sources: cfg.sources[p.slug] || [] };
 });
 const CATS = [...new Set(posts.map((p) => p.category))].filter(c => c !== "Getting started" && c !== "Getting Started");
@@ -195,7 +200,8 @@ const TOTAL_QS = inlineQs + Object.values(BANKS).reduce((n, b) => n + b.length, 
 const STATS = (() => {
   const assessments = posts.filter((p) => p.bankKey);
   const guides = posts.filter((p) => !p.bankKey && p.category.toLowerCase() !== "getting started");
-  return { guides: guides.length, assessments: assessments.length, resources: guides.length + assessments.length,
+  const articles = posts.length - guides.length - assessments.length;
+  return { guides: guides.length, assessments: assessments.length, articles, entries: posts.length, resources: guides.length + assessments.length,
     questions: TOTAL_QS, assessmentQuestions: assessments.reduce((n, p) => n + BANKS[p.bankKey].length, 0), categories: CATS.length };
 })();
 // sanity: slugs unique, every legacy mapping lands on a real page
@@ -359,7 +365,7 @@ function homePage() {
       <button type="submit">Search</button>
     </form>
     <div class="stats">
-      <div class="stat"><b>${STATS.resources}</b><small>Learning Resources</small></div>
+      <div class="stat"><b>${STATS.guides}</b><small>Study Guides</small></div>
       <div class="stat"><b>${STATS.questions}</b><small>Practice Questions</small></div>
       <div class="stat"><b>${STATS.categories}</b><small>Skill Categories</small></div>
       <div class="stat"><b>${STATS.assessments}</b><small>Full-Length Assessments</small></div>
@@ -541,6 +547,7 @@ function guidesHub() {
   const cats = [...new Set(posts.map((p) => p.category))];
   const body = `${pageHero("All Study Guides", "Every SkillPrep guide and practice test, grouped by skill. Each one is unofficial, concept-first and reviewed on the date shown on the guide.")}
 <div class="container">
+  <p class="section-sub" style="margin:24px 0 0">${STATS.entries} entries listed: ${STATS.guides} study guides, ${STATS.assessments} full-length assessments and ${STATS.articles} informational article.</p>
   <div class="card prose">
     ${cats.map((c) => `<h2>${esc(c)}</h2>
     <ul>
@@ -550,7 +557,7 @@ function guidesHub() {
 </div>`;
   return layout({
     title: `All Study Guides and Practice Tests | ${cfg.siteName}`,
-    desc: `Browse all ${STATS.resources} SkillPrep study guides and practice tests: ${cats.slice(0, 4).join(", ")} and more, each with practice questions.`,
+    desc: `Browse ${STATS.entries} SkillPrep entries: ${STATS.guides} study guides, ${STATS.assessments} full-length practice tests and ${STATS.articles} informational article, each unofficial and concept-first.`,
     path: "guides/", prefix: "../", nav: "guides", body,
     ld: [{ "@context": "https://schema.org", "@type": "BreadcrumbList", itemListElement: [
       { "@type": "ListItem", position: 1, name: "Home", item: SITE },
@@ -565,7 +572,6 @@ function testsHub() {
   const cardHtml = (p) => {
     const n = BANKS[p.bankKey].length;
     const topics = new Set(BANKS[p.bankKey].map((q) => q.p)).size;
-    const mins = Math.max(5, Math.round(n * 0.75));
     const guide = posts.find((g) => g.slug === ((cfg.related || {})[p.slug] || [])[0]);
     return `<article class="post-card">
         <div class="thumb" style="background:${p.gradient}" aria-hidden="true">${p.icon}</div>
@@ -575,7 +581,8 @@ function testsHub() {
           <p class="excerpt">${esc(p.excerpt)}</p>
           <div class="card-details">
             <span>${n} questions across ${topics} topics</span>
-            <span>Estimated time: about ${mins} min</span>
+            <span>Untimed: about ${untimedMin(n)} min (rough estimate)</span>
+            <span>Optional timer: ${timedMin(n)} min (${TIMING.timedSecPerQ} s per question)</span>
           </div>
           <div class="meta" style="flex-direction:column;align-items:stretch;gap:10px">
             <a class="btn" href="../${p.url}" aria-label="Start assessment: ${esc(p.title.replace(/:.*/, ""))}">Start Assessment</a>
@@ -633,10 +640,12 @@ function aboutPage() {
   <div>
     <div class="card" style="margin-bottom:22px">
       <h3 class="card-h">Site stats</h3>
-      <p><b>${STATS.resources}</b> learning resources (${STATS.guides} study guides and ${STATS.assessments} full-length assessments)</p>
+      <p><b>${STATS.guides}</b> study guides</p>
+      <p><b>${STATS.assessments}</b> full-length assessments (<a href="../practice-tests/">see all</a>)</p>
+      <p><b>${STATS.articles}</b> additional informational article</p>
+      <p><b>${STATS.entries}</b> total listed entries</p>
       <p><b>${STATS.questions}</b> practice questions, each with an explanation</p>
       <p><b>${STATS.categories}</b> skill categories</p>
-      <p><b>${STATS.assessments}</b> full-length practice assessments (<a href="../practice-tests/">see all</a>)</p>
     </div>
     <div class="card">
       <h3 class="card-h">Categories</h3>
@@ -875,10 +884,11 @@ write("ads.txt", "google.com, pub-9455217122501464, DIRECT, f08c47fec0942fa0\n")
 write("robots.txt", `User-agent: *\nAllow: /\n\nSitemap: ${SITE}sitemap.xml\n`);
 write(".nojekyll", "");
 // Stats self-check: the numbers rendered on the key pages must come from STATS.
-[["index.html", [STATS.resources, STATS.questions, STATS.categories, STATS.assessments]], ["about/index.html", [STATS.resources, STATS.questions, STATS.categories, STATS.assessments]],
+if (!new RegExp("n \\* " + TIMING.timedSecPerQ + "\\b").test(fs.readFileSync(path.join(ROOT, "js/site.js"), "utf8"))) throw new Error("Timer constant in js/site.js no longer matches TIMING.timedSecPerQ");
+[["index.html", [STATS.guides, STATS.questions, STATS.categories, STATS.assessments]], ["about/index.html", [STATS.guides, STATS.assessments, STATS.articles, STATS.entries, STATS.questions, STATS.categories]], ["guides/index.html", [STATS.entries]],
  ["practice-tests/index.html", [STATS.assessments, STATS.assessmentQuestions]]].forEach(([f, nums]) => {
   const h = fs.readFileSync(path.join(ROOT, f), "utf8");
-  nums.forEach((n) => { if (!h.includes(`>${n}<`) && !h.includes(`${n} full-length`) && !h.includes(`${n} questions`)) throw new Error(`Stats mismatch: ${f} does not show ${n}`); });
+  nums.forEach((n) => { if (!h.includes(`>${n}<`) && !h.includes(`${n} full-length`) && !h.includes(`${n} questions`) && !h.includes(`${n} entries`)) throw new Error(`Stats mismatch: ${f} does not show ${n}`); });
 });
 
 console.log(`Built ${posts.length} guides + 6 pages + 404 + sitemap (${urls.length} URLs). Practice questions: ${TOTAL_QS}.`);

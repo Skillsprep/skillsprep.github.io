@@ -313,7 +313,8 @@ ${quiz()}` },
         <ul>
           <li><b>Format:</b> 40 multiple-choice questions, one best answer each</li>
           <li><b>Topics:</b> Prepare the data (10), Model and DAX (12), Visualize and analyze (10), Manage and secure Power BI (8), following the four skill areas in Microsoft's PL-300 study guide</li>
-          <li><b>Practice tools:</b> practise one topic, retry only the questions you missed, bookmark hard ones, or turn on an optional timer (45 seconds per question)</li>
+          <li><b>Practice tools:</b> practise one topic, retry only the questions you missed, bookmark hard ones, or turn on an optional timer (45 seconds per question, %%TIMED%% minutes in total)</li>
+          <li><b>Time:</b> untimed, a typical pass takes about %%UNTIMED%% minutes (a rough estimate)</li>
           <li><b>Not an exam simulator:</b> real exams use other question types, and Microsoft updates the skills measured, so check the current study guide before you sit it</li>
         </ul>
         <div class="callout"><b>Unofficial</b> These are independent study aids, not official Microsoft exam content. New to a topic? Read the <a href="../power-bi-study-guide/">Power BI study guide</a> first.</div>` },
