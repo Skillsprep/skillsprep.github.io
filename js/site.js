@@ -4,6 +4,8 @@
   "use strict";
   var $ = function (s, r) { return (r || document).querySelector(s); };
   var $$ = function (s, r) { return Array.prototype.slice.call((r || document).querySelectorAll(s)); };
+  // Respect "reduce motion": scripted scrolling is instant for people who ask for it.
+  var SMOOTH = (window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches) ? "auto" : "smooth";
   function store(key, val) {
     try { if (val === undefined) return window.localStorage.getItem(key); window.localStorage.setItem(key, val); } catch (e) { /* storage unavailable */ }
     return null;
@@ -63,7 +65,7 @@
   }
   window.addEventListener("scroll", function () { if (!ticking) { ticking = true; window.requestAnimationFrame(onScroll); } }, { passive: true });
   onScroll();
-  if (backTop) backTop.addEventListener("click", function () { window.scrollTo({ top: 0, behavior: "smooth" }); });
+  if (backTop) backTop.addEventListener("click", function () { window.scrollTo({ top: 0, behavior: SMOOTH }); });
 
   /* ---------- table of contents highlighting ---------- */
   var tocLinks = $$("[data-toc]");
@@ -183,7 +185,7 @@
       var rm0 = $(".mock-retry-missed", actions); if (rm0) rm0.remove();
       if (timerEl && !timedOn) timerEl.hidden = true;
       startTimer();
-      box.scrollIntoView({ behavior: "smooth", block: "start" });
+      box.scrollIntoView({ behavior: SMOOTH, block: "start" });
     }
 
     function startSet(list, label) {
@@ -292,7 +294,7 @@
         actions.appendChild(rm);
       }
       result.focus({ preventScroll: true });
-      result.scrollIntoView({ behavior: "smooth", block: "start" });
+      result.scrollIntoView({ behavior: SMOOTH, block: "start" });
     });
   });
   function esc(s) { return String(s).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;"); }
@@ -332,7 +334,7 @@
     };
     chips.forEach(function (c) { c.addEventListener("click", function () { state.cat = c.getAttribute("data-cat"); apply(true); }); });
     input.addEventListener("input", function () { state.q = input.value.trim(); apply(true); });
-    form.addEventListener("submit", function (e) { e.preventDefault(); state.q = input.value.trim(); apply(true); $("#guides").scrollIntoView({ behavior: "smooth" }); });
+    form.addEventListener("submit", function (e) { e.preventDefault(); state.q = input.value.trim(); apply(true); $("#guides").scrollIntoView({ behavior: SMOOTH }); });
     apply(false);
     if (state.q || state.cat !== "All") { var g = $("#guides"); if (g && !window.location.hash) setTimeout(function () { g.scrollIntoView(); }, 0); }
   }
