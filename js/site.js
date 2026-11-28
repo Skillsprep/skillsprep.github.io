@@ -263,7 +263,11 @@
       // format: skillprep:progress:pathname = "answeredCount,correctCount,totalCount"
       var path = window.location.pathname.replace(/^\/|\/$/g, "") + "/";
       if (!path || path === "/") path = box.getAttribute("data-key");
-      if (mode === "all") localStorage.setItem("skillprep:progress:" + path, done + "," + score + "," + total);
+      var saveNote = "";
+      if (mode === "all") {
+        try { localStorage.setItem("skillprep:progress:" + path, done + "," + score + "," + total); }
+        catch (e) { saveNote = " · progress couldn't be saved (browser storage is blocked or full)"; }
+      }
       var rows = order.map(function (p) {
         var s = parts[p], pp = Math.round((s.ok / s.n) * 100);
         return '<tr><th scope="row">' + esc(p) + "</th><td>" + s.ok + " / " + s.n + '</td><td><span class="pbar"><i style="width:' + pp + '%" class="' + (pp >= 70 ? "ok" : "weak") + '"></i></span> ' + pp + "%" + (pp < 70 ? ' <b class="flag">revisit</b>' : "") + "</td></tr>";
@@ -274,7 +278,7 @@
       result.innerHTML =
         '<div class="score ' + tone + '"><div class="big">' + score + " / " + total + " (" + pct + "%)</div>" +
         '<div class="verdict">' + verdict + "</div>" +
-        '<div class="sub">Answered ' + done + " of " + total + (mode !== "all" ? " · practice set (" + modeLabel + ") — not saved" : isBest ? " · new personal best" : " · your best: " + prevBest + "%") + timeNote + "</div>" +
+        '<div class="sub">Answered ' + done + " of " + total + (mode !== "all" ? " · practice set (" + modeLabel + ") — not saved" : isBest ? " · new personal best" : " · your best: " + prevBest + "%") + timeNote + saveNote + "</div>" +
         '<table class="breakdown"><thead><tr><th scope="col">Topic</th><th scope="col">Score</th><th scope="col">Result</th></tr></thead><tbody>' + rows + "</tbody></table>" +
         review + "</div>";
       countEl.textContent = "Scored " + score + " / " + total;
@@ -400,11 +404,16 @@ exportBtn.className = "btn";
 exportBtn.textContent = "Export Progress (JSON)";
 exportBtn.onclick = function() {
     let progressData = {};
-    for (let i = 0; i < localStorage.length; i++) {
-        let key = localStorage.key(i);
-        if (key.startsWith("skillprep:")) {
-            progressData[key] = localStorage.getItem(key);
+    try {
+        for (let i = 0; i < localStorage.length; i++) {
+            let key = localStorage.key(i);
+            if (key && key.startsWith("skillprep:")) {
+                progressData[key] = localStorage.getItem(key);
+            }
         }
+    } catch (err) {
+        alert("Your browser is blocking storage, so progress can't be read or exported here.");
+        return;
     }
     if (Object.keys(progressData).length === 0) {
         alert("No progress to export.");
@@ -433,7 +442,9 @@ importInput.style.display = "none";
 importInput.onchange = function(e) {
     const file = e.target.files[0];
     if (!file) return;
+    if (file.size > 1048576) { alert("This file is too large to be a SkillPrep progress export. Nothing was imported."); e.target.value = ""; return; }
     const reader = new FileReader();
+    reader.onerror = function () { alert("The file could not be read. Nothing was imported."); e.target.value = ""; };
     reader.onload = function(evt) {
         var input = e.target;
         function done() { input.value = ""; }
@@ -473,13 +484,13 @@ importInput.onchange = function(e) {
             if (conflicts.length > 0) {
                 overwrite = confirm(conflicts.length + " saved item(s) on this device differ from the file.\n\nOK = replace them with the imported values.\nCancel = keep your current progress and import only new items.");
             }
-            var imported = 0;
+            var imported = 0, failed = 0;
             valid.forEach(function (k) {
                 var cur = null; try { cur = localStorage.getItem(k); } catch (x) {}
                 if (cur !== null && cur !== data[k] && !overwrite) return;
-                try { localStorage.setItem(k, data[k]); imported++; } catch (x) {}
+                try { localStorage.setItem(k, data[k]); imported++; } catch (x) { failed++; }
             });
-            alert("Imported " + imported + " item(s)." + (skipped ? " Skipped " + skipped + " invalid item(s)." : ""));
+            alert("Imported " + imported + " item(s)." + (skipped ? " Skipped " + skipped + " invalid item(s)." : "") + (failed ? " " + failed + " item(s) could not be saved because browser storage is blocked or full." : ""));
             done();
             if (imported > 0) window.location.reload();
         } catch (err) {
@@ -564,11 +575,14 @@ document.querySelectorAll(".mock-hint").forEach(hint => {
     const link = card.getAttribute("href").replace("./", "").replace("../../", "");
     if (!link) return;
     const progressKey = "skillprep:progress:" + link;
-    const stored = localStorage.getItem(progressKey);
-    if (stored) {
+    let stored = null;
+    try { stored = localStorage.getItem(progressKey); } catch (e) {}
+    // Ignore (but never delete) entries that are not in the "answered,correct,total" format SkillPrep writes.
+    const pm = stored && /^(\d{1,5}),(\d{1,5}),(\d{1,5})$/.exec(stored);
+    if (pm && +pm[2] <= +pm[1] && +pm[1] <= +pm[3]) {
       hasData = true;
       modulesStarted++;
-      const [answeredCount, correctCount, totalCount] = stored.split(",").map(Number);
+      const [answeredCount, correctCount, totalCount] = [+pm[1], +pm[2], +pm[3]];
       totalAttempts += answeredCount;
       correctAttempts += correctCount;
 
@@ -609,11 +623,13 @@ document.querySelectorAll(".mock-hint").forEach(hint => {
   if (clearDashBtn) {
     clearDashBtn.addEventListener("click", () => {
       if (confirm("Are you sure you want to reset your learning progress? This cannot be undone.")) {
-        Object.keys(localStorage).forEach(key => {
-          if (key.startsWith("skillprep:progress:")) {
-            localStorage.removeItem(key);
-          }
-        });
+        try {
+          Object.keys(localStorage).forEach(key => {
+            if (key.startsWith("skillprep:progress:")) {
+              localStorage.removeItem(key);
+            }
+          });
+        } catch (e) { alert("Your browser is blocking storage, so progress couldn't be reset."); return; }
         window.location.reload();
       }
     });
